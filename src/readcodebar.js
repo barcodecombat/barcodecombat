@@ -74,5 +74,5 @@ barcode.readcodebar.prototype = {
 
 }
 
-var reader = new barcode.readcodebar();
-reader.init();
+//var reader = new barcode.readcodebar();
+//reader.init();

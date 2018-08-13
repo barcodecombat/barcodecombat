@@ -5,13 +5,17 @@ barcode.GameEngine = function (){
   this.tileSet = null;
   this.level = null;
   this.loaded = false;
+  this.state = barcode.C.STATE_MENU_SHOWN;
 }
 
 barcode.GameEngine.prototype ={
 
-  gameLoop: function (obj){
-    if (! barcode.GameEngine.loaded ) return;
-    barcode.GameEngine.render();
+  gameLoop: function (){
+    console.log(barcode.GameEngine.state);
+    if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
+        if (! barcode.GameEngine.loaded ) return;
+          barcode.GameEngine.render();
+    }
   },
 
   clickEvent : function(evt){
@@ -37,20 +41,37 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.level.character.path = pthFinding.path;
   },
 
-  init : function(){
-
-    this.tileSet = new Image();
-    this.tileSet.src = "./assets/tileset/tileset1.png";
-    const instance = this;
-    this.tileSet.addEventListener("load",function(e){instance.loaded = true;});
-    this.level = new barcode.Level();
-    this.level.init(barcode.maps.map1);
+  initDonjon : function(){
+    barcode.GameEngine.tileSet = new Image();
+    barcode.GameEngine.tileSet.src = "./assets/tileset/tileset1.png";
+    const instance = barcode.GameEngine;
+    barcode.GameEngine.tileSet.addEventListener("load",function(e){instance.loaded = true;});
+    barcode.GameEngine.level = new barcode.Level();
+    barcode.GameEngine.level.init(barcode.maps.map1);
     let canvas = document.getElementById("layer1");
     canvas.width = 500;
     canvas.height = 500;
     canvas.addEventListener("click",barcode.GameEngine.clickEvent);
+    barcode.GameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
+    //setInterval(barcode.GameEngine.gameLoop,1000/60);
   },
 
+
+  initMenu : function(){
+    barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
+    let canvas = document.getElementById("layer1");
+    let context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = 0;
+    canvas.height = 0;
+  },
+
+  init : function(){
+    let btnMenu = document.getElementById("btnMenu");
+    btnMenu.addEventListener("click",barcode.GameEngine.initMenu);
+    let btnDonjon = document.getElementById("btnDonjon");
+    btnDonjon.addEventListener("click",barcode.GameEngine.initDonjon);
+  },
 
 
   render : function(){
@@ -61,7 +82,5 @@ barcode.GameEngine.prototype ={
 
 }
 barcode.GameEngine = new barcode.GameEngine();
-
 barcode.GameEngine.init();
-//barcode.GameEngine.gameLoop();
 setInterval(barcode.GameEngine.gameLoop,1000/60)

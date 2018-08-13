@@ -12,7 +12,7 @@ barcode.Monster = function(){
   this.loaded = false;
   this.movingTick = 0;
   this.path = [];
-  this.step = 3;
+  this.step = 1;
 };
 
 barcode.Monster.prototype = {
