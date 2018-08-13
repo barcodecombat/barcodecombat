@@ -3,6 +3,8 @@ var barcode = barcode || {};
 
 barcode.Level = function(){
   this.tiles = [];
+  this.monsters = [];
+  this.character = "undefined";
   this.maxX = 0;
   this.maxY = 0;
 };
@@ -27,6 +29,12 @@ barcode.Level.prototype = {
     });
     this.maxX = xx + 1;
     this.maxY = yy + 1;
+
+    var mob1 = new barcode.Monster();
+    mob1.init();
+    this.monsters.push(mob1);
+    this.character = new barcode.Character();
+    this.character.init();
   },
 
   aPathArray : function(){
@@ -46,6 +54,21 @@ barcode.Level.prototype = {
     return grid;
   },
 
+  renderMob : function(ctx){
+    var _ctx = ctx;
+    var _this = this;
+    this.monsters.forEach(function(elt){
+      elt.createPathTo(_this.character.getTile());
+      elt.move();
+      elt.render(_ctx);
+    })
+  },
+
+  renderCharacter : function(ctx){
+    this.character.move();
+    this.character.render(ctx);
+  },
+
   render : function(ts,ctx){
     this.tiles.forEach(function(elt){
       ctx.drawImage(
@@ -59,6 +82,8 @@ barcode.Level.prototype = {
          elt.size,
          elt.size);
     });
+    this.renderMob(ctx);
+    this.renderCharacter(ctx);
   }
 
 

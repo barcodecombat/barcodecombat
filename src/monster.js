@@ -1,10 +1,10 @@
 'use strict';
 var barcode = barcode || {};
 
-barcode.Character = function(){
-  this.x = 32 ;
-  this.y = 32;
-  this.size = 64;
+barcode.Monster = function(){
+  this.x = 96 ;
+  this.y = 192;
+  this.size = 32;
   this.spriteset = null;
   this.animation = 0;
   this.direction = 0;
@@ -15,24 +15,29 @@ barcode.Character = function(){
   this.step = 3;
 };
 
-
-barcode.Character.prototype = {
+barcode.Monster.prototype = {
   loaded : function(){
     this.loaded = true;
-  },
-
-  getTile : function(){
-    let tx = Math.round(this.x/32);
-    let ty = Math.round(this.y/32);
-    return {"x" : tx, "y" : ty  };
-  },
-
+  }
+  ,
   init : function(src){
     this.spriteset = new Image();
-    this.spriteset.src = "assets/sprites/fille.png";
-    this.spriteset.addEventListener("load",barcode.Character.loaded);
+    this.spriteset.src = "assets/sprites/bolt.png";
+    this.spriteset.addEventListener("load",barcode.Monster.loaded);
   },
 
+  render : function(ctx){
+    ctx.drawImage(
+       this.spriteset,
+       this.animation*this.size,
+       this.direction*this.size,
+       this.size,
+       this.size,
+       this.x,
+       this.y,
+       32,
+       32);
+  },
   animate : function(){
     let d = new Date();
     let newTick = d.getTime();
@@ -43,8 +48,24 @@ barcode.Character.prototype = {
     }
   },
 
-  move : function(){
+  getTile : function(){
+    let tx = Math.round(this.x/32);
+    let ty = Math.round(this.y/32);
+    return {"x" : tx, "y" : ty  };
+  },
 
+  createPathTo : function(tileTarget){
+    if ((this.path.length == 0) || ( this.path[0].x != tileTarget.x && this.path[0].y != tileTarget.y)){
+      let grid = barcode.GameEngine.level.aPathArray();
+      let tileMob = this.getTile();
+
+      var pthFinding = new barcode.Apath();
+      var result =  pthFinding.findShortestPath([tileMob.x,tileMob.y],[tileTarget.x,tileTarget.y], grid);
+      this.path = pthFinding.path;
+    }
+  },
+
+  move : function(){
     if (this.path.length > 0){
       this.animate();
       var nextTile = this.path[this.path.length-1];
@@ -76,17 +97,4 @@ barcode.Character.prototype = {
     }
   },
 
-  render : function(ctx){
-    ctx.drawImage(
-       this.spriteset,
-       this.animation*this.size,
-       this.direction*this.size,
-       this.size,
-       this.size,
-       this.x,
-       this.y,
-       32,
-       32);
-
-  }
 };

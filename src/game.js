@@ -4,7 +4,6 @@ var barcode = barcode || {};
 barcode.GameEngine = function (){
   this.tileSet = null;
   this.level = null;
-  this.character = null;
   this.loaded = false;
 }
 
@@ -12,13 +11,12 @@ barcode.GameEngine.prototype ={
 
   gameLoop: function (obj){
     if (! barcode.GameEngine.loaded ) return;
-    barcode.GameEngine.character.move();
     barcode.GameEngine.render();
   },
 
   clickEvent : function(evt){
     let grid = barcode.GameEngine.level.aPathArray();
-    let tileChar = barcode.GameEngine.character.getTile();
+    let tileChar = barcode.GameEngine.level.character.getTile();
 
     // TODO : FActorize convert posX to tileX
     let tx = Math.floor(evt.pageX/32);
@@ -36,12 +34,11 @@ barcode.GameEngine.prototype ={
         console.log(elt);
     });
     console.log("%%%%%%%");*/
-    barcode.GameEngine.character.path = pthFinding.path;
+    barcode.GameEngine.level.character.path = pthFinding.path;
   },
 
   init : function(){
-    this.character = new barcode.Character();
-    this.character.init();
+
     this.tileSet = new Image();
     this.tileSet.src = "./assets/tileset/tileset1.png";
     const instance = this;
@@ -60,7 +57,6 @@ barcode.GameEngine.prototype ={
       let canvas = document.getElementById("layer1");
       let context = canvas.getContext("2d");
       this.level.render(this.tileSet, context)
-      this.character.render(context);
     }
 
 }
