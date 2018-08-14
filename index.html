@@ -5,12 +5,30 @@
     <title>BarCode</title>
       <script type="text/javascript" src="assets/tiles/tiles.js"></script>
       <script type="text/javascript" src="assets/maps/map1.js"></script>
+      <style>
+      #interactive.viewport {
+        width: 640px;
+        height: 480px;
+      }
+
+      /* line 6, ../sass/_viewport.scss */
+      #interactive.viewport canvas, video {
+        float: left;
+        width: 640px;
+        height: 480px;
+      }
+      /* line 10, ../sass/_viewport.scss */
+      #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
+        margin-left: -640px;
+      }
+      </style>
 </head>
 <body>
-  <canvas id="layer1"></canvas>
-  <div id="mainMenu" style="position:absolite; top: 50; left : 100;">
+  <canvas id="layer1" height=0 width=0;></canvas>
+  <div id="interactive" class="viewport" style="display:None"></div>
+  <div id="mainMenu" style="position:absolute; top: 50; left : 100;">
     <button id="btnDonjon">Donjon</button>
-    <button>Scan</button>
+    <button id="btnScan">Scan</button>
     <button>Hero</button>
     <button id="btnMenu">Menu</button>
   </div>

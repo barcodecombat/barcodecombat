@@ -1,7 +1,7 @@
 
 var barcode = barcode || {};
 
-barcode.readcodebar = function(){
+barcode.Readcodebar = function(){
   this.state =  {
             inputStream: {
                 type : "LiveStream",
@@ -27,9 +27,10 @@ barcode.readcodebar = function(){
         };
 };
 
-barcode.readcodebar.prototype = {
-  init : function(){
-
+barcode.Readcodebar.prototype = {
+  start : function(){
+    let div = document.getElementById("interactive");
+    div.style.display = 'block';
     var _this = this;
     Quagga.init(this.state, function(err) {
         if (err) {
@@ -42,6 +43,8 @@ barcode.readcodebar.prototype = {
   },
 
   stop : function(){
+    let div = document.getElementById("interactive");
+    div.style.display = 'none';
     Quagga.stop();
   },
   detected : function(result){

@@ -13,9 +13,14 @@ barcode.Monster = function(){
   this.movingTick = 0;
   this.path = [];
   this.step = 1;
+  this.target = null;
 };
 
 barcode.Monster.prototype = {
+  calcDistance : function(){
+
+  },
+
   loaded : function(){
     this.loaded = true;
   }
@@ -33,10 +38,10 @@ barcode.Monster.prototype = {
        this.direction*this.size,
        this.size,
        this.size,
-       this.x,
-       this.y,
-       32,
-       32);
+       this.x+barcode.GameEngine.centerX - barcode.GameEngine.level.character.x,
+       this.y+barcode.GameEngine.centerY - barcode.GameEngine.level.character.y,
+       barcode.GameEngine.tileSize,
+       barcode.GameEngine.tileSize);
   },
   animate : function(){
     let d = new Date();
@@ -49,12 +54,13 @@ barcode.Monster.prototype = {
   },
 
   getTile : function(){
-    let tx = Math.round(this.x/32);
-    let ty = Math.round(this.y/32);
+    let tx = Math.round(this.x/barcode.GameEngine.tileSize);
+    let ty = Math.round(this.y/barcode.GameEngine.tileSize);
     return {"x" : tx, "y" : ty  };
   },
 
   createPathTo : function(tileTarget){
+    this.target = tileTarget;
     if ((this.path.length == 0) || ( this.path[0].x != tileTarget.x && this.path[0].y != tileTarget.y)){
       let grid = barcode.GameEngine.level.aPathArray();
       let tileMob = this.getTile();

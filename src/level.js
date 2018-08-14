@@ -70,6 +70,7 @@ barcode.Level.prototype = {
   },
 
   render : function(ts,ctx){
+    var _this = this;
     this.tiles.forEach(function(elt){
       ctx.drawImage(
          ts,
@@ -77,10 +78,10 @@ barcode.Level.prototype = {
          elt.ty,
          elt.size,
          elt.size,
-         elt.x*elt.size,
-         elt.y*elt.size,
-         elt.size,
-         elt.size);
+         elt.x*barcode.GameEngine.tileSize + barcode.GameEngine.centerX-_this.character.x,
+         elt.y*barcode.GameEngine.tileSize + barcode.GameEngine.centerY-_this.character.y,
+         barcode.GameEngine.tileSize,
+         barcode.GameEngine.tileSize);
     });
     this.renderMob(ctx);
     this.renderCharacter(ctx);

@@ -22,8 +22,8 @@ barcode.Character.prototype = {
   },
 
   getTile : function(){
-    let tx = Math.round(this.x/32);
-    let ty = Math.round(this.y/32);
+    let tx = Math.round(this.x/barcode.GameEngine.tileSize);
+    let ty = Math.round(this.y/barcode.GameEngine.tileSize);
     return {"x" : tx, "y" : ty  };
   },
 
@@ -83,10 +83,10 @@ barcode.Character.prototype = {
        this.direction*this.size,
        this.size,
        this.size,
-       this.x,
-       this.y,
-       32,
-       32);
+       barcode.GameEngine.centerX,
+       barcode.GameEngine.centerY,
+       barcode.GameEngine.tileSize,
+       barcode.GameEngine.tileSize);
 
   }
 };
