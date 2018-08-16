@@ -14,12 +14,13 @@ barcode.Monster = function(){
   this.path = [];
   this.step = 1;
   this.target = null;
+  this.range = 1.3;
+  this.attackSpeed = 500;
+  this.lastAttack = 0;
+  this.damage = 1;
 };
 
 barcode.Monster.prototype = {
-  calcDistance : function(){
-
-  },
 
   loaded : function(){
     this.loaded = true;
@@ -43,6 +44,25 @@ barcode.Monster.prototype = {
        barcode.GameEngine.tileSize,
        barcode.GameEngine.tileSize);
   },
+
+  doAction : function(){
+    let distance = calcDistance({x:this.target.x*barcode.GameEngine.tileSize,y:this.target.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+    if (distance > this.range*(barcode.GameEngine.tileSize)){
+      this.move();
+    }else{
+      this.attack();
+    }
+  },
+
+  attack : function(){
+    let d = new Date();
+    let newTick = d.getTime();
+    if (newTick - this.lastAttack > this.attackSpeed){
+      this.lastAttack = newTick;
+      barcode.GameEngine.level.character.doDamage(this.damage);
+    }
+  },
+
   animate : function(){
     let d = new Date();
     let newTick = d.getTime();
@@ -82,19 +102,19 @@ barcode.Monster.prototype = {
         if (dx != 0){
           if (dx > 0){
             this.x += this.step;
-            this.direction = 2;
+            this.direction = barcode.C.DIRECTION_RIGHT;
           }else{
             this.x -= this.step;
-            this.direction = 1;
+            this.direction = barcode.C.DIRECTION_LEFT;
           }
         }
         if (dy != 0){
           if (dy > 0){
             this.y += this.step;
-            this.direction = 0;
+            this.direction = barcode.C.DIRECTION_UP;
           }else{
             this.y -= this.step;
-            this.direction = 3;
+            this.direction = barcode.C.DIRECTION_DOWN;
           }
         }
       }else{

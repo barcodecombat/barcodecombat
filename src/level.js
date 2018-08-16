@@ -59,7 +59,7 @@ barcode.Level.prototype = {
     var _this = this;
     this.monsters.forEach(function(elt){
       elt.createPathTo(_this.character.getTile());
-      elt.move();
+      elt.doAction();
       elt.render(_ctx);
     })
   },

@@ -13,6 +13,7 @@ barcode.Character = function(){
   this.movingTick = 0;
   this.path = [];
   this.step = 3;
+  this.hitpoint = 1;
 };
 
 
@@ -33,6 +34,11 @@ barcode.Character.prototype = {
     this.spriteset.addEventListener("load",barcode.Character.loaded);
   },
 
+  doDamage : function(hp){
+    this.hitpoint -= hp;
+    console.log(this.hitpoint);
+  },
+
   animate : function(){
     let d = new Date();
     let newTick = d.getTime();
@@ -44,30 +50,31 @@ barcode.Character.prototype = {
   },
 
   move : function(){
-
     if (this.path.length > 0){
       this.animate();
       var nextTile = this.path[this.path.length-1];
       var currentTile = this.getTile();
-      if (nextTile.x != currentTile.x || nextTile.y != currentTile.y){
-        var dx = nextTile.x - currentTile.x;
-        var dy = nextTile.y - currentTile.y;
-        if (dx != 0){
+      let dist = calcDistance(this, {x: nextTile.x*barcode.GameEngine.tileSize, y: nextTile.y*barcode.GameEngine.tileSize});
+      //if (nextTile.x != currentTile.x || nextTile.y != currentTile.y){
+      if (dist >10 ){
+        var dx = nextTile.x*barcode.GameEngine.tileSize - this.x;
+        var dy = nextTile.y*barcode.GameEngine.tileSize - this.y;
+        if (Math.abs(dx) > this.step){
           if (dx > 0){
             this.x += this.step;
-            this.direction = 2;
-          }else{
+            this.direction = barcode.C.DIRECTION_RIGHT;
+          }else {
             this.x -= this.step;
-            this.direction = 1;
+            this.direction = barcode.C.DIRECTION_LEFT;
           }
         }
-        if (dy != 0){
+        if (Math.abs(dy) > this.step){
           if (dy > 0){
             this.y += this.step;
-            this.direction = 0;
+            this.direction = barcode.C.DIRECTION_UP;
           }else{
             this.y -= this.step;
-            this.direction = 3;
+            this.direction = barcode.C.DIRECTION_DOWN;
           }
         }
       }else{

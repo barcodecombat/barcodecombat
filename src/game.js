@@ -17,6 +17,8 @@ barcode.GameEngine.prototype ={
     if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
         if (! barcode.GameEngine.loaded ) return;
           barcode.GameEngine.render();
+        if (barcode.GameEngine.level.character.hitpoint <= 0)
+          barcode.GameEngine.state === barcode.C.STATE_DONJON_DEATH;
     }
   },
 
