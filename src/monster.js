@@ -64,14 +64,14 @@ barcode.Monster.prototype = {
     let newTick = d.getTime();
     if (newTick - this.lastAttack > this.attackSpeed){
       this.lastAttack = newTick;
-      barcode.GameEngine.level.character.doDamage(this.damage);
+      barcode.GameEngine.level.character.hit(this.damage);
     }
   },
 
   animate : function(){
     let d = new Date();
     let newTick = d.getTime();
-    if (newTick - this.movingTick > 50){
+    if (newTick - this.movingTick >  barcode.C.ANIMATION_SPEED){
       this.movingTick = newTick;
       this.animation += 1;
       if (this.animation > 2) this.animation = 0;

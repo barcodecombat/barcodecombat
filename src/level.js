@@ -84,6 +84,11 @@ barcode.Level.prototype = {
       if (elt.hitpoint <= 0) monsterToRemove.push(elt);
     })
     for (let i=0;i<monsterToRemove.length;i++){
+      var animation = new barcode.Animation();
+      animation.init();
+      animation.x = monsterToRemove[i].x;
+      animation.y = monsterToRemove[i].y;
+      barcode.GameEngine.animations.push(animation);
       this.removeMonster(monsterToRemove[i]);
     }
   },

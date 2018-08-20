@@ -14,6 +14,9 @@ barcode.Character = function(){
   this.path = [];
   this.step = 3;
   this.hitpoint = 1;
+  this.speedAttack = 50;
+  this.rangeAttack = 64;
+  this.lastAttackTicks = 0;
 };
 
 
@@ -34,14 +37,14 @@ barcode.Character.prototype = {
     this.spriteset.addEventListener("load",barcode.Character.loaded);
   },
 
-  doDamage : function(hp){
+  hit : function(hp){
     this.hitpoint -= hp;
   },
 
   animate : function(){
     let d = new Date();
     let newTick = d.getTime();
-    if (newTick - this.movingTick > 50){
+    if (newTick - this.movingTick > barcode.C.ANIMATION_SPEED){
       this.movingTick = newTick;
       this.animation += 1;
       if (this.animation > 2) this.animation = 0;
@@ -62,7 +65,12 @@ barcode.Character.prototype = {
   },
 
   hitTarget : function(mob){
-    mob.hit(1);
+    let d = new Date();
+    let newTick = d.getTime();
+    if (newTick - this.lastAttackTicks > this.speedAttack){
+      this.lastAttackTicks = newTick;
+      mob.hit(1);
+    }
   },
 
 

@@ -7,10 +7,13 @@ barcode.GameEngine = function (){
   this.loaded = false;
   this.state = barcode.C.STATE_MENU_SHOWN;
   this.readcodebar = null;
-  this.tileSize = 32;
-  this.centerX = 400;
-  this.centerY = 200;
+  this.tileSize = barcode.C.TILE_SIZE_PC;
+  this.centerX = 0;
+  this.centerY = 0;
+  this.animations = [];
 }
+
+
 
 barcode.GameEngine.prototype ={
   gameLoop: function (){
@@ -22,11 +25,25 @@ barcode.GameEngine.prototype ={
     }
   },
 
+  checkAnimations : function(context){
+    var animationToRemove = [];
+    this.animations.forEach(function(elt){
+      elt.render(context);
+      if (!elt.isActive()) animationToRemove.push(elt);
+    })
+    for (let i=0;i<animationToRemove.length;i++){
+      const index = this.animations.indexOf(animationToRemove[i]);
+      if (index !== -1) {
+          this.animations.splice(index, 1);
+      }
+    }
+  },
+
   clickEvent : function(evt){
     var mob = barcode.GameEngine.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
     if ( mob != null){
         var dist = calcDistance(mob, barcode.GameEngine.level.character);
-        if (dist > barcode.GameEngine.tileSize){
+        if (dist > barcode.GameEngine.level.character.rangeAttack){
           barcode.GameEngine.level.character.goToTarget(evt.pageX,evt.pageY);
         }else{
           barcode.GameEngine.level.character.hitTarget(mob);
@@ -34,16 +51,6 @@ barcode.GameEngine.prototype ={
     }else{
       barcode.GameEngine.level.character.goToTarget(evt.pageX,evt.pageY);
     }
-  /*  let grid = barcode.GameEngine.level.aPathArray();
-    let tileChar = barcode.GameEngine.level.character.getTile();
-    // TODO : FActorize convert posX to tileX
-    let tx = Math.floor((evt.pageX-barcode.GameEngine.centerX+barcode.GameEngine.level.character.x)/barcode.GameEngine.tileSize);
-    let ty = Math.floor((evt.pageY-barcode.GameEngine.centerY+barcode.GameEngine.level.character.y)/barcode.GameEngine.tileSize);
-
-    var pthFinding = new barcode.Apath();
-    var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid);
-
-    barcode.GameEngine.level.character.path = pthFinding.path;*/
   },
 
   closeState : function(){
@@ -59,8 +66,6 @@ barcode.GameEngine.prototype ={
     }
   },
 
-
-
   initDonjon : function(){
     barcode.GameEngine.closeState();
     barcode.GameEngine.tileSet = new Image();
@@ -74,32 +79,17 @@ barcode.GameEngine.prototype ={
     canvas.height = window.innerHeight;
     canvas.addEventListener("click",barcode.GameEngine.clickEvent);
     barcode.GameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
-    /*function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top
-        };
-      }
-
-
-    canvas.addEventListener('mousemove', function(evt) {
-        var mousePos = getMousePos(canvas, evt);
-        console.log( 'Mouse position: ' + mousePos.x + ',' + mousePos.y);
-      }, false);*/
   },
 
   initMenu : function(){
     barcode.GameEngine.closeState();
     barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
-
   },
 
   initScan : function(){
     barcode.GameEngine.closeState();
     barcode.GameEngine.state = barcode.C.STATE_SCAN_INPROGRESS;
     if (barcode.GameEngine.readcodebar == null) barcode.GameEngine.readcodebar = new barcode.Readcodebar();
-
     barcode.GameEngine.readcodebar.start();
   },
 
@@ -113,6 +103,8 @@ barcode.GameEngine.prototype ={
 
     this.centerX = window.innerWidth / 2 -window.innerWidth / 4 ;
     this.centerY = window.innerHeight / 2 - window.innerHeight / 4;
+
+    if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
   },
 
   render : function(){
@@ -120,6 +112,8 @@ barcode.GameEngine.prototype ={
       let context = canvas.getContext("2d");
       context.clearRect(0, 0, canvas.width, canvas.height);
       this.level.render(this.tileSet, context)
+      this.checkAnimations(context);
+
     }
 }
 
