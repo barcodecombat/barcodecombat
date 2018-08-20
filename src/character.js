@@ -36,7 +36,6 @@ barcode.Character.prototype = {
 
   doDamage : function(hp){
     this.hitpoint -= hp;
-    console.log(this.hitpoint);
   },
 
   animate : function(){
@@ -48,6 +47,24 @@ barcode.Character.prototype = {
       if (this.animation > 2) this.animation = 0;
     }
   },
+
+  goToTarget : function(x,y){
+    let grid = barcode.GameEngine.level.aPathArray();
+    let tileChar = this.getTile();
+    // TODO : FActorize convert posX to tileX
+    let tx = Math.floor((x-barcode.GameEngine.centerX+this.x)/barcode.GameEngine.tileSize);
+    let ty = Math.floor((y-barcode.GameEngine.centerY+this.y)/barcode.GameEngine.tileSize);
+
+    var pthFinding = new barcode.Apath();
+    var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid);
+
+    this.path = pthFinding.path;
+  },
+
+  hitTarget : function(mob){
+    mob.hit(1);
+  },
+
 
   move : function(){
     if (this.path.length > 0){

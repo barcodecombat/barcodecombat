@@ -18,6 +18,7 @@ barcode.Monster = function(){
   this.attackSpeed = 500;
   this.lastAttack = 0;
   this.damage = 1;
+  this.hitpoint = 1;
 };
 
 barcode.Monster.prototype = {
@@ -30,6 +31,10 @@ barcode.Monster.prototype = {
     this.spriteset = new Image();
     this.spriteset.src = "assets/sprites/bolt.png";
     this.spriteset.addEventListener("load",barcode.Monster.loaded);
+  },
+
+  hit: function(hp){
+    this.hitpoint -= hp;
   },
 
   render : function(ctx){

@@ -37,6 +37,18 @@ barcode.Level.prototype = {
     this.character.init();
   },
 
+  getTheMobUnderMouse : function(x,y){
+    var _x = x - barcode.GameEngine.centerX + barcode.GameEngine.level.character.x;
+    var _y = y - barcode.GameEngine.centerY + barcode.GameEngine.level.character.y;
+    var result = null;
+    this.monsters.forEach(function(elt){
+      if (((_x-barcode.GameEngine.tileSize)< elt.x) && ((_x+barcode.GameEngine.tileSize)>elt.x ) && ((_y-barcode.GameEngine.tileSize)< elt.y) && ((_y+barcode.GameEngine.tileSize)>elt.y )){
+        result = elt;
+      }
+    });
+    return result;
+  },
+
   aPathArray : function(){
     let grid = [];
     for (var i=0;i<this.maxY;i++){
@@ -54,14 +66,26 @@ barcode.Level.prototype = {
     return grid;
   },
 
+  removeMonster : function(mob){
+    const index = this.monsters.indexOf(mob);
+    if (index !== -1) {
+        this.monsters.splice(index, 1);
+    }
+  },
+
   renderMob : function(ctx){
     var _ctx = ctx;
     var _this = this;
+    var monsterToRemove = [];
     this.monsters.forEach(function(elt){
       elt.createPathTo(_this.character.getTile());
       elt.doAction();
       elt.render(_ctx);
+      if (elt.hitpoint <= 0) monsterToRemove.push(elt);
     })
+    for (let i=0;i<monsterToRemove.length;i++){
+      this.removeMonster(monsterToRemove[i]);
+    }
   },
 
   renderCharacter : function(ctx){

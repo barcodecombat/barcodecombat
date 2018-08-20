@@ -23,7 +23,18 @@ barcode.GameEngine.prototype ={
   },
 
   clickEvent : function(evt){
-    let grid = barcode.GameEngine.level.aPathArray();
+    var mob = barcode.GameEngine.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
+    if ( mob != null){
+        var dist = calcDistance(mob, barcode.GameEngine.level.character);
+        if (dist > barcode.GameEngine.tileSize){
+          barcode.GameEngine.level.character.goToTarget(evt.pageX,evt.pageY);
+        }else{
+          barcode.GameEngine.level.character.hitTarget(mob);
+        }
+    }else{
+      barcode.GameEngine.level.character.goToTarget(evt.pageX,evt.pageY);
+    }
+  /*  let grid = barcode.GameEngine.level.aPathArray();
     let tileChar = barcode.GameEngine.level.character.getTile();
     // TODO : FActorize convert posX to tileX
     let tx = Math.floor((evt.pageX-barcode.GameEngine.centerX+barcode.GameEngine.level.character.x)/barcode.GameEngine.tileSize);
@@ -32,7 +43,7 @@ barcode.GameEngine.prototype ={
     var pthFinding = new barcode.Apath();
     var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid);
 
-    barcode.GameEngine.level.character.path = pthFinding.path;
+    barcode.GameEngine.level.character.path = pthFinding.path;*/
   },
 
   closeState : function(){
@@ -48,6 +59,8 @@ barcode.GameEngine.prototype ={
     }
   },
 
+
+
   initDonjon : function(){
     barcode.GameEngine.closeState();
     barcode.GameEngine.tileSet = new Image();
@@ -57,10 +70,23 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.level = new barcode.Level();
     barcode.GameEngine.level.init(barcode.maps.map1);
     let canvas = document.getElementById("layer1");
-    canvas.width = 800;
-    canvas.height = 600;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     canvas.addEventListener("click",barcode.GameEngine.clickEvent);
     barcode.GameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
+    /*function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+
+
+    canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        console.log( 'Mouse position: ' + mousePos.x + ',' + mousePos.y);
+      }, false);*/
   },
 
   initMenu : function(){
@@ -84,7 +110,9 @@ barcode.GameEngine.prototype ={
     btnDonjon.addEventListener("click",barcode.GameEngine.initDonjon);
     let btnScan = document.getElementById("btnScan");
     btnScan.addEventListener("click",barcode.GameEngine.initScan);
-    console.log(window.screen.width + "//" + window.screen.height)
+
+    this.centerX = window.innerWidth / 2 -window.innerWidth / 4 ;
+    this.centerY = window.innerHeight / 2 - window.innerHeight / 4;
   },
 
   render : function(){
