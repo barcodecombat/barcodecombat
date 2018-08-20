@@ -11,6 +11,10 @@ barcode.GameEngine = function (){
   this.centerX = 0;
   this.centerY = 0;
   this.animations = [];
+  this.floatingText = [];
+  this.canvasTile = "undefined";
+  this.canvasCreature = "undefined";
+  this.canvasAnimation = "undefined";
 }
 
 
@@ -39,6 +43,20 @@ barcode.GameEngine.prototype ={
     }
   },
 
+  checkFloatingText : function(context){
+    var ftToRemove = [];
+    this.floatingText.forEach(function(elt){
+      elt.render(context);
+      if (!elt.isActive()) ftToRemove.push(elt);
+    })
+    for (let i=0;i<ftToRemove.length;i++){
+      const index = this.floatingText.indexOf(ftToRemove[i]);
+      if (index !== -1) {
+          this.floatingText.splice(index, 1);
+      }
+    }
+  },
+
   clickEvent : function(evt){
     var mob = barcode.GameEngine.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
     if ( mob != null){
@@ -53,16 +71,22 @@ barcode.GameEngine.prototype ={
     }
   },
 
+  setCanvasSize : function(width, height){
+    this.canvasTile.width = width;
+    this.canvasTile.height = height;
+    this.canvasCreature.width = width;
+    this.canvasCreature.height = height;
+    this.canvasAnimation.width = width;
+    this.canvasAnimation.height = height;
+  },
+
   closeState : function(){
     if (barcode.GameEngine.state === barcode.C.STATE_SCAN_INPROGRESS && barcode.GameEngine.readcodebar != null){
       barcode.GameEngine.readcodebar.stop();
     }
     if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
-      let canvas = document.getElementById("layer1");
-      let context = canvas.getContext("2d");
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      canvas.width = 0;
-      canvas.height = 0;
+      this.clearCanvas();
+      this.setCanvasSize(0,0);
     }
   },
 
@@ -74,10 +98,8 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.tileSet.addEventListener("load",function(e){instance.loaded = true;});
     barcode.GameEngine.level = new barcode.Level();
     barcode.GameEngine.level.init(barcode.maps.map1);
-    let canvas = document.getElementById("layer1");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.addEventListener("click",barcode.GameEngine.clickEvent);
+    barcode.GameEngine.setCanvasSize(window.innerWidth,window.innerHeight);
+    barcode.GameEngine.canvasAnimation.addEventListener("click",barcode.GameEngine.clickEvent);
     barcode.GameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
   },
 
@@ -101,20 +123,33 @@ barcode.GameEngine.prototype ={
     let btnScan = document.getElementById("btnScan");
     btnScan.addEventListener("click",barcode.GameEngine.initScan);
 
+    this.canvasTile = document.getElementById("layerTile");
+    this.canvasCreature = document.getElementById("layerCreature");
+    this.canvasAnimation = document.getElementById("layerAnimation");
+
     this.centerX = window.innerWidth / 2 -window.innerWidth / 4 ;
     this.centerY = window.innerHeight / 2 - window.innerHeight / 4;
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
   },
 
-  render : function(){
-      let canvas = document.getElementById("layer1");
-      let context = canvas.getContext("2d");
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      this.level.render(this.tileSet, context)
-      this.checkAnimations(context);
+  clearCanvas : function(){
+    let context = this.canvasTile.getContext("2d");
+    context.clearRect(0, 0, this.canvasTile.width, this.canvasTile.height);
+    context = this.canvasCreature.getContext("2d");
+    context.clearRect(0, 0, this.canvasCreature.width, this.canvasCreature.height);
+    context = this.canvasAnimation.getContext("2d");
+    context.clearRect(0, 0, this.canvasAnimation.width, this.canvasAnimation.height);
+  },
 
-    }
+  render : function(){
+    this.clearCanvas();
+    this.level.render(this.tileSet)
+
+    this.checkAnimations(this.canvasTile.getContext("2d"));
+    this.checkFloatingText(this.canvasAnimation.getContext("2d"));
+
+  }
 }
 
 barcode.GameEngine = new barcode.GameEngine();

@@ -11,6 +11,8 @@ barcode.Animation = function(){
   this.duration = 5000;
   this.startTime = 0;
   this.spriteset = null;
+  this.typeAnimation = barcode.C.TYPE_ANIMATION_STATIC;
+  this.layerToDraw = "undefined";
 };
 
 
@@ -33,7 +35,7 @@ barcode.Animation.prototype = {
   },
 
   render : function(ctx){
-    ctx.drawImage(
+    this.layerToDraw.drawImage(
        this.spriteset,
        this.tx,
        this.ty,

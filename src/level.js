@@ -32,7 +32,14 @@ barcode.Level.prototype = {
 
     var mob1 = new barcode.Monster();
     mob1.init();
+    var mob2 = new barcode.Monster();
+    mob2.init();
+    mob2.x = 128;
+    mob2.y = 128;
+
     this.monsters.push(mob1);
+    this.monsters.push(mob2);
+  //
     this.character = new barcode.Character();
     this.character.init();
   },
@@ -88,6 +95,7 @@ barcode.Level.prototype = {
       animation.init();
       animation.x = monsterToRemove[i].x;
       animation.y = monsterToRemove[i].y;
+      animation.layerToDraw = barcode.GameEngine.canvasTile.getContext("2d");
       barcode.GameEngine.animations.push(animation);
       this.removeMonster(monsterToRemove[i]);
     }
@@ -98,8 +106,9 @@ barcode.Level.prototype = {
     this.character.render(ctx);
   },
 
-  render : function(ts,ctx){
+  render : function(ts){
     var _this = this;
+    var ctx = barcode.GameEngine.canvasTile.getContext("2d");
     this.tiles.forEach(function(elt){
       ctx.drawImage(
          ts,
@@ -112,6 +121,8 @@ barcode.Level.prototype = {
          barcode.GameEngine.tileSize,
          barcode.GameEngine.tileSize);
     });
+    
+    ctx = barcode.GameEngine.canvasCreature.getContext("2d");
     this.renderMob(ctx);
     this.renderCharacter(ctx);
   }

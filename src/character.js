@@ -39,6 +39,13 @@ barcode.Character.prototype = {
 
   hit : function(hp){
     this.hitpoint -= hp;
+
+    var ft = new barcode.FloatingText();
+    ft.init();
+    ft.x = this.x + barcode.GameEngine.tileSize/2;
+    ft.y = this.y + barcode.GameEngine.tileSize/2;
+    ft.text = hp;
+    barcode.GameEngine.floatingText.push(ft);
   },
 
   animate : function(){
@@ -70,6 +77,12 @@ barcode.Character.prototype = {
     if (newTick - this.lastAttackTicks > this.speedAttack){
       this.lastAttackTicks = newTick;
       mob.hit(1);
+      var ft = new barcode.FloatingText();
+      ft.init();
+      ft.x = mob.x + barcode.GameEngine.tileSize/2;
+      ft.y = mob.y + barcode.GameEngine.tileSize/2;
+      ft.text = "1";
+      barcode.GameEngine.floatingText.push(ft);
     }
   },
 

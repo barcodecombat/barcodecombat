@@ -18,7 +18,7 @@ barcode.Monster = function(){
   this.attackSpeed = 500;
   this.lastAttack = 0;
   this.damage = 1;
-  this.hitpoint = 1;
+  this.hitpoint = 10;
 };
 
 barcode.Monster.prototype = {

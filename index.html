@@ -27,7 +27,9 @@
       </style>
 </head>
 <body>
-  <canvas id="layer1" height=0 width=0;></canvas>
+  <canvas id="layerTile" height="0" width="0" style="position:absolute; top:0;left:0;z-index: 15"></canvas>
+  <canvas id="layerCreature" height="0" width="0" style="position:absolute; top:0;left:0;z-index: 25"></canvas>
+  <canvas id="layerAnimation" height="0" width="0" style="position:absolute; top:0;left:0;z-index: 35"></canvas>
   <div id="interactive" class="viewport" style="display:None"></div>
   <div id="mainMenu" style="position:absolute; top: 50; left : 100;">
     <button id="btnDonjon">Donjon</button>
@@ -39,6 +41,7 @@
   <script src="./src/commons.js"></script>
   <script src="./src/constantes.js"></script>
   <script src="./src/animation.js"></script>
+  <script src="./src/floatingtext.js"></script>
   <script src="./src/quagga.min.js"></script>
   <script src="./src/readcodebar.js"></script>
   <script src="./src/apath.js"></script>
