@@ -45,8 +45,8 @@ barcode.Level.prototype = {
   },
 
   getTheMobUnderMouse : function(x,y){
-    var _x = x - barcode.GameEngine.centerX + barcode.GameEngine.level.character.x;
-    var _y = y - barcode.GameEngine.centerY + barcode.GameEngine.level.character.y;
+    var _x = x - barcode.GameEngine.centerX + this.character.x;
+    var _y = y - barcode.GameEngine.centerY + this.character.y;
     var result = null;
     this.monsters.forEach(function(elt){
       if (((_x-barcode.GameEngine.tileSize)< elt.x) && ((_x+barcode.GameEngine.tileSize)>elt.x ) && ((_y-barcode.GameEngine.tileSize)< elt.y) && ((_y+barcode.GameEngine.tileSize)>elt.y )){
@@ -95,8 +95,8 @@ barcode.Level.prototype = {
       animation.init();
       animation.x = monsterToRemove[i].x;
       animation.y = monsterToRemove[i].y;
-      animation.layerToDraw = barcode.GameEngine.canvasTile.getContext("2d");
-      barcode.GameEngine.animations.push(animation);
+      animation.layerToDraw = barcode.GameDonjon.canvasTile.getContext("2d");
+      barcode.GameDonjon.animations.push(animation);
       this.removeMonster(monsterToRemove[i]);
     }
   },
@@ -108,7 +108,7 @@ barcode.Level.prototype = {
 
   render : function(ts){
     var _this = this;
-    var ctx = barcode.GameEngine.canvasTile.getContext("2d");
+    var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
     this.tiles.forEach(function(elt){
       ctx.drawImage(
          ts,
@@ -121,8 +121,8 @@ barcode.Level.prototype = {
          barcode.GameEngine.tileSize,
          barcode.GameEngine.tileSize);
     });
-    
-    ctx = barcode.GameEngine.canvasCreature.getContext("2d");
+
+    ctx = barcode.GameDonjon.canvasCreature.getContext("2d");
     this.renderMob(ctx);
     this.renderCharacter(ctx);
   }

@@ -15,7 +15,6 @@ barcode.Animation = function(){
   this.layerToDraw = "undefined";
 };
 
-
 barcode.Animation.prototype = {
 
   init : function(){
@@ -41,8 +40,8 @@ barcode.Animation.prototype = {
        this.ty,
        this.size,
        this.size,
-       this.x+barcode.GameEngine.centerX - barcode.GameEngine.level.character.x,
-       this.y+barcode.GameEngine.centerY - barcode.GameEngine.level.character.y,
+       this.x+barcode.GameEngine.centerX - barcode.GameDonjon.level.character.x,
+       this.y+barcode.GameEngine.centerY - barcode.GameDonjon.level.character.y,
        barcode.GameEngine.tileSize,
        barcode.GameEngine.tileSize);
 

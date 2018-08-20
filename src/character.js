@@ -19,7 +19,6 @@ barcode.Character = function(){
   this.lastAttackTicks = 0;
 };
 
-
 barcode.Character.prototype = {
   loaded : function(){
     this.loaded = true;
@@ -45,7 +44,7 @@ barcode.Character.prototype = {
     ft.x = this.x + barcode.GameEngine.tileSize/2;
     ft.y = this.y + barcode.GameEngine.tileSize/2;
     ft.text = hp;
-    barcode.GameEngine.floatingText.push(ft);
+    barcode.GameDonjon.floatingText.push(ft);
   },
 
   animate : function(){
@@ -59,7 +58,7 @@ barcode.Character.prototype = {
   },
 
   goToTarget : function(x,y){
-    let grid = barcode.GameEngine.level.aPathArray();
+    let grid = barcode.GameDonjon.level.aPathArray();
     let tileChar = this.getTile();
     // TODO : FActorize convert posX to tileX
     let tx = Math.floor((x-barcode.GameEngine.centerX+this.x)/barcode.GameEngine.tileSize);
@@ -82,7 +81,7 @@ barcode.Character.prototype = {
       ft.x = mob.x + barcode.GameEngine.tileSize/2;
       ft.y = mob.y + barcode.GameEngine.tileSize/2;
       ft.text = "1";
-      barcode.GameEngine.floatingText.push(ft);
+      barcode.GameDonjon.floatingText.push(ft);
     }
   },
 

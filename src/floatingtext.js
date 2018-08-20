@@ -27,10 +27,10 @@ barcode.FloatingText.prototype = {
   },
 
   render : function(ctx){
-    var ctx = barcode.GameEngine.canvasAnimation.getContext("2d");
+    var ctx = barcode.GameDonjon.canvasAnimation.getContext("2d");
     ctx.font = "1Opx Arial";
     ctx.fillStyle = this.color;
-    ctx.fillText(this.text, this.x+barcode.GameEngine.centerX - barcode.GameEngine.level.character.x, this.y+barcode.GameEngine.centerY - barcode.GameEngine.level.character.y);
+    ctx.fillText(this.text, this.x+barcode.GameEngine.centerX - barcode.GameDonjon.level.character.x, this.y+barcode.GameEngine.centerY - barcode.GameDonjon.level.character.y);
     this.y -= 1;
   }
 };
