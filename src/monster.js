@@ -13,7 +13,7 @@ barcode.Monster = function(){
   this.movingTick = 0;
   this.path = [];
   this.step = 1;
-  this.target = null;
+  this.target = "undefined";
   this.range = 1.3;
   this.attackSpeed = 500;
   this.lastAttack = 0;
@@ -51,11 +51,14 @@ barcode.Monster.prototype = {
   },
 
   doAction : function(){
-    let distance = calcDistance({x:this.target.x*barcode.GameEngine.tileSize,y:this.target.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
-    if (distance > this.range*(barcode.GameEngine.tileSize)){
-      this.move();
-    }else{
-      this.attack();
+    if (typeof this.target !== "undefined")
+    {
+      let distance = calcDistance({x:this.target.x*barcode.GameEngine.tileSize,y:this.target.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+      if (distance > this.range*(barcode.GameEngine.tileSize)){
+        this.move();
+      }else{
+        this.attack();
+      }
     }
   },
 

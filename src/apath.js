@@ -73,9 +73,9 @@ barcode.Apath.prototype = {
       adjacentBrickList.push({ y : this.currentBrick.y-1 , x :this.currentBrick.x-1,cost : 3});
     if (this.currentBrick.x-1 >=0 && this.currentBrick.y+1 < this.gridSizeY)
       adjacentBrickList.push({ y : this.currentBrick.y+1 , x :this.currentBrick.x-1,cost : 3});
-    if (this.currentBrick.x+1 < this.gridSizeY && this.currentBrick.y-1 >=0)
+    if (this.currentBrick.x+1 < this.gridSizeX && this.currentBrick.y-1 >=0)
       adjacentBrickList.push({ y : this.currentBrick.y-1 , x :this.currentBrick.x+1,cost : 3});
-    if (this.currentBrick.x+1 < this.gridSizeX && this.currentBrick.y+1 < this.gridSizeY)
+    if (this.currentBrick.x+1 < this.gridSizeY && this.currentBrick.y+1 < this.gridSizeY)
         adjacentBrickList.push({ y : this.currentBrick.y+1 , x :this.currentBrick.x+1,cost : 3});
 
     return adjacentBrickList;
@@ -85,11 +85,11 @@ barcode.Apath.prototype = {
     var adjacentBrickList = [];
     if (this.currentBrick.x-1 >=0)
       adjacentBrickList.push({ y : this.currentBrick.y , x :this.currentBrick.x-1,cost : 2});
-    if (this.currentBrick.x+1 < this.gridSizeX)
+    if (this.currentBrick.x+1 < this.gridSizeY)
       adjacentBrickList.push({ y : this.currentBrick.y , x :this.currentBrick.x+1,cost : 2});
     if (this.currentBrick.y-1 >=0)
       adjacentBrickList.push({ y : this.currentBrick.y-1 , x :this.currentBrick.x,cost : 2});
-    if (this.currentBrick.y+1 < this.gridSizeY)
+    if (this.currentBrick.y+1 < this.gridSizeX)
       adjacentBrickList.push({ y : this.currentBrick.y+1 , x :this.currentBrick.x,cost : 2});
     return this.retrieveDiagonalBricks(adjacentBrickList);
   },
@@ -97,7 +97,6 @@ barcode.Apath.prototype = {
   exploreAdjacentBricks : function(){
     var adjacentBrickList = this.retrieveAdjacentBricks();
     for(var i = 0 ; i < adjacentBrickList.length ; i++){
-
       if (typeof adjacentBrickList[i] !== 'undefined'){
         var adjacentBrick = this.grid[adjacentBrickList[i].y][adjacentBrickList[i].x];
         if (adjacentBrick.status !== "visited" && adjacentBrick.status !=="Obstacle"){
@@ -117,7 +116,6 @@ barcode.Apath.prototype = {
     }
   },
 
-
   findShortestPath :function(start, goal,grid){
     this.grid = grid;
     this.goal = goal;
@@ -125,10 +123,13 @@ barcode.Apath.prototype = {
 
     this.openCount = 1;
     while(this.openCount > 0){
-      if (!this.retrieveNextBrickToVisit()) return false;
+      if (!this.retrieveNextBrickToVisit()){
+        return false;
+      }
       this.manageOpenList();
-      if (this.isGoalFounded())
+      if (this.isGoalFounded()){
         return true;
+      }
 
       this.grid[this.currentBrick.y][this.currentBrick.x].status = "visited";
       var adjacentBrickList = this.exploreAdjacentBricks();
