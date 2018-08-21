@@ -21,37 +21,39 @@
       #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
         margin-left: -640px;
       }
-      #layer1 {
-        border: 1px solid blue;
+      canvas {
+        position: absolute;
+        top : 0;
+        left : 0;
       }
       </style>
 </head>
 <body>
-  <canvas id="layerTile" height="0" width="0" style="position:absolute; top:50;left:0;z-index: 15"></canvas>
-  <canvas id="layerCreature" height="0" width="0" style="position:absolute; top:50;left:0;z-index: 25"></canvas>
-  <canvas id="layerAnimation" height="0" width="0" style="position:absolute; top:50;left:0;z-index: 35"></canvas>
-  <div id="interactive" class="viewport" style="display:None"></div>
-  <div id="mainMenu" style="position:absolute; top: 0; left : 100;">
+  <canvas id="layerTile" height="0" width="0" style="z-index: 15"></canvas>
+<canvas id="layerCreature" height="0" width="0" style="z-index: 25"></canvas>
+<canvas id="layerAnimation" height="0" width="0" style="z-index: 35"></canvas>
+<div id="interactive" class="viewport" style="display:None"></div>
+  <div id="mainMenu" style="position:absolute; top: 0; left : 100; z-index: 99">
     <button id="btnDonjon">Donjon</button>
     <button id="btnScan">Scan</button>
     <button>Hero</button>
     <button id="btnMenu">Menu</button>
   </div>
 
-  <script src="./src/commons.js"></script>
-  <script src="./src/constantes.js"></script>
-  <script src="./src/animation.js"></script>
-  <script src="./src/floatingtext.js"></script>
-  <script src="./src/quagga.min.js"></script>
-  <script src="./src/readcodebar.js"></script>
-  <script src="./src/apath.js"></script>
-  <script src="./src/item.js"></script>
-  <script src="./src/itemgenerator.js"></script>
-  <script src="./src/character.js"></script>
-  <script src="./src/monster.js"></script>
-  <script src="./src/tile.js"></script>
-  <script src="./src/level.js"></script>
-  <script src="./src/gamedonjon.js"></script>
-  <script src="./src/game.js"></script>
+  <script src="./src/game/commons.js"></script>
+  <script src="./src/game/constantes.js"></script>
+  <script src="./src/game/animation.js"></script>
+  <script src="./src/game/floatingtext.js"></script>
+  <script src="./src/game/quagga.min.js"></script>
+  <script src="./src/game/readcodebar.js"></script>
+  <script src="./src/game/apath.js"></script>
+  <script src="./src/game/item.js"></script>
+  <script src="./src/game/itemgenerator.js"></script>
+  <script src="./src/game/character.js"></script>
+  <script src="./src/game/monster.js"></script>
+  <script src="./src/game/tile.js"></script>
+  <script src="./src/game/level.js"></script>
+  <script src="./src/game/gamedonjon.js"></script>
+  <script src="./src/game/game.js"></script>
 </body>
 </html>

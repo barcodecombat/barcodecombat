@@ -15,7 +15,7 @@ barcode.Character = function(){
   this.step = 3;
   this.hitpoint = 1;
   this.speedAttack = 50;
-  this.rangeAttack = 64;
+  this.rangeAttack = 1;
   this.lastAttackTicks = 0;
 };
 
