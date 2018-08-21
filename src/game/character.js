@@ -2,8 +2,8 @@
 var barcode = barcode || {};
 
 barcode.Character = function(){
-  this.x = 32 ;
-  this.y = 32;
+  this.x = 0 ;
+  this.y = 0;
   this.size = 64;
   this.spriteset = null;
   this.animation = 0;

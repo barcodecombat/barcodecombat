@@ -7,6 +7,7 @@ barcode.Level = function(){
   this.character = "undefined";
   this.maxX = 0;
   this.maxY = 0;
+  this.startingPoint = {};
 };
 
 barcode.Level.prototype = {
@@ -29,7 +30,8 @@ barcode.Level.prototype = {
     });
     this.maxX = xx + 1;
     this.maxY = yy + 1;
-
+    this.startingPoint = src.startingpoint;
+    console.log(this.startingPoint);
     var mob1 = new barcode.Monster();
     mob1.init();
     var mob2 = new barcode.Monster();
@@ -42,6 +44,8 @@ barcode.Level.prototype = {
   //
     this.character = new barcode.Character();
     this.character.init();
+    this.character.x = this.startingPoint.x * barcode.GameEngine.tileSize;
+    this.character.y = this.startingPoint.y * barcode.GameEngine.tileSize;
   },
 
   getTheMobUnderMouse : function(x,y){

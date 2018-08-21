@@ -2,6 +2,10 @@
 var barcode = barcode || {};
 barcode.maps = barcode.maps || {};
 barcode.maps.map1 = {
+  "startingpoint" : {
+      x : 2,
+      y : 1
+  },
   "tiles" : [
     {
       "x":1,

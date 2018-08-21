@@ -7,11 +7,14 @@ barcode.Room = function(){
   this.size = 0;
   this.type = 0;
   this.tiles = [];
+  this.startingPoint = "undefined";
 };
 
 barcode.Room.prototype = {
   addStartingPoint : function(){
-
+    let x = Math.floor(Math.random()*(this.sizeX-2)+1);
+    let y = Math.floor(Math.random()*(this.sizeY-2)+1);
+    this.startingPoint = { 'x' : x, 'y' :y};
   },
 
   init : function(){
@@ -31,6 +34,7 @@ barcode.Room.prototype = {
         this.tiles.push(tempTile);
       }
     }
+
   },
 
   render : function(){
@@ -48,5 +52,18 @@ barcode.Room.prototype = {
          barcode.C.TILE_SIZE_PC,
          barcode.C.TILE_SIZE_PC);
     });
+
+    if (typeof this.startingPoint !== "undefined"){
+      ctx.drawImage(
+         barcode.Generator.heroSprite,
+         0,
+         0,
+         64,
+         64,
+         this.startingPoint.x*barcode.C.TILE_SIZE_PC,
+         this.startingPoint.y*barcode.C.TILE_SIZE_PC,
+         barcode.C.TILE_SIZE_PC,
+         barcode.C.TILE_SIZE_PC);
+    }
   }
 };

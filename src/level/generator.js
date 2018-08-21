@@ -5,6 +5,7 @@ barcode.Generator = function(){
   this.rooms = [];
   this.canvasTile = "undefined";
   this.tileSet = "undefined";
+  this.heroSprite = "undefined";
 };
 
 barcode.Generator.prototype = {
@@ -20,20 +21,24 @@ barcode.Generator.prototype = {
 
   gameLoop : function(){
     barcode.Generator.clearCanvas();
-      barcode.Generator.rooms.forEach(function(elt){
+    barcode.Generator.rooms.forEach(function(elt){
           elt.render();
-      });
+    });
   },
 
   generateLevel : function(){
+    barcode.Generator.rooms = [];
     var room = new barcode.Room();
     room.init();
     barcode.Generator.rooms.push(room);
+    barcode.Generator.rooms[0].addStartingPoint();
   },
 
   init : function(){
     this.tileSet = new Image();
     this.tileSet.src = "./assets/tileset/tileset1.png";
+    this.heroSprite = new Image();
+    this.heroSprite.src = "assets/sprites/fille.png";
     let btnGenerate = document.getElementById("btnGenerate");
     btnGenerate.addEventListener("click",barcode.Generator.generateLevel);
     this.canvasTile = document.getElementById("layerTile");
