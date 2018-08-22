@@ -31,12 +31,25 @@ barcode.Level.prototype = {
     });
     this.maxX = xx + 1;
     this.maxY = yy + 1;
+
     this.startingPoint = src.startingpoint;
-  //
+
     this.character = new barcode.Character();
     this.character.init();
     this.character.x = this.startingPoint.x * barcode.GameEngine.tileSize;
     this.character.y = this.startingPoint.y * barcode.GameEngine.tileSize;
+
+    if (typeof src.mobs !== "undefined"){
+      var listMob = this.monsters;
+      src.mobs.forEach(function(mob){
+          var newMob = new barcode.Monster();
+          newMob.init();
+          newMob.x = mob.x * barcode.GameEngine.tileSize;
+          newMob.y = mob.y * barcode.GameEngine.tileSize ;
+          listMob.push(newMob);
+      });
+    }
+
   },
   initFromGenerator : function(){
     var lvlGenerated = barcode.Generator.generateLevel();
