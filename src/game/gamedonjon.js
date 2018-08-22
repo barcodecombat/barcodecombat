@@ -16,7 +16,7 @@ barcode.GameDonjon.prototype ={
     this.tileSet = new Image();
     this.tileSet.src = "./assets/tileset/tileset1.png";
     this.level = new barcode.Level();
-    this.level.init(barcode.maps.map1);
+    this.level.init();
     this.canvasTile = document.getElementById("layerTile");
     this.canvasCreature = document.getElementById("layerCreature");
     this.canvasAnimation = document.getElementById("layerAnimation");

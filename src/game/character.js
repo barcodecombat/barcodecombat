@@ -84,7 +84,6 @@ barcode.Character.prototype = {
     }
   },
 
-
   move : function(){
     if (this.path.length > 0){
       this.animate();

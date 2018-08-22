@@ -11,7 +11,8 @@ barcode.Level = function(){
 };
 
 barcode.Level.prototype = {
-  init : function(src){
+
+  initFromJs : function(src){
     var tiles = this.tiles;
     let xx =0, yy = 0;
     src.tiles.forEach(function(elt){
@@ -31,21 +32,20 @@ barcode.Level.prototype = {
     this.maxX = xx + 1;
     this.maxY = yy + 1;
     this.startingPoint = src.startingpoint;
-    console.log(this.startingPoint);
-    var mob1 = new barcode.Monster();
-    mob1.init();
-    var mob2 = new barcode.Monster();
-    mob2.init();
-    mob2.x = 128;
-    mob2.y = 128;
-
-    this.monsters.push(mob1);
-    this.monsters.push(mob2);
   //
     this.character = new barcode.Character();
     this.character.init();
     this.character.x = this.startingPoint.x * barcode.GameEngine.tileSize;
     this.character.y = this.startingPoint.y * barcode.GameEngine.tileSize;
+  },
+  initFromGenerator : function(){
+    var lvlGenerated = barcode.Generator.generateLevel();
+    this.initFromJs(lvlGenerated);
+  },
+
+  init : function(src){
+    //this.initFromJs(barcode.maps.map1);
+    this.initFromGenerator();
   },
 
   getTheMobUnderMouse : function(x,y){

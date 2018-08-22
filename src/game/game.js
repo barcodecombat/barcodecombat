@@ -47,6 +47,8 @@ barcode.GameEngine.prototype ={
   },
 
   init : function(){
+    barcode.Generator = new barcode.Generator();
+    barcode.Generator.init();
     barcode.GameDonjon = new barcode.GameDonjon();
     let btnMenu = document.getElementById("btnMenu");
     btnMenu.addEventListener("click",barcode.GameEngine.initMenu);
