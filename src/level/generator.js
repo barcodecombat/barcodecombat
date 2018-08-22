@@ -49,7 +49,7 @@ barcode.Generator.prototype = {
 
     if (mobs.length > 0) result['mobs'] = mobs;
     result['tiles'] = tiles;
-    console.log(result);
+
     return result;
   },
 
