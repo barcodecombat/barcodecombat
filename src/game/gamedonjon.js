@@ -3,9 +3,9 @@ var barcode = barcode || {};
 
 barcode.GameDonjon = function (){
   this.level = 'undefined';
-  this.canvasTile = "undefined";
-  this.canvasCreature = "undefined";
-  this.canvasAnimation = "undefined";
+  this.canvasTile = undefined;
+  this.canvasCreature = undefined;
+  this.canvasAnimation = undefined;
   this.animations = [];
   this.floatingText = [];
   this.tileSet = null;

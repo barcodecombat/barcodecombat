@@ -3,10 +3,10 @@ var barcode = barcode || {};
 
 barcode.Generator = function(){
   this.rooms = [];
-  this.canvasTile = "undefined";
-  this.tileSet = "undefined";
-  this.heroSprite = "undefined";
-  this.mobSprite = "undefined";
+  this.canvasTile = undefined;
+  this.tileSet = undefined;
+  this.heroSprite = undefined;
+  this.mobSprite = undefined;
 };
 
 barcode.Generator.prototype = {
@@ -27,13 +27,7 @@ barcode.Generator.prototype = {
     });
   },
 
-  generateLevel : function(){
-    barcode.Generator.rooms = [];
-    var room = new barcode.Room();
-    room.init();
-    barcode.Generator.rooms.push(room);
-    barcode.Generator.rooms[0].addStartingPoint();
-
+  generateJson : function(){
     var tiles = [];
     var mobs = [];
     var result = {};
@@ -41,16 +35,51 @@ barcode.Generator.prototype = {
       itRoom.tiles.forEach(function(elt){
         tiles.push(elt);
       });
-      if (typeof itRoom.startingPoint !== "undefined") result['startingpoint'] = itRoom.startingPoint;
+      if (typeof itRoom.startingPoint !== 'undefined'){
+        result['startingpoint'] = itRoom.startingPoint;
+      }
       itRoom.mobs.forEach(function(elt){
         mobs.push(elt);
       });
     });
-
     if (mobs.length > 0) result['mobs'] = mobs;
     result['tiles'] = tiles;
-
+    console.log(result);
     return result;
+  },
+
+
+  putRoom : function(room){
+    var isCollided = true;
+    var it = 0;
+    while (isCollided && it < 100){
+      room.x = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length);/// barcode.GameEngine.tileSize);
+      room.y = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length);// / barcode.GameEngine.tileSize);
+      isCollided = false;
+      for (let i = 0 ; i < this.rooms.length && isCollided == false; i++){
+        isCollided = room.roomCollision(barcode.Generator.rooms[i]);
+      }
+      it++;
+    }
+
+  },
+
+  createRoom : function(){
+    var room = new barcode.Room();
+    room.init();
+    this.putRoom(room);
+    room.alignTiles();
+    barcode.Generator.rooms.push(room);
+  },
+
+  generateLevel : function(){
+    barcode.Generator.rooms = [];
+    var nbRoom = Math.floor(Math.random()*3) + 2;
+    for(let i = 0 ; i < nbRoom ; i++){
+      this.createRoom();
+    }
+    barcode.Generator.rooms[0].addStartingPoint();
+    return this.generateJson();
   },
 
   init : function(){
@@ -65,7 +94,7 @@ barcode.Generator.prototype = {
     this.mobSprite = new Image();
     this.mobSprite.src = "assets/sprites/bolt.png";
     let btnGenerate = document.getElementById("btnGenerate");
-    if (typeof btnGenerate !== "undefined" && btnGenerate != null)
+    if (typeof btnGenerate !== 'undefined' && btnGenerate != null)
       btnGenerate.addEventListener("click",barcode.Generator.generateLevel);
     this.canvasTile = document.getElementById("layerTile");
     this.setCanvasSize(window.innerWidth,window.innerHeight);

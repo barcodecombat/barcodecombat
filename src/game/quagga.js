@@ -3601,7 +3601,7 @@ function ready(cb) {
 }
 
 function initCanvas() {
-    if (typeof document !== "undefined") {
+    if (typeof document !== undefined) {
         var $viewport = getViewPort();
         _canvasContainer.dom.image = document.querySelector("canvas.imgBuffer");
         if (!_canvasContainer.dom.image) {

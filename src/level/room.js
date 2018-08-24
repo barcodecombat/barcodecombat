@@ -2,13 +2,15 @@
 var barcode = barcode || {};
 
 barcode.Room = function(){
+  this.x = 0;
+  this.y = 0;
   this.sizeX = 0;
   this.sizeY = 0;
   this.size = 0;
   this.type = 0;
   this.tiles = [];
   this.mobs = [];
-  this.startingPoint = "undefined";
+  this.startingPoint = undefined;
 };
 
 barcode.Room.prototype = {
@@ -25,6 +27,36 @@ barcode.Room.prototype = {
       let x = Math.floor(Math.random()*(this.sizeX-2)+1);
       let y = Math.floor(Math.random()*(this.sizeY-2)+1);
       this.mobs.push({'x' : x, 'y' : y});
+    }
+  },
+
+
+  roomCollision : function(room){
+    if (room.x < (this.x + this.sizeX)
+    && (room.x+ room.sizeX) > this.x
+    && room.y< (this.y+this.sizeY)
+    && (room.y+room.sizeY) > this.y) {
+      return true;
+    }
+    return false;
+
+  },
+
+  alignTiles : function(){
+    var _this = this;
+    this.tiles.forEach(function(tile){
+      tile.x += _this.x;
+      tile.y += _this.y;
+    });
+    if (typeof this.startingPoint !== 'undefined'){
+      this.startingPoint.x += this.x;
+      this.startingPoint.y += this.y;
+    }
+    if (this.mobs.length > 0){
+      this.mobs.forEach(function(mob){
+        mob.x += _this.x;
+        mob.y += _this.y;
+      });
     }
   },
 
@@ -63,7 +95,7 @@ barcode.Room.prototype = {
          barcode.C.TILE_SIZE_PC);
     });
 
-    if (typeof this.startingPoint !== "undefined"){
+    if (typeof this.startingPoint !== undefined){
       ctx.drawImage(
          barcode.Generator.heroSprite,
          0,

@@ -4,7 +4,7 @@ var barcode = barcode || {};
 barcode.Level = function(){
   this.tiles = [];
   this.monsters = [];
-  this.character = "undefined";
+  this.character = undefined;
   this.maxX = 0;
   this.maxY = 0;
   this.startingPoint = {};
@@ -39,7 +39,7 @@ barcode.Level.prototype = {
     this.character.x = this.startingPoint.x * barcode.GameEngine.tileSize;
     this.character.y = this.startingPoint.y * barcode.GameEngine.tileSize;
 
-    if (typeof src.mobs !== "undefined"){
+    if (typeof src.mobs !== 'undefined'){
       var listMob = this.monsters;
       src.mobs.forEach(function(mob){
           var newMob = new barcode.Monster();

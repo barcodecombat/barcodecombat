@@ -12,7 +12,7 @@ barcode.Animation = function(){
   this.startTime = 0;
   this.spriteset = null;
   this.typeAnimation = barcode.C.TYPE_ANIMATION_STATIC;
-  this.layerToDraw = "undefined";
+  this.layerToDraw = undefined;
 };
 
 barcode.Animation.prototype = {
