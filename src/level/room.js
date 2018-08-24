@@ -30,16 +30,40 @@ barcode.Room.prototype = {
     }
   },
 
+  addDoor : function(){
+    var rn = Math.random();
+    var x = 0, y=0;
+
+    if (rn < 0.25){
+      x = Math.floor(this.sizeX / 2) + this.x ;
+      y = this.y;
+    }else if (rn < 0.5){
+      x = Math.floor(this.sizeX / 2) + this.x ;
+      y = this.sizeY + this.y - 1;
+    }else if (rn < 0.75){
+      x = this.x;
+      y = Math.floor(this.sizeY /2 ) +this.y;
+    }else{
+      x = this.x + this.sizeX - 1;
+      y = Math.floor(this.sizeY /2 ) +this.y;
+    }
+
+    this.tiles.forEach(function(tile){
+      if (tile.x == x && tile.y == y){
+        tile.ttile = 1;
+      }
+    });
+  },
+
 
   roomCollision : function(room){
-    if (room.x < (this.x + this.sizeX)
-    && (room.x+ room.sizeX) > this.x
-    && room.y< (this.y+this.sizeY)
-    && (room.y+room.sizeY) > this.y) {
+    if ((room.x+1) < (this.x + this.sizeX)
+    && (room.x+ room.sizeX) > (this.x+1)
+    && (room.y+1)< (this.y+this.sizeY)
+    && (room.y+room.sizeY) > (this.y+1)) {
       return true;
     }
     return false;
-
   },
 
   alignTiles : function(){
@@ -95,7 +119,7 @@ barcode.Room.prototype = {
          barcode.C.TILE_SIZE_PC);
     });
 
-    if (typeof this.startingPoint !== undefined){
+    if (typeof this.startingPoint !== 'undefined'){
       ctx.drawImage(
          barcode.Generator.heroSprite,
          0,

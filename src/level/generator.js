@@ -69,17 +69,19 @@ barcode.Generator.prototype = {
     room.init();
     this.putRoom(room);
     room.alignTiles();
+    room.addDoor();
     barcode.Generator.rooms.push(room);
   },
 
   generateLevel : function(){
     barcode.Generator.rooms = [];
-    var nbRoom = Math.floor(Math.random()*3) + 2;
+    //var nbRoom = Math.floor(Math.random()*3) + 2;
+    var nbRoom = 2;
     for(let i = 0 ; i < nbRoom ; i++){
-      this.createRoom();
+      barcode.Generator.createRoom();
     }
     barcode.Generator.rooms[0].addStartingPoint();
-    return this.generateJson();
+    return barcode.Generator.generateJson();
   },
 
   init : function(){
