@@ -81,8 +81,8 @@ barcode.Generator.prototype = {
       });
     });
 
-    barcode.Generator.maxX = maxX;
-    barcode.Generator.maxY = maxY;
+    barcode.Generator.maxX = maxX+2;
+    barcode.Generator.maxY = maxY+2;
     return tiles;
   },
 
@@ -123,15 +123,17 @@ barcode.Generator.prototype = {
       tempTile.ttile = 1;
       barcode.Generator.corridorTile.push(tempTile);
     })
-
-
   },
 
   createRoom : function(){
     var room = new barcode.Room();
     room.init();
-    this.putRoom(room);
-
+    if (barcode.Generator.length == 0 ){
+        room.x = 2;
+        room.y = 2;
+    }else{
+      this.putRoom(room);
+    }
     room.alignTiles();
     room.addDoor();
     barcode.Generator.rooms.push(room);
