@@ -15,13 +15,15 @@ barcode.Generator = function(){
 
 barcode.Generator.prototype = {
   setCanvasSize : function(width, height){
-    this.canvasTile.width = width;
-    this.canvasTile.height = height;
+    barcode.Generator.canvasTile.width = width;
+    barcode.Generator.canvasTile.height = height;
   },
 
   clearCanvas : function(){
-    let context = this.canvasTile.getContext("2d");
-    context.clearRect(0, 0, this.canvasTile.width, this.canvasTile.height);
+    if (typeof barcode.Generator.canvasTile !== 'undefined') {
+      let context = barcode.Generator.canvasTile.getContext("2d");
+      context.clearRect(0, 0, barcode.Generator.canvasTile.width, barcode.Generator.canvasTile.height);
+    }
   },
 
   gameLoop : function(){
@@ -45,6 +47,9 @@ barcode.Generator.prototype = {
       itRoom.mobs.forEach(function(elt){
         mobs.push(elt);
       });
+    });
+    barcode.Generator.corridorTile.forEach(function (tile){
+      tiles.push(tile);
     });
     if (mobs.length > 0) result['mobs'] = mobs;
     result['tiles'] = tiles;
@@ -119,20 +124,6 @@ barcode.Generator.prototype = {
       barcode.Generator.corridorTile.push(tempTile);
     })
 
-    var ctx = barcode.Generator.canvasTile.getContext("2d");
-    barcode.Generator.allTiles.forEach(function(raw){
-      raw.forEach(function(tile){
-        if (tile.status == "visited"){
-          ctx.beginPath();
-          ctx.lineWidth="6";
-          let col = (tile.F * 10).toString(16);
-          ctx.strokeStyle = "#" + col + "aaaa";
-          ctx.rect(tile.x * 32,tile.y * 32,32,32);
-          ctx.stroke();
-        }
-      });
-    });
-
 
   },
 
@@ -162,28 +153,43 @@ barcode.Generator.prototype = {
   },
 
   render : function(){
-    barcode.Generator.clearCanvas();
-    barcode.Generator.rooms.forEach(function(elt){
-          elt.render();
-    });
-    var ctx = barcode.Generator.canvasTile.getContext("2d");
-    barcode.Generator.corridorTile.forEach(function(tile){
-      var elt = barcode.tiles[tile.ttile];
-      ctx.drawImage(
-         barcode.Generator.tileSet,
-         elt.x,
-         elt.y,
-         elt.size,
-         elt.size,
-         tile.x*barcode.C.TILE_SIZE_PC,
-         tile.y*barcode.C.TILE_SIZE_PC,
-         barcode.C.TILE_SIZE_PC,
-         barcode.C.TILE_SIZE_PC);
-    });
+    if (typeof barcode.Generator.canvasTile !== 'undefined'){
+      barcode.Generator.clearCanvas();
+      barcode.Generator.rooms.forEach(function(elt){
+            elt.render();
+      });
+      var ctx = barcode.Generator.canvasTile.getContext("2d");
+      barcode.Generator.corridorTile.forEach(function(tile){
+        var elt = barcode.tiles[tile.ttile];
+        ctx.drawImage(
+           barcode.Generator.tileSet,
+           elt.x,
+           elt.y,
+           elt.size,
+           elt.size,
+           tile.x*barcode.C.TILE_SIZE_PC,
+           tile.y*barcode.C.TILE_SIZE_PC,
+           barcode.C.TILE_SIZE_PC,
+           barcode.C.TILE_SIZE_PC);
+      });
+
+      var ctx = barcode.Generator.canvasTile.getContext("2d");
+      barcode.Generator.allTiles.forEach(function(raw){
+        raw.forEach(function(tile){
+          if (tile.status == "visited"){
+            ctx.beginPath();
+            ctx.lineWidth="6";
+            let col = (tile.F * 10).toString(16);
+            ctx.strokeStyle = "#" + col + "aaaa";
+            ctx.rect(tile.x * 32,tile.y * 32,32,32);
+            ctx.stroke();
+          }
+        });
+      });
+    }
   },
 
   init : function(){
-
   },
 
   storeLevel : function(){
