@@ -10,6 +10,7 @@ barcode.Generator = function(){
   this.allSprites = [];
   this.maxX = 0;
   this.maxY = 0;
+  this.corridorTile = [];
 };
 
 barcode.Generator.prototype = {
@@ -89,15 +90,14 @@ barcode.Generator.prototype = {
 
     for (let i=0;i<this.maxY;i++){
       for (let j=0;j<this.maxX;j++){
-        let brick = {'x' : j, 'y' : i, 'F' : -1, 'G' : -1, 'status' : 'Obstacle','cameFrom' : {}};
+        let brick = {'x' : j, 'y' : i, 'F' : -1, 'G' : -1, 'status' : 'Empty','cameFrom' : {}};
         if (( j + "/" + i) in tiles){
-          if(tiles[j + "/" + i].ttile == 1)
-            brick.status = 'Empty';
+          if(tiles[j + "/" + i].ttile == 2)
+            brick.status = 'Obstacle';
         }
         grid[i][j] = brick;
       }
     }
-    console.log(grid);
     return grid;
   },
 
@@ -106,16 +106,31 @@ barcode.Generator.prototype = {
     var pthFinding = new barcode.Apath();
     var result =  pthFinding.findShortestPath([barcode.Generator.rooms[0].door.x,barcode.Generator.rooms[0].door.y],
       [barcode.Generator.rooms[1].door.x,barcode.Generator.rooms[1].door.y], barcode.Generator.allTiles,false);
-    console.log(result);
+      //[barcode.Generator.rooms[0].startingPoint.x,barcode.Generator.rooms[0].startingPoint.y], barcode.Generator.allTiles,false);
+    var path = pthFinding.path;
+    path.splice(0,1);
+    path.splice(-1,1);
+
+    path.forEach(function(tilePath){
+      let tempTile = new barcode.Tile();
+      tempTile.x = tilePath.x;
+      tempTile.y = tilePath.y;
+      tempTile.ttile = 1;
+      barcode.Generator.corridorTile.push(tempTile);
+    })
 
     var ctx = barcode.Generator.canvasTile.getContext("2d");
-    barcode.Generator.allTiles.forEach(function(tile){
-      ctx.beginPath();
-      ctx.lineWidth="4";
-      let col = (tile.F * 10).toString(16);
-      ctx.strokeStyle = "#" + col + "aaaa";
-      ctx.rect(tile.x * 32,tile.y * 32,32,32);
-      ctx.stroke();
+    barcode.Generator.allTiles.forEach(function(raw){
+      raw.forEach(function(tile){
+        if (tile.status == "visited"){
+          ctx.beginPath();
+          ctx.lineWidth="6";
+          let col = (tile.F * 10).toString(16);
+          ctx.strokeStyle = "#" + col + "aaaa";
+          ctx.rect(tile.x * 32,tile.y * 32,32,32);
+          ctx.stroke();
+        }
+      });
     });
 
 
@@ -132,7 +147,9 @@ barcode.Generator.prototype = {
   },
 
   generateLevel : function(){
+    barcode.Generator.clearCanvas();
     barcode.Generator.rooms = [];
+    barcode.Generator.corridorTile = [];
     //var nbRoom = Math.floor(Math.random()*3) + 2;
     var nbRoom = 2;
     for(let i = 0 ; i < nbRoom ; i++){
@@ -140,7 +157,29 @@ barcode.Generator.prototype = {
     }
     barcode.Generator.rooms[0].addStartingPoint();
     barcode.Generator.createCorridor();
+    barcode.Generator.render();
     return barcode.Generator.generateJson();
+  },
+
+  render : function(){
+    barcode.Generator.clearCanvas();
+    barcode.Generator.rooms.forEach(function(elt){
+          elt.render();
+    });
+    var ctx = barcode.Generator.canvasTile.getContext("2d");
+    barcode.Generator.corridorTile.forEach(function(tile){
+      var elt = barcode.tiles[tile.ttile];
+      ctx.drawImage(
+         barcode.Generator.tileSet,
+         elt.x,
+         elt.y,
+         elt.size,
+         elt.size,
+         tile.x*barcode.C.TILE_SIZE_PC,
+         tile.y*barcode.C.TILE_SIZE_PC,
+         barcode.C.TILE_SIZE_PC,
+         barcode.C.TILE_SIZE_PC);
+    });
   },
 
   init : function(){
@@ -176,11 +215,8 @@ barcode.Generator.prototype = {
       });
       barcode.Generator.rooms.push(newRoom);
     })
-    barcode.Generator.clearCanvas();
-    barcode.Generator.rooms.forEach(function(elt){
-          elt.render();
-    });
     barcode.Generator.createCorridor();
+    barcode.Generator.render();
 
   },
 
