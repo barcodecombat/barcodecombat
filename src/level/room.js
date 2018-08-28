@@ -10,6 +10,7 @@ barcode.Room = function(){
   this.type = 0;
   this.tiles = [];
   this.mobs = [];
+  this.door = {};
   this.startingPoint = undefined;
 };
 
@@ -56,6 +57,8 @@ barcode.Room.prototype = {
         y = Math.floor(this.sizeY /2 ) +this.y;
       }
     }
+
+    this.door = { 'x' : x, 'y' : y};
 
     this.tiles.forEach(function(tile){
       if (tile.x == x && tile.y == y){

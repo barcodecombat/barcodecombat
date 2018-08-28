@@ -7,6 +7,9 @@ barcode.Generator = function(){
   this.tileSet = undefined;
   this.heroSprite = undefined;
   this.mobSprite = undefined;
+  this.allSprites = [];
+  this.maxX = 0;
+  this.maxY = 0;
 };
 
 barcode.Generator.prototype = {
@@ -44,7 +47,6 @@ barcode.Generator.prototype = {
     });
     if (mobs.length > 0) result['mobs'] = mobs;
     result['tiles'] = tiles;
-    console.log(result);
     return result;
   },
 
@@ -62,12 +64,68 @@ barcode.Generator.prototype = {
     }
   },
 
+  getTiles : function(){
+    var tiles = {};
+    var maxX = 0, maxY = 0;
+    barcode.Generator.rooms.forEach(function(room){
+      room.tiles.forEach(function(tile){
+        tiles[tile.x + "/" + tile.y] = tile;
+        if (tile.x > maxX) maxX = tile.x;
+        if (tile.y > maxY) maxY = tile.y;
+      });
+    });
+
+    barcode.Generator.maxX = maxX;
+    barcode.Generator.maxY = maxY;
+    return tiles;
+  },
+
+  createWholeMap : function(){
+    var tiles = barcode.Generator.getTiles();
+    let grid = [];
+    for (var i=0;i<this.maxY;i++){
+      grid[i] = [];
+    }
+
+    for (let i=0;i<this.maxY;i++){
+      for (let j=0;j<this.maxX;j++){
+        let brick = {'x' : j, 'y' : i, 'F' : -1, 'G' : -1, 'status' : 'Obstacle','cameFrom' : {}};
+        if (( j + "/" + i) in tiles){
+          if(tiles[j + "/" + i].ttile == 1)
+            brick.status = 'Empty';
+        }
+        grid[i][j] = brick;
+      }
+    }
+    return grid;
+  },
+
+  createCorridor : function(){
+    barcode.Generator.allTiles = barcode.Generator.createWholeMap();
+    var pthFinding = new barcode.Apath();
+    var result =  pthFinding.findShortestPath([barcode.Generator.rooms[0].door.x,barcode.Generator.rooms[0].door.y],[barcode.Generator.rooms[1].door.x,barcode.Generator.rooms[0].door.y], barcode.Generator.allTiles);
+    console.log(result);
+
+    var ctx = barcode.Generator.canvasTile.getContext("2d");
+    barcode.Generator.allTiles.forEach(function(tile){
+      ctx.beginPath();
+      ctx.lineWidth="4";
+      let col = (tile.F * 10).toString(16);
+      ctx.strokeStyle = "#" + col + "aaaa";
+      ctx.rect(tile.x * 32,tile.y * 32,32,32);
+      ctx.stroke();
+    });
+
+
+  },
+
   createRoom : function(){
     var room = new barcode.Room();
     room.init();
     this.putRoom(room);
     room.alignTiles();
     room.addDoor();
+
     barcode.Generator.rooms.push(room);
   },
 
@@ -79,6 +137,7 @@ barcode.Generator.prototype = {
       barcode.Generator.createRoom();
     }
     barcode.Generator.rooms[0].addStartingPoint();
+    barcode.Generator.createCorridor();
     return barcode.Generator.generateJson();
   },
 
@@ -102,7 +161,7 @@ barcode.Generator.prototype = {
       newRoom.sizeY = roomStored.sizeY;
       newRoom.x = roomStored.x;
       newRoom.y = roomStored.y;
-
+      newRoom.door = roomStored.door;
       if (typeof roomStored.startingPoint !== 'undefined')
         newRoom.startingPoint = roomStored.startingPoint;
 
@@ -119,6 +178,8 @@ barcode.Generator.prototype = {
     barcode.Generator.rooms.forEach(function(elt){
           elt.render();
     });
+    barcode.Generator.createCorridor();
+
   },
 
   initFromEditor : function(){
