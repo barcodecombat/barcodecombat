@@ -60,7 +60,7 @@ barcode.Level.prototype = {
       var rawG = [];
       for (let j=0 ; j < this.aPathArray[i].length;j++){
         var elt = this.aPathArray[i][j];
-        var brick = {'x' : elt.x, 'y' : elt.y, 'F' : elt.F, 'G' : elt.G, 'status' : elt.status,'cameFrom' : {}};
+        var brick = JSON.parse(JSON.stringify(elt));
         rawG.push(brick);
       }
       grid[i] = rawG;

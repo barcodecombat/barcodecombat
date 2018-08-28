@@ -120,7 +120,6 @@ barcode.Apath.prototype = {
   },
 
   findShortestPath :function(start, goal,grid,withDiagonals){
-    console.log("findShortestPath from " + start[0] + "/" + start[1] + " to " + goal[0] + "/" + goal[1]);
     this.grid = grid;
     this.goal = goal;
     this.withDiagonals = withDiagonals;
@@ -129,7 +128,6 @@ barcode.Apath.prototype = {
     this.openCount = 1;
     while(this.openCount > 0){
       if (!this.retrieveNextBrickToVisit()){
-        console.log("unable to retrieveNextBrickToVisit");
         return false;
       }
       this.manageOpenList();

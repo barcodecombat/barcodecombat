@@ -106,11 +106,11 @@ barcode.Generator.prototype = {
     return grid;
   },
 
-  createCorridor : function(){
+  createCorridor : function(room1,room2){
     barcode.Generator.allTiles = barcode.Generator.createWholeMap();
     var pthFinding = new barcode.Apath();
-    var result =  pthFinding.findShortestPath([barcode.Generator.rooms[0].door.x,barcode.Generator.rooms[0].door.y],
-      [barcode.Generator.rooms[1].door.x,barcode.Generator.rooms[1].door.y], barcode.Generator.allTiles,false);
+    var result =  pthFinding.findShortestPath([room1.door.x,room1.door.y],
+      [room2.door.x,room2.door.y], barcode.Generator.allTiles,false);
       //[barcode.Generator.rooms[0].startingPoint.x,barcode.Generator.rooms[0].startingPoint.y], barcode.Generator.allTiles,false);
     var path = pthFinding.path;
     path.splice(0,1);
@@ -125,10 +125,16 @@ barcode.Generator.prototype = {
     })
   },
 
+  createCorridors : function(){
+    for (let i = 0 ; i < (barcode.Generator.rooms.length-1) ; i++){
+      barcode.Generator.createCorridor(barcode.Generator.rooms[i],barcode.Generator.rooms[i+1]);
+    }
+  },
+
   createRoom : function(){
     var room = new barcode.Room();
     room.init();
-    if (barcode.Generator.length == 0 ){
+    if (barcode.Generator.rooms.length == 0 ){
         room.x = 2;
         room.y = 2;
     }else{
@@ -144,12 +150,12 @@ barcode.Generator.prototype = {
     barcode.Generator.rooms = [];
     barcode.Generator.corridorTile = [];
     //var nbRoom = Math.floor(Math.random()*3) + 2;
-    var nbRoom = 2;
+    var nbRoom = 3;
     for(let i = 0 ; i < nbRoom ; i++){
       barcode.Generator.createRoom();
     }
     barcode.Generator.rooms[0].addStartingPoint();
-    barcode.Generator.createCorridor();
+    barcode.Generator.createCorridors();
     barcode.Generator.render();
     return barcode.Generator.generateJson();
   },
@@ -174,7 +180,7 @@ barcode.Generator.prototype = {
            barcode.C.TILE_SIZE_PC,
            barcode.C.TILE_SIZE_PC);
       });
-
+/*
       var ctx = barcode.Generator.canvasTile.getContext("2d");
       barcode.Generator.allTiles.forEach(function(raw){
         raw.forEach(function(tile){
@@ -187,7 +193,7 @@ barcode.Generator.prototype = {
             ctx.stroke();
           }
         });
-      });
+      });*/
     }
   },
 
