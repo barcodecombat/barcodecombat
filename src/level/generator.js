@@ -48,7 +48,6 @@ barcode.Generator.prototype = {
     return result;
   },
 
-
   putRoom : function(room){
     var isCollided = true;
     var it = 0;
@@ -61,7 +60,6 @@ barcode.Generator.prototype = {
       }
       it++;
     }
-
   },
 
   createRoom : function(){
@@ -88,6 +86,41 @@ barcode.Generator.prototype = {
 
   },
 
+  storeLevel : function(){
+    var toStore = {};
+    toStore.rooms = barcode.Generator.rooms;
+    localStorage.setItem('levelStored', JSON.stringify(toStore));
+  },
+
+  retrieveLevel : function(){
+    var obj = JSON.parse(localStorage.getItem('levelStored'));
+
+    barcode.Generator.rooms = [];
+    obj.rooms.forEach(function(roomStored){
+      var newRoom = new barcode.Room();
+      newRoom.sizeX = roomStored.sizeX;
+      newRoom.sizeY = roomStored.sizeY;
+      newRoom.x = roomStored.x;
+      newRoom.y = roomStored.y;
+
+      if (typeof roomStored.startingPoint !== 'undefined')
+        newRoom.startingPoint = roomStored.startingPoint;
+
+      roomStored.tiles.forEach(function(tileStored){
+        let tempTile = new barcode.Tile();
+        tempTile.x = tileStored.x;
+        tempTile.y =  tileStored.y;
+        tempTile.ttile = tileStored.ttile;
+        newRoom.tiles.push(tempTile);
+      });
+      barcode.Generator.rooms.push(newRoom);
+    })
+    barcode.Generator.clearCanvas();
+    barcode.Generator.rooms.forEach(function(elt){
+          elt.render();
+    });
+  },
+
   initFromEditor : function(){
     this.tileSet = new Image();
     this.tileSet.src = "./assets/tileset/tileset1.png";
@@ -98,6 +131,12 @@ barcode.Generator.prototype = {
     let btnGenerate = document.getElementById("btnGenerate");
     if (typeof btnGenerate !== 'undefined' && btnGenerate != null)
       btnGenerate.addEventListener("click",barcode.Generator.generateLevel);
+    let btnStore = document.getElementById("btnStore");
+    if (typeof btnStore !== 'undefined' && btnStore != null)
+        btnStore.addEventListener("click",barcode.Generator.storeLevel);
+    let btnRetrieve = document.getElementById("btnRetrieve");
+    if (typeof btnRetrieve !== 'undefined' && btnRetrieve != null)
+        btnRetrieve.addEventListener("click",barcode.Generator.retrieveLevel);
     this.canvasTile = document.getElementById("layerTile");
     this.setCanvasSize(window.innerWidth,window.innerHeight);
   }
