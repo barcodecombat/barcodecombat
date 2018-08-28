@@ -58,15 +58,30 @@ barcode.Character.prototype = {
   },
 
   goToTarget : function(x,y){
-    let grid = barcode.GameDonjon.level.aPathArray();
+    let grid = barcode.GameDonjon.level.getAPathArray();
     let tileChar = this.getTile();
     // TODO : FActorize convert posX to tileX
     let tx = Math.floor((x-barcode.GameEngine.centerX+this.x)/barcode.GameEngine.tileSize);
     let ty = Math.floor((y-barcode.GameEngine.centerY+this.y)/barcode.GameEngine.tileSize);
-    var pthFinding = new barcode.Apath();
-    var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid,true);
+      var pthFinding = new barcode.Apath();
+      var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid,true);
+      this.path = pthFinding.path;
+    /*var ctx = barcode.GameDonjon.canvasAPath.getContext("2d");
+    console.log(grid);
+    var _this = this;
+    grid.forEach(function(raw){
+      raw.forEach(function(tile){
+        if (tile.status == "visited"){
+          ctx.beginPath();
+          ctx.lineWidth="6";
+          let col = (tile.F * 10).toString(16);
+          ctx.strokeStyle = "#" + col + "aaaa";
+          ctx.rect(tile.x * 32 + barcode.GameEngine.centerX-_this.x,tile.y * 32 + barcode.GameEngine.centerY-_this.y ,32,32);
+          ctx.stroke();
+        }
+      });
+    });*/
 
-    this.path = pthFinding.path;
   },
 
   hitTarget : function(mob){

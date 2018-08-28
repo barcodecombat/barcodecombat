@@ -90,7 +90,7 @@ barcode.Monster.prototype = {
   createPathTo : function(tileTarget){
     this.target = tileTarget;
     if ((this.path.length == 0) || ( this.path[0].x != tileTarget.x && this.path[0].y != tileTarget.y)){
-      let grid = barcode.GameDonjon.level.aPathArray();
+      let grid = barcode.GameDonjon.level.getAPathArray();
       let tileMob = this.getTile();
 
       var pthFinding = new barcode.Apath();

@@ -8,6 +8,7 @@ barcode.Level = function(){
   this.maxX = 0;
   this.maxY = 0;
   this.startingPoint = {};
+  this.aPathArray = [];
 };
 
 barcode.Level.prototype = {
@@ -49,8 +50,24 @@ barcode.Level.prototype = {
           listMob.push(newMob);
       });
     }
-
   },
+
+  getAPathArray : function(){
+    if (this.aPathArray.length == 0)
+      this.aPathArray = this.aPathArrayGenerate();
+    var grid = [];
+    for (let i = 0 ; i < this.aPathArray.length ; i++){
+      var rawG = [];
+      for (let j=0 ; j < this.aPathArray[i].length;j++){
+        var elt = this.aPathArray[i][j];
+        var brick = {'x' : elt.x, 'y' : elt.y, 'F' : elt.F, 'G' : elt.G, 'status' : elt.status,'cameFrom' : {}};
+        rawG.push(brick);
+      }
+      grid[i] = rawG;
+    }
+    return grid;
+  },
+
   initFromGenerator : function(){
     var lvlGenerated = barcode.Generator.generateLevel();
     this.initFromJs(lvlGenerated);
@@ -59,6 +76,7 @@ barcode.Level.prototype = {
   init : function(src){
     //this.initFromJs(barcode.maps.map1);
     this.initFromGenerator();
+    this.aPathArray = this.aPathArrayGenerate();
   },
 
   getTheMobUnderMouse : function(x,y){
@@ -73,19 +91,30 @@ barcode.Level.prototype = {
     return result;
   },
 
-  aPathArray : function(){
+  getTilesForAPath : function(){
+    var tiles = {};
+    this.tiles.forEach(function(tile){
+      tiles[tile.x + "/" + tile.y] = tile;
+    });
+    return tiles;
+  },
+
+  aPathArrayGenerate : function(){
     let grid = [];
+    let tiles= this.getTilesForAPath();
     for (var i=0;i<this.maxY;i++){
       grid[i] = [];
     }
-
-    this.tiles.forEach(function(elt){
-      let brick = {x : elt.x, y : elt.y, F : -1, G : -1, status : 'Obstacle',cameFrom : {}};
-      if (elt.type == "ground"){
-        brick.status = 'Empty';
+    for (let i=0;i<this.maxY;i++){
+      for (let j=0;j<this.maxX;j++){
+        let brick = {'x' : j, 'y' : i, 'F' : -1, 'G' : -1, 'status' : 'Obstacle','cameFrom' : {}};
+        if (( j + "/" + i) in tiles){
+          if(tiles[j + "/" + i].type == "ground")
+            brick.status = 'Empty';
+        }
+        grid[i][j] = brick;
       }
-      grid[elt.y][elt.x] = brick
-    });
+    }
 
     return grid;
   },
