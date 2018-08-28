@@ -33,19 +33,28 @@ barcode.Room.prototype = {
   addDoor : function(){
     var rn = Math.random();
     var x = 0, y=0;
-
-    if (rn < 0.25){
-      x = Math.floor(this.sizeX / 2) + this.x ;
-      y = this.y;
-    }else if (rn < 0.5){
-      x = Math.floor(this.sizeX / 2) + this.x ;
-      y = this.sizeY + this.y - 1;
-    }else if (rn < 0.75){
-      x = this.x;
-      y = Math.floor(this.sizeY /2 ) +this.y;
+    if (this.x == 0 && this.y == 0){
+      if (rn < 0.5){
+        x = Math.floor(this.sizeX / 2) + this.x ;
+        y = this.sizeY + this.y - 1;
+      }else{
+        x = this.x + this.sizeX - 1;
+        y = Math.floor(this.sizeY /2 ) +this.y;
+      }
     }else{
-      x = this.x + this.sizeX - 1;
-      y = Math.floor(this.sizeY /2 ) +this.y;
+      if (rn < 0.25){
+        x = Math.floor(this.sizeX / 2) + this.x ;
+        y = this.y;
+      }else if (rn < 0.5){
+        x = Math.floor(this.sizeX / 2) + this.x ;
+        y = this.sizeY + this.y - 1;
+      }else if (rn < 0.75){
+        x = this.x;
+        y = Math.floor(this.sizeY /2 ) +this.y;
+      }else{
+        x = this.x + this.sizeX - 1;
+        y = Math.floor(this.sizeY /2 ) +this.y;
+      }
     }
 
     this.tiles.forEach(function(tile){
