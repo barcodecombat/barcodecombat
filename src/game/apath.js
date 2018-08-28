@@ -91,7 +91,10 @@ barcode.Apath.prototype = {
       adjacentBrickList.push({ y : this.currentBrick.y-1 , x :this.currentBrick.x,cost : 2});
     if (this.currentBrick.y+1 < this.gridSizeX)
       adjacentBrickList.push({ y : this.currentBrick.y+1 , x :this.currentBrick.x,cost : 2});
-    return this.retrieveDiagonalBricks(adjacentBrickList);
+    if (this.withDiagonals){
+      return this.retrieveDiagonalBricks(adjacentBrickList);
+    }
+    return adjacentBrickList;
   },
 
   exploreAdjacentBricks : function(){
@@ -116,14 +119,17 @@ barcode.Apath.prototype = {
     }
   },
 
-  findShortestPath :function(start, goal,grid){
+  findShortestPath :function(start, goal,grid,withDiagonals){
+    console.log("findShortestPath from " + start[0] + "/" + start[1] + " to " + goal[0] + "/" + goal[1]);
     this.grid = grid;
     this.goal = goal;
+    this.withDiagonals = withDiagonals;
     this.initializeAPath(start);
 
     this.openCount = 1;
     while(this.openCount > 0){
       if (!this.retrieveNextBrickToVisit()){
+        console.log("unable to retrieveNextBrickToVisit");
         return false;
       }
       this.manageOpenList();
@@ -134,6 +140,7 @@ barcode.Apath.prototype = {
       this.grid[this.currentBrick.y][this.currentBrick.x].status = "visited";
       var adjacentBrickList = this.exploreAdjacentBricks();
     }
+    console.log("no path found");
     return false;
   }
 

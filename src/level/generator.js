@@ -97,13 +97,15 @@ barcode.Generator.prototype = {
         grid[i][j] = brick;
       }
     }
+    console.log(grid);
     return grid;
   },
 
   createCorridor : function(){
     barcode.Generator.allTiles = barcode.Generator.createWholeMap();
     var pthFinding = new barcode.Apath();
-    var result =  pthFinding.findShortestPath([barcode.Generator.rooms[0].door.x,barcode.Generator.rooms[0].door.y],[barcode.Generator.rooms[1].door.x,barcode.Generator.rooms[0].door.y], barcode.Generator.allTiles);
+    var result =  pthFinding.findShortestPath([barcode.Generator.rooms[0].door.x,barcode.Generator.rooms[0].door.y],
+      [barcode.Generator.rooms[1].door.x,barcode.Generator.rooms[1].door.y], barcode.Generator.allTiles,false);
     console.log(result);
 
     var ctx = barcode.Generator.canvasTile.getContext("2d");
@@ -123,9 +125,9 @@ barcode.Generator.prototype = {
     var room = new barcode.Room();
     room.init();
     this.putRoom(room);
+
     room.alignTiles();
     room.addDoor();
-
     barcode.Generator.rooms.push(room);
   },
 
