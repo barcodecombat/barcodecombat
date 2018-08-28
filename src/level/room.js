@@ -16,8 +16,8 @@ barcode.Room = function(){
 
 barcode.Room.prototype = {
   addStartingPoint : function(){
-    let x = Math.floor(Math.random()*(this.sizeX-2)+1);
-    let y = Math.floor(Math.random()*(this.sizeY-2)+1);
+    let x = Math.floor(Math.random()*(this.sizeX-2)+1 + this.x );
+    let y = Math.floor(Math.random()*(this.sizeY-2)+1 + this.y );
     this.startingPoint = { 'x' : x, 'y' :y};
   },
 
@@ -84,10 +84,6 @@ barcode.Room.prototype = {
       tile.x += _this.x;
       tile.y += _this.y;
     });
-    if (typeof this.startingPoint !== 'undefined'){
-      this.startingPoint.x += this.x;
-      this.startingPoint.y += this.y;
-    }
     if (this.mobs.length > 0){
       this.mobs.forEach(function(mob){
         mob.x += _this.x;

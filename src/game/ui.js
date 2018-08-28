@@ -18,6 +18,7 @@ barcode.UI.prototype = {
 
   renderLifeGauge : function(){
     var prctLife = Math.floor((barcode.GameDonjon.level.character.hitpoint/barcode.GameDonjon.level.character.maxHitPoint)*100);
+    if (prctLife < 0) prctLife = 0;
     this.ctx.beginPath();
     this.ctx.fillStyle = "red";
     this.ctx.fillRect(50,window.innerHeight-70,prctLife,10);
