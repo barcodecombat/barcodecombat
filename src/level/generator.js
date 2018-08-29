@@ -60,11 +60,13 @@ barcode.Generator.prototype = {
     var isCollided = true;
     var it = 0;
     while (isCollided && it < 100){
-      room.x = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length);/// barcode.GameEngine.tileSize);
-      room.y = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length);// / barcode.GameEngine.tileSize);
+      room.x = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length) + 1;/// barcode.GameEngine.tileSize);
+      room.y = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length) + 1;// / barcode.GameEngine.tileSize);
       isCollided = false;
       for (let i = 0 ; i < this.rooms.length && isCollided == false; i++){
-        isCollided = room.roomCollision(barcode.Generator.rooms[i]);
+        if (room !== barcode.Generator.rooms[i]){
+          isCollided = room.roomCollision(barcode.Generator.rooms[i]);
+        }
       }
       it++;
     }
@@ -209,7 +211,6 @@ barcode.Generator.prototype = {
 
   retrieveLevel : function(){
     var obj = JSON.parse(localStorage.getItem('levelStored'));
-    console.log(obj);
     barcode.Generator.rooms = [];
     this.corridorTile = [];
     obj.rooms.forEach(function(roomStored){
@@ -229,6 +230,7 @@ barcode.Generator.prototype = {
         tempTile.ttile = tileStored.ttile;
         newRoom.tiles.push(tempTile);
       });
+
       barcode.Generator.rooms.push(newRoom);
     });
     obj.corridorTile.forEach(function(tileStored){
