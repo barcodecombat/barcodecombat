@@ -22,7 +22,7 @@ barcode.GameDonjon.prototype ={
     this.canvasAnimation = document.getElementById("layerAnimation");
     this.setCanvasSize(window.innerWidth,window.innerHeight);
     this.canvasAnimation.addEventListener("click",barcode.GameDonjon.clickEvent);
-    barcode.UI = new barcode.UI();
+    barcode.ui = new barcode.UI();
   },
 
   checkAnimations : function(context){
@@ -98,6 +98,6 @@ barcode.GameDonjon.prototype ={
 
     this.checkAnimations(this.canvasTile.getContext("2d"));
     this.checkFloatingText(this.canvasAnimation.getContext("2d"));
-    barcode.UI.render();  
+    barcode.ui.render();
   }
 };

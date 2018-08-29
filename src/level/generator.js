@@ -120,7 +120,7 @@ barcode.Generator.prototype = {
       let tempTile = new barcode.Tile();
       tempTile.x = tilePath.x;
       tempTile.y = tilePath.y;
-      tempTile.ttile = 1;
+      tempTile.ttile = 3;
       barcode.Generator.corridorTile.push(tempTile);
     })
   },
@@ -203,13 +203,15 @@ barcode.Generator.prototype = {
   storeLevel : function(){
     var toStore = {};
     toStore.rooms = barcode.Generator.rooms;
+    toStore.corridorTile = barcode.Generator.corridorTile;
     localStorage.setItem('levelStored', JSON.stringify(toStore));
   },
 
   retrieveLevel : function(){
     var obj = JSON.parse(localStorage.getItem('levelStored'));
-
+    console.log(obj);
     barcode.Generator.rooms = [];
+    this.corridorTile = [];
     obj.rooms.forEach(function(roomStored){
       var newRoom = new barcode.Room();
       newRoom.sizeX = roomStored.sizeX;
@@ -228,8 +230,14 @@ barcode.Generator.prototype = {
         newRoom.tiles.push(tempTile);
       });
       barcode.Generator.rooms.push(newRoom);
-    })
-    barcode.Generator.createCorridor();
+    });
+    obj.corridorTile.forEach(function(tileStored){
+      let tempTile = new barcode.Tile();
+      tempTile.x = tileStored.x;
+      tempTile.y =  tileStored.y;
+      tempTile.ttile = tileStored.ttile;
+      barcode.Generator.corridorTile.push(tempTile);
+    });
     barcode.Generator.render();
 
   },
