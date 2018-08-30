@@ -37,7 +37,7 @@ barcode.C = Object.freeze({
   TYPE_ITEM_ARMOR : 3,
 
   // type item effects
-  TYPE_ITEM_EFFECT_LIFE_REGENERATION : 0,
+  PROPERTY_ITEM_LIFE_REGENERATION : 0,
 
 
 

@@ -104,8 +104,9 @@ barcode.Character.prototype = {
   },
 
   applyEffect : function(){
+    var _this = this;
     this.items.forEach(function(item){
-
+      item.apply(_this);
     });
   },
 
