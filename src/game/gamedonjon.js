@@ -23,6 +23,17 @@ barcode.GameDonjon.prototype ={
     this.setCanvasSize(window.innerWidth,window.innerHeight);
     this.canvasAnimation.addEventListener("click",barcode.GameDonjon.clickEvent);
     barcode.ui = new barcode.UI();
+    document.onmousemove = barcode.GameDonjon.handleMouseMove;
+
+  },
+
+  handleMouseMove : function(evt){
+    var mob = barcode.GameDonjon.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
+    if ( mob != null){
+      barcode.ui.showMonsterGauge(mob);
+    }else{
+      barcode.ui.hideMonsterGauge();
+    }
   },
 
   checkAnimations : function(context){
