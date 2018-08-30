@@ -13,8 +13,7 @@ barcode.GameDonjon = function (){
 
 barcode.GameDonjon.prototype ={
   init : function(){
-    this.tileSet = new Image();
-    this.tileSet.src = "./assets/tileset/tileset1.png";
+    this.tileSet = barcode.tileset.get("assets/tileset/tileset1.png");
     this.level = new barcode.Level();
     this.level.init();
     this.canvasTile = document.getElementById("layerTile");

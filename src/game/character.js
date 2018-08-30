@@ -33,12 +33,10 @@ barcode.Character.prototype = {
   },
 
   init : function(src){
-    this.spriteset = new Image();
-    this.spriteset.src = "assets/sprites/fille.png";
-    this.spriteset.addEventListener("load",barcode.Character.loaded);
 
+    this.spriteset = barcode.tileset.get("assets/sprites/fille.png");
     let tempItem = new barcode.Item();
-    tempItem.loadItem(3);
+    tempItem.load(3);
     this.items.push(tempItem);
   },
 

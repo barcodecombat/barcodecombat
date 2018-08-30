@@ -29,9 +29,7 @@ barcode.Monster.prototype = {
   }
   ,
   init : function(src){
-    this.spriteset = new Image();
-    this.spriteset.src = "assets/sprites/bolt.png";
-    this.spriteset.addEventListener("load",barcode.Monster.loaded);
+    this.spriteset = barcode.tileset.get("assets/sprites/bolt.png");
   },
 
   hit: function(hp){

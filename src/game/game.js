@@ -50,6 +50,7 @@ barcode.GameEngine.prototype ={
     barcode.Generator = new barcode.Generator();
     barcode.Generator.init();
     barcode.GameDonjon = new barcode.GameDonjon();
+    barcode.tileset = new barcode.Tileset();
     let btnMenu = document.getElementById("btnMenu");
     btnMenu.addEventListener("click",barcode.GameEngine.initMenu);
     let btnDonjon = document.getElementById("btnDonjon");
