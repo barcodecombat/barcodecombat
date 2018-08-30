@@ -3,7 +3,7 @@ var barcode = barcode || {};
 barcode.items = {
   "1" :
   {
-    "type":"weapon",
+    "type":1,
     "size":32,
     "x" : 0,
     "y" : 170,
@@ -14,7 +14,7 @@ barcode.items = {
   },
   "2" :
   {
-    "type":"shield",
+    "type":2,
     "size":32,
     "x" : 0,
     "y" : 408,
@@ -22,4 +22,14 @@ barcode.items = {
     "block" : 20,
     "hitpoint" : 50
   },
+  "3" : {
+    "type":2,
+    "size":32,
+    "x" : 205,
+    "y" : 646,
+    "name" : "amulette",
+    "effects" : [
+      { 'type' : 0, 'value' : 1}
+    ]
+  }
 };

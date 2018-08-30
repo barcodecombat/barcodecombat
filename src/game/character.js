@@ -18,6 +18,7 @@ barcode.Character = function(){
   this.speedAttack = 50;
   this.rangeAttack = 64;
   this.lastAttackTicks = 0;
+  this.items = [];
 };
 
 barcode.Character.prototype = {
@@ -35,6 +36,10 @@ barcode.Character.prototype = {
     this.spriteset = new Image();
     this.spriteset.src = "assets/sprites/fille.png";
     this.spriteset.addEventListener("load",barcode.Character.loaded);
+
+    let tempItem = new barcode.Item();
+    tempItem.loadItem(3);
+    this.items.push(tempItem);
   },
 
   hit : function(hp){
@@ -98,6 +103,17 @@ barcode.Character.prototype = {
       ft.text = "1";
       barcode.GameDonjon.floatingText.push(ft);
     }
+  },
+
+  applyEffect : function(){
+    this.items.forEach(function(item){
+
+    });
+  },
+
+  loop: function(){
+    this.move();
+    this.applyEffect();
   },
 
   move : function(){

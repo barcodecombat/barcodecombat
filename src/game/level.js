@@ -148,7 +148,7 @@ barcode.Level.prototype = {
   },
 
   renderCharacter : function(ctx){
-    this.character.move();
+    this.character.loop();
     this.character.render(ctx);
   },
 
