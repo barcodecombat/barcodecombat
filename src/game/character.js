@@ -13,6 +13,7 @@ barcode.Character = function(){
   this.movingTick = 0;
   this.path = [];
   this.step = 3;
+  this.damage = [1,1];
   this.maxHitPoint = 500;
   this.hitpoint = 500;
   this.speedAttack = 50;
@@ -32,17 +33,25 @@ barcode.Character.prototype = {
     return {"x" : tx, "y" : ty  };
   },
 
-  init : function(src){
-
-    this.spriteset = barcode.tileset.get("assets/sprites/fille.png");
+  addItemToCharacter : function(idTemplate){
     let tempItem = new barcode.Item();
-    tempItem.load(3);
+    tempItem.load(idTemplate);
     this.items.push(tempItem);
+    if (tempItem.typeItem === barcode.C.TYPE_ITEM_WEAPON){
+      this.damage = tempItem.damage;
+      this.speedAttack = tempItem.speed;
+      this.rangeAttack = tempItem.range;
+    }
+  },
+
+  init : function(src){
+    this.spriteset = barcode.tileset.get("assets/sprites/fille.png");
+    this.addItemToCharacter(1);
+    this.addItemToCharacter(3);
   },
 
   hit : function(hp){
     this.hitpoint -= hp;
-
     var ft = new barcode.FloatingText();
     ft.init();
     ft.x = this.x + barcode.GameEngine.tileSize/2;
@@ -64,28 +73,17 @@ barcode.Character.prototype = {
   goToTarget : function(x,y){
     let grid = barcode.GameDonjon.level.getAPathArray();
     let tileChar = this.getTile();
-    // TODO : FActorize convert posX to tileX
     let tx = Math.floor((x-barcode.GameEngine.centerX+this.x)/barcode.GameEngine.tileSize);
     let ty = Math.floor((y-barcode.GameEngine.centerY+this.y)/barcode.GameEngine.tileSize);
       var pthFinding = new barcode.Apath();
       var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid,true);
       this.path = pthFinding.path;
-    /*var ctx = barcode.GameDonjon.canvasAPath.getContext("2d");
-    console.log(grid);
-    var _this = this;
-    grid.forEach(function(raw){
-      raw.forEach(function(tile){
-        if (tile.status == "visited"){
-          ctx.beginPath();
-          ctx.lineWidth="6";
-          let col = (tile.F * 10).toString(16);
-          ctx.strokeStyle = "#" + col + "aaaa";
-          ctx.rect(tile.x * 32 + barcode.GameEngine.centerX-_this.x,tile.y * 32 + barcode.GameEngine.centerY-_this.y ,32,32);
-          ctx.stroke();
-        }
-      });
-    });*/
+  },
 
+  calculateDamageToDo : function(){
+    var result = 1;
+    result = Math.floor(Math.random() * this.damage[1] + this.damage[0]);
+    return result;
   },
 
   hitTarget : function(mob){
@@ -93,12 +91,13 @@ barcode.Character.prototype = {
     let newTick = d.getTime();
     if (newTick - this.lastAttackTicks > this.speedAttack){
       this.lastAttackTicks = newTick;
-      mob.hit(1);
+      let damage = this.calculateDamageToDo()
+      mob.hit(damage);
       var ft = new barcode.FloatingText();
       ft.init();
       ft.x = mob.x + barcode.GameEngine.tileSize/2;
       ft.y = mob.y + barcode.GameEngine.tileSize/2;
-      ft.text = "1";
+      ft.text = damage;
       barcode.GameDonjon.floatingText.push(ft);
     }
   },

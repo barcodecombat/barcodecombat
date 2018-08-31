@@ -10,6 +10,9 @@ barcode.Item = function(){
   this.spriteset = undefined;
   this.lastTick  = 0;
   this.properties = [];
+  this.speed = 0;
+  this.range = 0;
+  this.damage = [];
 };
 
 
@@ -22,6 +25,12 @@ barcode.Item.prototype = {
     })
   },
 
+  loadWeapon : function(src){
+    this.speed = src.speed;
+    this.range = src.range;
+    this.damage = src.damage.split('-');
+  },
+
   load : function(templateId){
     this.spriteset = barcode.tileset.get("assets/items/items.png");
     this.typeItem = 0;
@@ -32,6 +41,8 @@ barcode.Item.prototype = {
     this.name = src.name;
     if (src.typeitem === barcode.C.TYPE_ITEM_NECKLACE){
       this.loadNecklace(src);
+    }else if (src.typeitem === barcode.C.TYPE_ITEM_WEAPON){
+      this.loadWeapon(src);
     }
   },
 
