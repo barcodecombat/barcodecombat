@@ -19,6 +19,7 @@ barcode.Character = function(){
   this.speedAttack = 50;
   this.rangeAttack = 64;
   this.lastAttackTicks = 0;
+  this.chanceToBlock = 0;
   this.items = [];
 };
 
@@ -35,18 +36,14 @@ barcode.Character.prototype = {
 
   addItemToCharacter : function(idTemplate){
     let tempItem = new barcode.Item();
-    tempItem.load(idTemplate);
+    tempItem.load(idTemplate,this);
     this.items.push(tempItem);
-    if (tempItem.typeItem === barcode.C.TYPE_ITEM_WEAPON){
-      this.damage = tempItem.damage;
-      this.speedAttack = tempItem.speed;
-      this.rangeAttack = tempItem.range;
-    }
   },
 
   init : function(src){
     this.spriteset = barcode.tileset.get("assets/sprites/fille.png");
     this.addItemToCharacter(1);
+    this.addItemToCharacter(2);
     this.addItemToCharacter(3);
   },
 
@@ -57,10 +54,25 @@ barcode.Character.prototype = {
     barcode.GameDonjon.floatingText.push(ft);
   },
 
+  isHitBlocked : function(){
+    var blocked = false;
+    if (this.chanceToBlock > 0){
+      var rand = Math.random()*100;
+      if (rand <= this.chanceToBlock){
+        blocked = true;
+      }
+    }
+    return blocked;
+  },
+
   hit : function(hp){
-    this.hitpoint -= hp;
     var ft = new barcode.FloatingText();
-    ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
+    if (! this.isHitBlocked()){
+      this.hitpoint -= hp;
+      ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
+    }else{
+      ft.init(this.x + barcode.GameEngine.tileSize/2 - 10,this.y + barcode.GameEngine.tileSize/2,"Block",barcode.C.FT_COLOR_BLUE);
+    }
     barcode.GameDonjon.floatingText.push(ft);
   },
 

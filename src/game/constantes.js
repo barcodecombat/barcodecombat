@@ -42,6 +42,7 @@ barcode.C = Object.freeze({
   //Floating text color
   FT_COLOR_RED : "red",
   FT_COLOR_GREEN : "green",
+  FT_COLOR_BLUE : "blue",
 
 
 });

@@ -101,18 +101,20 @@ barcode.Apath.prototype = {
     var adjacentBrickList = this.retrieveAdjacentBricks();
     for(var i = 0 ; i < adjacentBrickList.length ; i++){
       if (typeof adjacentBrickList[i] !== 'undefined'){
-        var adjacentBrick = this.grid[adjacentBrickList[i].y][adjacentBrickList[i].x];
-        if (adjacentBrick.status !== "visited" && adjacentBrick.status !=="Obstacle"){
-          var gScore = this.currentBrick.G + adjacentBrickList[i].cost;
-          if (adjacentBrick.G == -1 || gScore < adjacentBrick.G){
-            adjacentBrick.cameFrom = this.currentBrick;
-            adjacentBrick.G = gScore;
-            var fScore = gScore + this.calcDistanceManhattan(this.currentBrick,adjacentBrick);
-            adjacentBrick.F = fScore;
-            if (! (fScore in this.openList)) this.openList[fScore] = [];
-            if (! ( ('' + adjacentBrick.x + "/" + adjacentBrick.y) in this.openList[fScore] ))
-              this.openList[fScore].push('' + adjacentBrick.x + "/" + adjacentBrick.y);
-              this.openCount++;
+        if (typeof this.grid[adjacentBrickList[i].y] !== 'undefined' ){
+          var adjacentBrick = this.grid[adjacentBrickList[i].y][adjacentBrickList[i].x];
+          if (typeof adjacentBrick !== 'undefined' && adjacentBrick.status !== "visited" && adjacentBrick.status !=="Obstacle"){
+            var gScore = this.currentBrick.G + adjacentBrickList[i].cost;
+            if (adjacentBrick.G == -1 || gScore < adjacentBrick.G){
+              adjacentBrick.cameFrom = this.currentBrick;
+              adjacentBrick.G = gScore;
+              var fScore = gScore + this.calcDistanceManhattan(this.currentBrick,adjacentBrick);
+              adjacentBrick.F = fScore;
+              if (! (fScore in this.openList)) this.openList[fScore] = [];
+              if (! ( ('' + adjacentBrick.x + "/" + adjacentBrick.y) in this.openList[fScore] ))
+                this.openList[fScore].push('' + adjacentBrick.x + "/" + adjacentBrick.y);
+                this.openCount++;
+              }
           }
         }
       }
