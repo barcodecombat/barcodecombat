@@ -39,6 +39,9 @@ barcode.C = Object.freeze({
   // type item effects
   PROPERTY_ITEM_LIFE_REGENERATION : 0,
 
+  //Floating text color
+  FT_COLOR_RED : "red",
+  FT_COLOR_GREEN : "green",
 
 
 });

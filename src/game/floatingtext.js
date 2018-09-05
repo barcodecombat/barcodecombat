@@ -5,16 +5,20 @@ barcode.FloatingText = function(){
   this.x = 32 ;
   this.y = 32;
   this.text = "";
-  this.color = "red";
+  this.color = barcode.C.FT_COLOR_RED;
   this.duration = 500;
   this.startTime = 0;
 };
 
 barcode.FloatingText.prototype = {
 
-  init : function(){
+  init : function(x,y,text,color){
     let d = new Date();
     this.startTime = d.getTime();
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.text = text;
   },
 
   isActive : function(){

@@ -50,13 +50,17 @@ barcode.Character.prototype = {
     this.addItemToCharacter(3);
   },
 
+  addHitPoint : function(hp){
+    this.hitpoint += hp;
+    var ft = new barcode.FloatingText();
+    ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_GREEN);
+    barcode.GameDonjon.floatingText.push(ft);
+  },
+
   hit : function(hp){
     this.hitpoint -= hp;
     var ft = new barcode.FloatingText();
-    ft.init();
-    ft.x = this.x + barcode.GameEngine.tileSize/2;
-    ft.y = this.y + barcode.GameEngine.tileSize/2;
-    ft.text = hp;
+    ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
     barcode.GameDonjon.floatingText.push(ft);
   },
 
@@ -93,12 +97,6 @@ barcode.Character.prototype = {
       this.lastAttackTicks = newTick;
       let damage = this.calculateDamageToDo()
       mob.hit(damage);
-      var ft = new barcode.FloatingText();
-      ft.init();
-      ft.x = mob.x + barcode.GameEngine.tileSize/2;
-      ft.y = mob.y + barcode.GameEngine.tileSize/2;
-      ft.text = damage;
-      barcode.GameDonjon.floatingText.push(ft);
     }
   },
 

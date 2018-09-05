@@ -34,6 +34,9 @@ barcode.Monster.prototype = {
 
   hit: function(hp){
     this.hitpoint -= hp;
+    var ft = new barcode.FloatingText();
+    ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
+    barcode.GameDonjon.floatingText.push(ft);
   },
 
   render : function(ctx){
