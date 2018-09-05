@@ -64,6 +64,12 @@ barcode.UI.prototype = {
     this.ctx.strokeStyle = "black";
     this.ctx.rect(49,window.innerHeight-71,102,12);
     this.ctx.stroke();
+
+    this.ctx.font = "1Opx Arial";
+    this.ctx.fillStyle = "white ";
+    let text = barcode.GameDonjon.level.character.hitpoint + " / " + barcode.GameDonjon.level.character.maxHitPoint + " hp";
+    this.ctx.fillText(text , 160, window.innerHeight-60);
+
     this.ctx.drawImage(
        barcode.GameDonjon.level.character.spriteset,
        0,

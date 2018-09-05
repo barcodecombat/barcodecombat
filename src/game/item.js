@@ -18,12 +18,19 @@ barcode.Item = function(){
 
 
 barcode.Item.prototype = {
-  loadNecklace : function(src,creature){
+  loadProperties : function(src,creature){
     var _this = this;
-    src.properties.forEach(function(prop){
-      var tprop = {'typeproperty' : prop.typeproperty, 'value' : prop.value };
-      _this.properties.push(tprop);
-    })
+    var _creature = creature;
+    if (typeof src.properties !== 'undefined'){
+      src.properties.forEach(function(prop){
+        var tprop = {'typeproperty' : prop.typeproperty, 'value' : prop.value };
+        _this.properties.push(tprop);
+        if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
+          _creature.maxHitPoint += tprop.value;
+          _creature.hitpoint += tprop.value;
+        }
+      })
+    }
   },
 
   loadShield : function(src,creature){
@@ -48,13 +55,12 @@ barcode.Item.prototype = {
     this.tx = src.x;
     this.ty = src.y;
     this.name = src.name;
-    if (src.typeitem === barcode.C.TYPE_ITEM_NECKLACE){
-      this.loadNecklace(src,creature);
-    }else if (src.typeitem === barcode.C.TYPE_ITEM_WEAPON){
+    if (src.typeitem === barcode.C.TYPE_ITEM_WEAPON){
       this.loadWeapon(src,creature);
     }else if (src.typeitem === barcode.C.TYPE_ITEM_SHIELD){
       this.loadShield(src,creature);
     }
+    this.loadProperties(src,creature);
   },
 
   applyLifeRegeneration : function(_creature, prop){
