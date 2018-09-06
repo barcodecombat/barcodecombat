@@ -40,16 +40,23 @@ barcode.Monster.prototype = {
   },
 
   render : function(ctx){
-    ctx.drawImage(
-       this.spriteset,
-       this.animation*this.size,
-       this.direction*this.size,
-       this.size,
-       this.size,
-       this.x+barcode.GameEngine.centerX - barcode.GameDonjon.level.character.x,
-       this.y+barcode.GameEngine.centerY - barcode.GameDonjon.level.character.y,
-       barcode.GameEngine.tileSize,
-       barcode.GameEngine.tileSize);
+    let tile = this.getTile();
+    let tilesArray = barcode.GameDonjon.level.getTilesForAPath();
+    if ((tile.x + "/" + tile.y) in tilesArray){
+      if (tilesArray[tile.x + "/" + tile.y].lightened){
+        ctx.drawImage(
+           this.spriteset,
+           this.animation*this.size,
+           this.direction*this.size,
+           this.size,
+           this.size,
+           this.x+barcode.GameEngine.centerX - barcode.GameDonjon.level.character.x,
+           this.y+barcode.GameEngine.centerY - barcode.GameDonjon.level.character.y,
+           barcode.GameEngine.tileSize,
+           barcode.GameEngine.tileSize);
+      }
+    }
+
   },
 
   doAction : function(){

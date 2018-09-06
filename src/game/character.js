@@ -11,6 +11,7 @@ barcode.Character = function(){
   this.moving = false;
   this.loaded = false;
   this.movingTick = 0;
+  this.lightRadius = 5;
   this.path = [];
   this.step = 3;
   this.damage = [1,1];

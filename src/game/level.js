@@ -10,6 +10,7 @@ barcode.Level = function(){
   this.startingPoint = {};
   this.aPathArray = [];
   this.decors = [];
+  this.aPathTiles = undefined;
 };
 
 barcode.Level.prototype = {
@@ -104,11 +105,14 @@ barcode.Level.prototype = {
   },
 
   getTilesForAPath : function(){
-    var tiles = {};
-    this.tiles.forEach(function(tile){
-      tiles[tile.x + "/" + tile.y] = tile;
-    });
-    return tiles;
+    if (typeof this.aPathTiles === 'undefined'){
+      var _this = this;
+      this.aPathTiles = {};
+      this.tiles.forEach(function(tile){
+        _this.aPathTiles[tile.x + "/" + tile.y] = tile;
+      });
+    }
+    return this.aPathTiles;
   },
 
   aPathArrayGenerate : function(){
@@ -164,19 +168,76 @@ barcode.Level.prototype = {
     this.character.render(ctx);
   },
 
+  makeLight : function(){
+    var tiles = {};
+    this.tiles.forEach(function(elt){
+      elt.lightened = false;
+    })
+    let chTile = barcode.GameDonjon.level.character.getTile();
+    let radius = barcode.GameDonjon.level.character.lightRadius;
+    for (let i = -radius ; i < radius ; i++){
+      for (let j = -radius ; j < radius ; j++){
+        let tile = {'x' : chTile.x + i, 'y' : chTile.y +j};
+        tiles[(chTile.x) + i + "/" + (chTile.y + j)] = tile;
+      }
+    }
+    return tiles;
+  },
+
+  renderFog : function(){
+    var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
+    var tiles = this.getTilesForAPath();
+    var lightTiles = this.makeLight();
+    let xi = Math.floor(barcode.GameDonjon.canvasTile.width / barcode.GameEngine.tileSize) +1;
+    let yj = Math.floor(barcode.GameDonjon.canvasTile.height / barcode.GameEngine.tileSize) +1;
+
+    for( let i = 0 ; i < xi ; i++){
+      for( let j = 0 ; j < yj ; j++){
+          let chTile = barcode.GameDonjon.level.character.getTile();
+          let rx = Math.floor((i * barcode.GameEngine.tileSize - barcode.GameEngine.centerX+barcode.GameDonjon.level.character.x)/barcode.GameEngine.tileSize);
+          let ry = Math.floor((j * barcode.GameEngine.tileSize - barcode.GameEngine.centerY+barcode.GameDonjon.level.character.y)/barcode.GameEngine.tileSize);
+
+          ctx.beginPath();
+          if ((rx + "/" + ry ) in lightTiles && (rx + "/" + ry ) in tiles){
+              tiles[rx + "/" + ry].state = barcode.C.TILE_VISITED;
+              tiles[rx + "/" + ry].lightened = true;
+          }else{
+            if ((rx + "/" + ry ) in tiles){
+              if (tiles[rx + "/" + ry].state === barcode.C.TILE_VISITED){
+                ctx.fillStyle = "rgba(0,0,0,0.5)";
+              }else{
+                ctx.fillStyle = "black";
+              }
+            }else{
+              ctx.fillStyle = "black";
+            }
+
+            ctx.fillRect(rx*barcode.GameEngine.tileSize + barcode.GameEngine.centerX-barcode.GameDonjon.level.character.x,
+                         ry*barcode.GameEngine.tileSize + barcode.GameEngine.centerY-barcode.GameDonjon.level.character.y,
+                        barcode.GameEngine.tileSize,
+                        barcode.GameEngine.tileSize);
+        }
+      }
+    }
+  },
+
   render : function(ts){
     var _this = this;
     var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.fillRect(0,0,barcode.GameDonjon.canvasTile.width,barcode.GameDonjon.canvasTile.height);
     this.tiles.forEach(function(elt){
       elt.render(ts);
     });
     this.decors.forEach(function(elt){
       elt.render();
     })
-
+    this.renderFog();
     ctx = barcode.GameDonjon.canvasCreature.getContext("2d");
     this.renderMob(ctx);
     this.renderCharacter(ctx);
+
   }
 
 

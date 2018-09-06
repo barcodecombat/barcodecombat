@@ -9,6 +9,7 @@ barcode.Tile = function (){
   this.tx = 0;
   this.ty = 0;
   this.state = barcode.C.TILE_NOT_VISITED;
+  this.lightened = false;
 };
 
 barcode.Tile.prototype = {
