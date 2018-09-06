@@ -28,6 +28,13 @@ barcode.Item.prototype = {
         if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
           _creature.maxHitPoint += tprop.value;
           _creature.hitpoint += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
+          _creature.damage[0] += tprop.value;
+          _creature.damage[1] += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
+          _creature.step += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+          _creature.speedAttack += tprop.value;
         }
       })
     }
@@ -42,7 +49,8 @@ barcode.Item.prototype = {
     this.speed = src.speed;
     this.range = src.range;
     this.damage = src.damage.split('-');
-    creature.damage = this.damage;
+    creature.damage[0] = parseInt(this.damage[0]);
+    creature.damage[1] = parseInt(this.damage[1]);
     creature.range = this.range;
     creature.speed = this.speed;
   },

@@ -98,7 +98,7 @@ barcode.Character.prototype = {
 
   calculateDamageToDo : function(){
     var result = 1;
-    result = Math.floor(Math.random() * this.damage[1] + this.damage[0]);
+    result = Math.floor(Math.random() * (this.damage[1] - this.damage[0]) + this.damage[0]);
     return result;
   },
 
