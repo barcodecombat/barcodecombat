@@ -32,6 +32,16 @@ barcode.Room.prototype = {
     }
   },
 
+  addChest : function(){
+    var x = Math.floor(Math.random()*(this.sizeX-2) + 1);
+    var y = Math.floor(Math.random()*(this.sizeY-2) + 1);
+    var dec = new barcode.Decor();
+    dec.load(barcode.C.DECOR_CHEST);
+    dec.x = x + this.x;
+    dec.y = y + this.y;
+    this.decors.push(dec);
+  },
+
   addDoor : function(){
     var rn = Math.random();
     var x = 0, y=0;
@@ -68,7 +78,7 @@ barcode.Room.prototype = {
     });
 
     let dec = new barcode.Decor();
-    dec.load(2);
+    dec.load(barcode.C.DECOR_DOOR);
     dec.x = x;
     dec.y = y;
     this.decors.push(dec);

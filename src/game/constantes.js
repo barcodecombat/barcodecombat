@@ -48,5 +48,9 @@ barcode.C = Object.freeze({
   FT_COLOR_GREEN : "green",
   FT_COLOR_BLUE : "blue",
 
+  //DEcor id
+  DECOR_CHEST : 1,
+  DECOR_DOOR : 2,
+
 
 });

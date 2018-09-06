@@ -179,7 +179,6 @@ barcode.Level.prototype = {
          barcode.GameEngine.tileSize,
          barcode.GameEngine.tileSize);
     });
-
     this.decors.forEach(function(elt){
       elt.render(ctx);
     })
