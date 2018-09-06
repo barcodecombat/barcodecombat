@@ -4,7 +4,6 @@ var barcode = barcode || {};
 barcode.Level = function(){
   this.tiles = [];
   this.monsters = [];
-  this.character = undefined;
   this.maxX = 0;
   this.maxY = 0;
   this.startingPoint = {};
@@ -37,10 +36,9 @@ barcode.Level.prototype = {
 
     this.startingPoint = src.startingpoint;
 
-    this.character = new barcode.Character();
-    this.character.init();
-    this.character.x = this.startingPoint.x * barcode.GameEngine.tileSize;
-    this.character.y = this.startingPoint.y * barcode.GameEngine.tileSize;
+
+    barcode.GameEngine.character.x = this.startingPoint.x * barcode.GameEngine.tileSize;
+    barcode.GameEngine.character.y = this.startingPoint.y * barcode.GameEngine.tileSize;
 
     if (typeof src.mobs !== 'undefined'){
       var listMob = this.monsters;
@@ -93,8 +91,8 @@ barcode.Level.prototype = {
   },
 
   getTheMobUnderMouse : function(x,y){
-    var _x = x - barcode.GameEngine.centerX + this.character.x;
-    var _y = y - barcode.GameEngine.centerY + this.character.y;
+    var _x = x - barcode.GameEngine.centerX + barcode.GameEngine.character.x;
+    var _y = y - barcode.GameEngine.centerY + barcode.GameEngine.character.y;
     var result = null;
     this.monsters.forEach(function(elt){
       if (((_x-barcode.GameEngine.tileSize)< elt.x) && ((_x+barcode.GameEngine.tileSize)>elt.x ) && ((_y-barcode.GameEngine.tileSize)< elt.y) && ((_y+barcode.GameEngine.tileSize)>elt.y )){
@@ -144,10 +142,9 @@ barcode.Level.prototype = {
 
   renderMob : function(ctx){
     var _ctx = ctx;
-    var _this = this;
     var monsterToRemove = [];
     this.monsters.forEach(function(elt){
-      elt.createPathTo(_this.character.getTile());
+      elt.createPathTo(barcode.GameEngine.character.getTile());
       elt.doAction();
       elt.render(_ctx);
       if (elt.hitpoint <= 0) monsterToRemove.push(elt);
@@ -164,8 +161,8 @@ barcode.Level.prototype = {
   },
 
   renderCharacter : function(ctx){
-    this.character.loop();
-    this.character.render(ctx);
+    barcode.GameEngine.character.loop();
+    barcode.GameEngine.character.render(ctx);
   },
 
   makeLight : function(){
@@ -173,8 +170,8 @@ barcode.Level.prototype = {
     this.tiles.forEach(function(elt){
       elt.lightened = false;
     })
-    let chTile = barcode.GameDonjon.level.character.getTile();
-    let radius = barcode.GameDonjon.level.character.lightRadius;
+    let chTile = barcode.GameEngine.character.getTile();
+    let radius = barcode.GameEngine.character.lightRadius;
     for (let i = -radius ; i < radius ; i++){
       for (let j = -radius ; j < radius ; j++){
         let tile = {'x' : chTile.x + i, 'y' : chTile.y +j};
@@ -193,9 +190,9 @@ barcode.Level.prototype = {
 
     for( let i = 0 ; i < xi ; i++){
       for( let j = 0 ; j < yj ; j++){
-          let chTile = barcode.GameDonjon.level.character.getTile();
-          let rx = Math.floor((i * barcode.GameEngine.tileSize - barcode.GameEngine.centerX+barcode.GameDonjon.level.character.x)/barcode.GameEngine.tileSize);
-          let ry = Math.floor((j * barcode.GameEngine.tileSize - barcode.GameEngine.centerY+barcode.GameDonjon.level.character.y)/barcode.GameEngine.tileSize);
+          let chTile = barcode.GameEngine.character.getTile();
+          let rx = Math.floor((i * barcode.GameEngine.tileSize - barcode.GameEngine.centerX+barcode.GameEngine.character.x)/barcode.GameEngine.tileSize);
+          let ry = Math.floor((j * barcode.GameEngine.tileSize - barcode.GameEngine.centerY+barcode.GameEngine.character.y)/barcode.GameEngine.tileSize);
 
           ctx.beginPath();
           if ((rx + "/" + ry ) in lightTiles && (rx + "/" + ry ) in tiles){
@@ -212,8 +209,8 @@ barcode.Level.prototype = {
               ctx.fillStyle = "black";
             }
 
-            ctx.fillRect(rx*barcode.GameEngine.tileSize + barcode.GameEngine.centerX-barcode.GameDonjon.level.character.x,
-                         ry*barcode.GameEngine.tileSize + barcode.GameEngine.centerY-barcode.GameDonjon.level.character.y,
+            ctx.fillRect(rx*barcode.GameEngine.tileSize + barcode.GameEngine.centerX-barcode.GameEngine.character.x,
+                         ry*barcode.GameEngine.tileSize + barcode.GameEngine.centerY-barcode.GameEngine.character.y,
                         barcode.GameEngine.tileSize,
                         barcode.GameEngine.tileSize);
         }

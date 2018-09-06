@@ -58,7 +58,7 @@ barcode.UI.prototype = {
   },
 
   renderLifeGauge : function(){
-    var prctLife = Math.floor((barcode.GameDonjon.level.character.hitpoint/barcode.GameDonjon.level.character.maxHitPoint)*100);
+    var prctLife = Math.floor((barcode.GameEngine.character.hitpoint/barcode.GameEngine.character.maxHitPoint)*100);
     if (prctLife < 0) prctLife = 0;
     this.ctx.beginPath();
     this.ctx.fillStyle = "red";
@@ -71,15 +71,15 @@ barcode.UI.prototype = {
 
     this.ctx.font = "1Opx Arial";
     this.ctx.fillStyle = "white ";
-    let text = barcode.GameDonjon.level.character.hitpoint + " / " + barcode.GameDonjon.level.character.maxHitPoint + " hp";
+    let text = barcode.GameEngine.character.hitpoint + " / " + barcode.GameEngine.character.maxHitPoint + " hp";
     this.ctx.fillText(text , 160, window.innerHeight-60);
 
     this.ctx.drawImage(
-       barcode.GameDonjon.level.character.spriteset,
+       barcode.GameEngine.character.spriteset,
        0,
        0,
-       barcode.GameDonjon.level.character.size,
-       barcode.GameDonjon.level.character.size,
+       barcode.GameEngine.character.size,
+       barcode.GameEngine.character.size,
        10,
        window.innerHeight-80,
        barcode.GameEngine.tileSize,

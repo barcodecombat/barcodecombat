@@ -33,8 +33,8 @@ barcode.Decor.prototype = {
        this.sprites[this.state].y,
        this.size,
        this.size,
-       this.x*barcode.GameEngine.tileSize+barcode.GameEngine.centerX - barcode.GameDonjon.level.character.x,
-       this.y*barcode.GameEngine.tileSize+barcode.GameEngine.centerY - barcode.GameDonjon.level.character.y,
+       this.x*barcode.GameEngine.tileSize+barcode.GameEngine.centerX - barcode.GameEngine.character.x,
+       this.y*barcode.GameEngine.tileSize+barcode.GameEngine.centerY - barcode.GameEngine.character.y,
        barcode.GameEngine.tileSize,
        barcode.GameEngine.tileSize);
   },

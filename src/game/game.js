@@ -9,6 +9,7 @@ barcode.GameEngine = function (){
   this.tileSize = barcode.C.TILE_SIZE_PC;
   this.centerX = 0;
   this.centerY = 0;
+  this.character = undefined;
 }
 
 barcode.GameEngine.prototype ={
@@ -67,6 +68,9 @@ barcode.GameEngine.prototype ={
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;
     this.centerY = window.innerHeight / 2 - this.tileSize / 2 - 70;
+
+    this.character = new barcode.Character();
+    this.character.init();
   },
 
 }

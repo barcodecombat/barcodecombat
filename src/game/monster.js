@@ -50,8 +50,8 @@ barcode.Monster.prototype = {
            this.direction*this.size,
            this.size,
            this.size,
-           this.x+barcode.GameEngine.centerX - barcode.GameDonjon.level.character.x,
-           this.y+barcode.GameEngine.centerY - barcode.GameDonjon.level.character.y,
+           this.x+barcode.GameEngine.centerX - barcode.GameEngine.character.x,
+           this.y+barcode.GameEngine.centerY - barcode.GameEngine.character.y,
            barcode.GameEngine.tileSize,
            barcode.GameEngine.tileSize);
       }
@@ -76,7 +76,7 @@ barcode.Monster.prototype = {
     let newTick = d.getTime();
     if (newTick - this.lastAttack > this.attackSpeed){
       this.lastAttack = newTick;
-      barcode.GameDonjon.level.character.hit(this.damage);
+      barcode.GameEngine.character.hit(this.damage);
     }
   },
 

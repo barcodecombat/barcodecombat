@@ -87,14 +87,14 @@ barcode.GameDonjon.prototype ={
   clickEvent : function(evt){
     var mob = barcode.GameDonjon.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
     if ( mob != null){
-        var dist = calcDistance(mob, barcode.GameDonjon.level.character);
-        if (dist > barcode.GameDonjon.level.character.rangeAttack){
-          barcode.GameDonjon.level.character.goToTarget(evt.pageX,evt.pageY);
+        var dist = calcDistance(mob, barcode.GameEngine.character);
+        if (dist > barcode.GameEngine.character.rangeAttack){
+          barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
         }else{
-          barcode.GameDonjon.level.character.hitTarget(mob);
+          barcode.GameEngine.character.hitTarget(mob);
         }
     }else{
-      barcode.GameDonjon.level.character.goToTarget(evt.pageX,evt.pageY);
+      barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
     }
   },
 
@@ -113,7 +113,7 @@ barcode.GameDonjon.prototype ={
   },
 
   gameLoop : function(){
-    if (this.level.character.hitpoint <= 0)
+    if (barcode.GameEngine.hitpoint <= 0)
       barcode.GameEngine.state == barcode.C.STATE_DONJON_DEATH;
     this.render();
   },
