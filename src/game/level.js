@@ -9,6 +9,7 @@ barcode.Level = function(){
   this.maxY = 0;
   this.startingPoint = {};
   this.aPathArray = [];
+  this.decors = [];
 };
 
 barcode.Level.prototype = {
@@ -48,6 +49,17 @@ barcode.Level.prototype = {
           newMob.x = mob.x * barcode.GameEngine.tileSize;
           newMob.y = mob.y * barcode.GameEngine.tileSize ;
           listMob.push(newMob);
+      });
+    }
+
+    if (typeof src.decors !== 'undefined'){
+      var _this = this;
+      src.decors.forEach(function(elt){
+        var dec = new barcode.Decor();
+        dec.load(elt.templateId);
+        dec.x = elt.x;
+        dec.y = elt.y;
+        _this.decors.push(dec);
       });
     }
   },
@@ -167,6 +179,10 @@ barcode.Level.prototype = {
          barcode.GameEngine.tileSize,
          barcode.GameEngine.tileSize);
     });
+
+    this.decors.forEach(function(elt){
+      elt.render(ctx);
+    })
 
     ctx = barcode.GameDonjon.canvasCreature.getContext("2d");
     this.renderMob(ctx);

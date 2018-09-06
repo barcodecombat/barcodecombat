@@ -11,6 +11,7 @@ barcode.Generator = function(){
   this.maxX = 0;
   this.maxY = 0;
   this.corridorTile = [];
+  this.decors = [];
 };
 
 barcode.Generator.prototype = {
@@ -36,6 +37,7 @@ barcode.Generator.prototype = {
   generateJson : function(){
     var tiles = [];
     var mobs = [];
+    var decors = [];
     var result = {};
     barcode.Generator.rooms.forEach(function(itRoom){
       itRoom.tiles.forEach(function(elt){
@@ -47,12 +49,18 @@ barcode.Generator.prototype = {
       itRoom.mobs.forEach(function(elt){
         mobs.push(elt);
       });
+      itRoom.decors.forEach(function(elt){
+        let dec = {"templateId" : elt.templateId, "x" : elt.x, "y" : elt.y};
+        decors.push(dec);
+      });
     });
     barcode.Generator.corridorTile.forEach(function (tile){
       tiles.push(tile);
     });
     if (mobs.length > 0) result['mobs'] = mobs;
     result['tiles'] = tiles;
+    result['decors'] = decors;
+
     return result;
   },
 
@@ -245,6 +253,7 @@ barcode.Generator.prototype = {
   },
 
   initFromEditor : function(){
+    barcode.tileset = new barcode.Tileset();
     this.tileSet = new Image();
     this.tileSet.src = "./assets/tileset/tileset1.png";
     this.heroSprite = new Image();

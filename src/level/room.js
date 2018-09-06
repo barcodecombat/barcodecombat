@@ -12,6 +12,7 @@ barcode.Room = function(){
   this.mobs = [];
   this.door = {};
   this.startingPoint = undefined;
+  this.decors = [];
 };
 
 barcode.Room.prototype = {
@@ -65,6 +66,12 @@ barcode.Room.prototype = {
         tile.ttile = 1;
       }
     });
+
+    let dec = new barcode.Decor();
+    dec.load(2);
+    dec.x = x;
+    dec.y = y;
+    this.decors.push(dec);
   },
 
 
@@ -149,6 +156,19 @@ barcode.Room.prototype = {
          32,
          this.mobs[i].x*barcode.C.TILE_SIZE_PC,
          this.mobs[i].y*barcode.C.TILE_SIZE_PC,
+         barcode.C.TILE_SIZE_PC,
+         barcode.C.TILE_SIZE_PC);
+    }
+
+    for(let i = 0 ; i < this.decors.length ; i++){
+      ctx.drawImage(
+         this.decors[i].spriteset,
+         this.decors[i].sprites[this.decors[i].state].x,
+         this.decors[i].sprites[this.decors[i].state].y,
+         32,
+         32,
+         this.decors[i].x*barcode.C.TILE_SIZE_PC,
+         this.decors[i].y*barcode.C.TILE_SIZE_PC,
          barcode.C.TILE_SIZE_PC,
          barcode.C.TILE_SIZE_PC);
     }
