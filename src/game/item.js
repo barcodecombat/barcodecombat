@@ -67,7 +67,8 @@ barcode.Item.prototype = {
     let diff = _creature.maxHitPoint - _creature.hitpoint;
     let value = prop.value;
     if (diff < prop.value) value = diff;
-    _creature.addHitPoint(value);
+    if (value > 0)
+      _creature.addHitPoint(value);
   },
 
   apply : function(creature){

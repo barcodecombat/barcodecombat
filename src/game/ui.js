@@ -23,7 +23,7 @@ barcode.UI.prototype = {
       if (prctLife < 0) prctLife = 0;
       this.ctx.beginPath();
       this.ctx.fillStyle = "#8b7e66";
-      this.ctx.fillRect(barcode.GameEngine.centerX - 80,20,200,30);
+      this.ctx.fillRect(barcode.GameEngine.centerX - 80,20,250,30);
       this.ctx.beginPath();
       this.ctx.fillStyle = "red";
       this.ctx.fillRect(barcode.GameEngine.centerX - 25,30,prctLife,10);
@@ -32,6 +32,10 @@ barcode.UI.prototype = {
       this.ctx.strokeStyle = "black";
       this.ctx.rect(barcode.GameEngine.centerX - 24,29,102,12);
       this.ctx.stroke();
+      this.ctx.font = "1Opx Arial";
+      this.ctx.fillStyle = "white ";
+      let text = this.mob.hitpoint + " / " + this.mob.maxHitPoint + " hp";
+      this.ctx.fillText(text , barcode.GameEngine.centerX + 90, 38);
       this.ctx.drawImage(
          this.mob.spriteset,
          0,

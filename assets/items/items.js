@@ -20,7 +20,9 @@ barcode.items = {
     "y" : 408,
     "name" : "bouclier en bois",
     "block" : 20,
-    "hitpoint" : 50
+    "properties" :[
+      { 'typeproperty' : 1, 'value' : 50}
+    ]
   },
   "3" : {
     "typeitem":0,
