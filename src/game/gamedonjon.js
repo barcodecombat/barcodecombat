@@ -6,6 +6,8 @@ barcode.GameDonjon = function (){
   this.canvasTile = undefined;
   this.canvasCreature = undefined;
   this.canvasAnimation = undefined;
+  this.canvasFog = undefined;
+  this.canvasMouse = undefined;
   this.animations = [];
   this.floatingText = [];
   this.tileSet = null;
@@ -19,8 +21,10 @@ barcode.GameDonjon.prototype ={
     this.canvasTile = document.getElementById("layerTile");
     this.canvasCreature = document.getElementById("layerCreature");
     this.canvasAnimation = document.getElementById("layerAnimation");
+    this.canvasFog = document.getElementById("layerFog");
+    this.canvasMouse = document.getElementById("layerMouse");
     this.setCanvasSize(window.innerWidth,window.innerHeight);
-    this.canvasAnimation.addEventListener("click",barcode.GameDonjon.clickEvent);
+    this.canvasMouse.addEventListener("click",barcode.GameDonjon.clickEvent);
     barcode.ui = new barcode.UI();
     document.onmousemove = barcode.GameDonjon.handleMouseMove;
 
@@ -70,6 +74,10 @@ barcode.GameDonjon.prototype ={
     this.canvasCreature.height = height;
     this.canvasAnimation.width = width;
     this.canvasAnimation.height = height;
+    this.canvasMouse.width = width;
+    this.canvasMouse.height = height;
+    this.canvasFog.width = width;
+    this.canvasFog.height = height;
   },
 
   clickEvent : function(evt){
@@ -93,6 +101,8 @@ barcode.GameDonjon.prototype ={
     context.clearRect(0, 0, this.canvasCreature.width, this.canvasCreature.height);
     context = this.canvasAnimation.getContext("2d");
     context.clearRect(0, 0, this.canvasAnimation.width, this.canvasAnimation.height);
+    context = this.canvasFog.getContext("2d");
+    context.clearRect(0, 0, this.canvasFog.width, this.canvasFog.height);
 
   },
 

@@ -168,19 +168,10 @@ barcode.Level.prototype = {
     var _this = this;
     var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
     this.tiles.forEach(function(elt){
-      ctx.drawImage(
-         ts,
-         elt.tx,
-         elt.ty,
-         elt.size,
-         elt.size,
-         elt.x*barcode.GameEngine.tileSize + barcode.GameEngine.centerX-_this.character.x,
-         elt.y*barcode.GameEngine.tileSize + barcode.GameEngine.centerY-_this.character.y,
-         barcode.GameEngine.tileSize,
-         barcode.GameEngine.tileSize);
+      elt.render(ts);
     });
     this.decors.forEach(function(elt){
-      elt.render(ctx);
+      elt.render();
     })
 
     ctx = barcode.GameDonjon.canvasCreature.getContext("2d");

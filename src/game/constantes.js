@@ -52,5 +52,8 @@ barcode.C = Object.freeze({
   DECOR_CHEST : 1,
   DECOR_DOOR : 2,
 
+  //TILE STATE
+  TILE_VISITED :1,
+  TILE_NOT_VISITED : 0,
 
 });
