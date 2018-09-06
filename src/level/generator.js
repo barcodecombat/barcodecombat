@@ -151,8 +151,8 @@ barcode.Generator.prototype = {
     barcode.Generator.clearCanvas();
     barcode.Generator.rooms = [];
     barcode.Generator.corridorTile = [];
-    //var nbRoom = Math.floor(Math.random()*3) + 2;
-    var nbRoom = 3;
+    var nbRoom = Math.floor(Math.random()*10) + 5;
+    //var nbRoom = 3;
     for(let i = 0 ; i < nbRoom ; i++){
       barcode.Generator.createRoom();
     }

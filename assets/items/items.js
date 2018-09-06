@@ -10,7 +10,12 @@ barcode.items = {
     "name" : "epee simple",
     "speed" : 50,
     "range" : 32,
-    "damage" : "3-7"
+    "damage" : "3-7",
+    "properties" : [
+      { 'typeproperty' : 2, 'value' : 10},
+      { 'typeproperty' : 3, 'value' : 2},
+      { 'typeproperty' : 4, 'value' : 50}
+    ]
   },
   "2" :
   {

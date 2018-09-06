@@ -2,6 +2,7 @@
 var barcode = barcode || {};
 
 barcode.Item = function(){
+  this.templateId = 0;
   this.typeItem = 0;
   this.tx = 0;
   this.ty = 0;
@@ -28,6 +29,13 @@ barcode.Item.prototype = {
         if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
           _creature.maxHitPoint += tprop.value;
           _creature.hitpoint += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
+          _creature.damage[0] += tprop.value;
+          _creature.damage[1] += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
+          _creature.step += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+          _creature.speedAttack += tprop.value;
         }
       })
     }
@@ -42,12 +50,15 @@ barcode.Item.prototype = {
     this.speed = src.speed;
     this.range = src.range;
     this.damage = src.damage.split('-');
-    creature.damage = this.damage;
+    creature.damage[0] = parseInt(this.damage[0]);
+    creature.damage[1] = parseInt(this.damage[1]);
     creature.range = this.range;
     creature.speed = this.speed;
   },
 
+
   load : function(templateId,creature){
+    this.templateId = templateId;
     this.spriteset = barcode.tileset.get("assets/items/items.png");
     this.typeItem = 0;
     var src = barcode.items[templateId];

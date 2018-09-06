@@ -28,6 +28,10 @@ barcode.GameEngine.prototype ={
     }
   },
 
+  saveGame : function(){
+    console.log(barcode.GameDonjon.level.character.saveToJs());
+  },
+
   initDonjon : function(){
     barcode.GameEngine.closeState();
     barcode.GameDonjon.init();
@@ -57,6 +61,8 @@ barcode.GameEngine.prototype ={
     btnDonjon.addEventListener("click",barcode.GameEngine.initDonjon);
     let btnScan = document.getElementById("btnScan");
     btnScan.addEventListener("click",barcode.GameEngine.initScan);
+    let btnSave = document.getElementById("btnSave");
+    btnSave.addEventListener("click",barcode.GameEngine.saveGame);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;

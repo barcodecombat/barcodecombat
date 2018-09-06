@@ -24,6 +24,18 @@ barcode.Character = function(){
 };
 
 barcode.Character.prototype = {
+  saveToJs : function(){
+    var meToJs = {};
+    var items =[];
+    this.items.forEach(function(item){
+      items.push(item.templateId);
+    })
+    meToJs.items = items;
+
+
+    return meToJs;
+  },
+
   loaded : function(){
     this.loaded = true;
   },
@@ -98,7 +110,7 @@ barcode.Character.prototype = {
 
   calculateDamageToDo : function(){
     var result = 1;
-    result = Math.floor(Math.random() * this.damage[1] + this.damage[0]);
+    result = Math.floor(Math.random() * (this.damage[1] - this.damage[0]) + this.damage[0]);
     return result;
   },
 

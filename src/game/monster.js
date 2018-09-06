@@ -90,14 +90,17 @@ barcode.Monster.prototype = {
   },
 
   createPathTo : function(tileTarget){
-    this.target = tileTarget;
-    if ((this.path.length == 0) || ( this.path[0].x != tileTarget.x && this.path[0].y != tileTarget.y)){
-      let grid = barcode.GameDonjon.level.getAPathArray();
-      let tileMob = this.getTile();
+    let distance = calcDistance({x:tileTarget.x*barcode.GameEngine.tileSize,y:tileTarget.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+    if (distance < 200){
+      this.target = tileTarget;
+      if ((this.path.length == 0) || ( this.path[0].x != tileTarget.x && this.path[0].y != tileTarget.y)){
+        let grid = barcode.GameDonjon.level.getAPathArray();
+        let tileMob = this.getTile();
 
-      var pthFinding = new barcode.Apath();
-      var result =  pthFinding.findShortestPath([tileMob.x,tileMob.y],[tileTarget.x,tileTarget.y], grid,true);
-      this.path = pthFinding.path;
+        var pthFinding = new barcode.Apath();
+        var result =  pthFinding.findShortestPath([tileMob.x,tileMob.y],[tileTarget.x,tileTarget.y], grid,true);
+        this.path = pthFinding.path;
+      }
     }
   },
 
