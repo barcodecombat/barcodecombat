@@ -14,7 +14,8 @@ barcode.items = {
     "properties" : [
       { 'typeproperty' : 2, 'value' : 10},
       { 'typeproperty' : 3, 'value' : 2},
-      { 'typeproperty' : 4, 'value' : 50}
+      { 'typeproperty' : 4, 'value' : 50},
+      { 'typeproperty' : 5, 'value' : 10}
     ]
   },
   "2" :

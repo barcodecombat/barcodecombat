@@ -15,6 +15,7 @@ barcode.Item = function(){
   this.range = 0;
   this.damage = [];
   this.chanceToBlock = 0;
+  this.lightradius = 0;
 };
 
 
@@ -34,8 +35,8 @@ barcode.Item.prototype = {
           _creature.damage[1] += tprop.value;
         }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
           _creature.step += tprop.value;
-        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
-          _creature.speedAttack += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
+          _creature.lightRadius += tprop.value;
         }
       })
     }
