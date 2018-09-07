@@ -57,6 +57,26 @@ barcode.UI.prototype = {
     this.mob = undefined;
   },
 
+  renderXp : function(){
+    var prctxp = Math.floor((barcode.GameEngine.character.actualXp/barcode.GameEngine.character.nextLevelAmountOfXp)*100);
+    if (prctxp < 0) prctxp = 0;
+    let textLvl = "Level : " + barcode.GameEngine.character.level;
+    this.ctx.fillText(textLvl , 230, window.innerHeight-60);
+    this.ctx.beginPath();
+    this.ctx.fillStyle = "#f1ffd1";
+    this.ctx.fillRect(280,window.innerHeight-70,prctxp,10);
+    this.ctx.beginPath();
+    this.ctx.lineWidth="3";
+    this.ctx.strokeStyle = "black";
+    this.ctx.rect(279,window.innerHeight-71,102,12);
+    this.ctx.stroke();
+
+    this.ctx.font = "1Opx Arial";
+    this.ctx.fillStyle = "white ";
+    let text = barcode.GameEngine.character.actualXp + " / " + barcode.GameEngine.character.nextLevelAmountOfXp + " xp";
+    this.ctx.fillText(text , 390, window.innerHeight-60);
+  },
+
   renderLifeGauge : function(){
     var prctLife = Math.floor((barcode.GameEngine.character.hitpoint/barcode.GameEngine.character.maxHitPoint)*100);
     if (prctLife < 0) prctLife = 0;
@@ -91,6 +111,7 @@ barcode.UI.prototype = {
       this.ctx  = barcode.GameDonjon.canvasAnimation.getContext("2d");
     this.drawRect();
     this.renderLifeGauge();
+    this.renderXp();
     this.drawMonsterGauge();
   }
 };

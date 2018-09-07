@@ -14,7 +14,7 @@ barcode.Monster = function(){
   this.path = [];
   this.step = 1;
   this.target = undefined;
-  this.range = 1;
+  this.range = 50;
   this.attackSpeed = 500;
   this.lastAttack = 0;
   this.damage = 1;
@@ -63,7 +63,7 @@ barcode.Monster.prototype = {
     if (typeof this.target !== 'undefined')
     {
       let distance = calcDistance({x:this.target.x*barcode.GameEngine.tileSize,y:this.target.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
-      if (distance > this.range*(barcode.GameEngine.tileSize)){
+      if (distance > this.range){
         this.move();
       }else{
         this.attack();

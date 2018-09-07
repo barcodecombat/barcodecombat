@@ -12,6 +12,9 @@ barcode.Character = function(){
   this.loaded = false;
   this.movingTick = 0;
   this.lightRadius = 4;
+  this.actualXp = 0;
+  this.nextLevelAmountOfXp = 100;
+  this.level = 0;
   this.path = [];
   this.step = 3;
   this.damage = [1,1];
@@ -115,6 +118,19 @@ barcode.Character.prototype = {
     return result;
   },
 
+  addLevel : function(lvl){
+    this.level += lvl;
+    this.nextLevelAmountOfXp =  (this.level+1)*100;
+    this.actualXp = 0;
+  },
+
+  addXp : function(xp){
+    this.actualXp += xp;
+    if (this.actualXp >= this.nextLevelAmountOfXp){
+      this.addLevel(1);
+    }
+  },
+
   hitTarget : function(mob){
     let d = new Date();
     let newTick = d.getTime();
@@ -122,6 +138,9 @@ barcode.Character.prototype = {
       this.lastAttackTicks = newTick;
       let damage = this.calculateDamageToDo()
       mob.hit(damage);
+      if (mob.hitpoint <= 0){
+          this.addXp(mob.maxHitPoint);
+      }
     }
   },
 
