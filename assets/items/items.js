@@ -1,7 +1,7 @@
 var barcode = barcode || {};
 
 barcode.items = {
-  "1" :
+  "1b" :
   {
     "typeitem":1,
     "size":32,
@@ -12,7 +12,7 @@ barcode.items = {
     "range" : 32,
     "damage" : "3-7",
   },
-  "1b" :
+  "1" :
   {
     "typeitem":1,
     "size":32,

@@ -86,10 +86,10 @@ barcode.Room.prototype = {
 
 
   roomCollision : function(room){
-    if ((room.x) < (this.x + this.sizeX)
-    && (room.x+ room.sizeX) > (this.x)
-    && (room.y)< (this.y+this.sizeY)
-    && (room.y+room.sizeY) > (this.y)) {
+    if ((room.x - 1) < (this.x + this.sizeX)
+    && (room.x+ room.sizeX + 1) > (this.x)
+    && (room.y - 1)< (this.y+this.sizeY)
+    && (room.y+room.sizeY + 1) > (this.y)) {
       return true;
     }
     return false;
