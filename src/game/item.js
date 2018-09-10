@@ -10,7 +10,11 @@ barcode.Item = function(){
   this.rarity = 0;
   this.spriteset = undefined;
   this.lastTick  = 0;
+  this.spriteset = null;
   this.properties = [];
+  this.tx = 0;
+  this.ty = 0;
+  this.spritesize = 0;
   this.speed = 0;
   this.range = 0;
   this.damage = [];
@@ -57,6 +61,15 @@ barcode.Item.prototype = {
     creature.speed = this.speed;
   },
 
+  loadSprite : function(){
+
+    if (typeof barcode.itemsimg !== "undefined"){
+      this.tx = barcode.itemsimg[this.idimg].x;
+      this.ty = barcode.itemsimg[this.idimg].y;
+      this.spriteset = barcode.tileset.get(barcode.itemsimg[this.idimg].tileset);
+      this.spritesize = barcode.itemsimg[this.idimg].size;
+    }
+  },
 
   load : function(templateId,creature){
     this.templateId = templateId;
@@ -64,8 +77,7 @@ barcode.Item.prototype = {
     this.typeItem = 0;
     var src = barcode.items[templateId];
     this.typeItem = src.typeitem;
-    this.tx = src.x;
-    this.ty = src.y;
+    this.idimg = src.idimg;
     this.rarity = src.rarity;
     this.name = src.name;
     if (src.typeitem === barcode.C.TYPE_ITEM_WEAPON){
@@ -74,6 +86,7 @@ barcode.Item.prototype = {
       this.loadShield(src,creature);
     }
     this.loadProperties(src,creature);
+    this.loadSprite();
   },
 
   applyLifeRegeneration : function(_creature, prop){

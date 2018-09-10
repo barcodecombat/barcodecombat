@@ -12,6 +12,7 @@ barcode.items = {
     "speed" : 50,
     "range" : 32,
     "damage" : "3-7",
+    "idimg" : 1
   },
   "1" :
   {
@@ -29,7 +30,8 @@ barcode.items = {
       { 'typeproperty' : 3, 'value' : 2},
       { 'typeproperty' : 4, 'value' : 50},
       { 'typeproperty' : 5, 'value' : 10}
-    ]
+    ],
+    "idimg" : 1
   },
   "2" :
   {
@@ -40,7 +42,7 @@ barcode.items = {
     "y" : 408,
     "name" : "bouclier en bois",
     "block" : 20,
-
+    "idimg" : 2
   },
   "2b" :
   {
@@ -53,7 +55,8 @@ barcode.items = {
     "block" : 20,
     "properties" :[
       { 'typeproperty' : 1, 'value' : 50}
-    ]
+    ],
+    "idimg" : 1
   },
   "3" : {
     "typeitem":0,
@@ -62,6 +65,7 @@ barcode.items = {
     "x" : 205,
     "y" : 646,
     "name" : "amulette",
+    "idimg" : 1
   },
   "3b" : {
     "typeitem":0,
@@ -72,6 +76,7 @@ barcode.items = {
     "name" : "amulette",
     "properties" : [
       { 'typeproperty' : 0, 'value' : 1}
-    ]
+    ],
+    "idimg" : 1
   }
 };

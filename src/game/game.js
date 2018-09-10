@@ -15,7 +15,9 @@ barcode.GameEngine = function (){
 barcode.GameEngine.prototype ={
   gameLoop: function (){
     if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
-        barcode.GameDonjon.gameLoop();
+        barcode.GameDonjon.loop();
+    }else if (barcode.GameEngine.state === barcode.C.STATE_INVENTORY){
+        barcode.inventory.loop();
     }
   },
 
@@ -48,7 +50,7 @@ barcode.GameEngine.prototype ={
 
   initHero : function(){
     barcode.GameEngine.closeState();
-    if (typeof barcode.inventory === 'undefined')
+    if (typeof barcode.inventory === 'undefined' || barcode.inventory === null)
       barcode.inventory = new barcode.Inventory();
     barcode.GameEngine.state = barcode.C.STATE_INVENTORY;
   },
@@ -76,7 +78,7 @@ barcode.GameEngine.prototype ={
     let btnSave = document.getElementById("btnSave");
     btnSave.addEventListener("click",barcode.GameEngine.saveGame);
     let btnHero = document.getElementById("btnHero");
-    btnSave.addEventListener("click",barcode.GameEngine.initHero);
+    btnHero.addEventListener("click",barcode.GameEngine.initHero);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;

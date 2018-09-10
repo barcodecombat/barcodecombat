@@ -71,7 +71,7 @@ barcode.GameDonjon.prototype ={
     }
   },
 
-  gameLoop : function(){
+  loop : function(){
     if (barcode.GameEngine.hitpoint <= 0)
       barcode.GameEngine.state == barcode.C.STATE_DONJON_DEATH;
     this.render();
