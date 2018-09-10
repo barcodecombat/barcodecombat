@@ -30,7 +30,9 @@ barcode.GameEngine.prototype ={
   },
 
   saveGame : function(){
-    console.log(barcode.GameDonjon.level.character.saveToJs());
+    var ch = barcode.GameEngine.character.saveToJs();
+    localStorage.setItem('characterStored', JSON.stringify(ch));
+    localStorage.setItem('itemsStored', JSON.stringify(barcode.items));
   },
 
   initDonjon : function(){
@@ -70,7 +72,17 @@ barcode.GameEngine.prototype ={
     this.centerY = window.innerHeight / 2 - this.tileSize / 2 - 70;
 
     this.character = new barcode.Character();
-    this.character.init();
+    var objCh = JSON.parse(localStorage.getItem('characterStored'));
+    if (typeof objCh !== 'undefined' && objCh !== null){
+      this.character.loadFromJs(objCh);
+    }else{
+      this.character.loadFromPreset();
+    }
+    var objIt = JSON.parse(localStorage.getItem('itemsStored'));
+    if (typeof objIt !== 'undefined' && objIt !== null){
+        barcode.items = objIt;
+    }
+
   },
 
 }

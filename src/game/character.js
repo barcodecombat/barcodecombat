@@ -5,11 +5,11 @@ barcode.Character = function(){
   this.x = 0 ;
   this.y = 0;
   this.size = 64;
+  this.sprite = "";
   this.spriteset = null;
   this.animation = 0;
   this.direction = 0;
   this.moving = false;
-  this.loaded = false;
   this.movingTick = 0;
   this.lightRadius = 4;
   this.actualXp = 0;
@@ -35,13 +35,28 @@ barcode.Character.prototype = {
       items.push(item.templateId);
     })
     meToJs.items = items;
-
+    meToJs.actualXp = this.actualXp;
+    meToJs.level = this.level;
+    meToJs.sprite = this.sprite;
+    meToJs.nextLevelAmountOfXp = this.nextLevelAmountOfXp;
 
     return meToJs;
   },
 
-  loaded : function(){
-    this.loaded = true;
+  loadFromJs : function(src){
+    this.sprite = src.sprite;
+    this.spriteset = barcode.tileset.get(this.sprite);
+    this.actualXp = src.actualXp;
+    this.level = src.level;
+    this.nextLevelAmountOfXp = src.nextLevelAmountOfXp;
+    if (typeof src.items !== 'undefined'){
+      var _this = this;
+      src.items.forEach(function(idTemplate){
+        let tempItem = new barcode.Item();
+        tempItem.load(idTemplate,_this);
+        _this.items.push(tempItem);
+      })
+    }
   },
 
   getTile : function(){
@@ -56,8 +71,9 @@ barcode.Character.prototype = {
     this.items.push(tempItem);
   },
 
-  init : function(src){
-    this.spriteset = barcode.tileset.get("assets/sprites/fille.png");
+  loadFromPreset : function(){
+    this.sprite = "assets/sprites/fille.png";
+    this.spriteset = barcode.tileset.get(this.sprite);
     this.addItemToCharacter(1);
     this.addItemToCharacter(2);
     this.addItemToCharacter(3);
