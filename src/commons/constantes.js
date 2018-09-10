@@ -11,6 +11,7 @@ barcode.C = Object.freeze({
   STATE_DONJON_QUIT : 5,
   STATE_GOTO_SCAN : 6,
   STATE_SCAN_INPROGRESS : 7,
+  STATE_INVENTORY : 8,
 
   //direction
   DIRECTION_UP :0,

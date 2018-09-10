@@ -66,6 +66,7 @@ barcode.Item.prototype = {
     this.typeItem = src.typeitem;
     this.tx = src.x;
     this.ty = src.y;
+    this.rarity = src.rarity;
     this.name = src.name;
     if (src.typeitem === barcode.C.TYPE_ITEM_WEAPON){
       this.loadWeapon(src,creature);

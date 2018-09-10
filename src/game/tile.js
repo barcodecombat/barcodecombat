@@ -14,7 +14,7 @@ barcode.Tile = function (){
 
 barcode.Tile.prototype = {
   render : function(ts){
-    var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
+    var ctx = barcode.canvas.canvasTile.getContext("2d");
     ctx.drawImage(
        ts,
        this.tx,

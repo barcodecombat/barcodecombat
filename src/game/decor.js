@@ -26,7 +26,7 @@ barcode.Decor.prototype = {
   },
 
   render : function(){
-    var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
+    var ctx = barcode.canvas.canvasTile.getContext("2d");
     ctx.drawImage(
        this.spriteset,
        this.sprites[this.state].x,

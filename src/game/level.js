@@ -148,13 +148,14 @@ barcode.Level.prototype = {
       elt.doAction();
       elt.render(_ctx);
       if (elt.hitpoint <= 0) monsterToRemove.push(elt);
+
     })
     for (let i=0;i<monsterToRemove.length;i++){
       var animation = new barcode.Animation();
       animation.init();
       animation.x = monsterToRemove[i].x;
       animation.y = monsterToRemove[i].y;
-      animation.layerToDraw = barcode.GameDonjon.canvasTile.getContext("2d");
+      animation.layerToDraw = barcode.canvas.canvasTile.getContext("2d");
       barcode.GameDonjon.animations.push(animation);
       this.removeMonster(monsterToRemove[i]);
     }
@@ -182,18 +183,17 @@ barcode.Level.prototype = {
   },
 
   renderFog : function(){
-    var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
+    var ctx = barcode.canvas.canvasTile.getContext("2d");
     var tiles = this.getTilesForAPath();
     var lightTiles = this.makeLight();
-    let xi = Math.floor(barcode.GameDonjon.canvasTile.width / barcode.GameEngine.tileSize) +1;
-    let yj = Math.floor(barcode.GameDonjon.canvasTile.height / barcode.GameEngine.tileSize) +1;
+    let xi = Math.floor(barcode.canvas.canvasTile.width / barcode.GameEngine.tileSize) +1;
+    let yj = Math.floor(barcode.canvas.canvasTile.height / barcode.GameEngine.tileSize) +1;
 
     for( let i = 0 ; i < xi ; i++){
       for( let j = 0 ; j < yj ; j++){
           let chTile = barcode.GameEngine.character.getTile();
           let rx = Math.floor((i * barcode.GameEngine.tileSize - barcode.GameEngine.centerX+barcode.GameEngine.character.x)/barcode.GameEngine.tileSize);
           let ry = Math.floor((j * barcode.GameEngine.tileSize - barcode.GameEngine.centerY+barcode.GameEngine.character.y)/barcode.GameEngine.tileSize);
-
           ctx.beginPath();
           if ((rx + "/" + ry ) in lightTiles && (rx + "/" + ry ) in tiles){
               tiles[rx + "/" + ry].state = barcode.C.TILE_VISITED;
@@ -220,10 +220,10 @@ barcode.Level.prototype = {
 
   render : function(ts){
     var _this = this;
-    var ctx = barcode.GameDonjon.canvasTile.getContext("2d");
+    var ctx = barcode.canvas.canvasTile.getContext("2d");
     ctx.beginPath();
     ctx.fillStyle = "black";
-    ctx.fillRect(0,0,barcode.GameDonjon.canvasTile.width,barcode.GameDonjon.canvasTile.height);
+    ctx.fillRect(0,0,barcode.canvas.canvasTile.width,barcode.canvas.canvasTile.height);
     this.tiles.forEach(function(elt){
       elt.render(ts);
     });
@@ -231,7 +231,7 @@ barcode.Level.prototype = {
       elt.render();
     })
     this.renderFog();
-    ctx = barcode.GameDonjon.canvasCreature.getContext("2d");
+    ctx = barcode.canvas.canvasCreature.getContext("2d");
     this.renderMob(ctx);
     this.renderCharacter(ctx);
 

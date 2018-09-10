@@ -108,7 +108,7 @@ barcode.UI.prototype = {
 
   render : function(){
     if (typeof this.ctx === 'undefined')
-      this.ctx  = barcode.GameDonjon.canvasAnimation.getContext("2d");
+      this.ctx  = barcode.canvas.canvasAnimation.getContext("2d");
     this.drawRect();
     this.renderLifeGauge();
     this.renderXp();

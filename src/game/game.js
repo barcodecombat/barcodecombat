@@ -24,8 +24,8 @@ barcode.GameEngine.prototype ={
       barcode.GameEngine.readcodebar.stop();
     }
     if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
-      barcode.GameDonjon.clearCanvas();
-      barcode.GameDonjon.setCanvasSize(0,0);
+      barcode.canvas.clearCanvas();
+      barcode.canvas.setCanvasSize(0,0);
     }
   },
 
@@ -46,6 +46,13 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
   },
 
+  initHero : function(){
+    barcode.GameEngine.closeState();
+    if (typeof barcode.inventory === 'undefined')
+      barcode.inventory = new barcode.Inventory();
+    barcode.GameEngine.state = barcode.C.STATE_INVENTORY;
+  },
+
   initScan : function(){
     barcode.GameEngine.closeState();
     barcode.GameEngine.state = barcode.C.STATE_SCAN_INPROGRESS;
@@ -57,6 +64,8 @@ barcode.GameEngine.prototype ={
     barcode.Generator = new barcode.Generator();
     barcode.Generator.init();
     barcode.GameDonjon = new barcode.GameDonjon();
+    barcode.canvas = new barcode.Canvas();
+    barcode.canvas.init();
     barcode.tileset = new barcode.Tileset();
     let btnMenu = document.getElementById("btnMenu");
     btnMenu.addEventListener("click",barcode.GameEngine.initMenu);
@@ -66,6 +75,8 @@ barcode.GameEngine.prototype ={
     btnScan.addEventListener("click",barcode.GameEngine.initScan);
     let btnSave = document.getElementById("btnSave");
     btnSave.addEventListener("click",barcode.GameEngine.saveGame);
+    let btnHero = document.getElementById("btnHero");
+    btnSave.addEventListener("click",barcode.GameEngine.initHero);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;

@@ -4,6 +4,7 @@ barcode.items = {
   "1b" :
   {
     "typeitem":1,
+    "rarity" : 0,
     "size":32,
     "x" : 0,
     "y" : 170,
@@ -16,6 +17,7 @@ barcode.items = {
   {
     "typeitem":1,
     "size":32,
+    "rarity" : 1,
     "x" : 0,
     "y" : 170,
     "name" : "epee simple",
@@ -33,6 +35,7 @@ barcode.items = {
   {
     "typeitem":2,
     "size":32,
+    "rarity" : 0,
     "x" : 0,
     "y" : 408,
     "name" : "bouclier en bois",
@@ -43,6 +46,7 @@ barcode.items = {
   {
     "typeitem":2,
     "size":32,
+    "rarity" : 0,
     "x" : 0,
     "y" : 408,
     "name" : "bouclier en bois",
@@ -54,6 +58,7 @@ barcode.items = {
   "3" : {
     "typeitem":0,
     "size":32,
+    "rarity" : 0,
     "x" : 205,
     "y" : 646,
     "name" : "amulette",
@@ -61,6 +66,7 @@ barcode.items = {
   "3b" : {
     "typeitem":0,
     "size":32,
+    "rarity" : 0,
     "x" : 205,
     "y" : 646,
     "name" : "amulette",
