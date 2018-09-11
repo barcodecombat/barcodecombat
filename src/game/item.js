@@ -41,7 +41,10 @@ barcode.Item.prototype = {
           _creature.step += tprop.value;
         }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
           _creature.lightRadius += tprop.value;
+        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+          _creature.speedAttack += tprop.value;
         }
+
       })
     }
   },

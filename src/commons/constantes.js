@@ -49,6 +49,10 @@ barcode.C = Object.freeze({
   FT_COLOR_RED : "red",
   FT_COLOR_GREEN : "green",
   FT_COLOR_BLUE : "blue",
+  FT_COLOR_BLACK : "black",
+  FT_COLOR_WHITE : "white",
+  FT_COLOR_YELLOW_COLD : "#f1ffd1",  
+  FT_COLOR_BROWN : "#8b7e66",
 
   //DEcor id
   DECOR_CHEST : 1,

@@ -14,7 +14,6 @@ barcode.Canvas.prototype ={
     this.canvasCreature = document.getElementById("layerCreature");
     this.canvasAnimation = document.getElementById("layerAnimation");
     this.canvasMouse = document.getElementById("layerMouse");
-    this.setCanvasSize(window.innerWidth,window.innerHeight);
   },
 
   setCanvasSize : function(width, height){
@@ -28,12 +27,14 @@ barcode.Canvas.prototype ={
     this.canvasMouse.height = height;
   },
 
+  clearOneCanvas : function(canvas){
+    let context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  },
+
   clearCanvas : function(){
-    let context = this.canvasTile.getContext("2d");
-    context.clearRect(0, 0, this.canvasTile.width, this.canvasTile.height);
-    context = this.canvasCreature.getContext("2d");
-    context.clearRect(0, 0, this.canvasCreature.width, this.canvasCreature.height);
-    context = this.canvasAnimation.getContext("2d");
-    context.clearRect(0, 0, this.canvasAnimation.width, this.canvasAnimation.height);
+    this.clearOneCanvas(this.canvasTile);
+    this.clearOneCanvas(this.canvasCreature);
+    this.clearOneCanvas(this.canvasAnimation);
   },
 };

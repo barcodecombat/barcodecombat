@@ -17,7 +17,7 @@ barcode.GameEngine.prototype ={
     if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
         barcode.GameDonjon.loop();
     }else if (barcode.GameEngine.state === barcode.C.STATE_INVENTORY){
-        barcode.inventory.loop();
+        //barcode.inventory.loop();
     }
   },
 
@@ -28,6 +28,10 @@ barcode.GameEngine.prototype ={
     if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
       barcode.canvas.clearCanvas();
       barcode.canvas.setCanvasSize(0,0);
+    }
+    if(barcode.GameEngine.state == barcode.C.STATE_INVENTORY){
+      barcode.inventory.eraseInventory();
+      barcode.inventory.init();
     }
   },
 
@@ -52,6 +56,8 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.closeState();
     if (typeof barcode.inventory === 'undefined' || barcode.inventory === null)
       barcode.inventory = new barcode.Inventory();
+    barcode.inventory.init();
+    barcode.inventory.render();
     barcode.GameEngine.state = barcode.C.STATE_INVENTORY;
   },
 
