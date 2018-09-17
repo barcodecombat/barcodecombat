@@ -46,7 +46,7 @@ barcode.Inventory.prototype ={
   },
   renderItemShield : function(item){
     barcode.inventory.ctxItem.fillStyle = barcode.C.FT_COLOR_WHITE;
-    this.ctxItem.fillText("Chance de blocker : " + item.chanceToBlock ,160,200 + this.actualY);
+    this.ctxItem.fillText("Chance de blocker : " + item.chanceToBlock + "%" ,160,200 + this.actualY);
     this.actualY += 20;
   },
 
@@ -61,7 +61,6 @@ barcode.Inventory.prototype ={
   },
 
   renderProperties : function(item){
-    //barcode.inventory.ctxItem.fillStyle = "#97ffff";
     barcode.inventory.ctxItem.fillStyle = barcode.C.FT_COLOR_MAGICAL;
     var _this = barcode.inventory;
     item.properties.forEach(function(prop){
@@ -75,6 +74,8 @@ barcode.Inventory.prototype ={
           _this.ctxItem.fillText("Vitesse : + " + prop.value ,160,200 + _this.actualY);
       }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
           _this.ctxItem.fillText("Vitesse d'attaque : + " + prop.value ,160,200 + _this.actualY);
+      }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_REGENERATION){
+          _this.ctxItem.fillText("Regen. Vie : + " + prop.value ,160,200 + _this.actualY);
       }
       _this.actualY += 20;
     });
@@ -93,10 +94,11 @@ barcode.Inventory.prototype ={
       this.ctxItem.fillStyle = barcode.C.FT_COLOR_WHITE;
       this.ctxItem.fillText(item.name,180,170);
       this.ctxItem.font = "10px Arial";
-      if (item.typeitem === barcode.C.TYPE_ITEM_WEAPON)
+      if (item.typeItem === barcode.C.TYPE_ITEM_WEAPON){
         barcode.inventory.renderItemWeapon(item);
-      else if (item.typeitem === barcode.C.TYPE_ITEM_SHIELD)
+      }else if (item.typeItem === barcode.C.TYPE_ITEM_SHIELD){
         barcode.inventory.renderItemShield(item);
+      }
       barcode.inventory.renderProperties(item);
 
     }

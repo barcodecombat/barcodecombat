@@ -46,13 +46,13 @@ barcode.items = {
     ],
     "idimg" : 1
   },
-  "3" : {
+  "3b" : {
     "typeitem":0,
     "rarity" : 1,
     "name" : "amulette",
     "idimg" : 3
   },
-  "3b" : {
+  "3" : {
     "typeitem":0,
     "rarity" : 0,
     "name" : "amulette",
