@@ -31,6 +31,7 @@ barcode.Inventory.prototype ={
        let div = document.getElementById("inventory");
        let divImg = document.createElement("div");
        let img = document.createElement("img");
+       console.log(item);
        img.src = barcode.itemsimg[item.idimg].tileset;
        divImg.addEventListener("mouseover",this.showItem);
        divImg.addEventListener("mouseout",this.hideItem);

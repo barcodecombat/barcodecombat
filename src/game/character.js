@@ -74,9 +74,9 @@ barcode.Character.prototype = {
   loadFromPreset : function(){
     this.sprite = "assets/sprites/fille.png";
     this.spriteset = barcode.tileset.get(this.sprite);
-    this.addItemToCharacter(1);
-    this.addItemToCharacter(2);
-    this.addItemToCharacter(3);
+  //  this.addItemToCharacter(1);
+  //  this.addItemToCharacter(2);
+  //  this.addItemToCharacter(3);
   },
 
   addHitPoint : function(hp){

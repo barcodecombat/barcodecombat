@@ -68,6 +68,13 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.readcodebar.start();
   },
 
+  generateItem : function(){
+    var itemGenerator = new barcode.itemgenerator();
+    itemGenerator.generate();
+    console.log(itemGenerator.item);
+    barcode.GameEngine.character.items.push(itemGenerator.item);
+  },
+
   init : function(){
     barcode.Generator = new barcode.Generator();
     barcode.Generator.init();
@@ -85,6 +92,8 @@ barcode.GameEngine.prototype ={
     btnSave.addEventListener("click",barcode.GameEngine.saveGame);
     let btnHero = document.getElementById("btnHero");
     btnHero.addEventListener("click",barcode.GameEngine.initHero);
+    let btnGenerate = document.getElementById("btnGenerate");
+    btnGenerate.addEventListener("click",barcode.GameEngine.generateItem);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;
