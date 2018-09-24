@@ -12,25 +12,41 @@ barcode.itemgenerator.prototype = {
     return rarity;
   },
 
+  qualityCheck : function(){
+    let quality = Math.round(Math.random()*100);
+    return quality;
+  },
+
   typeCheck : function(){
     let typeItem = Math.round(Math.random()*3);
     return typeItem;
   },
 
   generateCaractWeapon : function(){
-    this.item.damage = [1,5];
+    this.item.damage[0] = Math.round(Math.random()*10 * this.item.quality /100);
+    this.item.damage[1] = Math.round(Math.random()*30 * this.item.quality /100 + this.item.damage[0]);
     this.item.range = 32;
-    this.item.speed = 50;
-    this.item.idimg = "1";
+    this.item.speed = Math.round(Math.random() * this.item.quality);
+    this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
+  },
+
+  getImageForItem : function(val){
+    var result = 0;
+    if (val in barcode.itemsinfo){
+      var len = barcode.itemsinfo[val].length;
+      var rnd = Math.round(Math.random()*(len-1));
+      result = barcode.itemsinfo[val][rnd];
+    }
+    return result;
   },
 
   generateCaractShield : function(){
-    this.item.chanceToBlock = 50;
-    this.item.idimg = "2";
+    this.item.chanceToBlock = Math.round(Math.random()*50 * this.item.quality / 100);
+    this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
   },
 
   generateCaractNecklace : function(){
-    this.item.idimg = "3";
+    this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
   },
 
   generateCaract : function(){
@@ -38,14 +54,28 @@ barcode.itemgenerator.prototype = {
       this.generateCaractWeapon();
     }else if (this.item.typeItem === barcode.C.TYPE_ITEM_SHIELD ){
       this.generateCaractShield();
-    }else if (this.item.typeItem === barcode.C.TYPE_ITEM_NECKLACE ){
+    }else if (this.item.typeItem === barcode.C.TYPE_ITEM_JEWEL ){
       this.generateCaractNecklace();
     }
   },
 
   generateProperty(){
     var prop = Math.round(Math.random()*5);
-    var property = { 'typeproperty' : 1, 'value' : 50};
+    var value = 0;
+    if (prop === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
+      value = Math.round(Math.random() * 10 * this.item.quality / 100 + 1);
+    }else if (prop === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
+      value = Math.round(Math.random() * 100 * this.item.quality / 100 + 5);
+    }else if (prop === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
+      value = Math.round(Math.random() * 10 * this.item.quality / 100 + 1);
+    }else if (prop === barcode.C.PROPERTY_ITEM_LIFE_REGENERATION){
+      value = Math.round(Math.random() * 10 * this.item.quality / 100 + 1);
+    }else if (prop === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+      value = Math.round(Math.random() * 50 * this.item.quality / 100 + 5);
+    }else if (prop === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
+      value = Math.round(Math.random() * 5 * this.item.quality / 100 + 1);
+    }
+    var property = { 'typeproperty' : prop, 'value' : value};
     this.item.properties.push(property);
   },
 
@@ -61,8 +91,11 @@ barcode.itemgenerator.prototype = {
     this.item = new barcode.Item();
     this.item.rarity = this.rarityCheck();
     this.item.typeItem = this.typeCheck();
+    this.item.quality = this.qualityCheck();
+    this.item.idimg = 1;
     this.generateCaract();
     this.generateMagicProperties();
+
     return this.item;
   },
 };
