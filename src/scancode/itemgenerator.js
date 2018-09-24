@@ -8,7 +8,16 @@ barcode.itemgenerator = function(){
 
 barcode.itemgenerator.prototype = {
   rarityCheck : function(){
-    let rarity = Math.round(Math.random()*3);
+
+    let maxRarity = 0;
+    if (barcode.GameEngine.character.level > 30){
+      maxRarity = 3;
+    }else if (barcode.GameEngine.character.level > 20){
+      maxRarity = 2;
+    }else if (barcode.GameEngine.character.level > 10){
+      maxRarity = 1;
+    }
+    let rarity = Math.round(Math.random()*maxRarity);
     return rarity;
   },
 

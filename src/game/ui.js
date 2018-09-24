@@ -63,7 +63,7 @@ barcode.UI.prototype = {
     let textLvl = "Level : " + barcode.GameEngine.character.level;
     this.ctx.fillText(textLvl , 230, window.innerHeight-60);
     this.ctx.beginPath();
-    this.ctx.fillStyle = bacode.C.FT_COLOR_YELLOW_COLD;
+    this.ctx.fillStyle = barcode.C.FT_COLOR_YELLOW_COLD;
     this.ctx.fillRect(280,window.innerHeight-70,prctxp,10);
     this.ctx.beginPath();
     this.ctx.lineWidth="3";
