@@ -18,7 +18,7 @@ barcode.itemgenerator.prototype = {
   },
 
   typeCheck : function(){
-    let typeItem = Math.round(Math.random()*3);
+    let typeItem = Math.round(Math.random()*2);
     return typeItem;
   },
 
@@ -28,6 +28,7 @@ barcode.itemgenerator.prototype = {
     this.item.range = 32;
     this.item.speed = Math.round(Math.random() * this.item.quality);
     this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
+    this.item.name = barcode.itemsimg[this.item.idimg].name;
   },
 
   getImageForItem : function(val){
@@ -43,10 +44,12 @@ barcode.itemgenerator.prototype = {
   generateCaractShield : function(){
     this.item.chanceToBlock = Math.round(Math.random()*50 * this.item.quality / 100);
     this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
+    this.item.name = barcode.itemsimg[this.item.idimg].name;
   },
 
   generateCaractNecklace : function(){
     this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
+    this.item.name = barcode.itemsimg[this.item.idimg].name;
   },
 
   generateCaract : function(){

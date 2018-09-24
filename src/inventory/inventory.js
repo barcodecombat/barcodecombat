@@ -22,16 +22,20 @@ barcode.Inventory.prototype ={
       this.ctxInv.beginPath();
       this.ctxInv.lineWidth="3";
       if (item.rarity == 0)
-        this.ctxInv.strokeStyle = barcode.C.FT_COLOR_BLACK;
+        this.ctxInv.strokeStyle = barcode.C.FT_COLOR_GREY;
       else if (item.rarity == 1)
+        this.ctxInv.strokeStyle = barcode.C.FT_COLOR_TURQUOISE;
+      else if (item.rarity == 2)
         this.ctxInv.strokeStyle = barcode.C.FT_COLOR_BLUE;
+      else if (item.rarity == 3)
+        this.ctxInv.strokeStyle = barcode.C.FT_COLOR_YELLOW;
+
       this.ctxInv.rect(30 + i*70, 100 + j*70,64,64);
       this.ctxInv.stroke();
 
        let div = document.getElementById("inventory");
        let divImg = document.createElement("div");
        let img = document.createElement("img");
-       console.log(item);
        img.src = barcode.itemsimg[item.idimg].tileset;
        divImg.addEventListener("mouseover",this.showItem);
        divImg.addEventListener("mouseout",this.hideItem);
@@ -47,7 +51,7 @@ barcode.Inventory.prototype ={
   },
   renderItemShield : function(item){
     barcode.inventory.ctxItem.fillStyle = barcode.C.FT_COLOR_WHITE;
-    this.ctxItem.fillText("Chance de blocker : " + item.chanceToBlock + "%" ,160,200 + this.actualY);
+    this.ctxItem.fillText("Chance de bloquer : " + item.chanceToBlock + "%" ,160,200 + this.actualY);
     this.actualY += 20;
   },
 
