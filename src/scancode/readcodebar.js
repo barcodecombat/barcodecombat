@@ -29,7 +29,7 @@ barcode.Readcodebar = function(){
 
 barcode.Readcodebar.prototype = {
   start : function(){
-    let div = document.getElementById("interactive");
+    let div = document.getElementById("scan");
     div.style.display = 'block';
     var _this = this;
     Quagga.init(this.state, function(err) {
@@ -43,7 +43,7 @@ barcode.Readcodebar.prototype = {
   },
 
   stop : function(){
-    let div = document.getElementById("interactive");
+    let div = document.getElementById("scan");
     div.style.display = 'none';
     Quagga.stop();
   },

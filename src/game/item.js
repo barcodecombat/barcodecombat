@@ -57,9 +57,10 @@ barcode.Item.prototype = {
   loadWeapon : function(src,creature){
     this.speed = src.speed;
     this.range = src.range;
-    this.damage = src.damage.split('-');
-    creature.damage[0] = parseInt(this.damage[0]);
-    creature.damage[1] = parseInt(this.damage[1]);
+    creature.damage[0] = src.damage[0];
+    creature.damage[1] = src.damage[1];
+    this.damage.push(src.damage[0]);
+    this.damage.push(src.damage[1]);
     creature.range = this.range;
     creature.speed = this.speed;
   },
@@ -79,13 +80,13 @@ barcode.Item.prototype = {
     this.spriteset = barcode.tileset.get("assets/items/items.png");
     this.typeItem = 0;
     var src = barcode.items[templateId];
-    this.typeItem = src.typeitem;
+    this.typeItem = src.typeItem;
     this.idimg = src.idimg;
     this.rarity = src.rarity;
     this.name = src.name;
-    if (src.typeitem === barcode.C.TYPE_ITEM_WEAPON){
+    if (this.typeItem === barcode.C.TYPE_ITEM_WEAPON){
       this.loadWeapon(src,creature);
-    }else if (src.typeitem === barcode.C.TYPE_ITEM_SHIELD){
+    }else if (this.typeItem === barcode.C.TYPE_ITEM_SHIELD){
       this.loadShield(src,creature);
     }
     this.loadProperties(src,creature);

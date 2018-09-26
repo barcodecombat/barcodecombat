@@ -3,22 +3,22 @@ var barcode = barcode || {};
 barcode.items = {
   "1b" :
   {
-    "typeitem":1,
+    "typeItem":1,
     "rarity" : 0,
     "name" : "epee simple",
     "speed" : 50,
     "range" : 32,
-    "damage" : "3-7",
+    "damage" : [3,7],
     "idimg" : 1
   },
   "1" :
   {
-    "typeitem":1,
+    "typeItem":1,
     "rarity" : 0,
     "name" : "epee simple",
     "speed" : 50,
     "range" : 32,
-    "damage" : "3-7",
+    "damage" : [3,7],
     "properties" : [
       { 'typeproperty' : 2, 'value' : 10},
       { 'typeproperty' : 3, 'value' : 2},
@@ -29,7 +29,7 @@ barcode.items = {
   },
   "2" :
   {
-    "typeitem":2,
+    "typeItem":2,
     "rarity" : 0,
     "name" : "bouclier en bois",
     "block" : 20,
@@ -37,7 +37,7 @@ barcode.items = {
   },
   "2b" :
   {
-    "typeitem":2,
+    "typeItem":2,
     "rarity" : 0,
     "name" : "bouclier en bois",
     "block" : 20,
@@ -47,13 +47,13 @@ barcode.items = {
     "idimg" : 1
   },
   "3b" : {
-    "typeitem":0,
+    "typeItem":0,
     "rarity" : 1,
     "name" : "amulette",
     "idimg" : 3
   },
   "3" : {
-    "typeitem":0,
+    "typeItem":0,
     "rarity" : 0,
     "name" : "amulette",
     "properties" : [

@@ -68,11 +68,19 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.readcodebar.start();
   },
 
-  generateItem : function(){
+  generateItem : function(val){
+    if (typeof val === 'undefined' || val == null){
+      val = Math.round(Math.random()*999999999);
+    }
     var itemGenerator = new barcode.itemgenerator();
     itemGenerator.generate();
-    console.log(itemGenerator.item);
-    barcode.GameEngine.character.items.push(itemGenerator.item);
+    barcode.items[val] = itemGenerator.item;
+    //barcode.GameEngine.character.items.push(itemGenerator.item);
+    barcode.GameEngine.character.addItemToCharacter(val);
+  },
+
+  scanItem : function(){
+    barcode.GameEngine.generateItem();
   },
 
   init : function(){
@@ -93,11 +101,18 @@ barcode.GameEngine.prototype ={
     let btnHero = document.getElementById("btnHero");
     btnHero.addEventListener("click",barcode.GameEngine.initHero);
     let btnGenerate = document.getElementById("btnGenerate");
-    btnGenerate.addEventListener("click",barcode.GameEngine.generateItem);
+    btnGenerate.addEventListener("click",barcode.GameEngine.scanItem);
+    let butnScan = document.getElementById("buttonScan");
+    butnScan.addEventListener("click",barcode.GameEngine.scanItem);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;
     this.centerY = window.innerHeight / 2 - this.tileSize / 2 - 70;
+
+    var objIt = JSON.parse(localStorage.getItem('itemsStored'));
+    if (typeof objIt !== 'undefined' && objIt !== null){
+        barcode.items = objIt;
+    }
 
     this.character = new barcode.Character();
     var objCh = JSON.parse(localStorage.getItem('characterStored'));
@@ -105,10 +120,6 @@ barcode.GameEngine.prototype ={
       this.character.loadFromJs(objCh);
     }else{
       this.character.loadFromPreset();
-    }
-    var objIt = JSON.parse(localStorage.getItem('itemsStored'));
-    if (typeof objIt !== 'undefined' && objIt !== null){
-        barcode.items = objIt;
     }
 
   },

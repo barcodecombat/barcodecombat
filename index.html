@@ -38,7 +38,11 @@
   <canvas id="layerAnimation" height="0" width="0" style="z-index: 45"></canvas>
   <canvas id="layerMouse" height="0" width="0" style="z-index: 50"></canvas>
   <div id="inventory" style="z-index:99"></div>
-  <div id="interactive" class="viewport" style="display:None"></div>
+  <div id="scan" style="display:None">
+    <div id="interactive" class="viewport" ></div>
+    <button id="buttonScan">Scan</button>
+    <input type="found" value=""/>
+  </div>
   <div id="mainMenu" style="position:absolute; top: 0; left : 100; z-index: 99">
     <button id="btnDonjon">Donjon</button>
     <button id="btnScan">Scan</button>
@@ -53,8 +57,8 @@
   <script src="./src/commons/canvas.js"></script>
   <script src="./src/game/animation.js"></script>
   <script src="./src/game/floatingtext.js"></script>
-  <script src="./src/game/quagga.min.js"></script>
-  <script src="./src/game/readcodebar.js"></script>
+  <script src="./src/game/quagga.js"></script>
+  <script src="./src/scancode/readcodebar.js"></script>
   <script src="./src/game/apath.js"></script>
   <script src="./src/scancode/itemgenerator.js"></script>
   <script src="./src/game/item.js"></script>
