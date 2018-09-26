@@ -50,6 +50,9 @@ barcode.Readcodebar.prototype = {
   detected : function(result){
     var code = result.codeResult.code;
     document.getElementById("Found").value = code;
+    barcode.GameEngine.GenerateItem(code);
+    this.stop();
+    barcode.GameEngine.initHero();
   },
   processed : function(result){
     var drawingCtx = Quagga.canvas.ctx.overlay,
