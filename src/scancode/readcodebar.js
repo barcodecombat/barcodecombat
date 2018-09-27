@@ -47,11 +47,14 @@ barcode.Readcodebar.prototype = {
     div.style.display = 'none';
     Quagga.stop();
   },
+
   detected : function(result){
     var code = result.codeResult.code;
     document.getElementById("Found").value = code;
-    barcode.GameEngine.GenerateItem(code);
-    this.stop();
+    barcode.GameEngine.generateItem(code);
+    let div = document.getElementById("scan");
+    div.style.display = 'none';
+    Quagga.stop();
     barcode.GameEngine.initHero();
   },
   processed : function(result){
