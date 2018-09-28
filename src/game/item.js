@@ -50,8 +50,8 @@ barcode.Item.prototype = {
   },
 
   loadShield : function(src,creature){
-    this.chanceToBlock = src.block;
-    creature.chanceToBlock = src.block
+    this.chanceToBlock = src.chanceToBlock;
+    creature.chanceToBlock = src.chanceToBlock;
   },
 
   loadWeapon : function(src,creature){

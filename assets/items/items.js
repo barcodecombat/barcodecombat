@@ -32,7 +32,7 @@ barcode.items = {
     "typeItem":2,
     "rarity" : 0,
     "name" : "bouclier en bois",
-    "block" : 20,
+    "chanceToBlock" : 20,
     "idimg" : 2
   },
   "2b" :
@@ -40,7 +40,7 @@ barcode.items = {
     "typeItem":2,
     "rarity" : 0,
     "name" : "bouclier en bois",
-    "block" : 20,
+    "chanceToBlock" : 20,
     "properties" :[
       { 'typeproperty' : 1, 'value' : 50}
     ],
