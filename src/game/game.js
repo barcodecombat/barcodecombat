@@ -25,13 +25,17 @@ barcode.GameEngine.prototype ={
     if (barcode.GameEngine.state === barcode.C.STATE_SCAN_INPROGRESS && barcode.GameEngine.readcodebar != null){
       barcode.GameEngine.readcodebar.stop();
     }
-    if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
+    else if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
       barcode.canvas.clearCanvas();
       barcode.canvas.setCanvasSize(0,0);
     }
-    if(barcode.GameEngine.state == barcode.C.STATE_INVENTORY){
+    else if(barcode.GameEngine.state == barcode.C.STATE_INVENTORY){
       barcode.inventory.eraseInventory();
       barcode.inventory.init();
+    }
+    else if(barcode.GameEngine.state == barcode.C.STATE_MENU_SHOWN){
+      var menu = document.getElementById("mainMenu");
+      menu.style.display = "none";
     }
   },
 
@@ -50,6 +54,8 @@ barcode.GameEngine.prototype ={
   initMenu : function(){
     barcode.GameEngine.closeState();
     barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
+    var menu = document.getElementById("mainMenu");
+    menu.style.display = "block";
   },
 
   initHero : function(){
@@ -90,6 +96,7 @@ barcode.GameEngine.prototype ={
     barcode.canvas = new barcode.Canvas();
     barcode.canvas.init();
     barcode.tileset = new barcode.Tileset();
+    barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
     let btnMenu = document.getElementById("btnMenu");
     btnMenu.addEventListener("click",barcode.GameEngine.initMenu);
     let btnDonjon = document.getElementById("btnDonjon");

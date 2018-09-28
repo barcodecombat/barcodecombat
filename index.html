@@ -9,28 +9,7 @@
       <script type="text/javascript" src="assets/items/itemsimg.js"></script>
       <script type="text/javascript" src="assets/items/itemsinfo.js"></script>
       <script type="text/javascript" src="assets/decor.js"></script>
-      <style>
-      #interactive.viewport {
-        width: 640px;
-        height: 480px;
-      }
-
-      /* line 6, ../sass/_viewport.scss */
-      #interactive.viewport canvas, video {
-        float: left;
-        width: 640px;
-        height: 480px;
-      }
-      /* line 10, ../sass/_viewport.scss */
-      #interactive.viewport canvas.drawingBuffer, video.drawingBuffer {
-        margin-left: -640px;
-      }
-      canvas {
-        position: absolute;
-        top : 0;
-        left : 0;
-      }
-      </style>
+      <link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 <body>
   <canvas id="layerTile" height="0" width="0" style="z-index: 15"></canvas>
@@ -43,13 +22,16 @@
     <button id="buttonScan">Scan</button>
     <input type="text" id="Found" value=""/>
   </div>
-  <div id="mainMenu" style="position:absolute; top: 0; left : 100; z-index: 99">
-    <button id="btnDonjon">Donjon</button>
-    <button id="btnScan">Scan</button>
-    <button id="btnHero">Hero</button>
+  <div id="mainbutton" style="position:absolute; top: 0; left : 100; z-index: 99">
     <button id="btnSave">Save</button>
     <button id="btnMenu">Menu</button>
     <button id="btnGenerate">GenerateItem</button>
+  </div>
+  <div id="mainMenu" style="position:absolute; top:100px; left:100px; z-index : 99; width:500px;height:500px;background-color: #8b7e66">
+    <h1 align="center">CodeBar Wars</h1>
+    <button id="btnDonjon" class="myButton" style="position:absolute; top:150px; left:150px; z-index : 99;">Donjon</button>
+    <button id="btnHero" class="myButton" style="position:absolute; top:220px; left:150px; z-index : 99;" >Inventaire</button>
+    <button id="btnScan" class="myButton" style="position:absolute; top:290px; left:150px; z-index : 99">Scan</button>
   </div>
 
   <script src="./src/commons/commons.js"></script>
