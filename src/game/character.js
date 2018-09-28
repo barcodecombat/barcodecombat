@@ -137,7 +137,7 @@ barcode.Character.prototype = {
   addLevel : function(lvl){
     this.level += lvl;
     this.nextLevelAmountOfXp =  (this.level+1)*100;
-    this.actualXp = 0;
+    //this.actualXp = 0;
   },
 
   addXp : function(xp){

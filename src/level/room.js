@@ -23,7 +23,7 @@ barcode.Room.prototype = {
   },
 
   addMobs : function(){
-    let nbMobs = Math.floor(Math.random() * (Math.floor( Math.sqrt(this.sizeX * this.sizeY)/2)));
+    let nbMobs = Math.floor(Math.random() * (Math.floor( Math.sqrt(this.sizeX * this.sizeY))))+2;
 
     for (let i = 0 ; i < nbMobs ; i++){
       let x = Math.floor(Math.random()*(this.sizeX-2)+1);
