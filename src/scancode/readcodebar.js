@@ -25,6 +25,7 @@ barcode.Readcodebar = function(){
             },
             locate: true
         };
+    this.lastTick = 0;
 };
 
 barcode.Readcodebar.prototype = {
@@ -49,13 +50,17 @@ barcode.Readcodebar.prototype = {
   },
 
   detected : function(result){
-    var code = result.codeResult.code;
-    document.getElementById("Found").value = code;
-    barcode.GameEngine.generateItem(code);
-    let div = document.getElementById("scan");
-    div.style.display = 'none';
-    Quagga.stop();
-    barcode.GameEngine.initHero();
+    let d = new Date();
+    let newTick = d.getTime();
+    if (newTick - barcode.GameEngine.readcodebar.lastTick > 1000){
+      barcode.GameEngine.readcodebar.lastTick = newTick;
+      var code = result.codeResult.code;
+      document.getElementById("Found").value = code;
+      barcode.GameEngine.generateItem(code);
+      barcode.GameEngine.readcodebar.stop();
+      barcode.GameEngine.initHero();
+    }
+
   },
   processed : function(result){
     var drawingCtx = Quagga.canvas.ctx.overlay,
