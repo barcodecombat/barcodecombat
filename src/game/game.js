@@ -16,8 +16,8 @@ barcode.GameEngine.prototype ={
   gameLoop: function (){
     if (barcode.GameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
         barcode.GameDonjon.loop();
-    }else if (barcode.GameEngine.state === barcode.C.STATE_INVENTORY){
-        //barcode.inventory.loop();
+    }else if (barcode.GameEngine.state === barcode.C.STATE_DONJON_DEATH){
+      barcode.GameEngine.showDeath();
     }
   },
 
@@ -36,6 +36,11 @@ barcode.GameEngine.prototype ={
     else if(barcode.GameEngine.state == barcode.C.STATE_MENU_SHOWN){
       var menu = document.getElementById("mainMenu");
       menu.style.display = "none";
+    }else if(barcode.GameEngine.state == barcode.C.STATE_MENU_DEATH){
+      var menu = document.getElementById("death");
+      menu.style.display = "none";
+      barcode.canvas.clearCanvas();
+      barcode.canvas.setCanvasSize(0,0);
     }
   },
 
@@ -45,10 +50,18 @@ barcode.GameEngine.prototype ={
     localStorage.setItem('itemsStored', JSON.stringify(barcode.items));
   },
 
+  showDeath : function(){
+    barcode.GameEngine.closeState();
+    var menu = document.getElementById("death");
+    menu.style.display = "block";
+    barcode.GameEngine.state = barcode.C.STATE_MENU_DEATH;
+  },
+
   initDonjon : function(){
     barcode.GameEngine.closeState();
     barcode.GameDonjon.init();
     barcode.GameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
+    barcode.GameEngine.character.resetHp();
   },
 
   initMenu : function(){
@@ -111,6 +124,8 @@ barcode.GameEngine.prototype ={
     btnGenerate.addEventListener("click",barcode.GameEngine.scanItem);
     let butnScan = document.getElementById("buttonScan");
     butnScan.addEventListener("click",barcode.GameEngine.scanItem);
+    let btnDeathBack = document.getElementById("btnBackToMenu");
+    btnDeathBack.addEventListener("click",barcode.GameEngine.initMenu);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;

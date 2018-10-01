@@ -18,8 +18,8 @@ barcode.Character = function(){
   this.path = [];
   this.step = 3;
   this.damage = [1,1];
-  this.maxHitPoint = 500;
-  this.hitpoint = 500;
+  this.maxHitPoint = 100;
+  this.hitpoint = 100;
   this.speedAttack = 50;
   this.rangeAttack = 64;
   this.lastAttackTicks = 0;
@@ -97,6 +97,10 @@ barcode.Character.prototype = {
     return blocked;
   },
 
+  resetHp : function(){
+    this.hitpoint = this.maxHitPoint;
+  },
+
   hit : function(hp){
     var ft = new barcode.FloatingText();
     if (! this.isHitBlocked()){
@@ -106,6 +110,9 @@ barcode.Character.prototype = {
       ft.init(this.x + barcode.GameEngine.tileSize/2 - 10,this.y + barcode.GameEngine.tileSize/2,"Block",barcode.C.FT_COLOR_BLUE);
     }
     barcode.GameDonjon.floatingText.push(ft);
+    if (this.hitpoint <=0){
+      barcode.GameEngine.state = barcode.C.STATE_DONJON_DEATH;
+    }
   },
 
   animate : function(){
@@ -137,7 +144,7 @@ barcode.Character.prototype = {
   addLevel : function(lvl){
     this.level += lvl;
     this.nextLevelAmountOfXp =  (this.level+1)*100;
-    //this.actualXp = 0;
+    this.resetHp();
   },
 
   addXp : function(xp){
