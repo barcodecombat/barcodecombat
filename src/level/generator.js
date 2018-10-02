@@ -5,6 +5,7 @@ barcode.Generator = function(){
   this.rooms = [];
   this.canvasTile = undefined;
   this.tileSet = undefined;
+  this.listOfTilesToUse = undefined;
   this.heroSprite = undefined;
   this.mobSprite = undefined;
   this.allSprites = [];
@@ -107,8 +108,9 @@ barcode.Generator.prototype = {
       for (let j=0;j<this.maxX;j++){
         let brick = {'x' : j, 'y' : i, 'F' : -1, 'G' : -1, 'status' : 'Empty','cameFrom' : {}};
         if (( j + "/" + i) in tiles){
-          if(tiles[j + "/" + i].ttile == 2)
-            brick.status = 'Obstacle';
+           if(this.listOfTilesToUse.wall.indexOf(tiles[j + "/" + i].ttile) > -1 ){
+             brick.status = 'Obstacle';
+          }
         }
         grid[i][j] = brick;
       }
@@ -157,6 +159,8 @@ barcode.Generator.prototype = {
   },
 
   generateLevel : function(){
+    let tileSetIndex = Math.round(Math.random() * (barcode.tilesets.length-1));
+    barcode.Generator.listOfTilesToUse = barcode.tilesets[tileSetIndex];
     barcode.Generator.clearCanvas();
     barcode.Generator.rooms = [];
     barcode.Generator.corridorTile = [];

@@ -13,6 +13,8 @@ barcode.Room = function(){
   this.door = {};
   this.startingPoint = undefined;
   this.decors = [];
+  this.wall = 0;
+  this.ground = 0;
 };
 
 barcode.Room.prototype = {
@@ -110,6 +112,8 @@ barcode.Room.prototype = {
   },
 
   init : function(){
+    this.wall = barcode.Generator.listOfTilesToUse.wall[0];
+    this.ground = barcode.Generator.listOfTilesToUse.ground[0];
     this.sizeX = Math.floor(Math.random() * 10 +5);
     this.sizeY = Math.floor(Math.random() * 10 +5);
     for(let i=0;i<this.sizeY;i++){
@@ -117,9 +121,9 @@ barcode.Room.prototype = {
         let tempTile = new barcode.Tile();
         tempTile.x = j;
         tempTile.y = i;
-        tempTile.ttile = 1;
+        tempTile.ttile = this.ground;
 
-        if (i ==0 || j==0 || j == (this.sizeX-1) || i==(this.sizeY-1)) tempTile.ttile = 2;
+        if (i ==0 || j==0 || j == (this.sizeX-1) || i==(this.sizeY-1)) tempTile.ttile = this.wall;
 
         this.tiles.push(tempTile);
       }
