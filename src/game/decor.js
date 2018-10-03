@@ -9,6 +9,7 @@ barcode.Decor = function(){
   this.tileset = undefined;
   this.size = 32;
   this.state = 0;
+  this.typeDecor = 0;
 };
 
 
@@ -17,12 +18,17 @@ barcode.Decor.prototype = {
     this.templateId = templateId;
     var src = barcode.decors[templateId];
     this.spriteset = barcode.tileset.get(src.tileset);
+    this.typeDecor = src.typedecor;
     var _this = this;
 
     src.sprites.forEach(function(sp){
       _this.sprites.push({"state" : sp.state, "x" : sp.x, "y" : sp.y});
     })
     this.size = src.size;
+  },
+
+  apply : function(){
+    console.log("Apply decor");
   },
 
   render : function(){

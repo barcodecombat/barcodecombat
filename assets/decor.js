@@ -1,9 +1,10 @@
 var barcode = barcode || {};
 
 barcode.decors = {
-  "1" :
+  "0" :
   {
     "name" : "chest",
+    "typedecor" : 0,
     "size":32,
     "tileset" : "assets/tileset/murmures.png",
     "sprites" : [
@@ -11,9 +12,10 @@ barcode.decors = {
       { "state" : 1, "x" : 1663, "y" : 930},
     ]
   },
-  "1b" :
+  "0b" :
   {
     "name" : "chest",
+    "typedecor" : 0,
     "size":32,
     "tileset" : "assets/items/items.png",
     "sprites" : [
@@ -21,9 +23,10 @@ barcode.decors = {
       { "state" : 1, "x" : 270, "y" : 988},
     ]
   },
-  "2" :
+  "1" :
   {
     "name" : "door",
+    "typedecor" : 1,
     "size":32,
     "tileset" : "assets/tileset/murmures.png",
     "sprites" : [

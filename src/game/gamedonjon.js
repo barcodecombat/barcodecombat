@@ -68,7 +68,17 @@ barcode.GameDonjon.prototype ={
           barcode.GameEngine.character.hitTarget(mob);
         }
     }else{
-      barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
+      var decor = barcode.GameDonjon.level.getTheDecorUnderMouse(evt.pageX,evt.pageY);
+      if ( decor != null){
+          var dist = calcDistance({x: decor.x*barcode.GameEngine.tileSize, y: decor.y*barcode.GameEngine.tileSize}, barcode.GameEngine.character);
+          if (dist > barcode.GameEngine.tileSize){
+            barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
+          }else{
+            decor.apply();
+          }
+      }else{
+        barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
+      }
     }
   },
 

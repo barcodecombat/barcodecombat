@@ -102,6 +102,18 @@ barcode.Level.prototype = {
     return result;
   },
 
+  getTheDecorUnderMouse : function(x,y){
+    var _x = x - barcode.GameEngine.centerX + barcode.GameEngine.character.x;
+    var _y = y - barcode.GameEngine.centerY + barcode.GameEngine.character.y;
+    var result = null;
+    this.decors.forEach(function(elt){
+      if (((_x-barcode.GameEngine.tileSize)< elt.x*barcode.GameEngine.tileSize) && ((_x+barcode.GameEngine.tileSize)>elt.x*barcode.GameEngine.tileSize ) && ((_y-barcode.GameEngine.tileSize)< elt.y*barcode.GameEngine.tileSize) && ((_y+barcode.GameEngine.tileSize)>elt.y*barcode.GameEngine.tileSize )){
+        result = elt;
+      }
+    });
+    return result;
+  },
+
   getTilesForAPath : function(){
     if (typeof this.aPathTiles === 'undefined'){
       var _this = this;

@@ -70,8 +70,8 @@ barcode.C = Object.freeze({
   FT_COLOR_MAGICAL : "#2debf1",
 
   //DEcor id
-  DECOR_CHEST : 1,
-  DECOR_DOOR : 2,
+  DECOR_CHEST : 0,
+  DECOR_DOOR : 1,
 
   //TILE STATE
   TILE_VISITED :1,
