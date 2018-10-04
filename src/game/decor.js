@@ -31,9 +31,14 @@ barcode.Decor.prototype = {
   },
 
   doAction : function(){
-    if (this.apply.action === barcode.C.ACTION_APPLY_DECOR_REMOVE_DECOR){
-      barcode.GameDonjon.level.removeDecor(this);
-    }
+    var _this = this;
+    this.apply.forEach(function(action){
+      if (action.action === barcode.C.ACTION_APPLY_DECOR_REMOVE_DECOR){
+        barcode.GameDonjon.level.removeDecor(_this);
+      }else if(action.action === barcode.C.ACTION_APPLY_DECOR_CHANGE_SPRITE){
+        _this.state = 1;
+      }
+    })
   },
 
   render : function(){

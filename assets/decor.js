@@ -11,6 +11,10 @@ barcode.decors = {
     "sprites" : [
       { "state" : 0, "x" : 1631, "y" : 930},
       { "state" : 1, "x" : 1663, "y" : 930},
+    ],
+    "apply" : [
+      {"action" : 1},
+      {"action" : 2}
     ]
   },
   "0b" :
@@ -34,8 +38,8 @@ barcode.decors = {
     "sprites" : [
       { "state" : 0, "x" : 481, "y" : 768}
     ],
-    "apply" : {
+    "apply" : [{
       "action" : 0
-    }
+    }]
   },
 };

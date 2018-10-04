@@ -140,7 +140,6 @@ barcode.Apath.prototype = {
       this.grid[this.currentBrick.y][this.currentBrick.x].status = "visited";
       var adjacentBrickList = this.exploreAdjacentBricks();
     }
-    console.log("no path found");
     return false;
   }
 
