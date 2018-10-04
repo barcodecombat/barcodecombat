@@ -10,6 +10,7 @@ barcode.Level = function(){
   this.aPathArray = [];
   this.decors = [];
   this.aPathTiles = undefined;
+  this.changed = false;
 };
 
 barcode.Level.prototype = {
@@ -64,8 +65,10 @@ barcode.Level.prototype = {
   },
 
   getAPathArray : function(){
-    if (this.aPathArray.length == 0)
+    if (this.aPathArray.length == 0 || this.changed){
       this.aPathArray = this.aPathArrayGenerate();
+      this.changed = false;
+    }
     var grid = [];
     for (let i = 0 ; i < this.aPathArray.length ; i++){
       var rawG = [];
@@ -141,6 +144,11 @@ barcode.Level.prototype = {
         grid[i][j] = brick;
       }
     }
+    this.decors.forEach(function(elt){
+      if (elt.blocking){
+        grid[elt.y][elt.x].status = "Obstacle";
+      }
+    });
 
     return grid;
   },
@@ -157,6 +165,7 @@ barcode.Level.prototype = {
     if (index !== -1) {
         this.decors.splice(index, 1);
     }
+    this.changed = true;
   },
 
   renderMob : function(ctx){

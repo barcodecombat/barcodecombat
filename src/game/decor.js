@@ -20,6 +20,7 @@ barcode.Decor.prototype = {
     var src = barcode.decors[templateId];
     this.spriteset = barcode.tileset.get(src.tileset);
     this.typeDecor = src.typedecor;
+    this.blocking = src.blocking;
     this.apply = src.apply;
     var _this = this;
 

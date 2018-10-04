@@ -71,7 +71,7 @@ barcode.GameDonjon.prototype ={
       var decor = barcode.GameDonjon.level.getTheDecorUnderMouse(evt.pageX,evt.pageY);
       if ( decor != null){
           var dist = calcDistance({x: decor.x*barcode.GameEngine.tileSize, y: decor.y*barcode.GameEngine.tileSize}, barcode.GameEngine.character);
-          if (dist > barcode.GameEngine.tileSize){
+          if (dist > (barcode.GameEngine.tileSize*1.5)){
             barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
           }else{
             decor.doAction();
