@@ -74,7 +74,7 @@ barcode.GameDonjon.prototype ={
           if (dist > barcode.GameEngine.tileSize){
             barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
           }else{
-            decor.apply();
+            decor.doAction();
           }
       }else{
         barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);

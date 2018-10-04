@@ -152,6 +152,13 @@ barcode.Level.prototype = {
     }
   },
 
+  removeDecor : function(elt){
+    const index = this.decors.indexOf(elt);
+    if (index !== -1) {
+        this.decors.splice(index, 1);
+    }
+  },
+
   renderMob : function(ctx){
     var _ctx = ctx;
     var monsterToRemove = [];

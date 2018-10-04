@@ -73,6 +73,9 @@ barcode.C = Object.freeze({
   DECOR_CHEST : 0,
   DECOR_DOOR : 1,
 
+  // APPLY DECOR action
+  ACTION_APPLY_DECOR_REMOVE_DECOR : 0,
+
   //TILE STATE
   TILE_VISITED :1,
   TILE_NOT_VISITED : 0,

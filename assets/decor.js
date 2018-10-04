@@ -5,6 +5,7 @@ barcode.decors = {
   {
     "name" : "chest",
     "typedecor" : 0,
+    "blocking" : true,
     "size":32,
     "tileset" : "assets/tileset/murmures.png",
     "sprites" : [
@@ -28,9 +29,13 @@ barcode.decors = {
     "name" : "door",
     "typedecor" : 1,
     "size":32,
+    "blocking" : true,
     "tileset" : "assets/tileset/murmures.png",
     "sprites" : [
       { "state" : 0, "x" : 481, "y" : 768}
-    ]
+    ],
+    "apply" : {
+      "action" : 0
+    }
   },
 };

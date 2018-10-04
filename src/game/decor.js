@@ -9,6 +9,7 @@ barcode.Decor = function(){
   this.tileset = undefined;
   this.size = 32;
   this.state = 0;
+  this.apply = {};
   this.typeDecor = 0;
 };
 
@@ -19,6 +20,7 @@ barcode.Decor.prototype = {
     var src = barcode.decors[templateId];
     this.spriteset = barcode.tileset.get(src.tileset);
     this.typeDecor = src.typedecor;
+    this.apply = src.apply;
     var _this = this;
 
     src.sprites.forEach(function(sp){
@@ -27,8 +29,10 @@ barcode.Decor.prototype = {
     this.size = src.size;
   },
 
-  apply : function(){
-    console.log("Apply decor");
+  doAction : function(){
+    if (this.apply.action === barcode.C.ACTION_APPLY_DECOR_REMOVE_DECOR){
+      barcode.GameDonjon.level.removeDecor(this);
+    }
   },
 
   render : function(){
