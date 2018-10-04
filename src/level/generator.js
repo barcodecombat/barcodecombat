@@ -170,7 +170,8 @@ barcode.Generator.prototype = {
       barcode.Generator.createRoom();
     }
     barcode.Generator.rooms[0].addStartingPoint();
-    barcode.Generator.rooms[barcode.Generator.rooms.length-1].addChest();
+    //barcode.Generator.rooms[barcode.Generator.rooms.length-1].addChest();
+    barcode.Generator.rooms[0].addChest();
     barcode.Generator.createCorridors();
     barcode.Generator.render();
     return barcode.Generator.generateJson();

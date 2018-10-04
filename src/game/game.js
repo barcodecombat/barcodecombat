@@ -18,6 +18,8 @@ barcode.GameEngine.prototype ={
         barcode.GameDonjon.loop();
     }else if (barcode.GameEngine.state === barcode.C.STATE_DONJON_DEATH){
       barcode.GameEngine.showDeath();
+    }else if (barcode.GameEngine.state === barcode.C.STATE_MENU_TO_SHOW){
+      barcode.GameEngine.initMenu();
     }
   },
 
@@ -39,9 +41,9 @@ barcode.GameEngine.prototype ={
     }else if(barcode.GameEngine.state == barcode.C.STATE_MENU_DEATH){
       var menu = document.getElementById("death");
       menu.style.display = "none";
-      barcode.canvas.clearCanvas();
-      barcode.canvas.setCanvasSize(0,0);
     }
+    barcode.canvas.clearCanvas();
+    barcode.canvas.setCanvasSize(0,0);
   },
 
   saveGame : function(){
