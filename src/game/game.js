@@ -43,6 +43,9 @@ barcode.GameEngine.prototype ={
     }else if(barcode.GameEngine.state == barcode.C.STATE_MENU_DEATH){
       var menu = document.getElementById("death");
       menu.style.display = "none";
+    }else if(barcode.GameEngine.state == barcode.C.STATE_MENU_ENDDONJON){
+      var menu = document.getElementById("enddonjon");
+      menu.style.display = "none";
     }
     barcode.canvas.clearCanvas();
     barcode.canvas.setCanvasSize(0,0);
@@ -76,6 +79,7 @@ barcode.GameEngine.prototype ={
   },
 
   initMenu : function(){
+    console.log("pwet");
     barcode.GameEngine.closeState();
     barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
     var menu = document.getElementById("mainMenu");
@@ -137,7 +141,7 @@ barcode.GameEngine.prototype ={
     butnScan.addEventListener("click",barcode.GameEngine.scanItem);
     let btnDeathBack = document.getElementById("btnBackToMenu");
     btnDeathBack.addEventListener("click",barcode.GameEngine.initMenu);
-    let btnEndDonjonBack = document.getElementById("btnBackToMenu");
+    let btnEndDonjonBack = document.getElementById("btnBackToMenu2");
     btnEndDonjonBack.addEventListener("click",barcode.GameEngine.initMenu);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
