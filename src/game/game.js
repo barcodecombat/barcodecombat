@@ -20,6 +20,8 @@ barcode.GameEngine.prototype ={
       barcode.GameEngine.showDeath();
     }else if (barcode.GameEngine.state === barcode.C.STATE_MENU_TO_SHOW){
       barcode.GameEngine.initMenu();
+    }else if (barcode.GameEngine.state === barcode.C.STATE_MENU_ENDDONJON_TOSHOW){
+      barcode.GameEngine.showEndDonjon();
     }
   },
 
@@ -57,6 +59,13 @@ barcode.GameEngine.prototype ={
     var menu = document.getElementById("death");
     menu.style.display = "block";
     barcode.GameEngine.state = barcode.C.STATE_MENU_DEATH;
+  },
+
+  showEndDonjon : function(){
+    barcode.GameEngine.closeState();
+    var menu = document.getElementById("enddonjon");
+    menu.style.display = "block";
+    barcode.GameEngine.state = barcode.C.STATE_MENU_ENDDONJON;
   },
 
   initDonjon : function(){
@@ -128,6 +137,8 @@ barcode.GameEngine.prototype ={
     butnScan.addEventListener("click",barcode.GameEngine.scanItem);
     let btnDeathBack = document.getElementById("btnBackToMenu");
     btnDeathBack.addEventListener("click",barcode.GameEngine.initMenu);
+    let btnEndDonjonBack = document.getElementById("btnBackToMenu");
+    btnEndDonjonBack.addEventListener("click",barcode.GameEngine.initMenu);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;

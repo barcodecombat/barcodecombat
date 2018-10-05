@@ -38,7 +38,7 @@ barcode.Decor.prototype = {
       }else if(action.action === barcode.C.ACTION_APPLY_DECOR_CHANGE_SPRITE){
         _this.state = 1;
       }else if(action.action === barcode.C.ACTION_APPLY_DECOR_END_DONJON){
-        barcode.GameEngine.state = barcode.C.STATE_MENU_TO_SHOW;
+        barcode.GameEngine.state = barcode.C.STATE_MENU_ENDDONJON_TOSHOW;
       }
     })
   },
