@@ -69,6 +69,8 @@ barcode.GameEngine.prototype ={
     var menu = document.getElementById("enddonjon");
     menu.style.display = "block";
     barcode.GameEngine.state = barcode.C.STATE_MENU_ENDDONJON;
+    var ticket = new barcode.Ticket();
+    barcode.GameEngine.character.tickets.push(ticket);
   },
 
   initDonjon : function(){
@@ -79,7 +81,6 @@ barcode.GameEngine.prototype ={
   },
 
   initMenu : function(){
-    console.log("pwet");
     barcode.GameEngine.closeState();
     barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
     var menu = document.getElementById("mainMenu");

@@ -25,6 +25,8 @@ barcode.Character = function(){
   this.lastAttackTicks = 0;
   this.chanceToBlock = 0;
   this.items = [];
+  this.inventory = [];
+  this.tickets = [];
 };
 
 barcode.Character.prototype = {
@@ -38,6 +40,7 @@ barcode.Character.prototype = {
     meToJs.actualXp = this.actualXp;
     meToJs.level = this.level;
     meToJs.sprite = this.sprite;
+    meToJs.tickets = this.tickets;
     meToJs.nextLevelAmountOfXp = this.nextLevelAmountOfXp;
 
     return meToJs;
@@ -48,6 +51,7 @@ barcode.Character.prototype = {
     this.spriteset = barcode.tileset.get(this.sprite);
     this.actualXp = src.actualXp;
     this.level = src.level;
+    if (typeof src.tickets !== 'undefined') this.tickets = src.tickets;
     this.nextLevelAmountOfXp = src.nextLevelAmountOfXp;
     if (typeof src.items !== 'undefined'){
       var _this = this;
