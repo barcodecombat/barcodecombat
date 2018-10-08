@@ -27,6 +27,7 @@ barcode.Character = function(){
   this.items = [];
   this.inventory = [];
   this.tickets = [];
+  this.skillpoints = 0;
 };
 
 barcode.Character.prototype = {
@@ -41,6 +42,7 @@ barcode.Character.prototype = {
     meToJs.level = this.level;
     meToJs.sprite = this.sprite;
     meToJs.tickets = this.tickets;
+    meToJs.skillpoints = this.skillpoints;
     meToJs.nextLevelAmountOfXp = this.nextLevelAmountOfXp;
 
     return meToJs;
@@ -51,6 +53,7 @@ barcode.Character.prototype = {
     this.spriteset = barcode.tileset.get(this.sprite);
     this.actualXp = src.actualXp;
     this.level = src.level;
+    this.skillpoints = src.skillpoints;
     if (typeof src.tickets !== 'undefined') this.tickets = src.tickets;
     this.nextLevelAmountOfXp = src.nextLevelAmountOfXp;
     if (typeof src.items !== 'undefined'){
@@ -152,6 +155,7 @@ barcode.Character.prototype = {
   addLevel : function(lvl){
     this.level += lvl;
     this.nextLevelAmountOfXp =  (this.level+1)*100;
+    if (this.level %3 == 0) this.skillpoints += 1;
     this.resetHp();
   },
 
