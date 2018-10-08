@@ -17,8 +17,8 @@ barcode.Inventory.prototype ={
     var _this = this;
     var j = 0;
     this.ctxInv = barcode.canvas.canvasTile.getContext("2d");
-    for (let i=0 ; i < barcode.GameEngine.character.items.length ; i++){
-      let item = barcode.GameEngine.character.items[i];
+    for (let i=0 ; i < barcode.GameEngine.character.inventory.length ; i++){
+      let item = barcode.GameEngine.character.inventory[i];
       this.ctxInv.beginPath();
       this.ctxInv.lineWidth="3";
       if (item.rarity == 0)

@@ -34,10 +34,16 @@ barcode.Character.prototype = {
   saveToJs : function(){
     var meToJs = {};
     var items =[];
+    var inventory = []
     this.items.forEach(function(item){
       items.push(item.templateId);
     })
+    this.inventory.forEach(function(item){
+      inventory.push(item.templateId);
+    })
+
     meToJs.items = items;
+    meToJs.inventory = inventory;
     meToJs.actualXp = this.actualXp;
     meToJs.level = this.level;
     meToJs.sprite = this.sprite;
@@ -64,6 +70,14 @@ barcode.Character.prototype = {
         _this.items.push(tempItem);
       })
     }
+    if (typeof src.inventory !== 'undefined'){
+      var _this = this;
+      src.inventory.forEach(function(idTemplate){
+        let tempItem = new barcode.Item();
+        tempItem.load(idTemplate,_this);
+        _this.inventory.push(tempItem);
+      })
+    }
   },
 
   removeTicket : function(){
@@ -79,7 +93,7 @@ barcode.Character.prototype = {
   addItemToCharacter : function(idTemplate){
     let tempItem = new barcode.Item();
     tempItem.load(idTemplate,this);
-    this.items.push(tempItem);
+    this.inventory.push(tempItem);
   },
 
   loadFromPreset : function(){

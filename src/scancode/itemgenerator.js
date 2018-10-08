@@ -109,6 +109,7 @@ barcode.itemgenerator.prototype = {
 
   generate : function(){
     this.ticket = barcode.GameEngine.character.tickets[0];
+    if (typeof this.ticket === 'undefined') this.ticket = new barcode.Ticket();
     this.item = new barcode.Item();
     this.item.rarity = this.rarityCheck();
     this.item.typeItem = this.typeCheck();
