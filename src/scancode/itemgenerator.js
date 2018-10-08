@@ -3,25 +3,16 @@ var barcode = barcode || {};
 
 barcode.itemgenerator = function(){
   this.item = null;
+  this.ticket = null;
 };
 
 
 barcode.itemgenerator.prototype = {
   rarityCheck : function(){
     let rarity = barcode.C.RARITY_COMMON;
-/*
-    let maxRarity = 0;
-    if (barcode.GameEngine.character.level > 30){
-      maxRarity = 3;
-    }else if (barcode.GameEngine.character.level > 20){
-      maxRarity = 2;
-    }else if (barcode.GameEngine.character.level > 10){
-      maxRarity = 1;
-    }
-    let rarity = Math.round(Math.random()*maxRarity);*/
-    let prb3 = barcode.C.RARITY_LEGEND_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level;
-    let prb2 = barcode.C.RARITY_RARE_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level;
-    let prb1 = barcode.C.RARITY_UNCOMMON_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level;
+    let prb3 = barcode.C.RARITY_LEGEND_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level + this.ticket.legend;
+    let prb2 = barcode.C.RARITY_RARE_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level + this.ticket.rare;
+    let prb1 = barcode.C.RARITY_UNCOMMON_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level + this.ticket.uncommon;
     let dice = 0;
     if (prb3 >0){
       dice = Math.random() * 100;
@@ -116,7 +107,8 @@ barcode.itemgenerator.prototype = {
     }
   },
 
-  generate : function(id){
+  generate : function(){
+    this.ticket = barcode.GameEngine.character.ticket[0];
     this.item = new barcode.Item();
     this.item.rarity = this.rarityCheck();
     this.item.typeItem = this.typeCheck();
