@@ -123,6 +123,7 @@ barcode.GameEngine.prototype ={
 
   scanItem : function(){
     barcode.GameEngine.generateItem();
+    barcode.GameEngine.character.removeTicket();
   },
 
   init : function(){

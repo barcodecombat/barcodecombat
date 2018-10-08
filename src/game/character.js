@@ -63,6 +63,10 @@ barcode.Character.prototype = {
     }
   },
 
+  removeTicket : function(){
+    this.tickets.splice(0);
+  },
+
   getTile : function(){
     let tx = Math.round(this.x/barcode.GameEngine.tileSize);
     let ty = Math.round(this.y/barcode.GameEngine.tileSize);
