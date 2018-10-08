@@ -84,6 +84,13 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.closeState();
     barcode.GameEngine.state = barcode.C.STATE_MENU_SHOWN;
     var menu = document.getElementById("mainMenu");
+    var btnScan = document.getElementById("btnScan");
+    btnScan.innerHTML = "Scan : " + barcode.GameEngine.character.tickets.length + " left";
+    if (barcode.GameEngine.character.tickets.length == 0){
+      btnScan.disabled = true;
+    }else{
+      btnScan.disabled = false;
+    }
     menu.style.display = "block";
   },
 
@@ -161,6 +168,10 @@ barcode.GameEngine.prototype ={
     }else{
       this.character.loadFromPreset();
     }
+
+    this.initMenu();
+
+
 
   },
 
