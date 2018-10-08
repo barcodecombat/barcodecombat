@@ -119,11 +119,12 @@ barcode.GameEngine.prototype ={
     barcode.items[val] = itemGenerator.item;
     //barcode.GameEngine.character.items.push(itemGenerator.item);
     barcode.GameEngine.character.addItemToCharacter(val);
+    barcode.GameEngine.character.removeTicket();
   },
 
   scanItem : function(){
     barcode.GameEngine.generateItem();
-    barcode.GameEngine.character.removeTicket();
+
   },
 
   init : function(){
