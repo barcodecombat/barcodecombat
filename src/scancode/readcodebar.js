@@ -59,6 +59,7 @@ barcode.Readcodebar.prototype = {
       barcode.GameEngine.generateItem(code);
       barcode.GameEngine.readcodebar.stop();
       barcode.GameEngine.initHero();
+      barcode.GameEngine.character.removeTicket();
     }
 
   },

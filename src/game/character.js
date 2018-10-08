@@ -64,7 +64,7 @@ barcode.Character.prototype = {
   },
 
   removeTicket : function(){
-    this.tickets.splice(0);
+    this.tickets.splice(0,1);
   },
 
   getTile : function(){

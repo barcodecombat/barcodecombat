@@ -10,6 +10,6 @@ barcode.Ticket = function(){
 
 barcode.Ticket.prototype = {
   init : function(){
-    
+
   }
 }
