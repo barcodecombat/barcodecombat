@@ -57,8 +57,9 @@ barcode.Readcodebar.prototype = {
       var code = result.codeResult.code;
       document.getElementById("Found").value = code;
       barcode.GameEngine.generateItem(code);
-      barcode.GameEngine.readcodebar.stop();
-      barcode.GameEngine.initHero();
+      //barcode.GameEngine.readcodebar.stop();
+      //barcode.GameEngine.initHero();
+      //barcode.GameEngine.initScanned();
     }
 
   },

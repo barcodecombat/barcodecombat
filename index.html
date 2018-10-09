@@ -17,11 +17,20 @@
   <canvas id="layerCreature" height="0" width="0" style="z-index: 35"></canvas>
   <canvas id="layerAnimation" height="0" width="0" style="z-index: 45"></canvas>
   <canvas id="layerMouse" height="0" width="0" style="z-index: 50"></canvas>
-  <div id="inventory" style="z-index:99"></div>
+  <div id="inventory" style="z-index:99;display:None" >
+    <p>Objet &eacute;quip&eacute;</p>
+    <p>Inventaire</p>
+  </div>
   <div id="scan" style="display:None">
     <div id="interactive" class="viewport" ></div>
     <button id="buttonScan">Scan</button>
     <input type="text" id="Found" value=""/>
+  </div>
+  <div id="scanresult" style="position:absolute; top:100px; left:100px; z-index : 99; width:500px;height:500px;background-color: #8b7e66;display:None">
+    <div style="position:absolute; top:150px; left:100px; z-index : 99;display:None" id="alreadyscanned">
+      <h1 align="center">Vous avez deja scann&eacute; ce code</h1>
+    </div>
+    <button id="btnBackToMenu3" class="myButton" style="position:absolute; top:290px; left:150px; z-index : 99">Retour au menu</button>
   </div>
   <div id="mainbutton" style="position:absolute; top: 0; left : 100; z-index: 99">
     <button id="btnSave">Save</button>

@@ -36,6 +36,8 @@ barcode.GameEngine.prototype ={
     else if(barcode.GameEngine.state == barcode.C.STATE_INVENTORY){
       barcode.inventory.eraseInventory();
       barcode.inventory.init();
+      var menu = document.getElementById("inventory");
+      menu.style.display = "none";
     }
     else if(barcode.GameEngine.state == barcode.C.STATE_MENU_SHOWN){
       var menu = document.getElementById("mainMenu");
@@ -45,6 +47,9 @@ barcode.GameEngine.prototype ={
       menu.style.display = "none";
     }else if(barcode.GameEngine.state == barcode.C.STATE_MENU_ENDDONJON){
       var menu = document.getElementById("enddonjon");
+      menu.style.display = "none";
+    }else if(barcode.GameEngine.state == barcode.C.STATE_SCAN_RESULT){
+      var menu = document.getElementById("scanresult");
       menu.style.display = "none";
     }
     barcode.canvas.clearCanvas();
@@ -96,6 +101,9 @@ barcode.GameEngine.prototype ={
 
   initHero : function(){
     barcode.GameEngine.closeState();
+    console.log("here");
+    var menu = document.getElementById("inventory");
+    menu.style.display = "block";
     if (typeof barcode.inventory === 'undefined' || barcode.inventory === null)
       barcode.inventory = new barcode.Inventory();
     barcode.inventory.init();
@@ -114,12 +122,36 @@ barcode.GameEngine.prototype ={
     if (typeof val === 'undefined' || val == null){
       val = Math.round(Math.random()*999999999);
     }
-    var itemGenerator = new barcode.itemgenerator();
-    itemGenerator.generate();
-    barcode.items[val] = itemGenerator.item;
-    //barcode.GameEngine.character.items.push(itemGenerator.item);
-    barcode.GameEngine.character.addItemToCharacter(val);
-    barcode.GameEngine.character.removeTicket();
+    var itemIndexExist = val in barcode.items;
+
+
+    if (!itemIndexExist){
+      var itemGenerator = new barcode.itemgenerator();
+      itemGenerator.generate();
+      barcode.items[val] = itemGenerator.item;
+      //barcode.GameEngine.character.items.push(itemGenerator.item);
+      barcode.GameEngine.character.addItemToCharacter(val);
+      barcode.GameEngine.character.removeTicket();
+      barcode.GameEngine.readcodebar.stop();
+      barcode.GameEngine.initScanned(val);
+    }else{
+      barcode.GameEngine.readcodebar.stop();
+      barcode.GameEngine.initScanned();
+    }
+  },
+
+  initScanned : function( itemGenerated){
+    barcode.GameEngine.closeState();
+    barcode.GameEngine.state = barcode.C.STATE_SCAN_RESULT;
+    var menu = document.getElementById("scanresult");
+    menu.style.display = "block";
+    if (typeof itemGenerated !== 'undefined' || itemGenerated != null){
+      var menu = document.getElementById("alreadyscanned");
+      menu.style.display = "None";
+    }else{
+      var menu = document.getElementById("alreadyscanned");
+      menu.style.display = "block";
+    }
   },
 
   scanItem : function(){
@@ -153,6 +185,8 @@ barcode.GameEngine.prototype ={
     btnDeathBack.addEventListener("click",barcode.GameEngine.initMenu);
     let btnEndDonjonBack = document.getElementById("btnBackToMenu2");
     btnEndDonjonBack.addEventListener("click",barcode.GameEngine.initMenu);
+    let btnScanResultBack = document.getElementById("btnBackToMenu3");
+    btnScanResultBack.addEventListener("click",barcode.GameEngine.initMenu);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
     this.centerX = window.innerWidth / 2 -  this.tileSize / 2 ;
