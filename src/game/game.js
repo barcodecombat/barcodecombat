@@ -101,7 +101,6 @@ barcode.GameEngine.prototype ={
 
   initHero : function(){
     barcode.GameEngine.closeState();
-    console.log("here");
     var menu = document.getElementById("inventory");
     menu.style.display = "block";
     if (typeof barcode.inventory === 'undefined' || barcode.inventory === null)
@@ -129,28 +128,36 @@ barcode.GameEngine.prototype ={
       var itemGenerator = new barcode.itemgenerator();
       itemGenerator.generate();
       barcode.items[val] = itemGenerator.item;
-      //barcode.GameEngine.character.items.push(itemGenerator.item);
       barcode.GameEngine.character.addItemToCharacter(val);
       barcode.GameEngine.character.removeTicket();
-      barcode.GameEngine.readcodebar.stop();
-      barcode.GameEngine.initScanned(val);
+      if (barcode.GameEngine.readcodebar != null)
+        barcode.GameEngine.readcodebar.stop();
+      barcode.GameEngine.initScanned(itemGenerator.item);
     }else{
-      barcode.GameEngine.readcodebar.stop();
+      if (barcode.GameEngine.readcodebar != null)
+        barcode.GameEngine.readcodebar.stop();
       barcode.GameEngine.initScanned();
     }
   },
 
   initScanned : function( itemGenerated){
     barcode.GameEngine.closeState();
+    barcode.canvas.clearCanvas();
+    barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
     barcode.GameEngine.state = barcode.C.STATE_SCAN_RESULT;
     var menu = document.getElementById("scanresult");
     menu.style.display = "block";
     if (typeof itemGenerated !== 'undefined' || itemGenerated != null){
       var menu = document.getElementById("alreadyscanned");
       menu.style.display = "None";
+      var div = document.getElementById("itemtoshow");
+      div.style.display = "block";
+      barcode.RenderItem.render(div,itemGenerated,200 , 100 );
     }else{
       var menu = document.getElementById("alreadyscanned");
       menu.style.display = "block";
+      var div = document.getElementById("itemtoshow");
+      div.style.display = "None";
     }
   },
 
@@ -163,6 +170,7 @@ barcode.GameEngine.prototype ={
     barcode.Generator = new barcode.Generator();
     barcode.Generator.init();
     barcode.GameDonjon = new barcode.GameDonjon();
+    barcode.RenderItem = new barcode.RenderItem();
     barcode.canvas = new barcode.Canvas();
     barcode.canvas.init();
     barcode.tileset = new barcode.Tileset();
