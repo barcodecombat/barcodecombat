@@ -22,7 +22,6 @@ barcode.Item = function(){
   this.lightradius = 0;
 };
 
-
 barcode.Item.prototype = {
   loadProperties : function(src,creature){
     var _this = this;
@@ -31,38 +30,59 @@ barcode.Item.prototype = {
       src.properties.forEach(function(prop){
         var tprop = {'typeproperty' : prop.typeproperty, 'value' : prop.value };
         _this.properties.push(tprop);
-        if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
-          _creature.maxHitPoint += tprop.value;
-          _creature.hitpoint += tprop.value;
-        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
-          _creature.damage[0] += tprop.value;
-          _creature.damage[1] += tprop.value;
-        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
-          _creature.step += tprop.value;
-        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
-          _creature.lightRadius += tprop.value;
-        }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
-          _creature.speedAttack += tprop.value;
-        }
 
       })
     }
   },
 
+  equipProperties(creature){
+    var _creature = creature;
+    this.properties.foreacht(function(tprop){
+      if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
+        _creature.maxHitPoint += tprop.value;
+        _creature.hitpoint += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
+        _creature.damage[0] += tprop.value;
+        _creature.damage[1] += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
+        _creature.step += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
+        _creature.lightRadius += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+        _creature.speedAttack += tprop.value;
+      }
+    })
+  },
+
+  equipWeapon : function(creature){
+    creature.damage[0] = this.damage[0];
+    creature.damage[1] = this.damage[1];
+    creature.range = this.range;
+    creature.speed = this.speed;
+  },
+
+  equipShield : function(creature){
+    creature.chanceToBlock = src.chanceToBlock;
+  },
+
+  equip : function(creature){
+    this.equipProperties(src,creature);
+    if (this.typeItem === barcode.C.TYPE_ITEM_WEAPON){
+      this.equipWeapon(creature);
+    }else if (this.typeItem === barcode.C.TYPE_ITEM_SHIELD){
+      this.equipShield(creature);
+    }
+  },
+
   loadShield : function(src,creature){
     this.chanceToBlock = src.chanceToBlock;
-    creature.chanceToBlock = src.chanceToBlock;
   },
 
   loadWeapon : function(src,creature){
     this.speed = src.speed;
     this.range = src.range;
-    creature.damage[0] = src.damage[0];
-    creature.damage[1] = src.damage[1];
     this.damage.push(src.damage[0]);
     this.damage.push(src.damage[1]);
-    creature.range = this.range;
-    creature.speed = this.speed;
   },
 
   loadSprite : function(){
