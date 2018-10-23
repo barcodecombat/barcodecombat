@@ -67,6 +67,7 @@ barcode.GameEngine.prototype ={
     var menu = document.getElementById("death");
     menu.style.display = "block";
     barcode.GameEngine.state = barcode.C.STATE_MENU_DEATH;
+    barcode.GameEngine.saveGame();
   },
 
   showEndDonjon : function(){
@@ -76,6 +77,7 @@ barcode.GameEngine.prototype ={
     barcode.GameEngine.state = barcode.C.STATE_MENU_ENDDONJON;
     var ticket = new barcode.Ticket();
     barcode.GameEngine.character.tickets.push(ticket);
+    barcode.GameEngine.saveGame();
   },
 
   initDonjon : function(){
@@ -159,6 +161,7 @@ barcode.GameEngine.prototype ={
       var div = document.getElementById("itemtoshow");
       div.style.display = "None";
     }
+    barcode.GameEngine.saveGame();
   },
 
   scanItem : function(){
