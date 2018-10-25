@@ -10,27 +10,18 @@ barcode.RenderItem = function (){
 barcode.RenderItem.prototype = {
 
   render:function(div,item,x,y){
-    this.ctxInv = barcode.canvas.canvasTile.getContext("2d");;
-    this.ctxInv.beginPath();
-    this.ctxInv.lineWidth="3";
-    if (item.rarity == barcode.C.RARITY_COMMON)
-      this.ctxInv.strokeStyle = barcode.C.FT_COLOR_GREY;
-    else if (item.rarity == barcode.C.RARITY_UNCOMMON)
-      this.ctxInv.strokeStyle = barcode.C.FT_COLOR_TURQUOISE;
-    else if (item.rarity == barcode.C.RARITY_RARE)
-      this.ctxInv.strokeStyle = barcode.C.FT_COLOR_BLUE;
-    else if (item.rarity == barcode.C.RARITY_LEGEND)
-      this.ctxInv.strokeStyle = barcode.C.FT_COLOR_YELLOW;
-
-    var rect = div.getBoundingClientRect();
-    console.log(rect.top, rect.right, rect.bottom, rect.left);
-    this.ctxInv.rect(x+rect.left,y+rect.top,64,64);
-    //this.ctxInv.rect(x,y,64,64);
-    this.ctxInv.stroke();
-
-     //let div = document.getElementById("inventory");
      let divImg = document.createElement("div");
      let img = document.createElement("img");
+     let borderColor = "";
+     if (item.rarity == barcode.C.RARITY_COMMON)
+       borderColor = barcode.C.FT_COLOR_GREY;
+     else if (item.rarity == barcode.C.RARITY_UNCOMMON)
+       borderColor = barcode.C.FT_COLOR_TURQUOISE;
+     else if (item.rarity == barcode.C.RARITY_RARE)
+       borderColor = barcode.C.FT_COLOR_BLUE;
+     else if (item.rarity == barcode.C.RARITY_LEGEND)
+       borderColor = barcode.C.FT_COLOR_YELLOW;
+     img.style.border = "2px solid " + borderColor;
      img.src = barcode.itemsimg[item.idimg].tileset;
      divImg.addEventListener("mouseover",this.showItem);
      divImg.addEventListener("mouseout",this.hideItem);
