@@ -6,8 +6,6 @@ barcode.Inventory = function (){
 
 barcode.Inventory.prototype ={
   init : function(){
-    barcode.canvas.clearCanvas();
-    barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
   },
 
 
