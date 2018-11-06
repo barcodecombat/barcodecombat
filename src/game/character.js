@@ -90,6 +90,29 @@ barcode.Character.prototype = {
     return {"x" : tx, "y" : ty  };
   },
 
+  isItemWeared : function(item){
+    const index = this.items.indexOf(item);
+    if (index === -1) return false;
+
+    return true;
+  },
+
+  equipItem : function(item){
+    const index = this.inventory.indexOf(item);
+    if (index !== -1) {
+        this.inventory.splice(index, 1);
+        this.items.push(item);
+    }
+  },
+
+  unequipItem : function(item){
+    const index = this.items.indexOf(item);
+    if (index !== -1) {
+        this.items.splice(index, 1);
+        this.inventory.push(item);
+    }
+  },
+
   addItemToCharacter : function(idTemplate){
     let tempItem = new barcode.Item();
     tempItem.load(idTemplate,this);

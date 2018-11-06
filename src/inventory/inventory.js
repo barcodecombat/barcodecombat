@@ -27,8 +27,8 @@ barcode.Inventory.prototype ={
 
   eraseInventory : function(){
     let div = document.getElementById("itemininventory");
-    while (div.childNodes.length > 0){
-      div.removeChild(div.childNodes[0]);
-    }
+    div.innerHTML = "";
+    div = document.getElementById("heroItem");
+    div.innerHTML = "";
   }
 };

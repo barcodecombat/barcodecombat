@@ -26,6 +26,7 @@ barcode.RenderItem.prototype = {
      img.src = barcode.itemsimg[item.idimg].tileset;
      divImg.addEventListener("mouseover",this.showItem);
      divImg.addEventListener("mouseout",this.hideItem);
+     divImg.addEventListener("dblclick",this.equip );
      img.myParam = item;
      divImg.style.position = "absolute";
      divImg.style.left =(x+14) + "px";
@@ -81,6 +82,18 @@ barcode.RenderItem.prototype = {
         pTag.innerHTML = "Regen. Vie : + " + prop.value;
       }
     });
+  },
+
+  equip : function(evt){
+    var item = evt.target.myParam;
+    if (typeof item !== "undefined"){
+      if(barcode.GameEngine.character.isItemWeared(item)){
+        barcode.GameEngine.character.unequipItem(item);
+      }else{
+        barcode.GameEngine.character.equipItem(item);
+      }
+      barcode.GameEngine.initHero();
+    }
   },
 
   showItem : function(evt){
