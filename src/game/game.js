@@ -134,18 +134,16 @@ barcode.GameEngine.prototype ={
       barcode.GameEngine.character.removeTicket();
       if (barcode.GameEngine.readcodebar != null)
         barcode.GameEngine.readcodebar.stop();
-      barcode.GameEngine.initScanned(itemGenerator.item);
+      barcode.GameEngine.showScanned(itemGenerator.item);
     }else{
       if (barcode.GameEngine.readcodebar != null)
         barcode.GameEngine.readcodebar.stop();
-      barcode.GameEngine.initScanned();
+      barcode.GameEngine.showScanned();
     }
   },
 
-  initScanned : function( itemGenerated){
+  showScanned : function( itemGenerated){
     barcode.GameEngine.closeState();
-    barcode.canvas.clearCanvas();
-    barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
     barcode.GameEngine.state = barcode.C.STATE_SCAN_RESULT;
     var menu = document.getElementById("scanresult");
     menu.style.display = "block";
