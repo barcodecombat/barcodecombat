@@ -27,6 +27,14 @@ barcode.C = Object.freeze({
   RARITY_COMMON : 0,
   RARITY_STEP : 2,
 
+  //Defaut character value
+  DEFAULT_MIN_DEGAT : 1,
+  DEFAULT_MAX_DEGAT : 1,
+  DEFAULT_CHANCE_TO_BLOCK : 0,
+  DEFAULT_SPEED_ATTACK : 50,
+  DEFAULT_RANGE_ATTACK : 64,
+  DEFAULT_HITPOINT : 100,
+
   //direction
   DIRECTION_UP :0,
   DIRECTION_DOWN :3,

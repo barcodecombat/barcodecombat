@@ -62,15 +62,73 @@ barcode.Item.prototype = {
   },
 
   equipShield : function(creature){
-    creature.chanceToBlock = src.chanceToBlock;
+    creature.chanceToBlock = this.chanceToBlock;
   },
 
   equip : function(creature){
-    this.equipProperties(src,creature);
+    this.equipProperties(creature);
     if (this.typeItem === barcode.C.TYPE_ITEM_WEAPON){
       this.equipWeapon(creature);
     }else if (this.typeItem === barcode.C.TYPE_ITEM_SHIELD){
       this.equipShield(creature);
+    }
+  },
+
+  equipProperties(creature){
+    var _creature = creature;
+    this.properties.forEach(function(tprop){
+      if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
+        _creature.maxHitPoint += tprop.value;
+        _creature.hitpoint += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
+        _creature.damage[0] += tprop.value;
+        _creature.damage[1] += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
+        _creature.step += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
+        _creature.lightRadius += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+        _creature.speedAttack += tprop.value;
+      }
+    })
+  },
+
+  unequipProperties(creature){
+    var _creature = creature;
+    this.properties.forEach(function(tprop){
+      if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
+        _creature.maxHitPoint -= tprop.value;
+        _creature.hitpoint -= tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
+        _creature.damage[0] -= tprop.value;
+        _creature.damage[1] -= tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
+        _creature.step -= tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
+        _creature.lightRadius -= tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+        _creature.speedAttack -= tprop.value;
+      }
+    })
+  },
+
+  unequipWeapon : function(creature){
+    creature.damage[0] = barcode.C.DEFAULT_MIN_DEGAT;
+    creature.damage[1] = barcode.C.DEFAULT_MAX_DEGAT;
+    creature.range = barcode.C.DEFAULT_RANGE_ATTACK;
+    creature.speed = barcode.C.DEFAULT_SPEED_ATTACK;
+  },
+
+  unequipShield : function(creature){
+    creature.chanceToBlock = barcode.C.DEFAULT_CHANCE_TO_BLOCK;
+  },
+
+  unequip : function(creature){
+    this.unequipProperties(creature);
+    if (this.typeItem === barcode.C.TYPE_ITEM_WEAPON){
+      this.unequipWeapon(creature);
+    }else if (this.typeItem === barcode.C.TYPE_ITEM_SHIELD){
+      this.unequipShield(creature);
     }
   },
 

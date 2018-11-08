@@ -17,11 +17,11 @@ barcode.Character = function(){
   this.level = 1;
   this.path = [];
   this.step = 3;
-  this.damage = [1,1];
-  this.maxHitPoint = 100;
-  this.hitpoint = 100;
-  this.speedAttack = 50;
-  this.rangeAttack = 64;
+  this.damage = [barcode.C.DEFAULT_MIN_DEGAT,barcode.C.DEFAULT_MAX_DEGAT];
+  this.maxHitPoint = barcode.C.DEFAULT_HITPOINT;
+  this.hitpoint = barcode.C.DEFAULT_HITPOINT;
+  this.speedAttack = barcode.C.DEFAULT_SPEED_ATTACK;
+  this.rangeAttack = barcode.C.DEFAULT_RANGE_ATTACK;
   this.lastAttackTicks = 0;
   this.chanceToBlock = 0;
   this.items = [];
@@ -102,6 +102,7 @@ barcode.Character.prototype = {
     if (index !== -1) {
         this.inventory.splice(index, 1);
         this.items.push(item);
+        item.equip(this);
     }
   },
 
@@ -110,6 +111,7 @@ barcode.Character.prototype = {
     if (index !== -1) {
         this.items.splice(index, 1);
         this.inventory.push(item);
+        item.unequip(this);
     }
   },
 

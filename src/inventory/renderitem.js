@@ -94,6 +94,7 @@ barcode.RenderItem.prototype = {
       }
       barcode.GameEngine.initHero();
     }
+    barcode.RenderItem.hideItem();
   },
 
   showItem : function(evt){
