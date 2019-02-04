@@ -180,9 +180,10 @@ barcode.Character.prototype = {
     let tileChar = this.getTile();
     let tx = Math.floor((x-barcode.GameEngine.centerX+this.x)/barcode.GameEngine.tileSize);
     let ty = Math.floor((y-barcode.GameEngine.centerY+this.y)/barcode.GameEngine.tileSize);
-      var pthFinding = new barcode.Apath();
-      var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid,true);
-      this.path = pthFinding.path;
+    var pthFinding = new barcode.Apath();
+    var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid,true);
+    this.path = pthFinding.path;
+    this.grid = [];
   },
 
   calculateDamageToDo : function(){

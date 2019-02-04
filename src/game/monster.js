@@ -107,6 +107,7 @@ barcode.Monster.prototype = {
         var pthFinding = new barcode.Apath();
         var result =  pthFinding.findShortestPath([tileMob.x,tileMob.y],[tileTarget.x,tileTarget.y], grid,true);
         this.path = pthFinding.path;
+        grid = [];
       }
     }
   },

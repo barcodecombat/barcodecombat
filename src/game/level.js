@@ -79,6 +79,7 @@ barcode.Level.prototype = {
       }
       grid[i] = rawG;
     }
+    this.aPathArray = [];
     return grid;
   },
 
