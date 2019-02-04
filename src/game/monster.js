@@ -60,13 +60,19 @@ barcode.Monster.prototype = {
   },
 
   doAction : function(){
-    if (typeof this.target !== 'undefined')
-    {
+    if (typeof this.target !== 'undefined'){
       let distance = calcDistance({x:this.target.x*barcode.GameEngine.tileSize,y:this.target.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
-      if (distance > this.range){
+      if (distance > this.range && distance < 300){
+        this.createPathTo(barcode.GameEngine.character.getTile());
         this.move();
       }else{
         this.attack();
+      }
+    }else{
+      let distance = calcDistance({x:barcode.GameEngine.character.getTile().x*barcode.GameEngine.tileSize,y:barcode.GameEngine.character.getTile().y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+      console.log(distance);
+      if (distance < 200){
+        this.target = barcode.GameEngine.character.getTile();
       }
     }
   },

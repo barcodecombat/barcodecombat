@@ -159,6 +159,7 @@ barcode.Level.prototype = {
     if (index !== -1) {
         this.monsters.splice(index, 1);
     }
+    mob = {};
   },
 
   removeDecor : function(elt){
@@ -173,7 +174,7 @@ barcode.Level.prototype = {
     var _ctx = ctx;
     var monsterToRemove = [];
     this.monsters.forEach(function(elt){
-      elt.createPathTo(barcode.GameEngine.character.getTile());
+
       elt.doAction();
       elt.render(_ctx);
       if (elt.hitpoint <= 0) monsterToRemove.push(elt);
