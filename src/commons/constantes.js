@@ -93,4 +93,8 @@ barcode.C = Object.freeze({
   TILE_VISITED :1,
   TILE_NOT_VISITED : 0,
 
+  //mob
+  DISTANCE_MOB_SEE_PLAYER : 300,
+  DELAY_BETWEEN_TWO_PATH_CREATION : 500,
+
 });

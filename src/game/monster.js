@@ -20,6 +20,7 @@ barcode.Monster = function(){
   this.damage = 1;
   this.maxHitPoint = 10;
   this.hitpoint = 10;
+  this.lastTimeCreatingPath = 0;
 };
 
 barcode.Monster.prototype = {
@@ -62,16 +63,20 @@ barcode.Monster.prototype = {
   doAction : function(){
     if (typeof this.target !== 'undefined'){
       let distance = calcDistance({x:this.target.x*barcode.GameEngine.tileSize,y:this.target.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
-      if (distance > this.range && distance < 300){
-        this.createPathTo(barcode.GameEngine.character.getTile());
+      if (distance > this.range && distance < barcode.C.DISTANCE_MOB_SEE_PLAYER){
+        let d = new Date();
+        let newTick = d.getTime();
+        if(newTick - this.lastTimeCreatingPath > barcode.C.DELAY_BETWEEN_TWO_PATH_CREATION){
+          this.createPathTo(barcode.GameEngine.character.getTile());
+          this.lastTimeCreatingPath = newTick;
+        }
         this.move();
       }else{
         this.attack();
       }
     }else{
       let distance = calcDistance({x:barcode.GameEngine.character.getTile().x*barcode.GameEngine.tileSize,y:barcode.GameEngine.character.getTile().y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
-      console.log(distance);
-      if (distance < 200){
+      if (distance < barcode.C.DISTANCE_MOB_SEE_PLAYER){
         this.target = barcode.GameEngine.character.getTile();
       }
     }
