@@ -62,7 +62,7 @@ barcode.Monster.prototype = {
 
   doAction : function(){
     if (typeof this.target !== 'undefined'){
-      let distance = calcDistance({x:this.target.x*barcode.GameEngine.tileSize,y:this.target.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+      let distance = calcDistance({x:barcode.GameEngine.character.getTile().x*barcode.GameEngine.tileSize,y:barcode.GameEngine.character.getTile().y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
       if (distance > this.range && distance < barcode.C.DISTANCE_MOB_SEE_PLAYER){
         let d = new Date();
         let newTick = d.getTime();
@@ -71,7 +71,7 @@ barcode.Monster.prototype = {
           this.lastTimeCreatingPath = newTick;
         }
         this.move();
-      }else{
+      }else if (distance < this.range){
         this.attack();
       }
     }else{
