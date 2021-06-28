@@ -126,6 +126,12 @@ barcode.Character.prototype = {
     this.spriteset = barcode.tileset.get(this.sprite);
     let ticket = new barcode.Ticket();
     this.tickets.push(ticket);
+    let ticket = new barcode.Ticket();
+    this.tickets.push(ticket);
+    let ticket = new barcode.Ticket();
+    this.tickets.push(ticket);
+    let ticket = new barcode.Ticket();
+    this.tickets.push(ticket);
   //  this.addItemToCharacter(1);
   //  this.addItemToCharacter(2);
   //  this.addItemToCharacter(3);
