@@ -69,8 +69,8 @@ barcode.Generator.prototype = {
     var isCollided = true;
     var it = 0;
     while (isCollided && it < 100){
-      room.x = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length) + 1;/// barcode.GameEngine.tileSize);
-      room.y = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length) + 1;// / barcode.GameEngine.tileSize);
+      room.x = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length) + 1;/// barcode.gameEngine.tileSize);
+      room.y = Math.floor(Math.random() * 20 * barcode.Generator.rooms.length) + 1;// / barcode.gameEngine.tileSize);
       isCollided = false;
       for (let i = 0 ; i < this.rooms.length && isCollided == false; i++){
         if (room !== barcode.Generator.rooms[i]){

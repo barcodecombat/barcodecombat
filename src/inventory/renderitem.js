@@ -87,12 +87,12 @@ barcode.RenderItem.prototype = {
   equip : function(evt){
     var item = evt.target.myParam;
     if (typeof item !== "undefined"){
-      if(barcode.GameEngine.character.isItemWeared(item)){
-        barcode.GameEngine.character.unequipItem(item);
+      if(barcode.gameEngine.character.isItemWeared(item)){
+        barcode.gameEngine.character.unequipItem(item);
       }else{
-        barcode.GameEngine.character.equipItem(item);
+        barcode.gameEngine.character.equipItem(item);
       }
-      barcode.GameEngine.initHero();
+      barcode.gameEngine.initHero();
     }
     barcode.RenderItem.hideItem();
   },

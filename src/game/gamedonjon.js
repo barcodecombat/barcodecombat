@@ -61,30 +61,30 @@ barcode.GameDonjon.prototype ={
   clickEvent : function(evt){
     var mob = barcode.GameDonjon.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
     if ( mob != null){
-        var dist = calcDistance(mob, barcode.GameEngine.character);
-        if (dist > barcode.GameEngine.character.rangeAttack){
-          barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
+        var dist = calcDistance(mob, barcode.gameEngine.character);
+        if (dist > barcode.gameEngine.character.rangeAttack){
+          barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
         }else{
-          barcode.GameEngine.character.hitTarget(mob);
+          barcode.gameEngine.character.hitTarget(mob);
         }
     }else{
       var decor = barcode.GameDonjon.level.getTheDecorUnderMouse(evt.pageX,evt.pageY);
       if ( decor != null){
-          var dist = calcDistance({x: decor.x*barcode.GameEngine.tileSize, y: decor.y*barcode.GameEngine.tileSize}, barcode.GameEngine.character);
-          if (dist > (barcode.GameEngine.tileSize*1.5)){
-            barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
+          var dist = calcDistance({x: decor.x*barcode.gameEngine.tileSize, y: decor.y*barcode.gameEngine.tileSize}, barcode.gameEngine.character);
+          if (dist > (barcode.gameEngine.tileSize*1.5)){
+            barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
           }else{
             decor.doAction();
           }
       }else{
-        barcode.GameEngine.character.goToTarget(evt.pageX,evt.pageY);
+        barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
       }
     }
   },
 
   loop : function(){
-    if (barcode.GameEngine.hitpoint <= 0)
-      barcode.GameEngine.state == barcode.C.STATE_DONJON_DEATH;
+    if (barcode.gameEngine.hitpoint <= 0)
+      barcode.gameEngine.state == barcode.C.STATE_DONJON_DEATH;
     this.render();
   },
 

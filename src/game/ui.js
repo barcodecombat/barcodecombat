@@ -23,29 +23,29 @@ barcode.UI.prototype = {
       if (prctLife < 0) prctLife = 0;
       this.ctx.beginPath();
       this.ctx.fillStyle = barcode.C.FT_COLOR_BROWN;
-      this.ctx.fillRect(barcode.GameEngine.centerX - 80,20,250,30);
+      this.ctx.fillRect(barcode.gameEngine.centerX - 80,20,250,30);
       this.ctx.beginPath();
       this.ctx.fillStyle = barcode.C.FT_COLOR_RED;
-      this.ctx.fillRect(barcode.GameEngine.centerX - 25,30,prctLife,10);
+      this.ctx.fillRect(barcode.gameEngine.centerX - 25,30,prctLife,10);
       this.ctx.beginPath();
       this.ctx.lineWidth="3";
       this.ctx.strokeStyle = barcode.C.FT_COLOR_BLACK;
-      this.ctx.rect(barcode.GameEngine.centerX - 24,29,102,12);
+      this.ctx.rect(barcode.gameEngine.centerX - 24,29,102,12);
       this.ctx.stroke();
       this.ctx.font = "1Opx Arial";
       this.ctx.fillStyle = "white ";
       let text = this.mob.hitpoint + " / " + this.mob.maxHitPoint + " hp";
-      this.ctx.fillText(text , barcode.GameEngine.centerX + 90, 38);
+      this.ctx.fillText(text , barcode.gameEngine.centerX + 90, 38);
       this.ctx.drawImage(
          this.mob.spriteset,
          0,
          0,
          this.mob.size,
          this.mob.size,
-         barcode.GameEngine.centerX - 70,
+         barcode.gameEngine.centerX - 70,
          22,
-         barcode.GameEngine.tileSize,
-         barcode.GameEngine.tileSize);
+         barcode.gameEngine.tileSize,
+         barcode.gameEngine.tileSize);
     }
   },
 
@@ -58,9 +58,9 @@ barcode.UI.prototype = {
   },
 
   renderXp : function(){
-    var prctxp = Math.floor((barcode.GameEngine.character.actualXp/barcode.GameEngine.character.nextLevelAmountOfXp)*100);
+    var prctxp = Math.floor((barcode.gameEngine.character.actualXp/barcode.gameEngine.character.nextLevelAmountOfXp)*100);
     if (prctxp < 0) prctxp = 0;
-    let textLvl = "Level : " + barcode.GameEngine.character.level;
+    let textLvl = "Level : " + barcode.gameEngine.character.level;
     this.ctx.fillText(textLvl , 230, window.innerHeight-60);
     this.ctx.beginPath();
     this.ctx.fillStyle = barcode.C.FT_COLOR_YELLOW_COLD;
@@ -73,12 +73,12 @@ barcode.UI.prototype = {
 
     this.ctx.font = "1Opx Arial";
     this.ctx.fillStyle = barcode.C.FT_COLOR_WITE;
-    let text = barcode.GameEngine.character.actualXp + " / " + barcode.GameEngine.character.nextLevelAmountOfXp + " xp";
+    let text = barcode.gameEngine.character.actualXp + " / " + barcode.gameEngine.character.nextLevelAmountOfXp + " xp";
     this.ctx.fillText(text , 390, window.innerHeight-60);
   },
 
   renderLifeGauge : function(){
-    var prctLife = Math.floor((barcode.GameEngine.character.hitpoint/barcode.GameEngine.character.maxHitPoint)*100);
+    var prctLife = Math.floor((barcode.gameEngine.character.hitpoint/barcode.gameEngine.character.maxHitPoint)*100);
     if (prctLife < 0) prctLife = 0;
     this.ctx.beginPath();
     this.ctx.fillStyle = barcode.C.FT_COLOR_RED;
@@ -91,19 +91,19 @@ barcode.UI.prototype = {
 
     this.ctx.font = "1Opx Arial";
     this.ctx.fillStyle = barcode.C.FT_COLOR_WHITE;
-    let text = barcode.GameEngine.character.hitpoint + " / " + barcode.GameEngine.character.maxHitPoint + " hp";
+    let text = barcode.gameEngine.character.hitpoint + " / " + barcode.gameEngine.character.maxHitPoint + " hp";
     this.ctx.fillText(text , 160, window.innerHeight-60);
 
     this.ctx.drawImage(
-       barcode.GameEngine.character.spriteset,
+       barcode.gameEngine.character.spriteset,
        0,
        0,
-       barcode.GameEngine.character.size,
-       barcode.GameEngine.character.size,
+       barcode.gameEngine.character.size,
+       barcode.gameEngine.character.size,
        10,
        window.innerHeight-80,
-       barcode.GameEngine.tileSize,
-       barcode.GameEngine.tileSize);
+       barcode.gameEngine.tileSize,
+       barcode.gameEngine.tileSize);
   },
 
   render : function(){

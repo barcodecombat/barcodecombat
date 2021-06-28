@@ -52,14 +52,14 @@ barcode.Readcodebar.prototype = {
   detected : function(result){
     let d = new Date();
     let newTick = d.getTime();
-    if (newTick - barcode.GameEngine.readcodebar.lastTick > 1000){
-      barcode.GameEngine.readcodebar.lastTick = newTick;
+    if (newTick - barcode.gameEngine.readcodebar.lastTick > 1000){
+      barcode.gameEngine.readcodebar.lastTick = newTick;
       var code = result.codeResult.code;
       document.getElementById("Found").value = code;
-      barcode.GameEngine.generateItem(code);
-      //barcode.GameEngine.readcodebar.stop();
-      //barcode.GameEngine.initHero();
-      //barcode.GameEngine.initScanned();
+      barcode.gameEngine.generateItem(code);
+      //barcode.gameEngine.readcodebar.stop();
+      //barcode.gameEngine.initHero();
+      //barcode.gameEngine.initScanned();
     }
 
   },

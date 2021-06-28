@@ -40,10 +40,10 @@ barcode.Animation.prototype = {
        this.ty,
        this.size,
        this.size,
-       this.x+barcode.GameEngine.centerX - barcode.GameEngine.character.x,
-       this.y+barcode.GameEngine.centerY - barcode.GameEngine.character.y,
-       barcode.GameEngine.tileSize,
-       barcode.GameEngine.tileSize);
+       this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x,
+       this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y,
+       barcode.gameEngine.tileSize,
+       barcode.gameEngine.tileSize);
 
   }
 };

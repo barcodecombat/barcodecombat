@@ -85,8 +85,8 @@ barcode.Character.prototype = {
   },
 
   getTile : function(){
-    let tx = Math.round(this.x/barcode.GameEngine.tileSize);
-    let ty = Math.round(this.y/barcode.GameEngine.tileSize);
+    let tx = Math.round(this.x/barcode.gameEngine.tileSize);
+    let ty = Math.round(this.y/barcode.gameEngine.tileSize);
     return {"x" : tx, "y" : ty  };
   },
 
@@ -126,11 +126,11 @@ barcode.Character.prototype = {
     this.spriteset = barcode.tileset.get(this.sprite);
     let ticket = new barcode.Ticket();
     this.tickets.push(ticket);
-    let ticket = new barcode.Ticket();
+    ticket = new barcode.Ticket();
     this.tickets.push(ticket);
-    let ticket = new barcode.Ticket();
+    ticket = new barcode.Ticket();
     this.tickets.push(ticket);
-    let ticket = new barcode.Ticket();
+    ticket = new barcode.Ticket();
     this.tickets.push(ticket);
   //  this.addItemToCharacter(1);
   //  this.addItemToCharacter(2);
@@ -140,7 +140,7 @@ barcode.Character.prototype = {
   addHitPoint : function(hp){
     this.hitpoint += hp;
     var ft = new barcode.FloatingText();
-    ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_GREEN);
+    ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_GREEN);
     barcode.GameDonjon.floatingText.push(ft);
   },
 
@@ -163,13 +163,13 @@ barcode.Character.prototype = {
     var ft = new barcode.FloatingText();
     if (! this.isHitBlocked()){
       this.hitpoint -= hp;
-      ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
+      ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
     }else{
-      ft.init(this.x + barcode.GameEngine.tileSize/2 - 10,this.y + barcode.GameEngine.tileSize/2,"Block",barcode.C.FT_COLOR_BLUE);
+      ft.init(this.x + barcode.gameEngine.tileSize/2 - 10,this.y + barcode.gameEngine.tileSize/2,"Block",barcode.C.FT_COLOR_BLUE);
     }
     barcode.GameDonjon.floatingText.push(ft);
     if (this.hitpoint <=0){
-      barcode.GameEngine.state = barcode.C.STATE_DONJON_DEATH;
+      barcode.gameEngine.state = barcode.C.STATE_DONJON_DEATH;
     }
   },
 
@@ -186,8 +186,8 @@ barcode.Character.prototype = {
   goToTarget : function(x,y){
     let grid = barcode.GameDonjon.level.getAPathArray();
     let tileChar = this.getTile();
-    let tx = Math.floor((x-barcode.GameEngine.centerX+this.x)/barcode.GameEngine.tileSize);
-    let ty = Math.floor((y-barcode.GameEngine.centerY+this.y)/barcode.GameEngine.tileSize);
+    let tx = Math.floor((x-barcode.gameEngine.centerX+this.x)/barcode.gameEngine.tileSize);
+    let ty = Math.floor((y-barcode.gameEngine.centerY+this.y)/barcode.gameEngine.tileSize);
     var pthFinding = new barcode.Apath();
     var result =  pthFinding.findShortestPath([tileChar.x,tileChar.y],[tx,ty], grid,true);
     this.path = pthFinding.path;
@@ -244,11 +244,11 @@ barcode.Character.prototype = {
       this.animate();
       var nextTile = this.path[this.path.length-1];
       var currentTile = this.getTile();
-      let dist = calcDistance(this, {x: nextTile.x*barcode.GameEngine.tileSize, y: nextTile.y*barcode.GameEngine.tileSize});
+      let dist = calcDistance(this, {x: nextTile.x*barcode.gameEngine.tileSize, y: nextTile.y*barcode.gameEngine.tileSize});
       //if (nextTile.x != currentTile.x || nextTile.y != currentTile.y){
       if (dist >10 ){
-        var dx = nextTile.x*barcode.GameEngine.tileSize - this.x;
-        var dy = nextTile.y*barcode.GameEngine.tileSize - this.y;
+        var dx = nextTile.x*barcode.gameEngine.tileSize - this.x;
+        var dy = nextTile.y*barcode.gameEngine.tileSize - this.y;
         if (Math.abs(dx) > this.step){
           if (dx > 0){
             this.x += this.step;
@@ -280,10 +280,10 @@ barcode.Character.prototype = {
        this.direction*this.size,
        this.size,
        this.size,
-       barcode.GameEngine.centerX,
-       barcode.GameEngine.centerY,
-       barcode.GameEngine.tileSize,
-       barcode.GameEngine.tileSize);
+       barcode.gameEngine.centerX,
+       barcode.gameEngine.centerY,
+       barcode.gameEngine.tileSize,
+       barcode.gameEngine.tileSize);
 
   }
 };

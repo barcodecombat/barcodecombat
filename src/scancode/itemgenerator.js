@@ -10,9 +10,9 @@ barcode.itemgenerator = function(){
 barcode.itemgenerator.prototype = {
   rarityCheck : function(){
     let rarity = barcode.C.RARITY_COMMON;
-    let prb3 = barcode.C.RARITY_LEGEND_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level + this.ticket.legend;
-    let prb2 = barcode.C.RARITY_RARE_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level + this.ticket.rare;
-    let prb1 = barcode.C.RARITY_UNCOMMON_MALUS + barcode.C.RARITY_STEP * barcode.GameEngine.character.level + this.ticket.uncommon;
+    let prb3 = barcode.C.RARITY_LEGEND_MALUS + barcode.C.RARITY_STEP * barcode.gameEngine.character.level + this.ticket.legend;
+    let prb2 = barcode.C.RARITY_RARE_MALUS + barcode.C.RARITY_STEP * barcode.gameEngine.character.level + this.ticket.rare;
+    let prb1 = barcode.C.RARITY_UNCOMMON_MALUS + barcode.C.RARITY_STEP * barcode.gameEngine.character.level + this.ticket.uncommon;
     let dice = 0;
     if (prb3 >0){
       dice = Math.random() * 100;
@@ -108,7 +108,7 @@ barcode.itemgenerator.prototype = {
   },
 
   generate : function(){
-    this.ticket = barcode.GameEngine.character.tickets[0];
+    this.ticket = barcode.gameEngine.character.tickets[0];
     if (typeof this.ticket === 'undefined') this.ticket = new barcode.Ticket();
     this.item = new barcode.Item();
     this.item.rarity = this.rarityCheck();

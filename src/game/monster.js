@@ -36,7 +36,7 @@ barcode.Monster.prototype = {
   hit: function(hp){
     this.hitpoint -= hp;
     var ft = new barcode.FloatingText();
-    ft.init(this.x + barcode.GameEngine.tileSize/2,this.y + barcode.GameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
+    ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
     barcode.GameDonjon.floatingText.push(ft);
   },
 
@@ -51,10 +51,10 @@ barcode.Monster.prototype = {
            this.direction*this.size,
            this.size,
            this.size,
-           this.x+barcode.GameEngine.centerX - barcode.GameEngine.character.x,
-           this.y+barcode.GameEngine.centerY - barcode.GameEngine.character.y,
-           barcode.GameEngine.tileSize,
-           barcode.GameEngine.tileSize);
+           this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x,
+           this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y,
+           barcode.gameEngine.tileSize,
+           barcode.gameEngine.tileSize);
       }
     }
 
@@ -62,12 +62,12 @@ barcode.Monster.prototype = {
 
   doAction : function(){
     if (typeof this.target !== 'undefined'){
-      let distance = calcDistance({x:barcode.GameEngine.character.getTile().x*barcode.GameEngine.tileSize,y:barcode.GameEngine.character.getTile().y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+      let distance = calcDistance({x:barcode.gameEngine.character.getTile().x*barcode.gameEngine.tileSize,y:barcode.gameEngine.character.getTile().y*barcode.gameEngine.tileSize},{x : this.x, y : this.y});
       if (distance > this.range && distance < barcode.C.DISTANCE_MOB_SEE_PLAYER){
         let d = new Date();
         let newTick = d.getTime();
         if(newTick - this.lastTimeCreatingPath > barcode.C.DELAY_BETWEEN_TWO_PATH_CREATION){
-          this.createPathTo(barcode.GameEngine.character.getTile());
+          this.createPathTo(barcode.gameEngine.character.getTile());
           this.lastTimeCreatingPath = newTick;
         }
         this.move();
@@ -75,9 +75,9 @@ barcode.Monster.prototype = {
         this.attack();
       }
     }else{
-      let distance = calcDistance({x:barcode.GameEngine.character.getTile().x*barcode.GameEngine.tileSize,y:barcode.GameEngine.character.getTile().y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+      let distance = calcDistance({x:barcode.gameEngine.character.getTile().x*barcode.gameEngine.tileSize,y:barcode.gameEngine.character.getTile().y*barcode.gameEngine.tileSize},{x : this.x, y : this.y});
       if (distance < barcode.C.DISTANCE_MOB_SEE_PLAYER){
-        this.target = barcode.GameEngine.character.getTile();
+        this.target = barcode.gameEngine.character.getTile();
       }
     }
   },
@@ -87,7 +87,7 @@ barcode.Monster.prototype = {
     let newTick = d.getTime();
     if (newTick - this.lastAttack > this.attackSpeed){
       this.lastAttack = newTick;
-      barcode.GameEngine.character.hit(this.damage);
+      barcode.gameEngine.character.hit(this.damage);
     }
   },
 
@@ -102,13 +102,13 @@ barcode.Monster.prototype = {
   },
 
   getTile : function(){
-    let tx = Math.round(this.x/barcode.GameEngine.tileSize);
-    let ty = Math.round(this.y/barcode.GameEngine.tileSize);
+    let tx = Math.round(this.x/barcode.gameEngine.tileSize);
+    let ty = Math.round(this.y/barcode.gameEngine.tileSize);
     return {"x" : tx, "y" : ty  };
   },
 
   createPathTo : function(tileTarget){
-    let distance = calcDistance({x:tileTarget.x*barcode.GameEngine.tileSize,y:tileTarget.y*barcode.GameEngine.tileSize},{x : this.x, y : this.y});
+    let distance = calcDistance({x:tileTarget.x*barcode.gameEngine.tileSize,y:tileTarget.y*barcode.gameEngine.tileSize},{x : this.x, y : this.y});
     if (distance < 200){
       this.target = tileTarget;
       if ((this.path.length == 0) || ( this.path[0].x != tileTarget.x && this.path[0].y != tileTarget.y)){

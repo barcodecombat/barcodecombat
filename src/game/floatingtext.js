@@ -34,7 +34,7 @@ barcode.FloatingText.prototype = {
     var ctx = barcode.canvas.canvasAnimation.getContext("2d");
     ctx.font = "1Opx Arial";
     ctx.fillStyle = this.color;
-    ctx.fillText(this.text, this.x+barcode.GameEngine.centerX - barcode.GameEngine.character.x, this.y+barcode.GameEngine.centerY - barcode.GameEngine.character.y);
+    ctx.fillText(this.text, this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x, this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y);
     this.y -= 1;
   }
 };

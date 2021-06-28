@@ -38,16 +38,16 @@ barcode.Level.prototype = {
     this.startingPoint = src.startingpoint;
 
 
-    barcode.GameEngine.character.x = this.startingPoint.x * barcode.GameEngine.tileSize;
-    barcode.GameEngine.character.y = this.startingPoint.y * barcode.GameEngine.tileSize;
+    barcode.gameEngine.character.x = this.startingPoint.x * barcode.gameEngine.tileSize;
+    barcode.gameEngine.character.y = this.startingPoint.y * barcode.gameEngine.tileSize;
 
     if (typeof src.mobs !== 'undefined'){
       var listMob = this.monsters;
       src.mobs.forEach(function(mob){
           var newMob = new barcode.Monster();
           newMob.init();
-          newMob.x = mob.x * barcode.GameEngine.tileSize;
-          newMob.y = mob.y * barcode.GameEngine.tileSize ;
+          newMob.x = mob.x * barcode.gameEngine.tileSize;
+          newMob.y = mob.y * barcode.gameEngine.tileSize ;
           listMob.push(newMob);
       });
     }
@@ -95,11 +95,11 @@ barcode.Level.prototype = {
   },
 
   getTheMobUnderMouse : function(x,y){
-    var _x = x - barcode.GameEngine.centerX + barcode.GameEngine.character.x;
-    var _y = y - barcode.GameEngine.centerY + barcode.GameEngine.character.y;
+    var _x = x - barcode.gameEngine.centerX + barcode.gameEngine.character.x;
+    var _y = y - barcode.gameEngine.centerY + barcode.gameEngine.character.y;
     var result = null;
     this.monsters.forEach(function(elt){
-      if (((_x-barcode.GameEngine.tileSize)< elt.x) && ((_x+barcode.GameEngine.tileSize)>elt.x ) && ((_y-barcode.GameEngine.tileSize)< elt.y) && ((_y+barcode.GameEngine.tileSize)>elt.y )){
+      if (((_x-barcode.gameEngine.tileSize)< elt.x) && ((_x+barcode.gameEngine.tileSize)>elt.x ) && ((_y-barcode.gameEngine.tileSize)< elt.y) && ((_y+barcode.gameEngine.tileSize)>elt.y )){
         result = elt;
       }
     });
@@ -107,11 +107,11 @@ barcode.Level.prototype = {
   },
 
   getTheDecorUnderMouse : function(x,y){
-    var _x = x - barcode.GameEngine.centerX + barcode.GameEngine.character.x;
-    var _y = y - barcode.GameEngine.centerY + barcode.GameEngine.character.y;
+    var _x = x - barcode.gameEngine.centerX + barcode.gameEngine.character.x;
+    var _y = y - barcode.gameEngine.centerY + barcode.gameEngine.character.y;
     var result = null;
     this.decors.forEach(function(elt){
-      if (((_x-barcode.GameEngine.tileSize)< elt.x*barcode.GameEngine.tileSize) && ((_x+barcode.GameEngine.tileSize)>elt.x*barcode.GameEngine.tileSize ) && ((_y-barcode.GameEngine.tileSize)< elt.y*barcode.GameEngine.tileSize) && ((_y+barcode.GameEngine.tileSize)>elt.y*barcode.GameEngine.tileSize )){
+      if (((_x-barcode.gameEngine.tileSize)< elt.x*barcode.gameEngine.tileSize) && ((_x+barcode.gameEngine.tileSize)>elt.x*barcode.gameEngine.tileSize ) && ((_y-barcode.gameEngine.tileSize)< elt.y*barcode.gameEngine.tileSize) && ((_y+barcode.gameEngine.tileSize)>elt.y*barcode.gameEngine.tileSize )){
         result = elt;
       }
     });
@@ -192,8 +192,8 @@ barcode.Level.prototype = {
   },
 
   renderCharacter : function(ctx){
-    barcode.GameEngine.character.loop();
-    barcode.GameEngine.character.render(ctx);
+    barcode.gameEngine.character.loop();
+    barcode.gameEngine.character.render(ctx);
   },
 
   makeLight : function(){
@@ -201,8 +201,8 @@ barcode.Level.prototype = {
     this.tiles.forEach(function(elt){
       elt.lightened = false;
     })
-    let chTile = barcode.GameEngine.character.getTile();
-    let radius = barcode.GameEngine.character.lightRadius;
+    let chTile = barcode.gameEngine.character.getTile();
+    let radius = barcode.gameEngine.character.lightRadius;
     for (let i = -radius ; i < radius ; i++){
       for (let j = -radius ; j < radius ; j++){
         let tile = {'x' : chTile.x + i, 'y' : chTile.y +j};
@@ -216,14 +216,14 @@ barcode.Level.prototype = {
     var ctx = barcode.canvas.canvasTile.getContext("2d");
     var tiles = this.getTilesForAPath();
     var lightTiles = this.makeLight();
-    let xi = Math.floor(barcode.canvas.canvasTile.width / barcode.GameEngine.tileSize) +1;
-    let yj = Math.floor(barcode.canvas.canvasTile.height / barcode.GameEngine.tileSize) +1;
+    let xi = Math.floor(barcode.canvas.canvasTile.width / barcode.gameEngine.tileSize) +1;
+    let yj = Math.floor(barcode.canvas.canvasTile.height / barcode.gameEngine.tileSize) +1;
 
     for( let i = 0 ; i < xi ; i++){
       for( let j = 0 ; j < yj ; j++){
-          let chTile = barcode.GameEngine.character.getTile();
-          let rx = Math.floor((i * barcode.GameEngine.tileSize - barcode.GameEngine.centerX+barcode.GameEngine.character.x)/barcode.GameEngine.tileSize);
-          let ry = Math.floor((j * barcode.GameEngine.tileSize - barcode.GameEngine.centerY+barcode.GameEngine.character.y)/barcode.GameEngine.tileSize);
+          let chTile = barcode.gameEngine.character.getTile();
+          let rx = Math.floor((i * barcode.gameEngine.tileSize - barcode.gameEngine.centerX+barcode.gameEngine.character.x)/barcode.gameEngine.tileSize);
+          let ry = Math.floor((j * barcode.gameEngine.tileSize - barcode.gameEngine.centerY+barcode.gameEngine.character.y)/barcode.gameEngine.tileSize);
           ctx.beginPath();
           if ((rx + "/" + ry ) in lightTiles && (rx + "/" + ry ) in tiles){
               tiles[rx + "/" + ry].state = barcode.C.TILE_VISITED;
@@ -239,10 +239,10 @@ barcode.Level.prototype = {
               ctx.fillStyle = "black";
             }
 
-            ctx.fillRect(rx*barcode.GameEngine.tileSize + barcode.GameEngine.centerX-barcode.GameEngine.character.x,
-                         ry*barcode.GameEngine.tileSize + barcode.GameEngine.centerY-barcode.GameEngine.character.y,
-                        barcode.GameEngine.tileSize,
-                        barcode.GameEngine.tileSize);
+            ctx.fillRect(rx*barcode.gameEngine.tileSize + barcode.gameEngine.centerX-barcode.gameEngine.character.x,
+                         ry*barcode.gameEngine.tileSize + barcode.gameEngine.centerY-barcode.gameEngine.character.y,
+                        barcode.gameEngine.tileSize,
+                        barcode.gameEngine.tileSize);
         }
       }
     }

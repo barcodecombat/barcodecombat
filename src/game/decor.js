@@ -38,7 +38,7 @@ barcode.Decor.prototype = {
       }else if(action.action === barcode.C.ACTION_APPLY_DECOR_CHANGE_SPRITE){
         _this.state = 1;
       }else if(action.action === barcode.C.ACTION_APPLY_DECOR_END_DONJON){
-        barcode.GameEngine.state = barcode.C.STATE_MENU_ENDDONJON_TOSHOW;
+        barcode.gameEngine.state = barcode.C.STATE_MENU_ENDDONJON_TOSHOW;
       }
     })
   },
@@ -51,9 +51,9 @@ barcode.Decor.prototype = {
        this.sprites[this.state].y,
        this.size,
        this.size,
-       this.x*barcode.GameEngine.tileSize+barcode.GameEngine.centerX - barcode.GameEngine.character.x,
-       this.y*barcode.GameEngine.tileSize+barcode.GameEngine.centerY - barcode.GameEngine.character.y,
-       barcode.GameEngine.tileSize,
-       barcode.GameEngine.tileSize);
+       this.x*barcode.gameEngine.tileSize+barcode.gameEngine.centerX - barcode.gameEngine.character.x,
+       this.y*barcode.gameEngine.tileSize+barcode.gameEngine.centerY - barcode.gameEngine.character.y,
+       barcode.gameEngine.tileSize,
+       barcode.gameEngine.tileSize);
   },
 };
