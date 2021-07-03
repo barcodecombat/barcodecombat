@@ -37,12 +37,12 @@ barcode.Monster.prototype = {
     this.hitpoint -= hp;
     var ft = new barcode.FloatingText();
     ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
-    barcode.GameDonjon.floatingText.push(ft);
+    barcode.gameDonjon.floatingText.push(ft);
   },
 
   render : function(ctx){
     let tile = this.getTile();
-    let tilesArray = barcode.GameDonjon.level.getTilesForAPath();
+    let tilesArray = barcode.gameDonjon.level.getTilesForAPath();
     if ((tile.x + "/" + tile.y) in tilesArray){
       if (tilesArray[tile.x + "/" + tile.y].lightened){
         ctx.drawImage(
@@ -112,7 +112,7 @@ barcode.Monster.prototype = {
     if (distance < 200){
       this.target = tileTarget;
       if ((this.path.length == 0) || ( this.path[0].x != tileTarget.x && this.path[0].y != tileTarget.y)){
-        let grid = barcode.GameDonjon.level.getAPathArray();
+        let grid = barcode.gameDonjon.level.getAPathArray();
         let tileMob = this.getTile();
 
         var pthFinding = new barcode.Apath();

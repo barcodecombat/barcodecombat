@@ -141,7 +141,7 @@ barcode.Character.prototype = {
     this.hitpoint += hp;
     var ft = new barcode.FloatingText();
     ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_GREEN);
-    barcode.GameDonjon.floatingText.push(ft);
+    barcode.gameDonjon.floatingText.push(ft);
   },
 
   isHitBlocked : function(){
@@ -167,7 +167,7 @@ barcode.Character.prototype = {
     }else{
       ft.init(this.x + barcode.gameEngine.tileSize/2 - 10,this.y + barcode.gameEngine.tileSize/2,"Block",barcode.C.FT_COLOR_BLUE);
     }
-    barcode.GameDonjon.floatingText.push(ft);
+    barcode.gameDonjon.floatingText.push(ft);
     if (this.hitpoint <=0){
       barcode.gameEngine.state = barcode.C.STATE_DONJON_DEATH;
     }
@@ -184,7 +184,7 @@ barcode.Character.prototype = {
   },
 
   goToTarget : function(x,y){
-    let grid = barcode.GameDonjon.level.getAPathArray();
+    let grid = barcode.gameDonjon.level.getAPathArray();
     let tileChar = this.getTile();
     let tx = Math.floor((x-barcode.gameEngine.centerX+this.x)/barcode.gameEngine.tileSize);
     let ty = Math.floor((y-barcode.gameEngine.centerY+this.y)/barcode.gameEngine.tileSize);
@@ -237,6 +237,15 @@ barcode.Character.prototype = {
   loop: function(){
     this.move();
     this.applyEffect();
+    this.attack();
+  },
+
+  attack : function(){
+    var mob = barcode.gameDonjon.level.getMobToAttack();
+    if (mob !== null){
+      this.hitTarget(mob);
+    }
+  
   },
 
   move : function(){

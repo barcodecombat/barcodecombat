@@ -15,14 +15,14 @@ barcode.GameDonjon.prototype ={
     this.level = new barcode.Level();
     this.level.init();
 
-    barcode.canvas.canvasMouse.addEventListener("click",barcode.GameDonjon.clickEvent);
+    barcode.canvas.canvasMouse.addEventListener("click",barcode.gameDonjon.clickEvent);
     barcode.ui = new barcode.UI();
-    document.onmousemove = barcode.GameDonjon.handleMouseMove;
+    document.onmousemove = barcode.gameDonjon.handleMouseMove;
 
   },
 
   handleMouseMove : function(evt){
-    var mob = barcode.GameDonjon.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
+    var mob = barcode.gameDonjon.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
     if ( mob != null){
       barcode.ui.showMonsterGauge(mob);
     }else{
@@ -59,26 +59,16 @@ barcode.GameDonjon.prototype ={
   },
 
   clickEvent : function(evt){
-    var mob = barcode.GameDonjon.level.getTheMobUnderMouse(evt.pageX,evt.pageY);
-    if ( mob != null){
-        var dist = calcDistance(mob, barcode.gameEngine.character);
-        if (dist > barcode.gameEngine.character.rangeAttack){
+    var decor = barcode.gameDonjon.level.getTheDecorUnderMouse(evt.pageX,evt.pageY);
+    if ( decor != null){
+        var dist = calcDistance({x: decor.x*barcode.gameEngine.tileSize, y: decor.y*barcode.gameEngine.tileSize}, barcode.gameEngine.character);
+        if (dist > (barcode.gameEngine.tileSize*1.5)){
           barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
         }else{
-          barcode.gameEngine.character.hitTarget(mob);
+          decor.doAction();
         }
     }else{
-      var decor = barcode.GameDonjon.level.getTheDecorUnderMouse(evt.pageX,evt.pageY);
-      if ( decor != null){
-          var dist = calcDistance({x: decor.x*barcode.gameEngine.tileSize, y: decor.y*barcode.gameEngine.tileSize}, barcode.gameEngine.character);
-          if (dist > (barcode.gameEngine.tileSize*1.5)){
-            barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
-          }else{
-            decor.doAction();
-          }
-      }else{
-        barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
-      }
+      barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
     }
   },
 

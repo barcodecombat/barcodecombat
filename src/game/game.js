@@ -15,7 +15,7 @@ barcode.GameEngine = function (){
 barcode.GameEngine.prototype ={
   gameLoop: function (){
     if (barcode.gameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
-        barcode.GameDonjon.loop();
+        barcode.gameDonjon.loop();
     }else if (barcode.gameEngine.state === barcode.C.STATE_DONJON_DEATH){
       barcode.gameEngine.showDeath();
     }else if (barcode.gameEngine.state === barcode.C.STATE_MENU_TO_SHOW){
@@ -82,7 +82,7 @@ barcode.GameEngine.prototype ={
 
   initDonjon : function(){
     barcode.gameEngine.closeState();
-    barcode.GameDonjon.init();
+    barcode.gameDonjon.init();
     barcode.gameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
     barcode.gameEngine.character.resetHp();
   },
@@ -170,7 +170,7 @@ barcode.GameEngine.prototype ={
   init : function(){
     barcode.Generator = new barcode.Generator();
     barcode.Generator.init();
-    barcode.GameDonjon = new barcode.GameDonjon();
+    barcode.gameDonjon = new barcode.GameDonjon();
     barcode.RenderItem = new barcode.RenderItem();
     barcode.canvas = new barcode.Canvas();
     barcode.canvas.init();

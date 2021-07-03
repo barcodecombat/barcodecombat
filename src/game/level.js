@@ -106,6 +106,16 @@ barcode.Level.prototype = {
     return result;
   },
 
+  getMobToAttack : function(){
+    for (let i=0;i < this.monsters.length ; i++){
+      var dist = calcDistance(this.monsters[i], barcode.gameEngine.character);
+      if (dist < barcode.gameEngine.character.rangeAttack){
+        return(this.monsters[i]);
+      }
+    }
+    return null;
+  },
+
   getTheDecorUnderMouse : function(x,y){
     var _x = x - barcode.gameEngine.centerX + barcode.gameEngine.character.x;
     var _y = y - barcode.gameEngine.centerY + barcode.gameEngine.character.y;
@@ -186,7 +196,7 @@ barcode.Level.prototype = {
       animation.x = monsterToRemove[i].x;
       animation.y = monsterToRemove[i].y;
       animation.layerToDraw = barcode.canvas.canvasTile.getContext("2d");
-      barcode.GameDonjon.animations.push(animation);
+      barcode.gameDonjon.animations.push(animation);
       this.removeMonster(monsterToRemove[i]);
     }
   },
