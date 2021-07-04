@@ -31,7 +31,7 @@ barcode.GameEngine.prototype ={
     }
     else if (barcode.gameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
       barcode.canvas.clearCanvas();
-      barcode.canvas.setCanvasSize(0,0);
+      //barcode.canvas.setCanvasSize(0,0);
     }
     else if(barcode.gameEngine.state == barcode.C.STATE_INVENTORY){
       barcode.inventory.eraseInventory();
@@ -52,8 +52,8 @@ barcode.GameEngine.prototype ={
       var menu = document.getElementById("scanresult");
       menu.style.display = "none";
     }
-    barcode.canvas.clearCanvas();
-    barcode.canvas.setCanvasSize(0,0);
+    //barcode.canvas.clearCanvas();
+    //barcode.canvas.setCanvasSize(0,0);
   },
 
   saveGame : function(){
@@ -174,6 +174,7 @@ barcode.GameEngine.prototype ={
     barcode.RenderItem = new barcode.RenderItem();
     barcode.canvas = new barcode.Canvas();
     barcode.canvas.init();
+    barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
     barcode.tileset = new barcode.Tileset();
     barcode.gameEngine.state = barcode.C.STATE_MENU_SHOWN;
     let btnMenu = document.getElementById("btnMenu");
