@@ -10,14 +10,17 @@ barcode.Inventory.prototype ={
   },
 
   renderEmptyBag : function(){
-    this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
-    this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.fillRect(100,100,32,32);
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
-    this.ctx.rect(100,100,32,32);
-    this.ctx.stroke();
-    console.log(this.ctx);
+    for (let i=0;i<10;i++){
+      for (let j=0;j<6;j++){
+        this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
+        this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
+        this.ctx.fillRect(100+i*32,400+j*32,32,32);
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
+        this.ctx.rect(100+i*32,400+j*32,32,32);
+        this.ctx.stroke();
+      }
+    }
   },
 
 
