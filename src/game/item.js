@@ -193,4 +193,18 @@ barcode.Item.prototype = {
       this.lastTick = newTick;
     }
   },
+
+  render : function(x,y){
+    var ctx = barcode.canvas.canvasAnimation.getContext("2d");
+    ctx.drawImage(
+       this.spriteset,
+       0,
+       0,
+       32,
+       32,
+       x,
+       y,
+       32,
+       32);
+  },
 };
