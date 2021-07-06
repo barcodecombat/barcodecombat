@@ -88,7 +88,7 @@ barcode.Inventory.prototype ={
       let item = this.items[i];
       if (evt.pageX >= (item.x) && evt.pageX <=(item.x + 32)
         && evt.pageY >= (item.y) && evt.pageY <= (item.y+32)){
-          barcode.contextualItem.toggleMenu();
+          barcode.contextualItem.showMenu();
           barcode.contextualItem.item = item;
           clicked = true;
         }        
