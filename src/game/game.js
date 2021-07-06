@@ -22,7 +22,10 @@ barcode.GameEngine.prototype ={
       barcode.gameEngine.initMenu();
     }else if (barcode.gameEngine.state === barcode.C.STATE_MENU_ENDDONJON_TOSHOW){
       barcode.gameEngine.showEndDonjon();
+    }else if(barcode.gameEngine.state == barcode.C.STATE_INVENTORY){
+      barcode.inventory.render();
     }
+
   },
 
   clickEvent : function(evt){
@@ -180,6 +183,7 @@ barcode.GameEngine.prototype ={
     barcode.canvas.init();
     barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
     barcode.tileset = new barcode.Tileset();
+    barcode.contextualItem = new barcode.ContextualItem();
     barcode.gameEngine.state = barcode.C.STATE_MENU_SHOWN;
     let btnMenu = document.getElementById("btnMenu");
     btnMenu.addEventListener("click",barcode.gameEngine.initMenu);

@@ -83,22 +83,32 @@ barcode.Inventory.prototype ={
   },
 
   clickEvent : function(evt){
+    let clicked = false;
     for (let i=0; i < this.items.length; i++){
       let item = this.items[i];
       if (evt.pageX >= (item.x) && evt.pageX <=(item.x + 32)
         && evt.pageY >= (item.y) && evt.pageY <= (item.y+32)){
-          console.log("PWET");
+          barcode.contextualItem.toggleMenu();
+          barcode.contextualItem.item = item;
+          clicked = true;
         }        
     }
+
+    clicked = clicked || barcode.contextualItem.clickEvent(evt);
+    if (!clicked){
+      barcode.contextualItem.hideMenu();
+    }
+
   },
 
 
   render : function(){
+    barcode.canvas.clearCanvas();
     this.renderEmptyBag();
     this.renderBody();
     this.renderBoxOnBody();
     this.renderItemInInventory();
-   
+    barcode.contextualItem.render();
   },
 
 };
