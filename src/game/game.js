@@ -34,7 +34,6 @@ barcode.GameEngine.prototype ={
       //barcode.canvas.setCanvasSize(0,0);
     }
     else if(barcode.gameEngine.state == barcode.C.STATE_INVENTORY){
-      barcode.inventory.eraseInventory();
       barcode.inventory.init();
       var menu = document.getElementById("inventory");
       menu.style.display = "none";
@@ -103,8 +102,6 @@ barcode.GameEngine.prototype ={
 
   initHero : function(){
     barcode.gameEngine.closeState();
-    var menu = document.getElementById("inventory");
-    menu.style.display = "block";
     if (typeof barcode.inventory === 'undefined' || barcode.inventory === null)
       barcode.inventory = new barcode.Inventory();
     barcode.inventory.init();
