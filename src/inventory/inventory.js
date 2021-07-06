@@ -103,7 +103,6 @@ barcode.Inventory.prototype ={
 
 
   render : function(){
-    barcode.canvas.clearCanvas();
     this.renderEmptyBag();
     this.renderBody();
     this.renderBoxOnBody();

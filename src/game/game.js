@@ -14,6 +14,7 @@ barcode.GameEngine = function (){
 
 barcode.GameEngine.prototype ={
   gameLoop: function (){
+    barcode.canvas.clearCanvas();
     if (barcode.gameEngine.state === barcode.C.STATE_DONJON_INPROGRESS){
         barcode.gameDonjon.loop();
     }else if (barcode.gameEngine.state === barcode.C.STATE_DONJON_DEATH){
@@ -45,8 +46,6 @@ barcode.GameEngine.prototype ={
     }
     else if(barcode.gameEngine.state == barcode.C.STATE_INVENTORY){
       barcode.inventory.init();
-      var menu = document.getElementById("inventory");
-      menu.style.display = "none";
     }
     else if(barcode.gameEngine.state == barcode.C.STATE_MENU_SHOWN){
       var menu = document.getElementById("mainMenu");
