@@ -3,6 +3,7 @@ var barcode = barcode || {};
 
 barcode.Inventory = function (){
   this.ctx = null;
+  this.items = [];
 };
 
 barcode.Inventory.prototype ={
@@ -66,17 +67,38 @@ barcode.Inventory.prototype ={
     this.ctx.stroke(); 
   },
 
+  renderItemInInventory : function(){
+    this.items = [];
+    for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
+      let item = barcode.gameEngine.character.inventory[i];
+      item.render(100+i*32,400);
+      let itemJs = {};
+      itemJs = {
+        "x" : 100 + i*32,
+        "y" : 400,
+        "item" : item
+      };
+      this.items.push(itemJs);
+    }
+  },
+
+  clickEvent : function(evt){
+    for (let i=0; i < this.items.length; i++){
+      let item = this.items[i];
+      if (evt.pageX >= (item.x) && evt.pageX <=(item.x + 32)
+        && evt.pageY >= (item.y) && evt.pageY <= (item.y+32)){
+          console.log("PWET");
+        }        
+    }
+  },
+
 
   render : function(){
     this.renderEmptyBag();
     this.renderBody();
     this.renderBoxOnBody();
-    var _this = this;
-    var j = 0;
-    for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
-      let item = barcode.gameEngine.character.inventory[i];
-      item.render(100+i*32,400);
-    }
+    this.renderItemInInventory();
+   
   },
 
 };
