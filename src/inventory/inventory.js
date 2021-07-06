@@ -38,10 +38,39 @@ barcode.Inventory.prototype ={
        300);
   },
 
+  renderBoxOnBody : function(){
+    this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
+    // main gauche
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+    this.ctx.rect(160,200,32,32);
+    this.ctx.stroke();  
+    // main droite
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+    this.ctx.rect(260,200,32,32);
+    this.ctx.stroke();  
+    // cou
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+    this.ctx.rect(210,90,32,32);
+    this.ctx.stroke(); 
+    //potions
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+    this.ctx.rect(150,350,32,32);
+    this.ctx.stroke(); 
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+    this.ctx.rect(190,350,32,32);
+    this.ctx.stroke(); 
+  },
+
 
   render : function(){
     this.renderEmptyBag();
     this.renderBody();
+    this.renderBoxOnBody();
     var _this = this;
     var j = 0;
     for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
