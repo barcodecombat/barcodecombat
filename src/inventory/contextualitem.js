@@ -3,11 +3,13 @@ var barcode = barcode || {};
 
 barcode.ContextualItem = function (){
   this.active = false;
+  this.ctx = null;
   this.item = null;
   this.height = 200;
   this.width = 150;
   this.x = 200;
   this.y = 150;
+  this.propertiesY = 0;
 };
 
 barcode.ContextualItem.prototype ={
@@ -29,6 +31,59 @@ barcode.ContextualItem.prototype ={
         return false;
     },
 
+    renderItemWeapon : function(){
+        let text = "Vitesse d'attaque : " + this.item.item.speed;
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+
+        this.propertiesY += 10;
+
+        text = "Portee : " + this.item.item.range;
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+
+        this.propertiesY += 10;
+
+        text = "Degat : " + this.item.item.damage[0] + " - " + this.item.item.damage[1];
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+
+        this.propertiesY += 10;
+
+    },
+
+    renderItemShield : function(){
+        let text = "Chance de bloquer : " + this.item.item.chanceToBlock + "%";
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+
+        this.propertiesY += 10;
+    },
+
+    
+
+    renderItem : function(){
+        this.propertiesY = this.y + 13;
+        this.ctx.font = "1Opx Arial";
+        this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
+        let text = this.item.item.name;
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+        
+        this.propertiesY += 20;
+
+        if (this.item.item.typeItem === barcode.C.TYPE_ITEM_WEAPON){
+            this.renderItemWeapon();
+        }else if (this.item.item.typeItem === barcode.C.TYPE_ITEM_SHIELD){
+            this.renderItemShield();
+        }
+    },
+
     render : function(){
         if (this.item !== null && this.active === true){
             this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
@@ -38,6 +93,7 @@ barcode.ContextualItem.prototype ={
             this.ctx.beginPath();
             this.ctx.rect(this.x,this.y,this.width,this.height);
             this.ctx.stroke(); 
+            this.renderItem();
         }
     },
 
