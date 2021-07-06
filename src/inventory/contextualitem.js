@@ -84,6 +84,18 @@ barcode.ContextualItem.prototype ={
         }
     },
 
+    renderEquipButton : function(){
+        this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+            this.ctx.beginPath();
+            this.ctx.rect(this.x +30 ,this.y + 150 ,80, 30);
+            this.ctx.stroke(); 
+
+            let text = "Equiper";
+            this.ctx.fillText(text ,
+                this.x + 50, 
+                this.y + 170);
+    },
+
     render : function(){
         if (this.item !== null && this.active === true){
             this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
@@ -94,6 +106,7 @@ barcode.ContextualItem.prototype ={
             this.ctx.rect(this.x,this.y,this.width,this.height);
             this.ctx.stroke(); 
             this.renderItem();
+            this.renderEquipButton();
         }
     },
 
