@@ -23,9 +23,25 @@ barcode.Inventory.prototype ={
     }
   },
 
+  renderBody : function(){
+    let spriteset = barcode.tileset.get("assets/inventory/silhouette.png");
+    var ctx = barcode.canvas.canvasAnimation.getContext("2d");
+    ctx.drawImage(
+       spriteset,
+       0,
+       0,
+       624,
+       1200,
+       150,
+       50,
+       150,
+       300);
+  },
+
 
   render : function(){
     this.renderEmptyBag();
+    this.renderBody();
     var _this = this;
     var j = 0;
     for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
