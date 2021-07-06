@@ -27,8 +27,14 @@ barcode.ContextualItem.prototype ={
         this.active = false;
     },
 
-    clickEvent : function (){
-        return false;
+    clickEvent : function (evt){
+        if(evt.pageX > this.x && evt.pageX < (this.x + this. width)
+            && evt.pageY > this.y && evt.pageY < (this.y + this.height)){
+            return true;
+        }else{
+            return false;
+        }
+        
     },
 
     renderItemWeapon : function(){
