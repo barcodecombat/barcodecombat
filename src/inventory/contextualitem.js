@@ -10,6 +10,10 @@ barcode.ContextualItem = function (){
   this.x = 200;
   this.y = 150;
   this.propertiesY = 0;
+  this.buttonCoord = { "x" : this.x +30 ,
+                       "y" : this.y + 150 ,
+                       "width" : 80, 
+                       "height" : 30};
 };
 
 barcode.ContextualItem.prototype ={
@@ -30,6 +34,10 @@ barcode.ContextualItem.prototype ={
     clickEvent : function (evt){
         if(evt.pageX > this.x && evt.pageX < (this.x + this. width)
             && evt.pageY > this.y && evt.pageY < (this.y + this.height)){
+            if (evt.pageX > this.buttonCoord.x && evt.pageX < (this.buttonCoord.x + this.buttonCoord.width)
+            && evt.pageY > this.buttonCoord.y && evt.pageY < (this.buttonCoord.y + this.buttonCoord.height)){
+                console.log("quip");
+            }
             return true;
         }else{
             return false;
@@ -93,13 +101,13 @@ barcode.ContextualItem.prototype ={
     renderEquipButton : function(){
         this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
             this.ctx.beginPath();
-            this.ctx.rect(this.x +30 ,this.y + 150 ,80, 30);
+            this.ctx.rect(this.buttonCoord.x, this.buttonCoord.y, this.buttonCoord.width, this.buttonCoord.height);
             this.ctx.stroke(); 
 
             let text = "Equiper";
             this.ctx.fillText(text ,
-                this.x + 50, 
-                this.y + 170);
+                this.buttonCoord.x + 20, 
+                this.buttonCoord.y + 20);
     },
 
     render : function(){
