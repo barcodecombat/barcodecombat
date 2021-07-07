@@ -20,6 +20,7 @@ barcode.Item = function(){
   this.damage = [];
   this.chanceToBlock = 0;
   this.lightradius = 0;
+  this.status = barcode.C.ITEM_UNWEARED;
 };
 
 barcode.Item.prototype = {
@@ -72,6 +73,7 @@ barcode.Item.prototype = {
     }else if (this.typeItem === barcode.C.TYPE_ITEM_SHIELD){
       this.equipShield(creature);
     }
+    this.status = barcode.C.ITEM_WEARED;
   },
 
   equipProperties(creature){
@@ -130,6 +132,7 @@ barcode.Item.prototype = {
     }else if (this.typeItem === barcode.C.TYPE_ITEM_SHIELD){
       this.unequipShield(creature);
     }
+    this.status = barcode.C.ITEM_UNWEARED;
   },
 
   loadShield : function(src,creature){

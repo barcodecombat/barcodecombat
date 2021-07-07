@@ -47,6 +47,9 @@ barcode.C = Object.freeze({
 
   ANIMATION_SPEED : 50,
 
+  ITEM_UNWEARED : 0,
+  ITEM_WEARED : 1,
+
 
   COLOR_CONTEXTUAL : "#2F4f4f",
   COLOR_TEXT : "#deebf8",
