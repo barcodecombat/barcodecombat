@@ -203,11 +203,11 @@ barcode.Item.prototype = {
        this.spriteset,
        0,
        0,
-       32,
-       32,
+       barcode.C.TILE_SIZE_PC,
+       barcode.C.TILE_SIZE_PC,
        x,
        y,
-       32,
-       32);
+       barcode.C.TILE_SIZE_PC,
+       barcode.C.TILE_SIZE_PC);
   },
 };

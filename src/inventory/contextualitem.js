@@ -2,18 +2,18 @@
 var barcode = barcode || {};
 
 barcode.ContextualItem = function (){
-  this.active = false;
-  this.ctx = null;
-  this.item = null;
-  this.height = 200;
-  this.width = 150;
-  this.x = 200;
-  this.y = 150;
-  this.propertiesY = 0;
-  this.buttonCoord = { "x" : this.x +30 ,
-                       "y" : this.y + 150 ,
-                       "width" : 80, 
-                       "height" : 30};
+    this.active = false;
+    this.ctx = null;
+    this.item = null;
+    this.height = 200;
+    this.width = 150;
+    this.x = 200;
+    this.y = 150;
+    this.propertiesY = 0;
+    this.buttonCoord = { "x" : this.x +30 ,
+                    "y" : this.y + 150 ,
+                    "width" : 80, 
+                    "height" : 30};
 };
 
 barcode.ContextualItem.prototype ={
