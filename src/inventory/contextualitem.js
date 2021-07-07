@@ -31,12 +31,20 @@ barcode.ContextualItem.prototype ={
         this.active = false;
     },
 
+    equipItem : function(){
+        var item = this.item.item;
+        if (typeof item !== "undefined"){
+            barcode.gameEngine.character.equipItem(item);
+            this.hideMenu();
+        }
+    },
+
     clickEvent : function (evt){
         if(evt.pageX > this.x && evt.pageX < (this.x + this. width)
             && evt.pageY > this.y && evt.pageY < (this.y + this.height)){
             if (evt.pageX > this.buttonCoord.x && evt.pageX < (this.buttonCoord.x + this.buttonCoord.width)
             && evt.pageY > this.buttonCoord.y && evt.pageY < (this.buttonCoord.y + this.buttonCoord.height)){
-                console.log("quip");
+                barcode.contextualItem.equipItem();
             }
             return true;
         }else{
