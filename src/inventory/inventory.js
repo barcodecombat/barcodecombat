@@ -68,7 +68,6 @@ barcode.Inventory.prototype ={
   },
 
   renderItemInInventory : function(){
-    this.items = [];
     for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
       let item = barcode.gameEngine.character.inventory[i];
       item.render(100+i*32,400);
@@ -80,6 +79,38 @@ barcode.Inventory.prototype ={
       };
       this.items.push(itemJs);
     }
+  },
+
+  renderItemWeared : function(){
+    var _this = this;
+    barcode.gameEngine.character.items.forEach(function(item){
+      let itemJs = {};
+      if (item.typeItem === barcode.C.TYPE_ITEM_WEAPON){
+        item.render(260,200);
+        itemJs = {
+          "x" : 160 ,
+          "y" : 200,
+          "item" : item
+        };
+        _this.items.push(itemJs);
+      }else if (item.typeItem === barcode.C.TYPE_ITEM_SHIELD){
+        item.render(160,200);
+        itemJs = {
+          "x" : 260 ,
+          "y" : 200,
+          "item" : item
+        };
+        _this.items.push(itemJs);
+      }else if (item.typeItem === barcode.C.TYPE_ITEM_JEWEL){
+        item.render(210,90);
+        itemJs = {
+          "x" : 210 ,
+          "y" : 90,
+          "item" : item
+        };
+        _this.items.push(itemJs);
+      }
+    });
   },
 
   clickEvent : function(evt){
@@ -103,10 +134,12 @@ barcode.Inventory.prototype ={
 
 
   render : function(){
+    this.items = [];
     this.renderEmptyBag();
     this.renderBody();
     this.renderBoxOnBody();
     this.renderItemInInventory();
+    this.renderItemWeared();
     barcode.contextualItem.render();
   },
 
