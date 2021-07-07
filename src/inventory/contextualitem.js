@@ -34,7 +34,11 @@ barcode.ContextualItem.prototype ={
     equipItem : function(){
         var item = this.item.item;
         if (typeof item !== "undefined"){
-            barcode.gameEngine.character.equipItem(item);
+            if(barcode.gameEngine.character.isItemWeared(item)){
+                barcode.gameEngine.character.unequipItem(item);
+            }else{
+                barcode.gameEngine.character.equipItem(item);
+            }
             this.hideMenu();
         }
     },
@@ -108,14 +112,16 @@ barcode.ContextualItem.prototype ={
 
     renderEquipButton : function(){
         this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-            this.ctx.beginPath();
-            this.ctx.rect(this.buttonCoord.x, this.buttonCoord.y, this.buttonCoord.width, this.buttonCoord.height);
-            this.ctx.stroke(); 
-
-            let text = "Equiper";
-            this.ctx.fillText(text ,
-                this.buttonCoord.x + 20, 
-                this.buttonCoord.y + 20);
+        this.ctx.beginPath();
+        this.ctx.rect(this.buttonCoord.x, this.buttonCoord.y, this.buttonCoord.width, this.buttonCoord.height);
+        this.ctx.stroke(); 
+        let text = "Equiper";
+        if (this.item.item.status === barcode.C.ITEM_WEARED){
+            text = "Retirer";
+        }
+        this.ctx.fillText(text ,
+            this.buttonCoord.x + 20, 
+            this.buttonCoord.y + 20);
     },
 
     render : function(){

@@ -88,7 +88,7 @@ barcode.Inventory.prototype ={
       if (item.typeItem === barcode.C.TYPE_ITEM_WEAPON){
         item.render(260,200);
         itemJs = {
-          "x" : 160 ,
+          "x" : 260 ,
           "y" : 200,
           "item" : item
         };
@@ -96,7 +96,7 @@ barcode.Inventory.prototype ={
       }else if (item.typeItem === barcode.C.TYPE_ITEM_SHIELD){
         item.render(160,200);
         itemJs = {
-          "x" : 260 ,
+          "x" : 160 ,
           "y" : 200,
           "item" : item
         };
