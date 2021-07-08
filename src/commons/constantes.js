@@ -27,6 +27,9 @@ barcode.C = Object.freeze({
   RARITY_COMMON : 0,
   RARITY_STEP : 2,
 
+  //POTIONS
+  POTION_TYPE_HEAL : 1,
+
   //Defaut character value
   DEFAULT_MIN_DEGAT : 1,
   DEFAULT_MAX_DEGAT : 1,
@@ -76,6 +79,7 @@ barcode.C = Object.freeze({
   TYPE_ITEM_WEAPON : 1,
   TYPE_ITEM_SHIELD : 2,
   TYPE_ITEM_ARMOR : 3,
+  TYPE_ITEM_POTION : 4,
 
   // type item effects
   PROPERTY_ITEM_LIFE_REGENERATION : 0,
