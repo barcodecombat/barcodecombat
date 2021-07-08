@@ -22,10 +22,10 @@ barcode.Inventory.prototype ={
       for (let j=0;j<6;j++){
         this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
         this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
-        this.ctx.fillRect(100+i*barcode.C.TILE_SIZE_PC,400+j*barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC);
+        this.ctx.fillRect(100+i*barcode.gameEngine.tileSize,400+j*barcode.gameEngine.tileSize,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
         this.ctx.beginPath();
         this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
-        this.ctx.rect(100+i*barcode.C.TILE_SIZE_PC,400+j*barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC);
+        this.ctx.rect(100+i*barcode.gameEngine.tileSize,400+j*barcode.gameEngine.tileSize,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
         this.ctx.stroke();
       }
     }
@@ -51,36 +51,36 @@ barcode.Inventory.prototype ={
     // main gauche
     this.ctx.beginPath();
     this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.leftHand.x,this.bodyItems.leftHand.y,barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC);
+    this.ctx.rect(this.bodyItems.leftHand.x,this.bodyItems.leftHand.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
     this.ctx.stroke();  
     // main droite
     this.ctx.beginPath();
     this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.rightHand.x,this.bodyItems.rightHand.y,barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC);
+    this.ctx.rect(this.bodyItems.rightHand.x,this.bodyItems.rightHand.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
     this.ctx.stroke();  
     // cou
     this.ctx.beginPath();
     this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.neck.x,this.bodyItems.neck.y,barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC);
+    this.ctx.rect(this.bodyItems.neck.x,this.bodyItems.neck.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
     this.ctx.stroke(); 
     //potions
     this.ctx.beginPath();
     this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.potions1.x,this.bodyItems.potions1.y,barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC);
+    this.ctx.rect(this.bodyItems.potions1.x,this.bodyItems.potions1.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
     this.ctx.stroke(); 
     this.ctx.beginPath();
     this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.potions2.x,this.bodyItems.potions2.y,barcode.C.TILE_SIZE_PC,barcode.C.TILE_SIZE_PC);
+    this.ctx.rect(this.bodyItems.potions2.x,this.bodyItems.potions2.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
     this.ctx.stroke(); 
   },
 
   renderItemInInventory : function(){
     for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
       let item = barcode.gameEngine.character.inventory[i];
-      item.render(100+i*barcode.C.TILE_SIZE_PC,400);
+      item.render(100+i*barcode.gameEngine.tileSize,400);
       let itemJs = {};
       itemJs = {
-        "x" : 100 + i*barcode.C.TILE_SIZE_PC,
+        "x" : 100 + i*barcode.gameEngine.tileSize,
         "y" : 400,
         "item" : item
       };
@@ -124,8 +124,8 @@ barcode.Inventory.prototype ={
     let clicked = false;
     for (let i=0; i < this.items.length; i++){
       let item = this.items[i];
-      if (evt.pageX >= (item.x) && evt.pageX <=(item.x + barcode.C.TILE_SIZE_PC)
-        && evt.pageY >= (item.y) && evt.pageY <= (item.y+barcode.C.TILE_SIZE_PC)){
+      if (evt.pageX >= (item.x) && evt.pageX <=(item.x + barcode.gameEngine.tileSize)
+        && evt.pageY >= (item.y) && evt.pageY <= (item.y+barcode.gameEngine.tileSize)){
           barcode.contextualItem.showMenu();
           barcode.contextualItem.item = item;
           clicked = true;
