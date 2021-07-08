@@ -35,6 +35,10 @@ barcode.C = Object.freeze({
   DEFAULT_RANGE_ATTACK : 64,
   DEFAULT_HITPOINT : 100,
 
+//ANimation
+  ANIMATION_SLASH_EPEE : 1,
+  ANIMATION_BLOOD : 2,
+
   //direction
   DIRECTION_UP :0,
   DIRECTION_DOWN :3,

@@ -13,13 +13,22 @@ barcode.Animation = function(){
   this.spriteset = null;
   this.typeAnimation = barcode.C.TYPE_ANIMATION_STATIC;
   this.layerToDraw = undefined;
+  this.tilesets = {};
 };
 
 barcode.Animation.prototype = {
 
-  init : function(){
-    this.spriteset = new Image();
-    this.spriteset.src = "assets/tileset/blood.png";
+  init : function(idAnimation){
+    var src = barcode.animations[idAnimation];
+    if (typeof(src) !== "undefined"){
+      this.tx = src.x;
+      this.ty = src.y;
+      this.size = src.size;
+      this.x = 0;
+      this.y = 0;
+      this.spriteset = barcode.tileset.get(src.tileset);
+    }
+    
     let d = new Date();
     this.startTime = d.getTime();
   },
