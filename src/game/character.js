@@ -225,7 +225,7 @@ barcode.Character.prototype = {
       animation.init(barcode.C.ANIMATION_SLASH_EPEE);
       let decalageAnimation = Math.floor(Math.random() * 6)
       animation.x = mob.x+(barcode.gameEngine.tileSize/2 -6 + decalageAnimation);
-      animation.y = mob.y;
+      animation.y = mob.y -6 + decalageAnimation;
       animation.duration = 50;
       animation.layerToDraw = barcode.canvas.canvasAnimation.getContext("2d");
       barcode.gameDonjon.animations.push(animation);
