@@ -223,9 +223,10 @@ barcode.Character.prototype = {
       mob.hit(damage);
       var animation = new barcode.Animation();
       animation.init(barcode.C.ANIMATION_SLASH_EPEE);
-      animation.x = mob.x+barcode.gameEngine.tileSize;
+      let decalageAnimation = Math.floor(Math.random() * 6)
+      animation.x = mob.x+(barcode.gameEngine.tileSize/2 -6 + decalageAnimation);
       animation.y = mob.y;
-      animation.duration = 500;
+      animation.duration = 50;
       animation.layerToDraw = barcode.canvas.canvasAnimation.getContext("2d");
       barcode.gameDonjon.animations.push(animation);
 
