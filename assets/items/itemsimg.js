@@ -46,4 +46,9 @@ barcode.itemsimg = {
     "size" : 32,
     "name" : "Amulette"
   },
+  10:{
+    "tileset" : "assets/items/potionvie.png",
+    "size" : 32,
+    "name" : "potion vie"
+  },
 };

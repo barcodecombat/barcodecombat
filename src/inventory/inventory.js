@@ -116,6 +116,14 @@ barcode.Inventory.prototype ={
           "item" : item
         };
         _this.items.push(itemJs);
+      }else if (item.typeItem === barcode.C.TYPE_ITEM_POTION){
+        item.render(_this.bodyItems.potions1.x,_this.bodyItems.potions1.y);
+        itemJs = {
+          "x" : _this.bodyItems.potions1.x ,
+          "y" : _this.bodyItems.potions1.y,
+          "item" : item
+        };
+        _this.items.push(itemJs);
       }
     });
   },

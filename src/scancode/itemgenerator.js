@@ -35,7 +35,7 @@ barcode.itemgenerator.prototype = {
   },
 
   typeCheck : function(){
-    let typeItem = Math.round(Math.random()*2);
+    let typeItem = Math.round(Math.random()*4);
     return typeItem;
   },
 
@@ -69,6 +69,11 @@ barcode.itemgenerator.prototype = {
     this.item.name = barcode.itemsimg[this.item.idimg].name;
   },
 
+  generateCaractPotion : function(){
+    this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
+    this.item.name = barcode.itemsimg[this.item.idimg].name;
+  },
+
   generateCaract : function(){
     if (this.item.typeItem === barcode.C.TYPE_ITEM_WEAPON ){
       this.generateCaractWeapon();
@@ -76,6 +81,8 @@ barcode.itemgenerator.prototype = {
       this.generateCaractShield();
     }else if (this.item.typeItem === barcode.C.TYPE_ITEM_JEWEL ){
       this.generateCaractNecklace();
+    }else if(this.item.typeItem === barcode.C.TYPE_ITEM_POTION){
+      this.generateCaractPotion();
     }
   },
 

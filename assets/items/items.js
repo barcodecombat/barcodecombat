@@ -62,6 +62,6 @@ barcode.items = {
     "name" : "Potiuon de vie",
     "potiontype" : barcode.C.POTION_TYPE_HEAL,
     "value" : 20,
-    "idimg" : 1
+    "idimg" : 10
   }
 };
