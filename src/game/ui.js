@@ -4,6 +4,11 @@ var barcode = barcode || {};
 barcode.UI = function(){
   this.ctx = undefined;
   this.mob = undefined;
+
+  this.ItemsToOver =  {
+    "potions1" : {"x" : 500, "y" : window.innerHeight-90 },
+    "potions2" : {"x" : 550, "y" : window.innerHeight-90 },
+  } 
 };
 
 barcode.UI.prototype = {
@@ -106,6 +111,17 @@ barcode.UI.prototype = {
        barcode.gameEngine.tileSize);
   },
 
+  renderPotionBelt : function(){
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
+    this.ctx.rect(this.ItemsToOver.potions1.x,this.ItemsToOver.potions1.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
+    this.ctx.stroke(); 
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
+    this.ctx.rect(this.ItemsToOver.potions2.x,this.ItemsToOver.potions2.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
+    this.ctx.stroke(); 
+  },
+
   render : function(){
     if (typeof this.ctx === 'undefined')
       this.ctx  = barcode.canvas.canvasAnimation.getContext("2d");
@@ -113,5 +129,6 @@ barcode.UI.prototype = {
     this.renderLifeGauge();
     this.renderXp();
     this.drawMonsterGauge();
+    this.renderPotionBelt();
   }
 };
