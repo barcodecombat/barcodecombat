@@ -10,7 +10,23 @@ barcode.Inventory = function (){
     "neck" : {"x" : 210, "y" : 90 },
     "potions1" : {"x" : 150, "y" : 350 },
     "potions2" : {"x" : 190, "y" : 350 },
-  } 
+    "gant" : {"x" : 190, "y" : 350 },
+    "botte" : {"x" : 190, "y" : 350 },
+    "armure" : {"x" : 190, "y" : 350 },
+  };
+  this.bodyItems2 =  [
+    {"typeItem" : barcode.C.TYPE_ITEM_SHIELD, "position" : {"x" : 160, "y" : 200 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 260, "y" : 200 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_JEWEL, "position" : {"x" : 210, "y" : 90 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_POTION, "position" : {"x" : 150, "y" : 350 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_POTION, "position" : {"x" : 190, "y" : 350 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 210, "y" : 300 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 210, "y" : 150 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 120, "y" : 200 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 210, "y" : 40 }},
+  ];
+     
+
 };
 
 barcode.Inventory.prototype ={
@@ -48,31 +64,15 @@ barcode.Inventory.prototype ={
 
   renderBoxOnBody : function(){
     this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
-    // main gauche
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.leftHand.x,this.bodyItems.leftHand.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
-    this.ctx.stroke();  
-    // main droite
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.rightHand.x,this.bodyItems.rightHand.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
-    this.ctx.stroke();  
-    // cou
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.neck.x,this.bodyItems.neck.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
-    this.ctx.stroke(); 
-    //potions
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.potions1.x,this.bodyItems.potions1.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
-    this.ctx.stroke(); 
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
-    this.ctx.rect(this.bodyItems.potions2.x,this.bodyItems.potions2.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
-    this.ctx.stroke(); 
+    var _this = this;
+    this.bodyItems2.forEach(function(box){
+      _this.ctx.beginPath();
+      _this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+      _this.ctx.rect(box.position.x,box.position.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
+      _this.ctx.stroke();  
+    });
   },
+
 
   renderItemInInventory : function(){
     for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
