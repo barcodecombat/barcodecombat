@@ -9,6 +9,8 @@ barcode.UI = function(){
     "potions1" : {"x" : 500, "y" : window.innerHeight-90 },
     "potions2" : {"x" : 550, "y" : window.innerHeight-90 },
   } 
+
+  this.potions = [];
 };
 
 barcode.UI.prototype = {
@@ -111,6 +113,21 @@ barcode.UI.prototype = {
        barcode.gameEngine.tileSize);
   },
 
+  renderPotionWeared : function(){
+    this.potions = [];
+    for (let i=0; i < barcode.gameEngine.character.items.length ; i++){
+      if (barcode.gameEngine.character.items[i].typeItem === barcode.C.TYPE_ITEM_POTION){
+        barcode.gameEngine.character.items[i].render(this.ItemsToOver.potions1.x,this.ItemsToOver.potions1.y);
+        let potionJs = {
+          "potion" : barcode.gameEngine.character.items[i],
+          "x" : this.ItemsToOver.potions1.x,
+          "y": this.ItemsToOver.potions1.y
+        }
+        this.potions.push(potionJs);
+      }
+    }
+  },
+
   renderPotionBelt : function(){
     this.ctx.beginPath();
     this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
@@ -130,5 +147,6 @@ barcode.UI.prototype = {
     this.renderXp();
     this.drawMonsterGauge();
     this.renderPotionBelt();
+    this.renderPotionWeared();
   }
 };
