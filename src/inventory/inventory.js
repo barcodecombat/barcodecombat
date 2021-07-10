@@ -4,26 +4,17 @@ var barcode = barcode || {};
 barcode.Inventory = function (){
   this.ctx = null;
   this.items = [];
-  this.bodyItems =  {
-    "leftHand" : {"x" : 160, "y" : 200 },
-    "rightHand" : {"x" : 260, "y" : 200 },
-    "neck" : {"x" : 210, "y" : 90 },
-    "potions1" : {"x" : 150, "y" : 350 },
-    "potions2" : {"x" : 190, "y" : 350 },
-    "gant" : {"x" : 190, "y" : 350 },
-    "botte" : {"x" : 190, "y" : 350 },
-    "armure" : {"x" : 190, "y" : 350 },
-  };
-  this.bodyItems2 =  [
+
+  this.bodyItems =  [
     {"typeItem" : barcode.C.TYPE_ITEM_SHIELD, "position" : {"x" : 160, "y" : 200 }},
     {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 260, "y" : 200 }},
     {"typeItem" : barcode.C.TYPE_ITEM_JEWEL, "position" : {"x" : 210, "y" : 90 }},
     {"typeItem" : barcode.C.TYPE_ITEM_POTION, "position" : {"x" : 150, "y" : 350 }},
     {"typeItem" : barcode.C.TYPE_ITEM_POTION, "position" : {"x" : 190, "y" : 350 }},
-    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 210, "y" : 300 }},
-    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 210, "y" : 150 }},
-    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 120, "y" : 200 }},
-    {"typeItem" : barcode.C.TYPE_ITEM_WEAPON, "position" : {"x" : 210, "y" : 40 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_BOOT, "position" : {"x" : 210, "y" : 300 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_ARMOR, "position" : {"x" : 210, "y" : 150 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_GLOVE, "position" : {"x" : 120, "y" : 200 }},
+    {"typeItem" : barcode.C.TYPE_ITEM_HELMET, "position" : {"x" : 210, "y" : 40 }},
   ];
      
 
@@ -65,7 +56,7 @@ barcode.Inventory.prototype ={
   renderBoxOnBody : function(){
     this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
     var _this = this;
-    this.bodyItems2.forEach(function(box){
+    this.bodyItems.forEach(function(box){
       _this.ctx.beginPath();
       _this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
       _this.ctx.rect(box.position.x,box.position.y,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
@@ -91,45 +82,26 @@ barcode.Inventory.prototype ={
   renderItemWeared : function(){
     var _this = this;
     barcode.gameEngine.character.items.forEach(function(item){
-      let itemJs = {};
-      if (item.typeItem === barcode.C.TYPE_ITEM_WEAPON){
-        item.render(_this.bodyItems.rightHand.x,_this.bodyItems.rightHand.y);
-        itemJs = {
-          "x" : _this.bodyItems.rightHand.x ,
-          "y" : _this.bodyItems.rightHand.y,
-          "item" : item
-        };
-        _this.items.push(itemJs);
-      }else if (item.typeItem === barcode.C.TYPE_ITEM_SHIELD){
-        item.render(_this.bodyItems.leftHand.x,_this.bodyItems.leftHand.y);
-        itemJs = {
-          "x" : _this.bodyItems.leftHand.x ,
-          "y" : _this.bodyItems.leftHand.y,
-          "item" : item
-        };
-        _this.items.push(itemJs);
-      }else if (item.typeItem === barcode.C.TYPE_ITEM_JEWEL){
-        item.render(_this.bodyItems.neck.x,_this.bodyItems.neck.y);
-        itemJs = {
-          "x" : _this.bodyItems.neck.x ,
-          "y" : _this.bodyItems.neck.y,
-          "item" : item
-        };
-        _this.items.push(itemJs);
-      }else if (item.typeItem === barcode.C.TYPE_ITEM_POTION){
-        item.render(_this.bodyItems.potions1.x,_this.bodyItems.potions1.y);
-        itemJs = {
-          "x" : _this.bodyItems.potions1.x ,
-          "y" : _this.bodyItems.potions1.y,
-          "item" : item
-        };
-        _this.items.push(itemJs);
+      var itemJs = {};
+      for (let i=0;i<_this.bodyItems.length;i++){
+        let posItem = _this.bodyItems[i];
+        if (posItem.typeItem === item.typeItem){
+          item.render(posItem.position.x,posItem.position.y);
+          itemJs = {
+            "x" : posItem.position.x ,
+            "y" : posItem.position.y,
+            "item" : item
+          };
+          _this.items.push(itemJs);
+          break;
+        }
       }
     });
   },
 
   clickEvent : function(evt){
     let clicked = false;
+    //TODO : changer ce parcours pour utiliser le tableau des positions
     for (let i=0; i < this.items.length; i++){
       let item = this.items[i];
       if (evt.pageX >= (item.x) && evt.pageX <=(item.x + barcode.gameEngine.tileSize)

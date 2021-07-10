@@ -80,6 +80,9 @@ barcode.C = Object.freeze({
   TYPE_ITEM_SHIELD : 2,
   TYPE_ITEM_ARMOR : 3,
   TYPE_ITEM_POTION : 4,
+  TYPE_ITEM_GLOVE : 5,
+  TYPE_ITEM_BOOT : 6,
+  TYPE_ITEM_BOOT : 7,
 
   // type item effects
   PROPERTY_ITEM_LIFE_REGENERATION : 0,
