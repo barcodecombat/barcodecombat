@@ -197,6 +197,10 @@ barcode.Item.prototype = {
     }
   },
 
+  use : function(){
+    barcode.gameEngine.character.hitpoint += 20;
+  },
+
   render : function(x,y){
     var ctx = barcode.canvas.canvasAnimation.getContext("2d");
     ctx.drawImage(

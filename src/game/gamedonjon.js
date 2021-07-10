@@ -59,16 +59,18 @@ barcode.GameDonjon.prototype ={
   },
 
   clickEvent : function(evt){
-    var decor = barcode.gameDonjon.level.getTheDecorUnderMouse(evt.pageX,evt.pageY);
-    if ( decor != null){
-        var dist = calcDistance({x: decor.x*barcode.gameEngine.tileSize, y: decor.y*barcode.gameEngine.tileSize}, barcode.gameEngine.character);
-        if (dist > (barcode.gameEngine.tileSize*1.5)){
-          barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
-        }else{
-          decor.doAction();
-        }
-    }else{
-      barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
+    if (barcode.ui.clickEvent(evt) === false){
+      var decor = barcode.gameDonjon.level.getTheDecorUnderMouse(evt.pageX,evt.pageY);
+      if ( decor != null){
+          var dist = calcDistance({x: decor.x*barcode.gameEngine.tileSize, y: decor.y*barcode.gameEngine.tileSize}, barcode.gameEngine.character);
+          if (dist > (barcode.gameEngine.tileSize*1.5)){
+            barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
+          }else{
+            decor.doAction();
+          }
+      }else{
+        barcode.gameEngine.character.goToTarget(evt.pageX,evt.pageY);
+      }
     }
   },
 

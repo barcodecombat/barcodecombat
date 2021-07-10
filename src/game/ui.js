@@ -18,6 +18,19 @@ barcode.UI.prototype = {
 
   },
 
+  clickEvent : function(evt){
+    if(evt.pageY > window.innerHeight -100){
+      for (let i = 0 ; i < this.potions.length ; i++){
+        if (evt.pageX > this.potions[i].x && evt.pageX < (this.potions[i].x +32)
+        && evt.pageY > this.potions[i].y && evt.pageY < (this.potions[i].y + 32)){
+          this.potions[i].potion.use();
+        }
+      }
+      return true;
+    }
+    return false;
+  },
+
   drawRect : function(){
     this.ctx.beginPath();
     this.ctx.fillStyle = barcode.C.FT_COLOR_BROWN;
