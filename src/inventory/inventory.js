@@ -16,8 +16,7 @@ barcode.Inventory = function (){
     {"typeItem" : barcode.C.TYPE_ITEM_GLOVE, "position" : {"x" : 120, "y" : 200 }},
     {"typeItem" : barcode.C.TYPE_ITEM_HELMET, "position" : {"x" : 210, "y" : 40 }},
   ];
-     
-
+    
 };
 
 barcode.Inventory.prototype ={
