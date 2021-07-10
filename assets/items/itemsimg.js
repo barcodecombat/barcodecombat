@@ -51,4 +51,34 @@ barcode.itemsimg = {
     "size" : 32,
     "name" : "potion vie"
   },
+  11:{
+    "tileset" : "assets/items/epee4.png",
+    "size" : 32,
+    "name" : "epee 4"
+  },
+  12:{
+    "tileset" : "assets/items/epee5.png",
+    "size" : 32,
+    "name" : "epee 5"
+  },
+  13:{
+    "tileset" : "assets/items/armure1.png",
+    "size" : 32,
+    "name" : "armure 1"
+  },
+  14:{
+    "tileset" : "assets/items/gant1.png",
+    "size" : 32,
+    "name" : "gant 1"
+  },
+  15:{
+    "tileset" : "assets/items/botte1.png",
+    "size" : 32,
+    "name" : "botte 1"
+  },
+  16:{
+    "tileset" : "assets/items/bouclier4.png",
+    "size" : 32,
+    "name" : "bouclier4"
+  },
 };
