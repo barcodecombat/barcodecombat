@@ -90,6 +90,21 @@ barcode.ContextualItem.prototype ={
         this.propertiesY += 10;
     },
 
+    renderItemPotion : function(){
+        let text = "Type de potion : Soin";
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+
+        this.propertiesY += 10;
+        text = "Valeur  : " + this.item.item.value;
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+
+        this.propertiesY += 10;
+    },
+
     
 
     renderItem : function(){
@@ -107,6 +122,8 @@ barcode.ContextualItem.prototype ={
             this.renderItemWeapon();
         }else if (this.item.item.typeItem === barcode.C.TYPE_ITEM_SHIELD){
             this.renderItemShield();
+        }else if(this.item.item.typeItem === barcode.C.TYPE_ITEM_POTION){
+            this.renderItemPotion();
         }
     },
 
