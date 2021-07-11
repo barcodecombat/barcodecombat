@@ -80,6 +80,7 @@ barcode.Character.prototype = {
     }
   },
 
+
   removeTicket : function(){
     this.tickets.splice(0,1);
   },
@@ -139,6 +140,7 @@ barcode.Character.prototype = {
 
   addHitPoint : function(hp){
     this.hitpoint += hp;
+    this.hitpoint = this.hitpoint > this.maxHitPoint ? this.maxHitPoint : this.hitpoint;
     var ft = new barcode.FloatingText();
     ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_GREEN);
     barcode.gameDonjon.floatingText.push(ft);

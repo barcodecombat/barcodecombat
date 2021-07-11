@@ -198,7 +198,8 @@ barcode.Item.prototype = {
   },
 
   use : function(){
-    barcode.gameEngine.character.hitpoint += 20;
+    //TODO : utilsiation potion en dur :()
+    barcode.gameEngine.character.addHitPoint(20);
   },
 
   render : function(x,y){
