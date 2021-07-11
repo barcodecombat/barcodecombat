@@ -72,6 +72,8 @@ barcode.itemgenerator.prototype = {
   generateCaractPotion : function(){
     this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
     this.item.name = barcode.itemsimg[this.item.idimg].name;
+    this.item.typePotion = barcode.C.POTION_TYPE_HEALING;
+    this.item.value = Math.floor(Math.random()*20);
   },
 
   generateCaract : function(){

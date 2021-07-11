@@ -57,6 +57,8 @@ barcode.C = Object.freeze({
   ITEM_UNWEARED : 0,
   ITEM_WEARED : 1,
 
+  //POTION TYPE
+  POTION_TYPE_HEALING : 1,
 
   COLOR_CONTEXTUAL : "#2F4f4f",
   COLOR_TEXT : "#deebf8",

@@ -20,6 +20,8 @@ barcode.Item = function(){
   this.damage = [];
   this.chanceToBlock = 0;
   this.lightradius = 0;
+  this.potionType = 0;
+  this.value = 0;
   this.status = barcode.C.ITEM_UNWEARED;
 };
 
@@ -146,6 +148,11 @@ barcode.Item.prototype = {
     this.damage.push(src.damage[1]);
   },
 
+  loadPotion : function(src){
+    this.typePotion = src.typePotion;
+    this.value = src.value;
+  },
+
   loadSprite : function(){
 
     if (typeof barcode.itemsimg !== "undefined"){
@@ -169,6 +176,8 @@ barcode.Item.prototype = {
       this.loadWeapon(src,creature);
     }else if (this.typeItem === barcode.C.TYPE_ITEM_SHIELD){
       this.loadShield(src,creature);
+    }else if (this.typeItem === barcode.C.TYPE_ITEM_POTION){
+      this.loadPotion(src);
     }
     this.loadProperties(src,creature);
     this.loadSprite();
@@ -199,7 +208,12 @@ barcode.Item.prototype = {
 
   use : function(){
     //TODO : utilsiation potion en dur :()
-    barcode.gameEngine.character.addHitPoint(20);
+    if (this.typeItem === barcode.C.TYPE_ITEM_POTION){
+      if (typeof (this.typePotion) !== "undefined"){
+        barcode.gameEngine.character.addHitPoint(this.value);
+      }
+    }
+    
   },
 
   render : function(x,y){
