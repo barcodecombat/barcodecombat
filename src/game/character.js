@@ -98,12 +98,23 @@ barcode.Character.prototype = {
     return true;
   },
 
+  isItemWearedByType : function(typeItem){
+    for (let i=0 ; i < this.items.length ; i++){
+      if (this.items[i].typeItem === typeItem){
+        return true;
+      }
+    }
+    return false;
+  },
+
   equipItem : function(item){
-    const index = this.inventory.indexOf(item);
-    if (index !== -1) {
-        this.inventory.splice(index, 1);
-        this.items.push(item);
-        item.equip(this);
+    if (! this.isItemWeared(item.typeItem)){
+      const index = this.inventory.indexOf(item);
+      if (index !== -1) {
+          this.inventory.splice(index, 1);
+          this.items.push(item);
+          item.equip(this);
+      }
     }
   },
 

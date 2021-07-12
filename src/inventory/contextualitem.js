@@ -13,7 +13,8 @@ barcode.ContextualItem = function (){
     this.buttonCoord = { "x" : this.x +30 ,
                     "y" : this.y + 150 ,
                     "width" : 80, 
-                    "height" : 30};
+                    "height" : 30,
+                    "state" : true};
 };
 
 barcode.ContextualItem.prototype ={
@@ -47,7 +48,8 @@ barcode.ContextualItem.prototype ={
         if(evt.pageX > this.x && evt.pageX < (this.x + this. width)
             && evt.pageY > this.y && evt.pageY < (this.y + this.height)){
             if (evt.pageX > this.buttonCoord.x && evt.pageX < (this.buttonCoord.x + this.buttonCoord.width)
-            && evt.pageY > this.buttonCoord.y && evt.pageY < (this.buttonCoord.y + this.buttonCoord.height)){
+            && evt.pageY > this.buttonCoord.y && evt.pageY < (this.buttonCoord.y + this.buttonCoord.height)
+            && this.buttonCoord.state){
                 barcode.contextualItem.equipItem();
             }
             return true;
@@ -111,6 +113,7 @@ barcode.ContextualItem.prototype ={
         this.propertiesY = this.y + 13;
         this.ctx.font = "1Opx Arial";
         this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
+        console.log(this.item.item);
         let text = this.item.item.name;
         this.ctx.fillText(text ,
             this.x + 5, 
@@ -132,6 +135,12 @@ barcode.ContextualItem.prototype ={
         this.ctx.beginPath();
         this.ctx.rect(this.buttonCoord.x, this.buttonCoord.y, this.buttonCoord.width, this.buttonCoord.height);
         this.ctx.stroke(); 
+        this.buttonCoord.state = true;
+        if (barcode.gameEngine.character.isItemWearedByType(this.item.item.typeItem)){
+            this.ctx.fillStyle = barcode.C.COLOR_GRADIANT_RED; 
+            this.buttonCoord.state = false;
+        }
+        
         let text = "Equiper";
         if (this.item.item.status === barcode.C.ITEM_WEARED){
             text = "Retirer";
