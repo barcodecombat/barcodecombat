@@ -10,6 +10,8 @@ barcode.GameDonjon = function (){
 
 barcode.GameDonjon.prototype ={
   init : function(){
+    this.floatingText = [];
+    this.animations = [];
     barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
     this.tileSet = barcode.tileset.get("assets/tileset/tileset1.png");
     this.level = new barcode.Level();
