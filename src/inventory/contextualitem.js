@@ -136,14 +136,13 @@ barcode.ContextualItem.prototype ={
         this.ctx.rect(this.buttonCoord.x, this.buttonCoord.y, this.buttonCoord.width, this.buttonCoord.height);
         this.ctx.stroke(); 
         this.buttonCoord.state = true;
-        if (barcode.gameEngine.character.isItemWearedByType(this.item.item.typeItem)){
-            this.ctx.fillStyle = barcode.C.COLOR_GRADIANT_RED; 
-            this.buttonCoord.state = false;
-        }
-        
+    
         let text = "Equiper";
         if (this.item.item.status === barcode.C.ITEM_WEARED){
             text = "Retirer";
+        }else if (barcode.gameEngine.character.isItemWearedByType(this.item.item.typeItem)){
+            this.ctx.fillStyle = barcode.C.COLOR_GRADIANT_RED; 
+            this.buttonCoord.state = false;
         }
         this.ctx.fillText(text ,
             this.buttonCoord.x + 20, 
