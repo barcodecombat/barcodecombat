@@ -35,7 +35,7 @@ barcode.itemgenerator.prototype = {
   },
 
   typeCheck : function(){
-    let typeItem = Math.round(Math.random()*4);
+    let typeItem = Math.round(Math.random()*7);
     return typeItem;
   },
 

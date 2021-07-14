@@ -81,4 +81,9 @@ barcode.itemsimg = {
     "size" : 32,
     "name" : "bouclier4"
   },
+  17:{
+    "tileset" : "assets/items/casque1.png",
+    "size" : 32,
+    "name" : "casque1"
+  },
 };
