@@ -35,7 +35,7 @@ barcode.itemgenerator.prototype = {
   },
 
   typeCheck : function(){
-    let typeItem = Math.round(Math.random()*7);
+    let typeItem = Math.floor(Math.random()*8);
     return typeItem;
   },
 
@@ -61,6 +61,9 @@ barcode.itemgenerator.prototype = {
   },
 
   generateCaractNecklace : function(){
+  },
+
+  generateCaractArmor : function(){
   },
 
   generateCaractPotion : function(){
