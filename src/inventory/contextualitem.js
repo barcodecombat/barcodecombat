@@ -113,7 +113,6 @@ barcode.ContextualItem.prototype ={
         this.propertiesY = this.y + 13;
         this.ctx.font = "1Opx Arial";
         this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
-        console.log(this.item.item);
         let text = this.item.item.name;
         this.ctx.fillText(text ,
             this.x + 5, 

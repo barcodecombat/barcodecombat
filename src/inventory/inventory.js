@@ -65,16 +65,23 @@ barcode.Inventory.prototype ={
 
 
   renderItemInInventory : function(){
+    let iterVert=0;
+    let iterhoriz=0;
     for (let i=0 ; i < barcode.gameEngine.character.inventory.length ; i++){
       let item = barcode.gameEngine.character.inventory[i];
-      item.render(100+i*barcode.gameEngine.tileSize,400);
+      item.render(100+iterhoriz*barcode.gameEngine.tileSize,400 +barcode.gameEngine.tileSize*iterVert);
       let itemJs = {};
       itemJs = {
-        "x" : 100 + i*barcode.gameEngine.tileSize,
-        "y" : 400,
+        "x" : 100 + iterhoriz*barcode.gameEngine.tileSize,
+        "y" : 400 +barcode.gameEngine.tileSize*iterVert,
         "item" : item
       };
       this.items.push(itemJs);
+      iterhoriz+=1;
+      if (iterhoriz%11 ===10){
+        iterVert+=1;
+        iterhoriz=0;
+      }
     }
   },
 
