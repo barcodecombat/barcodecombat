@@ -56,7 +56,6 @@ barcode.ContextualItem.prototype ={
         }else{
             return false;
         }
-        
     },
 
     renderItemWeapon : function(){
@@ -107,13 +106,32 @@ barcode.ContextualItem.prototype ={
         this.propertiesY += 10;
     },
 
-    
+    renderProperties : function(){
+        var _this = this;
+        this.item.item.properties.forEach(function(prop){
+            let text = "";
+            if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_ICE){
+                text = "Degat elementaire de glace : ";
+            }
+            text += prop.value;
+            _this.ctx.fillText(text ,
+                              _this.x + 5, 
+                              _this.propertiesY);
+            _this.propertiesY += 20;
+        });
+    },
 
     renderItem : function(){
+        this.chooseFontColor();
         this.propertiesY = this.y + 13;
         this.ctx.font = "1Opx Arial";
-        this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
         let text = this.item.item.name;
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+        
+        this.propertiesY += 20;
+        text = "rarete : " +  this.item.item.rarity;
         this.ctx.fillText(text ,
             this.x + 5, 
             this.propertiesY);
@@ -127,6 +145,8 @@ barcode.ContextualItem.prototype ={
         }else if(this.item.item.typeItem === barcode.C.TYPE_ITEM_POTION){
             this.renderItemPotion();
         }
+
+        this.renderProperties();
     },
 
     renderEquipButton : function(){
@@ -135,7 +155,7 @@ barcode.ContextualItem.prototype ={
         this.ctx.rect(this.buttonCoord.x, this.buttonCoord.y, this.buttonCoord.width, this.buttonCoord.height);
         this.ctx.stroke(); 
         this.buttonCoord.state = true;
-    
+        this.chooseFontColor();
         let text = "Equiper";
         if (this.item.item.status === barcode.C.ITEM_WEARED){
             text = "Retirer";
@@ -148,12 +168,29 @@ barcode.ContextualItem.prototype ={
             this.buttonCoord.y + 20);
     },
 
+    chooseFontColor : function(){
+        if (this.item.item.rarity === barcode.C.RARITY_COMMON){
+            this.ctx.fillStyle = barcode.C.COLOR_TURQUOISE;
+        }else if  (this.item.item.rarity === barcode.C.RARITY_UNCOMMON){
+            this.ctx.fillStyle =  barcode.C.COLOR_CONTEXTUAL;
+        }
+    },
+
+    renderBoxColorContextual : function(){
+        if (this.item.item.rarity === barcode.C.RARITY_COMMON){
+            this.ctx.fillStyle ="grey";
+            this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
+        }else if  (this.item.item.rarity === barcode.C.RARITY_UNCOMMON){
+            this.ctx.fillStyle =  barcode.C.COLOR_TURQUOISE;
+            this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+        }
+    },
+
     render : function(){
         if (this.item !== null && this.active === true){
             this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
-            this.ctx.fillStyle = barcode.C.COLOR_TURQUOISE;
+            this.renderBoxColorContextual();
             this.ctx.fillRect(this.x,this.y,this.width,this.height);
-            this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
             this.ctx.beginPath();
             this.ctx.rect(this.x,this.y,this.width,this.height);
             this.ctx.stroke(); 
