@@ -134,7 +134,7 @@ barcode.Character.prototype = {
   },
 
   loadFromPreset : function(){
-    this.sprite = "assets/sprites/fille.png";
+    this.sprite = "assets/sprites/rose.png";
     this.spriteset = barcode.tileset.get(this.sprite);
     let ticket = new barcode.Ticket();
     this.tickets.push(ticket);

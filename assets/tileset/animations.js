@@ -18,5 +18,13 @@ barcode.animations = {
         "x" : 319,
         "y" : 32,
         "tileset" : "assets/tileset/blood.png",
-        }
+    },
+    "3":
+    {
+      "size":32,
+      "x" : 544,
+      "y" : 3616,
+      "name" : "ice",
+      "tileset" : "assets/tileset/murmures.png",
+    }
 };
