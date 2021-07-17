@@ -30,7 +30,7 @@ barcode.Monster.prototype = {
   }
   ,
   init : function(src){
-    this.spriteset = barcode.tileset.get("assets/sprites/bolt.png");
+    this.spriteset = barcode.tileset.get("assets/sprites/EnemySpriteSheet1.png");
   },
 
   hit: function(hp){
