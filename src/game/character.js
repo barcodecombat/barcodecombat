@@ -67,6 +67,7 @@ barcode.Character.prototype = {
       src.items.forEach(function(idTemplate){
         let tempItem = new barcode.Item();
         tempItem.load(idTemplate,_this);
+        tempItem.status = barcode.C.ITEM_WEARED;
         _this.items.push(tempItem);
       })
     }
