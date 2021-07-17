@@ -94,6 +94,7 @@ barcode.C = Object.freeze({
   PROPERTY_ITEM_ATTACK_SPEED_MODIFIER : 4,
   PROPERTY_ITEM_LIGHT_RADIUS : 5,
   PROPERTY_ITEM_ATTACK_ELEMENT_ICE : 6,
+  PROPERTY_ITEM_FREEZE : 106,
 
   //Floating text color
   FT_COLOR_RED : "red",
@@ -125,4 +126,5 @@ barcode.C = Object.freeze({
   DISTANCE_MOB_SEE_PLAYER : 300,
   DELAY_BETWEEN_TWO_PATH_CREATION : 2000,
 
+  RARITY : ["Commun", "Magique peu commun", "Rare", "Legendaire"],
 });

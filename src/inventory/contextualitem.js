@@ -107,6 +107,13 @@ barcode.ContextualItem.prototype ={
     },
 
     renderProperties : function(){
+        if ( (this.item.item.properties.length > 0 )){
+            let text = "Proprietes magiques"
+            this.ctx.fillText(text ,
+                this.x + 50, 
+                this.propertiesY + 10);
+            this.propertiesY += 40;
+        }
         var _this = this;
         this.item.item.properties.forEach(function(prop){
             let text = "";
@@ -138,13 +145,13 @@ barcode.ContextualItem.prototype ={
         this.chooseFontColor();
         this.propertiesY = this.y + 13;
         this.ctx.font = "1Opx Arial";
-        let text = this.item.item.name;
+        let text = "Nom de l'objet : " + this.item.item.name;
         this.ctx.fillText(text ,
             this.x + 5, 
             this.propertiesY);
         
         this.propertiesY += 20;
-        text = "rarete : " +  this.item.item.rarity;
+        text = "Rarete : " +  barcode.C.RARITY[this.item.item.rarity];
         this.ctx.fillText(text ,
             this.x + 5, 
             this.propertiesY);
