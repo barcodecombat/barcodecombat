@@ -186,7 +186,7 @@ barcode.ContextualItem.prototype ={
         }
     },
 
-    render : function(){
+    render : function(showbutton = true){
         if (this.item !== null && this.active === true){
             this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
             this.renderBoxColorContextual();
@@ -195,7 +195,7 @@ barcode.ContextualItem.prototype ={
             this.ctx.rect(this.x,this.y,this.width,this.height);
             this.ctx.stroke(); 
             this.renderItem();
-            this.renderEquipButton();
+            if (showbutton) this.renderEquipButton();
         }
     },
 

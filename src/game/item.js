@@ -8,7 +8,6 @@ barcode.Item = function(){
   this.ty = 0;
   this.name = "";
   this.rarity = 0;
-  this.spriteset = undefined;
   this.lastTick  = 0;
   this.spriteset = null;
   this.properties = [];
@@ -218,6 +217,10 @@ barcode.Item.prototype = {
 
   render : function(x,y){
     var ctx = barcode.canvas.canvasAnimation.getContext("2d");
+    if (this.spriteset === null){
+      this.spriteset = barcode.tileset.get(barcode.itemsimg[this.idimg].tileset);
+      this.spritesize = barcode.itemsimg[this.idimg].size;
+    }
     ctx.drawImage(
        this.spriteset,
        0,

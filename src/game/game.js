@@ -25,6 +25,8 @@ barcode.GameEngine.prototype ={
       barcode.gameEngine.showEndDonjon();
     }else if(barcode.gameEngine.state == barcode.C.STATE_INVENTORY){
       barcode.inventory.render();
+    }else if(barcode.gameEngine.state == barcode.C.STATE_SCAN_RESULT){
+      barcode.showItemGenerated.render();
     }
 
   },
@@ -57,8 +59,7 @@ barcode.GameEngine.prototype ={
       var menu = document.getElementById("enddonjon");
       menu.style.display = "none";
     }else if(barcode.gameEngine.state == barcode.C.STATE_SCAN_RESULT){
-      var menu = document.getElementById("scanresult");
-      menu.style.display = "none";
+      barcode.canvas.clearCanvas();
     }
     //barcode.canvas.clearCanvas();
     //barcode.canvas.setCanvasSize(0,0);
@@ -151,20 +152,7 @@ barcode.GameEngine.prototype ={
   showScanned : function( itemGenerated){
     barcode.gameEngine.closeState();
     barcode.gameEngine.state = barcode.C.STATE_SCAN_RESULT;
-    var menu = document.getElementById("scanresult");
-    menu.style.display = "block";
-    if (typeof itemGenerated !== 'undefined' || itemGenerated != null){
-      var menu = document.getElementById("alreadyscanned");
-      menu.style.display = "None";
-      var div = document.getElementById("itemtoshow");
-      div.style.display = "block";
-      barcode.RenderItem.render(div,itemGenerated,200 , 100 );
-    }else{
-      var menu = document.getElementById("alreadyscanned");
-      menu.style.display = "block";
-      var div = document.getElementById("itemtoshow");
-      div.style.display = "None";
-    }
+    barcode.showItemGenerated.init(itemGenerated);
     barcode.gameEngine.saveGame();
   },
 
@@ -183,6 +171,7 @@ barcode.GameEngine.prototype ={
     barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
     barcode.tileset = new barcode.Tileset();
     barcode.contextualItem = new barcode.ContextualItem();
+    barcode.showItemGenerated = new barcode.ShowItemGenerated();
     barcode.gameEngine.state = barcode.C.STATE_MENU_SHOWN;
     let btnMenu = document.getElementById("btnMenu");
     btnMenu.addEventListener("click",barcode.gameEngine.initMenu);
@@ -202,8 +191,6 @@ barcode.GameEngine.prototype ={
     btnDeathBack.addEventListener("click",barcode.gameEngine.initMenu);
     let btnEndDonjonBack = document.getElementById("btnBackToMenu2");
     btnEndDonjonBack.addEventListener("click",barcode.gameEngine.initMenu);
-    let btnScanResultBack = document.getElementById("btnBackToMenu3");
-    btnScanResultBack.addEventListener("click",barcode.gameEngine.initMenu);
     barcode.canvas.canvasMouse.addEventListener("click",barcode.gameEngine.clickEvent);
 
     if (window.screen.width < barcode.C.TILE_SIZE_WINDOW_SIZE_LIMITE) this.tileSize = barcode.C.TILE_SIZE_MOBILE;
