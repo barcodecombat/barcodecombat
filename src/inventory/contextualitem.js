@@ -6,7 +6,7 @@ barcode.ContextualItem = function (){
     this.ctx = null;
     this.item = null;
     this.height = 200;
-    this.width = 150;
+    this.width = 200;
     this.x = 200;
     this.y = 150;
     this.propertiesY = 0;
@@ -110,9 +110,22 @@ barcode.ContextualItem.prototype ={
         var _this = this;
         this.item.item.properties.forEach(function(prop){
             let text = "";
-            if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_ICE){
+            if (prop.typeproperty === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
+                text = "Luminosite : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
+                text = "Bonus de vie : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_DAMAGE_MODIFIER){
+                text = "Degat supplementaire : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_LIFE_REGENERATION){
+                text = "Regeneration de vie : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
+                text = "Bonus de vitesse d'attaque : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_MOVEMENT_SPEED_MODIFIER){
+                text = "Bonus de vitesse de mouvement : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_ICE){
                 text = "Degat elementaire de glace : ";
             }
+
             text += prop.value;
             _this.ctx.fillText(text ,
                               _this.x + 5, 
