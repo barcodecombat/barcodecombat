@@ -198,11 +198,17 @@ barcode.ContextualItem.prototype ={
 
     renderBoxColorContextual : function(){
         if (this.item.item.rarity === barcode.C.RARITY_COMMON){
-            this.ctx.fillStyle ="grey";
-            this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
+            this.ctx.fillStyle = barcode.C.INVENTORY_RARITY_COMMON_FONT_COLOR;
+            this.ctx.strokeStyle = barcode.C.INVENTORY_RARITY_COMMON_BACKGROUND_COLOR;
         }else if  (this.item.item.rarity === barcode.C.RARITY_UNCOMMON){
-            this.ctx.fillStyle =  barcode.C.COLOR_TURQUOISE;
-            this.ctx.strokeStyle = barcode.C.COLOR_CONTEXTUAL;
+            this.ctx.fillStyle =  barcode.C.INVENTORY_RARITY_UNCOMMON_FONT_COLOR;
+            this.ctx.strokeStyle = barcode.C.INVENTORY_RARITY_UNCOMMON_BACKGROUND_COLOR;
+        }else if  (this.item.item.rarity === barcode.C.RARITY_RARE){
+            this.ctx.fillStyle =  barcode.C.INVENTORY_RARITY_RARE_FONT_COLOR;
+            this.ctx.strokeStyle = barcode.C.INVENTORY_RARITY_RARE_BACKGROUND_COLOR;
+        }else if  (this.item.item.rarity === barcode.C.RARITY_LEGEND){
+            this.ctx.fillStyle =  barcode.C.INVENTORY_RARITY_LEGEND_FONT_COLOR;
+            this.ctx.strokeStyle = barcode.C.INVENTORY_RARITY_LEGEND_BACKGROUND_COLOR;
         }
     },
 
