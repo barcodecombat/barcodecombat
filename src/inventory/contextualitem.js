@@ -10,11 +10,26 @@ barcode.ContextualItem = function (){
     this.x = 200;
     this.y = 150;
     this.propertiesY = 0;
-    this.buttonCoord = { "x" : this.x +30 ,
+    this.buttonCoord = [{ "x" : this.x +50 ,
                     "y" : this.y + 150 ,
                     "width" : 80, 
                     "height" : 30,
-                    "state" : true};
+                    "state" : true,
+                    "name" : "retirer"},
+                    { "x" : this.x + 10 ,
+                    "y" : this.y + 150 ,
+                    "width" : 80, 
+                    "height" : 30,
+                    "state" : true,
+                    "name" : "equiper"},
+                    { "x" : this.x + 110 ,
+                    "y" : this.y + 150 ,
+                    "width" : 80, 
+                    "height" : 30,
+                    "state" : true,
+                    "name" : "detruire"},
+                ];
+    this.buttonDisplay = -1;
 };
 
 barcode.ContextualItem.prototype ={
@@ -47,10 +62,19 @@ barcode.ContextualItem.prototype ={
     clickEvent : function (evt){
         if(evt.pageX > this.x && evt.pageX < (this.x + this. width)
             && evt.pageY > this.y && evt.pageY < (this.y + this.height)){
-            if (evt.pageX > this.buttonCoord.x && evt.pageX < (this.buttonCoord.x + this.buttonCoord.width)
-            && evt.pageY > this.buttonCoord.y && evt.pageY < (this.buttonCoord.y + this.buttonCoord.height)
-            && this.buttonCoord.state){
-                barcode.contextualItem.equipItem();
+            for(let i = 0 ; i < this.buttonCoord.length ; i++){
+                if (evt.pageX > this.buttonCoord[i].x && evt.pageX < (this.buttonCoord[i].x + this.buttonCoord[i].width)
+                && evt.pageY > this.buttonCoord[i].y && evt.pageY < (this.buttonCoord[i].y + this.buttonCoord[i].height)
+                && this.buttonCoord[i].state){
+                    if ((this.buttonCoord[i].name === "retirer" && this.buttonDisplay ==0 ) 
+                    || (this.buttonCoord[i].name === "equiper" && this.buttonDisplay ==1 )){
+                        barcode.contextualItem.equipItem();
+                    }else if (this.buttonCoord[i].name === "detruire" && this.buttonDisplay ==1 ){
+                        barcode.gameEngine.character.removeItemFromInventory(this.item.item);
+                        barcode.gameEngine.saveGame();
+                        this.hideMenu();
+                    }
+                } 
             }
             return true;
         }else{
@@ -169,23 +193,57 @@ barcode.ContextualItem.prototype ={
         this.renderProperties();
     },
 
-    renderEquipButton : function(){
+    renderRetirerButton : function(){
         this.ctx.beginPath();
-        this.ctx.rect(this.buttonCoord.x, this.buttonCoord.y, this.buttonCoord.width, this.buttonCoord.height);
+        this.ctx.rect(this.buttonCoord[0].x, this.buttonCoord[0].y, this.buttonCoord[0].width, this.buttonCoord[0].height);
         this.ctx.stroke(); 
-        this.buttonCoord.state = true;
+        this.buttonCoord[0].state = true;
+        this.chooseFontColor();
+        let text =  "Retirer";
+        this.ctx.fillText(text ,
+            this.buttonCoord[0].x + 25 , 
+            this.buttonCoord[0].y + 20 );
+    },
+
+    renderDetruire : function(){
+        this.ctx.beginPath();
+        this.ctx.rect(this.buttonCoord[2].x, this.buttonCoord[2].y, this.buttonCoord[2].width, this.buttonCoord[2].height);
+        this.ctx.stroke(); 
+        this.buttonCoord[2].state = true;
+        this.chooseFontColor();
+        let text = "Detruire";
+        this.ctx.fillText(text ,
+            this.buttonCoord[2].x + 25 , 
+            this.buttonCoord[2].y + 20);
+    },
+
+    renderEquiper : function(){
+        this.ctx.beginPath();
+        this.ctx.rect(this.buttonCoord[1].x , this.buttonCoord[1].y, this.buttonCoord[1].width, this.buttonCoord[1].height);
+        this.ctx.stroke(); 
+        this.buttonCoord[1].state = true;
         this.chooseFontColor();
         let text = "Equiper";
-        if (this.item.item.status === barcode.C.ITEM_WEARED){
-            text = "Retirer";
-        }else if (barcode.gameEngine.character.isItemWearedByType(this.item.item.typeItem)){
+        if (barcode.gameEngine.character.isItemWearedByType(this.item.item.typeItem)){
             this.ctx.fillStyle = barcode.C.COLOR_GRADIANT_RED; 
-            this.buttonCoord.state = false;
+            this.buttonCoord[1].state = false;
         }
         this.ctx.fillText(text ,
-            this.buttonCoord.x + 20, 
-            this.buttonCoord.y + 20);
+            this.buttonCoord[1].x + 25 , 
+            this.buttonCoord[1].y + 20);
     },
+
+    renderButtons : function(){
+        if (this.item.item.status === barcode.C.ITEM_WEARED){
+            this.renderRetirerButton();
+            this.buttonDisplay = 0;
+        }else{
+            this.renderEquiper();
+            this.renderDetruire();
+            this.buttonDisplay = 1;
+        }
+    },
+
 
     chooseFontColor : function(){
         if (this.item.item.rarity === barcode.C.RARITY_COMMON){
@@ -224,7 +282,7 @@ barcode.ContextualItem.prototype ={
             this.ctx.rect(this.x,this.y,this.width,this.height);
             this.ctx.stroke(); 
             this.renderItem();
-            if (showbutton) this.renderEquipButton();
+            if (showbutton) this.renderButtons();
         }
     },
 

@@ -119,6 +119,13 @@ barcode.Character.prototype = {
     }
   },
 
+  removeItemFromInventory : function(item){
+    const index = this.inventory.indexOf(item);
+    if (index !== -1) {
+        this.inventory.splice(index, 1);
+    }
+  },
+
   unequipItem : function(item){
     const index = this.items.indexOf(item);
     if (index !== -1) {
