@@ -2,9 +2,14 @@
 var barcode = barcode || {};
 
 barcode.Monster = function(){
-  this.x = 96 ;
-  this.y = 192;
-  this.size = 32;
+  this.x = 0 ;
+  this.y = 0;
+  this.sprite = {
+    "x" : 0,
+    "y" : 0,
+    "size" : 0
+  };
+  this.name = "";
   this.spriteset = null;
   this.animation = 0;
   this.direction = 0;
@@ -29,8 +34,20 @@ barcode.Monster.prototype = {
     this.loaded = true;
   }
   ,
-  init : function(src){
-    this.spriteset = barcode.tileset.get("assets/sprites/EnemySpriteSheet1.png");
+  init : function(templateId){
+    
+    var src = barcode.mobs[templateId];
+    this.spriteset = barcode.tileset.get(src.sprite.spriteset);
+    this.sprite.x = src.sprite.x;
+    this.sprite.y = src.sprite.y;
+    this.sprite.size = src.sprite.size;
+    this.maxHitPoint = src.hitpoints;
+    this.hitpoint = src.hitpoints;
+    this.damage = src.damage;
+    this.range = src.range;
+    this.attackSpeed = src.attackspeed;
+    this.name = src.name;
+    
   },
 
   hit: function(hp){
@@ -47,10 +64,10 @@ barcode.Monster.prototype = {
       if (tilesArray[tile.x + "/" + tile.y].lightened){
         ctx.drawImage(
            this.spriteset,
-           this.animation*this.size,
-           this.direction*this.size,
-           this.size,
-           this.size,
+           this.sprite.x + this.animation*this.sprite.size,
+           this.sprite.y + this.direction*this.sprite.size,
+           this.sprite.size,
+           this.sprite.size,
            this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x,
            this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y,
            barcode.gameEngine.tileSize,
