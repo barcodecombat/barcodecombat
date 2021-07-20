@@ -18,7 +18,7 @@ barcode.Animation = function(){
 
 barcode.Animation.prototype = {
 
-  init : function(idAnimation){
+  init : function(idAnimation,timer = 100){
     var src = barcode.animations[idAnimation];
     if (typeof(src) !== "undefined"){
       this.tx = src.x;
@@ -28,9 +28,21 @@ barcode.Animation.prototype = {
       this.y = 0;
       this.spriteset = barcode.tileset.get(src.tileset);
     }
-    
+    this.duration = timer;
     let d = new Date();
     this.startTime = d.getTime();
+    this.layerToDraw = barcode.canvas.canvasAnimation.getContext("2d");
+  },
+
+  setXY(x,y){
+    this.x = x;
+    this.y = y;
+  },
+
+  setPosRandom(x,y){
+    let decalageAnimation = Math.floor(Math.random() * 6)
+    this.x = x+(barcode.gameEngine.tileSize/2 -6 + decalageAnimation);
+    this.y = y -6 + decalageAnimation;
   },
 
   isActive : function(){

@@ -45,6 +45,7 @@ barcode.C = Object.freeze({
 //ANimation
   ANIMATION_SLASH_EPEE : 1,
   ANIMATION_BLOOD : 2,
+  ANIMATION_SLASH_ICE : 3,
 
   //direction
   DIRECTION_UP :0,

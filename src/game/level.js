@@ -193,9 +193,8 @@ barcode.Level.prototype = {
     })
     for (let i=0;i<monsterToRemove.length;i++){
       var animation = new barcode.Animation();
-      animation.init(barcode.C.ANIMATION_BLOOD);
-      animation.x = monsterToRemove[i].x;
-      animation.y = monsterToRemove[i].y;
+      animation.init(barcode.C.ANIMATION_BLOOD, 5000);
+      animation.setPos(monsterToRemove[i].x,monsterToRemove[i].y);
       animation.layerToDraw = barcode.canvas.canvasTile.getContext("2d");
       barcode.gameDonjon.animations.push(animation);
       this.removeMonster(monsterToRemove[i]);
