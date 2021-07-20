@@ -45,7 +45,8 @@ barcode.Level.prototype = {
       var listMob = this.monsters;
       src.mobs.forEach(function(mob){
           var newMob = new barcode.Monster();
-          newMob.init(1 );
+          let idMob = Math.floor(Math.random() * 4) + 1;
+          newMob.init(idMob);
           newMob.x = mob.x * barcode.gameEngine.tileSize;
           newMob.y = mob.y * barcode.gameEngine.tileSize ;
           listMob.push(newMob);

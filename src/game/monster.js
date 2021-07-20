@@ -12,6 +12,7 @@ barcode.Monster = function(){
   this.name = "";
   this.spriteset = null;
   this.animation = 0;
+  this.nbAnimation = 0;
   this.direction = 0;
   this.moving = false;
   this.loaded = false;
@@ -47,6 +48,7 @@ barcode.Monster.prototype = {
     this.range = src.range;
     this.attackSpeed = src.attackspeed;
     this.name = src.name;
+    this.nbAnimation = src.animation;
     
   },
 
@@ -114,7 +116,7 @@ barcode.Monster.prototype = {
     if (newTick - this.movingTick >  barcode.C.ANIMATION_SPEED){
       this.movingTick = newTick;
       this.animation += 1;
-      if (this.animation > 2) this.animation = 0;
+      if (this.animation >= this.nbAnimation) this.animation = 0;
     }
   },
 

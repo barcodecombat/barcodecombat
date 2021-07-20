@@ -27,6 +27,10 @@ barcode.C = Object.freeze({
   RARITY_COMMON : 0,
   RARITY_STEP : 2,
 
+  //MONSTER
+  MONSTER_BOLT_RED : 1,
+  MONSTER_BOLT_PINK : 2,
+
   //POTIONS
   POTION_TYPE_HEAL : 1,
 
