@@ -33,7 +33,7 @@ barcode.UI.prototype = {
 
   drawRect : function(){
     this.ctx.beginPath();
-    this.ctx.fillStyle = barcode.C.FT_COLOR_BROWN;
+    this.ctx.fillStyle = barcode.C.COLOR_UI_BACKGROUND;
     this.ctx.fillRect(0,window.innerHeight-100,window.innerWidth,100);
   },
 
@@ -42,7 +42,7 @@ barcode.UI.prototype = {
       var prctLife = Math.floor((this.mob.hitpoint/this.mob.maxHitPoint)*100);
       if (prctLife < 0) prctLife = 0;
       this.ctx.beginPath();
-      this.ctx.fillStyle = barcode.C.FT_COLOR_BROWN;
+      this.ctx.fillStyle = barcode.C.COLOR_UI_BACKGROUND;
       this.ctx.fillRect(barcode.gameEngine.centerX - 80,20,250,30);
       this.ctx.beginPath();
       this.ctx.fillStyle = barcode.C.FT_COLOR_RED;

@@ -26,7 +26,6 @@ barcode.Inventory.prototype ={
   renderEmptyBag : function(){
     for (let i=0;i<10;i++){
       for (let j=0;j<6;j++){
-        this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
         this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
         this.ctx.fillRect(100+i*barcode.gameEngine.tileSize,400+j*barcode.gameEngine.tileSize,barcode.gameEngine.tileSize,barcode.gameEngine.tileSize);
         this.ctx.beginPath();
@@ -125,9 +124,17 @@ barcode.Inventory.prototype ={
 
   },
 
+  drawRect : function(){
+    this.ctx.beginPath();
+    this.ctx.fillStyle = barcode.C.COLOR_UI_BACKGROUND;
+    this.ctx.fillRect(50,20,450,600);
+  },
+
 
   render : function(){
     this.items = [];
+    this.ctx = barcode.canvas.canvasAnimation.getContext("2d");
+    this.drawRect();
     this.renderEmptyBag();
     this.renderBody();
     this.renderBoxOnBody();
