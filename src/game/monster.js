@@ -27,6 +27,7 @@ barcode.Monster = function(){
   this.maxHitPoint = 10;
   this.hitpoint = 10;
   this.lastTimeCreatingPath = 0;
+  this.chanceToHit = 20;
 };
 
 barcode.Monster.prototype = {
@@ -106,7 +107,15 @@ barcode.Monster.prototype = {
     let newTick = d.getTime();
     if (newTick - this.lastAttack > this.attackSpeed){
       this.lastAttack = newTick;
-      barcode.gameEngine.character.hit(this.damage);
+      let hitRandom = Math.floor(Math.random()*100);
+      if (this.chanceToHit < hitRandom){
+        barcode.gameEngine.character.hit(this.damage);
+      }else{
+        var ft = new barcode.FloatingText();
+        ft.init(barcode.gameEngine.character.x + barcode.gameEngine.tileSize/2,barcode.gameEngine.character.y + barcode.gameEngine.tileSize/2,
+          "rate",barcode.C.COLOR_GRADIANT_ORANGE);
+        barcode.gameDonjon.floatingText.push(ft);
+      }
     }
   },
 

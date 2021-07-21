@@ -28,6 +28,7 @@ barcode.Character = function(){
   this.inventory = [];
   this.tickets = [];
   this.skillpoints = 0;
+  this.chanceToHit = 20;
 };
 
 barcode.Character.prototype = {
@@ -241,16 +242,25 @@ barcode.Character.prototype = {
     if (newTick - this.lastAttackTicks > this.speedAttack){
       this.lastAttackTicks = newTick;
       let damage = this.calculateDamageToDo()
-      mob.hit(damage);
+      let hitRandom = Math.floor(Math.random()*100);
+      if (this.chanceToHit < hitRandom){
+        let damage = this.calculateDamageToDo()
+        mob.hit(damage);
+        if (mob.hitpoint <= 0){
+          this.addXp(mob.maxHitPoint);
+        }
+      }else{
+        var ft = new barcode.FloatingText();
+        ft.init(mob.x + barcode.gameEngine.tileSize/2,mob.y + barcode.gameEngine.tileSize/2,
+          "rate",barcode.C.COLOR_GRADIANT_ORANGE);
+        barcode.gameDonjon.floatingText.push(ft);
+      }
+      
       var animation = new barcode.Animation();
       animation.init(barcode.C.ANIMATION_SLASH_EPEE, 50);
       animation.setPosRandom(mob.x,mob.y);
       
       barcode.gameDonjon.animations.push(animation);
-
-      if (mob.hitpoint <= 0){
-          this.addXp(mob.maxHitPoint);
-      }
     }
   },
 
