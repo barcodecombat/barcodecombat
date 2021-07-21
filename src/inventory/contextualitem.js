@@ -161,6 +161,8 @@ barcode.ContextualItem.prototype ={
                 text = "Bonus de vitesse de mouvement : ";
             }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_ICE){
                 text = "Degat elementaire de glace : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_CHANCE_TO_HIT){
+                text = "Chance de toucher : + ";
             }
 
             text += prop.value;
