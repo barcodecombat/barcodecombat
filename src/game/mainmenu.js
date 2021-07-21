@@ -49,12 +49,14 @@ barcode.MainMenu.prototype = {
 
   drawButtons : function(){
     for (let i = 0; i < this.buttonCoord.length ; i++){
+        this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
+        this.ctx.fillRect(this.buttonCoord[i].x, this.buttonCoord[i].y, this.buttonCoord[i].width, this.buttonCoord[i].height);
         this.ctx.beginPath();
         this.ctx.rect(this.buttonCoord[i].x, this.buttonCoord[i].y, this.buttonCoord[i].width, this.buttonCoord[i].height);
         this.ctx.stroke(); 
         this.buttonCoord[i].state = true;
         let text = this.buttonCoord[i].name;
-        this.ctx.fillStyle = barcode.C.INVENTORY_RARITY_COMMON_FONT_COLOR;
+        this.ctx.fillStyle = barcode.C.COLOR_TURQUOISE;
         if (i == 2){
             text += " : " +  barcode.gameEngine.character.tickets.length + " left";
             if (barcode.gameEngine.character.tickets.length == 0){
@@ -64,7 +66,7 @@ barcode.MainMenu.prototype = {
         }
         
         
-        this.ctx.font = "30px Verdana";
+        this.ctx.font = "20px Verdana";
         this.ctx.fillText(text ,
             this.buttonCoord[i].x + 25 , 
             this.buttonCoord[i].y + 35);
@@ -75,6 +77,7 @@ barcode.MainMenu.prototype = {
     this.ctx.beginPath();
     this.ctx.fillStyle = barcode.C.COLOR_UI_BACKGROUND;
     this.ctx.fillRect(50,50,450,600);
+  
   },
 
   render : function(){
