@@ -21,6 +21,7 @@ barcode.Inventory = function (){
 
 barcode.Inventory.prototype ={
   init : function(){
+    barcode.contextualItem.hideMenu();
   },
 
   renderEmptyBag : function(){

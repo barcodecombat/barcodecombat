@@ -128,7 +128,6 @@ barcode.ContextualItem.prototype ={
             this.propertiesY);
 
         this.propertiesY += 10;
-        console.log(this.item.item);
         text = "Charges  : " + this.item.item.nbcharge;
         this.ctx.fillText(text ,
             this.x + 5, 
