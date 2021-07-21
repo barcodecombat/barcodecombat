@@ -32,7 +32,7 @@ barcode.FloatingText.prototype = {
 
   render : function(ctx){
     var ctx = barcode.canvas.canvasAnimation.getContext("2d");
-    ctx.font = "1Opx Arial";
+    ctx.font = "20px Arial";
     ctx.fillStyle = this.color;
     ctx.fillText(this.text, this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x, this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y);
     this.y -= 1;

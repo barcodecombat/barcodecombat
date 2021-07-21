@@ -174,7 +174,7 @@ barcode.ContextualItem.prototype ={
     renderItem : function(){
         this.chooseFontColor();
         this.propertiesY = this.y + 13;
-        this.ctx.font = "1Opx Arial";
+        this.ctx.font = "10px Verdana";
         let text = "Nom de l'objet : " + this.item.item.name;
         this.ctx.fillText(text ,
             this.x + 5, 
