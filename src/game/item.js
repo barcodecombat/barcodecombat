@@ -93,6 +93,8 @@ barcode.Item.prototype = {
         _creature.lightRadius += tprop.value;
       }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
         _creature.speedAttack += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_CHANCE_TO_HIT){
+        _creature.chanceToHit += tprop.value;
       }
     })
   },
@@ -112,6 +114,8 @@ barcode.Item.prototype = {
         _creature.lightRadius -= tprop.value;
       }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_SPEED_MODIFIER){
         _creature.speedAttack -= tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_CHANCE_TO_HIT){
+        _creature.chanceToHit -= tprop.value;
       }
     })
   },
