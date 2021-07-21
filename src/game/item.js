@@ -21,6 +21,7 @@ barcode.Item = function(){
   this.lightradius = 0;
   this.potionType = 0;
   this.value = 0;
+  this.nbcharge = 0;
   this.status = barcode.C.ITEM_UNWEARED;
 };
 
@@ -150,6 +151,7 @@ barcode.Item.prototype = {
   loadPotion : function(src){
     this.typePotion = src.typePotion;
     this.value = src.value;
+    this.nbcharge = src.nbcharge;
   },
 
   loadSprite : function(){
@@ -210,9 +212,9 @@ barcode.Item.prototype = {
     if (this.typeItem === barcode.C.TYPE_ITEM_POTION){
       if (typeof (this.typePotion) !== "undefined"){
         barcode.gameEngine.character.addHitPoint(this.value);
+        this.nbcharge -= 1;
       }
     }
-    
   },
 
   render : function(x,y){

@@ -24,6 +24,10 @@ barcode.UI.prototype = {
         if (evt.pageX > this.potions[i].x && evt.pageX < (this.potions[i].x +32)
         && evt.pageY > this.potions[i].y && evt.pageY < (this.potions[i].y + 32)){
           this.potions[i].potion.use();
+          if ( this.potions[i].potion.nbcharge === 0){
+            barcode.gameEngine.character.unequipItem(this.potions[i].potion);
+            barcode.gameEngine.character.removeItemFromInventory(this.potions[i].potion);
+          }
         }
       }
       return true;
@@ -137,6 +141,8 @@ barcode.UI.prototype = {
           "y": this.ItemsToOver.potions1.y
         }
         this.potions.push(potionJs);
+        let textLvl = barcode.gameEngine.character.items[i].nbcharge;
+        this.ctx.fillText(textLvl , 512, window.innerHeight-40);
       }
     }
   },

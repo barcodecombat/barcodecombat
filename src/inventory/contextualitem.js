@@ -122,7 +122,14 @@ barcode.ContextualItem.prototype ={
             this.propertiesY);
 
         this.propertiesY += 10;
-        text = "Valeur  : " + this.item.item.value;
+        text = "Valeur de soin : " + this.item.item.value;
+        this.ctx.fillText(text ,
+            this.x + 5, 
+            this.propertiesY);
+
+        this.propertiesY += 10;
+        console.log(this.item.item);
+        text = "Charges  : " + this.item.item.nbcharge;
         this.ctx.fillText(text ,
             this.x + 5, 
             this.propertiesY);
