@@ -95,7 +95,7 @@ barcode.UI.prototype = {
     this.ctx.rect(279,window.innerHeight-71,102,12);
     this.ctx.stroke();
 
-    this.ctx.font = "1Opx Arial";
+    this.ctx.font = barcode.Config.UI_FONT_SIZE;
     this.ctx.fillStyle = barcode.C.FT_COLOR_WITE;
     let text = barcode.gameEngine.character.actualXp + " / " + barcode.gameEngine.character.nextLevelAmountOfXp + " xp";
     this.ctx.fillText(text , 390, window.innerHeight-60);
@@ -113,7 +113,7 @@ barcode.UI.prototype = {
     this.ctx.rect(49,window.innerHeight-71,102,12);
     this.ctx.stroke();
 
-    this.ctx.font = "1Opx Arial";
+    this.ctx.font = barcode.Config.UI_FONT_SIZE;
     this.ctx.fillStyle = barcode.C.FT_COLOR_WHITE;
     let text = barcode.gameEngine.character.hitpoint + " / " + barcode.gameEngine.character.maxHitPoint + " hp";
     this.ctx.fillText(text , 160, window.innerHeight-60);
@@ -161,6 +161,7 @@ barcode.UI.prototype = {
   render : function(){
     if (typeof this.ctx === 'undefined')
       this.ctx  = barcode.canvas.canvasAnimation.getContext("2d");
+    this.ctx.font = barcode.Config.UI_FONT_SIZE;  
     this.drawRect();
     this.renderLifeGauge();
     this.renderXp();
