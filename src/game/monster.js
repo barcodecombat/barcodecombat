@@ -28,7 +28,7 @@ barcode.Monster = function(){
   this.hitpoint = 10;
   this.lastTimeCreatingPath = 0;
   this.chanceToHit = 20;
-  this.armore = 0;
+  this.armor = 0;
 };
 
 barcode.Monster.prototype = {

@@ -163,6 +163,8 @@ barcode.ContextualItem.prototype ={
                 text = "Degat elementaire de glace : ";
             }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_CHANCE_TO_HIT){
                 text = "Chance de toucher : + ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ARMOR){
+                text = "Bonus d'armure : ";
             }
 
             text += prop.value;
