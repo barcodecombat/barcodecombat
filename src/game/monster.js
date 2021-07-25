@@ -28,6 +28,7 @@ barcode.Monster = function(){
   this.hitpoint = 10;
   this.lastTimeCreatingPath = 0;
   this.chanceToHit = 20;
+  this.armore = 0;
 };
 
 barcode.Monster.prototype = {
@@ -54,6 +55,7 @@ barcode.Monster.prototype = {
   },
 
   hit: function(hp){
+    hp = reduceDamageFromArmor(hp,this);
     this.hitpoint -= hp;
     var ft = new barcode.FloatingText();
     ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);

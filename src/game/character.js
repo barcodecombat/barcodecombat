@@ -29,6 +29,7 @@ barcode.Character = function(){
   this.tickets = [];
   this.skillpoints = 0;
   this.chanceToHit = 20;
+  this.armor = 0;
 };
 
 barcode.Character.prototype = {
@@ -184,6 +185,7 @@ barcode.Character.prototype = {
   hit : function(hp){
     var ft = new barcode.FloatingText();
     if (! this.isHitBlocked()){
+      hp = reduceDamageFromArmor(hp,this);
       this.hitpoint -= hp;
       ft.init(this.x + barcode.gameEngine.tileSize/2,this.y + barcode.gameEngine.tileSize/2,hp,barcode.C.FT_COLOR_RED);
     }else{
