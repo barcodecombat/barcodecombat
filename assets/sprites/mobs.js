@@ -15,6 +15,7 @@ barcode.mobs = {
     "range" : 32,
     "animation" : 3,
     "attackspeed" : 50,
+    "armor" : 0,
   },
   2 :
   {
@@ -30,6 +31,7 @@ barcode.mobs = {
     "animation" : 3,
     "range" : 32,
     "attackspeed" : 50,
+    "armor" : 0,
   },
   3 :
   {
@@ -45,6 +47,7 @@ barcode.mobs = {
     "damage" : 3,
     "range" : 32,
     "attackspeed" : 50,
+    "armor" : 0,
   },
   4 :
   {
@@ -60,5 +63,6 @@ barcode.mobs = {
     "damage" : 4,
     "range" : 32,
     "attackspeed" : 50,
+    "armor" : 0,
   },
 };

@@ -51,6 +51,7 @@ barcode.Monster.prototype = {
     this.attackSpeed = src.attackspeed;
     this.name = src.name;
     this.nbAnimation = src.animation;
+    this.armor = src.armor;
     
   },
 
