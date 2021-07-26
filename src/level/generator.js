@@ -154,7 +154,8 @@ barcode.Generator.prototype = {
     }
     room.alignTiles();
     room.addDoor();
-
+    room.addDecor();
+    
     barcode.Generator.rooms.push(room);
   },
 

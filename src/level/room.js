@@ -111,7 +111,22 @@ barcode.Room.prototype = {
     }
   },
 
+  addDecor : function(){
+    let nbDecor = Math.floor(Math.random()*((this.sizeX -2) * (this.sizeY -2) / this.sizeX));
+    for (let i = 0; i < nbDecor ; i++){
+      let typeDecor = Math.floor(Math.random()*8 + 2);
+      var x = Math.floor(Math.random()*(this.sizeX-2) + 1);
+      var y = Math.floor(Math.random()*(this.sizeY-2) + 1);
+      var dec = new barcode.Decor();
+      dec.load(typeDecor);
+      dec.x = x + this.x;
+      dec.y = y + this.y;
+      this.decors.push(dec);
+    }
+  },
+
   init : function(){
+    
     this.wall = barcode.Generator.listOfTilesToUse.wall[0];
     this.ground = barcode.Generator.listOfTilesToUse.ground[0];
     this.sizeX = Math.floor(Math.random() * 10 +5);
@@ -129,7 +144,6 @@ barcode.Room.prototype = {
       }
     }
     this.addMobs();
-
   },
 
   render : function(){

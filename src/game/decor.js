@@ -32,15 +32,17 @@ barcode.Decor.prototype = {
 
   doAction : function(){
     var _this = this;
-    this.apply.forEach(function(action){
-      if (action.action === barcode.C.ACTION_APPLY_DECOR_REMOVE_DECOR){
-        barcode.gameDonjon.level.removeDecor(_this);
-      }else if(action.action === barcode.C.ACTION_APPLY_DECOR_CHANGE_SPRITE){
-        _this.state = 1;
-      }else if(action.action === barcode.C.ACTION_APPLY_DECOR_END_DONJON){
-        barcode.gameEngine.state = barcode.C.STATE_MENU_ENDDONJON_TOSHOW;
-      }
-    })
+    if (typeof this.apply!== 'undefined' ) {
+      this.apply.forEach(function(action){
+        if (action.action === barcode.C.ACTION_APPLY_DECOR_REMOVE_DECOR){
+          barcode.gameDonjon.level.removeDecor(_this);
+        }else if(action.action === barcode.C.ACTION_APPLY_DECOR_CHANGE_SPRITE){
+          _this.state = 1;
+        }else if(action.action === barcode.C.ACTION_APPLY_DECOR_END_DONJON){
+          barcode.gameEngine.state = barcode.C.STATE_MENU_ENDDONJON_TOSHOW;
+        }
+      })
+    }
   },
 
   render : function(){

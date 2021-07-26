@@ -42,4 +42,103 @@ barcode.decors = {
       "action" : 0
     }]
   },
+  "2" :
+  {
+    "name" : "vase casse",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/vasebroken.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "3" :
+  {
+    "name" : "colonne cassee",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/borkencolonne.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "4" :
+  {
+    "name" : "bricksgrey",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/bricksgrey.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "5" :
+  {
+    "name" : "metalstuck",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/metalstuck.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "6" :
+  {
+    "name" : "planches",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/planches.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "7" :
+  {
+    "name" : "seau",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/seau.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "8" :
+  {
+    "name" : "tonneau",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/tonneau.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "9" :
+  {
+    "name" : "tonneaubrise",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/tonneaubrise.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
+  "10" :
+  {
+    "name" : "trouherbu",
+    "typedecor" : 1,
+    "size":32,
+    "blocking" : true,
+    "tileset" : "assets/decor/trouherbu.png",
+    "sprites" : [
+      { "state" : 0, "x" : 0, "y" : 0}
+    ],
+  },
 };
