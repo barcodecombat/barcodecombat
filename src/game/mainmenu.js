@@ -20,6 +20,12 @@ barcode.MainMenu = function(){
                     "width" : 230, 
                     "height" : 50,
                     "state" : true,
+                    "name" : "Fiche"},
+                    { "x" : 150 ,
+                    "y" : 500 ,
+                    "width" : 230, 
+                    "height" : 50,
+                    "state" : true,
                     "name" : "Scan"},
                 ];
 };
@@ -40,9 +46,9 @@ barcode.MainMenu.prototype = {
                 barcode.gameEngine.initDonjon();
             }else if(this.buttonCoord[i].name === "Scan"){
                 barcode.gameEngine.initScan();
+            }else if(this.buttonCoord[i].name === "Fiche"){
+              barcode.gameEngine.initFiche();
             }
-                    
-
         }
     }
   },
@@ -57,7 +63,7 @@ barcode.MainMenu.prototype = {
         this.buttonCoord[i].state = true;
         let text = this.buttonCoord[i].name;
         this.ctx.fillStyle = barcode.C.COLOR_TURQUOISE;
-        if (i == 2){
+        if (this.buttonCoord[i].name == "Scan"){
             text += " : " +  barcode.gameEngine.character.tickets.length + " left";
             if (barcode.gameEngine.character.tickets.length == 0){
                 this.ctx.fillStyle = barcode.C.COLOR_GRADIANT_RED;
