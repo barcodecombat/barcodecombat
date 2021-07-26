@@ -58,6 +58,7 @@ barcode.MainMenu.prototype = {
         this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
         this.ctx.fillRect(this.buttonCoord[i].x, this.buttonCoord[i].y, this.buttonCoord[i].width, this.buttonCoord[i].height);
         this.ctx.beginPath();
+        this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
         this.ctx.rect(this.buttonCoord[i].x, this.buttonCoord[i].y, this.buttonCoord[i].width, this.buttonCoord[i].height);
         this.ctx.stroke(); 
         this.buttonCoord[i].state = true;

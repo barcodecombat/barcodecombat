@@ -14,8 +14,20 @@ barcode.FichePerso.prototype = {
 
   },
 
+  drawSprite : function(){
+    this.ctx.drawImage(
+        barcode.gameEngine.character.spriteset,
+        0,0,
+        barcode.gameEngine.character.size,
+        barcode.gameEngine.character.size,
+        400,
+        50,
+        barcode.gameEngine.tileSize *2 ,
+        barcode.gameEngine.tileSize *2);
+  },
+
   drawCaract : function(){
-    this.ctx.fillStyle = barcode.C.INVENTORY_RARITY_UNCOMMON_FONT_COLOR;
+    this.ctx.fillStyle = barcode.C.COLOR_TURQUOISE;
     let text = "Max Hp : " + barcode.gameEngine.character.maxHitPoint;
     this.ctx.fillText(text ,
         this.x, 
@@ -68,8 +80,12 @@ barcode.FichePerso.prototype = {
 
   drawRect : function(){
     this.ctx.beginPath();
-    this.ctx.fillStyle = barcode.C.COLOR_UI_BACKGROUND;
+    this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
     this.ctx.fillRect(50,20,450,600);
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = barcode.C.COLOR_TURQUOISE;
+    this.ctx.rect(50,20,450,600);
+    this.ctx.stroke();
   },
 
   render : function(){
@@ -78,5 +94,6 @@ barcode.FichePerso.prototype = {
     this.ctx.font = "15px Arial";
     this.drawRect();
     this.drawCaract();
+    this.drawSprite();
   },
 };
