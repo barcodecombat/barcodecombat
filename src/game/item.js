@@ -216,7 +216,6 @@ barcode.Item.prototype = {
   },
 
   use : function(){
-    //TODO : utilsiation potion en dur :()
     if (this.typeItem === barcode.C.TYPE_ITEM_POTION){
       if (typeof (this.typePotion) !== "undefined"){
         barcode.gameEngine.character.addHitPoint(this.value);
