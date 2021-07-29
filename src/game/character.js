@@ -239,6 +239,21 @@ barcode.Character.prototype = {
     }
   },
 
+  hitTargetHandleEffect : function(mob){
+    console.log(this.attackEffects); 
+    for (let i=0; i < this.attackEffects.length;i++){
+      if (this.attackEffects[i].typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
+        //TODO : gerer la probabilité de toucher
+        // TODO : Appliquer l'effet à la créature
+        var animation = new barcode.Animation();
+        animation.init(barcode.C.ANIMATION_SLASH_ICE, 500);
+        animation.setPosRandom(mob.x,mob.y);
+        barcode.gameDonjon.animations.push(animation);
+        
+      }
+    }
+  },
+
   hitTarget : function(mob){
     let d = new Date();
     let newTick = d.getTime();
@@ -249,6 +264,7 @@ barcode.Character.prototype = {
       if (this.chanceToHit < hitRandom){
         let damage = this.calculateDamageToDo()
         mob.hit(damage);
+        this.hitTargetHandleEffect(mob);
         if (mob.hitpoint <= 0){
           this.addXp(mob.maxHitPoint);
         }
