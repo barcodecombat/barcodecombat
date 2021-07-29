@@ -1,4 +1,4 @@
 function reduceDamageFromArmor(damage, creature){
-    damage = (1 - (creature.armor / 100)) * damage;
+    damage = Math.floor((1 - (creature.armor / 100)) * damage);
     return damage;
 }

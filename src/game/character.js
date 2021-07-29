@@ -72,8 +72,6 @@ barcode.Character.prototype = {
         tempItem.load(idTemplate,_this);
         _this.inventory.push(tempItem);
         _this.equipItem(tempItem);
-       // tempItem.status = barcode.C.ITEM_WEARED;
-       // _this.items.push(tempItem);
       })
     }
     if (typeof src.inventory !== 'undefined'){
@@ -241,15 +239,17 @@ barcode.Character.prototype = {
   },
 
   hitTargetHandleEffect : function(mob){
-    console.log(this.attackEffects); 
     for (let i=0; i < this.attackEffects.length;i++){
       if (this.attackEffects[i].typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
         //TODO : gerer la probabilité de toucher
         // TODO : Appliquer l'effet à la créature
-        var animation = new barcode.Animation();
-        animation.init(barcode.C.ANIMATION_SLASH_ICE, 500);
-        animation.setPosRandom(mob.x,mob.y);
-        barcode.gameDonjon.animations.push(animation);
+        let touche = Math.floor(Math.random()*100);
+        if (touche <= this.attackEffects[i].value){
+          var animation = new barcode.Animation();
+          animation.init(barcode.C.ANIMATION_SLASH_ICE, 500);
+          animation.setPosRandom(mob.x,mob.y);
+          barcode.gameDonjon.animations.push(animation);
+        }
         
       }
     }
