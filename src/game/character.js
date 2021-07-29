@@ -70,8 +70,10 @@ barcode.Character.prototype = {
       src.items.forEach(function(idTemplate){
         let tempItem = new barcode.Item();
         tempItem.load(idTemplate,_this);
-        tempItem.status = barcode.C.ITEM_WEARED;
-        _this.items.push(tempItem);
+        _this.inventory.push(tempItem);
+        _this.equipItem(tempItem);
+       // tempItem.status = barcode.C.ITEM_WEARED;
+       // _this.items.push(tempItem);
       })
     }
     if (typeof src.inventory !== 'undefined'){
@@ -83,7 +85,6 @@ barcode.Character.prototype = {
       })
     }
   },
-
 
   removeTicket : function(){
     this.tickets.splice(0,1);
