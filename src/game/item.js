@@ -97,6 +97,17 @@ barcode.Item.prototype = {
         _creature.chanceToHit += tprop.value;
       }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ARMOR){
         _creature.armor += tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
+        let found = false;
+        for (let i = 0 ; i < creature.attackEffects.length ; i++){
+          if (creature.attackEffects[i].typepropery === barcode.C.PROPERTY_ITEM_FREEZE){
+            creature.attackEffects[i].value += tprop.value;
+            found = true;
+          } 
+        }
+        if (! found){
+          creature.attackEffects.push(tprop);
+        }
       }
     })
   },
@@ -120,6 +131,18 @@ barcode.Item.prototype = {
         _creature.chanceToHit -= tprop.value;
       }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ARMOR){
         _creature.armor -= tprop.value;
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
+        let indexProperty = -1 ;
+        for (let i = 0 ; i < creature.attackEffects.length ; i++){
+          if (creature.attackEffects[i].typepropery === barcode.C.PROPERTY_ITEM_FREEZE){
+            creature.attackEffects[i].value -= tprop.value;
+            if (creature.attackEffects[i].value <= 0){
+              indexProperty = i;
+            }
+          } 
+        }
+        if (indexProperty != -1)
+            creature.attackEffects.splice(indexProperty, 1);
       }
     })
   },

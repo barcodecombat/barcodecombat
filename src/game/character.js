@@ -22,6 +22,7 @@ barcode.Character = function(){
   this.hitpoint = barcode.C.DEFAULT_HITPOINT;
   this.speedAttack = barcode.C.DEFAULT_SPEED_ATTACK;
   this.rangeAttack = barcode.C.DEFAULT_RANGE_ATTACK;
+  this.attackEffects = [];
   this.lastAttackTicks = 0;
   this.chanceToBlock = 0;
   this.items = [];

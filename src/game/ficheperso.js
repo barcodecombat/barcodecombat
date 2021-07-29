@@ -78,6 +78,20 @@ barcode.FichePerso.prototype = {
     this.propertiesY += this.stepY;
   },
 
+  drawAttackEffect : function(){
+    for (let i = 0 ; i < barcode.gameEngine.character.attackEffects.length ; i++){
+      let effect = barcode.gameEngine.character.attackEffects[i];
+      if (effect.typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
+        let text = "Chance de glacer : " + effect.value;
+        this.ctx.fillText(text ,
+            this.x, 
+            this.y + this.propertiesY);
+
+        this.propertiesY += this.stepY;
+      }
+    }
+  },
+
   drawRect : function(){
     this.ctx.beginPath();
     this.ctx.fillStyle = barcode.C.COLOR_CONTEXTUAL;
@@ -94,6 +108,7 @@ barcode.FichePerso.prototype = {
     this.ctx.font = "15px Arial";
     this.drawRect();
     this.drawCaract();
+    this.drawAttackEffect();
     this.drawSprite();
   },
 };

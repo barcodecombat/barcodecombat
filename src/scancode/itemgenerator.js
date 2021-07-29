@@ -106,6 +106,10 @@ barcode.itemgenerator.prototype = {
       value = Math.round(Math.random() * 5 * this.item.quality / 100 + 1);
     }else if (prop === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_ICE){
       value = Math.round(Math.random() * 5 * this.item.quality / 100 + 1);
+      let propSecondaire = barcode.C.PROPERTY_ITEM_FREEZE;
+      let valSecondaire = Math.round(Math.random() *20) + 1;
+      let propertySecondaire = { 'typeproperty' : propSecondaire, 'value' : valSecondaire};
+      this.item.properties.push(propertySecondaire);
     }else if (prop === barcode.C.PROPERTY_ITEM_CHANCE_TO_HIT){
       value = Math.floor(Math.random() * 10) +1;
     }else if (prop === barcode.C.PROPERTY_ITEM_ARMOR){
