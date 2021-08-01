@@ -29,10 +29,10 @@ barcode.Monster = function(){
   this.lastTimeCreatingPath = 0;
   this.chanceToHit = 20;
   this.armor = 0;
+  this.curses = [];
 };
 
 barcode.Monster.prototype = {
-
   loaded : function(){
     this.loaded = true;
   }
@@ -63,11 +63,35 @@ barcode.Monster.prototype = {
     barcode.gameDonjon.floatingText.push(ft);
   },
 
+  isFrozen : function(){
+    let result = false;
+    for (let i=0 ; i < this.curses.length ; i++){
+      if (this.curses[i] === barcode.C.PROPERTY_ITEM_FREEZE){
+        result = true;
+      }
+    }
+
+    return result;
+  },
+
+  addCurse : function(typeCurse){
+    this.curses.push(typeCurse);
+  },
+
   render : function(ctx){
     let tile = this.getTile();
     let tilesArray = barcode.gameDonjon.level.getTilesForAPath();
     if ((tile.x + "/" + tile.y) in tilesArray){
       if (tilesArray[tile.x + "/" + tile.y].lightened){
+        if (this.isFrozen()){
+          ctx.fillStyle = "#09f";
+          ctx.fillRect(this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x, 
+            this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y, barcode.gameEngine.tileSize,
+            barcode.gameEngine.tileSize);
+          
+          // set composite mode
+          ctx.globalCompositeOperation = "lighter";
+        }
         ctx.drawImage(
            this.spriteset,
            this.sprite.x + this.animation*this.sprite.size,
