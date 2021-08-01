@@ -100,7 +100,7 @@ barcode.Item.prototype = {
       }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
         let found = false;
         for (let i = 0 ; i < creature.attackEffects.length ; i++){
-          if (creature.attackEffects[i].typepropery === barcode.C.PROPERTY_ITEM_FREEZE){
+          if (creature.attackEffects[i].typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
             creature.attackEffects[i].value += tprop.value;
             found = true;
           } 

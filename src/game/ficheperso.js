@@ -42,14 +42,14 @@ barcode.FichePerso.prototype = {
 
     this.propertiesY += this.stepY;
 
-    text = "Chance de toucher : " + barcode.gameEngine.character.chanceToHit;
+    text = "Chance de toucher : " + barcode.gameEngine.character.chanceToHit + " %";
     this.ctx.fillText(text ,
         this.x, 
         this.y + this.propertiesY);
 
     this.propertiesY += this.stepY;
 
-    text = "Chance de bloquer : " + barcode.gameEngine.character.chanceToBlock;
+    text = "Chance de bloquer : " + barcode.gameEngine.character.chanceToBlock + " %";
     this.ctx.fillText(text ,
         this.x, 
         this.y + this.propertiesY);
@@ -82,7 +82,7 @@ barcode.FichePerso.prototype = {
     for (let i = 0 ; i < barcode.gameEngine.character.attackEffects.length ; i++){
       let effect = barcode.gameEngine.character.attackEffects[i];
       if (effect.typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
-        let text = "Chance de glacer : " + effect.value;
+        let text = "Chance de glacer : " + effect.value + " %";
         this.ctx.fillText(text ,
             this.x, 
             this.y + this.propertiesY);
