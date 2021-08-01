@@ -195,32 +195,34 @@ barcode.Monster.prototype = {
 
   move : function(){
     if (this.path.length > 0){
-      this.animate();
-      var nextTile = this.path[this.path.length-1];
-      var currentTile = this.getTile();
-      if (nextTile.x != currentTile.x || nextTile.y != currentTile.y){
-        var dx = nextTile.x - currentTile.x;
-        var dy = nextTile.y - currentTile.y;
-        if (dx != 0){
-          if (dx > 0){
-            this.x += this.step;
-            this.direction = barcode.C.DIRECTION_RIGHT;
-          }else{
-            this.x -= this.step;
-            this.direction = barcode.C.DIRECTION_LEFT;
+      if (!this.isFrozen()){
+        this.animate();
+        var nextTile = this.path[this.path.length-1];
+        var currentTile = this.getTile();
+        if (nextTile.x != currentTile.x || nextTile.y != currentTile.y){
+          var dx = nextTile.x - currentTile.x;
+          var dy = nextTile.y - currentTile.y;
+          if (dx != 0){
+            if (dx > 0){
+              this.x += this.step;
+              this.direction = barcode.C.DIRECTION_RIGHT;
+            }else{
+              this.x -= this.step;
+              this.direction = barcode.C.DIRECTION_LEFT;
+            }
           }
-        }
-        if (dy != 0){
-          if (dy > 0){
-            this.y += this.step;
-            this.direction = barcode.C.DIRECTION_UP;
-          }else{
-            this.y -= this.step;
-            this.direction = barcode.C.DIRECTION_DOWN;
+          if (dy != 0){
+            if (dy > 0){
+              this.y += this.step;
+              this.direction = barcode.C.DIRECTION_UP;
+            }else{
+              this.y -= this.step;
+              this.direction = barcode.C.DIRECTION_DOWN;
+            }
           }
+        }else{
+          this.path.splice(this.path.length-1);
         }
-      }else{
-        this.path.splice(this.path.length-1);
       }
     }
   },
