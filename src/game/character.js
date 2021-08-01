@@ -248,7 +248,7 @@ barcode.Character.prototype = {
           animation.init(barcode.C.ANIMATION_SLASH_ICE, 500);
           animation.setPosRandom(mob.x,mob.y);
           barcode.gameDonjon.animations.push(animation);
-          mob.addCurse(barcode.C.PROPERTY_ITEM_FREEZE);
+          mob.addCurse(barcode.C.CURSE_FROZEN);
         }
       }
     }

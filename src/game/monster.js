@@ -66,7 +66,7 @@ barcode.Monster.prototype = {
   isFrozen : function(){
     let result = false;
     for (let i=0 ; i < this.curses.length ; i++){
-      if (this.curses[i] === barcode.C.PROPERTY_ITEM_FREEZE){
+      if (this.curses[i].typeCurse === barcode.C.CURSE_FROZEN){
         result = true;
       }
     }
@@ -75,7 +75,9 @@ barcode.Monster.prototype = {
   },
 
   addCurse : function(typeCurse){
-    this.curses.push(typeCurse);
+    let curse = new barcode.Curse();
+    curse.init(typeCurse);
+    this.curses.push(curse);
   },
 
   render : function(ctx){
@@ -83,13 +85,12 @@ barcode.Monster.prototype = {
     let tilesArray = barcode.gameDonjon.level.getTilesForAPath();
     if ((tile.x + "/" + tile.y) in tilesArray){
       if (tilesArray[tile.x + "/" + tile.y].lightened){
+        ctx.globalCompositeOperation = "source-over";
         if (this.isFrozen()){
           ctx.fillStyle = "#09f";
           ctx.fillRect(this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x, 
             this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y, barcode.gameEngine.tileSize,
             barcode.gameEngine.tileSize);
-          
-          // set composite mode
           ctx.globalCompositeOperation = "lighter";
         }
         ctx.drawImage(
@@ -105,6 +106,18 @@ barcode.Monster.prototype = {
       }
     }
 
+  },
+
+  manageCurses : function(){
+    let indexCurseToRemove = -1;
+    for (let i=0;i< this.curses.length;i++){
+      if (!this.curses[i].isActive()){
+        indexCurseToRemove = i;
+      }
+    }
+    if (indexCurseToRemove !== -1){
+      this.curses.splice(indexCurseToRemove,1);
+    }
   },
 
   doAction : function(){
@@ -127,6 +140,8 @@ barcode.Monster.prototype = {
         this.target = barcode.gameEngine.character.getTile();
       }
     }
+    this.manageCurses();
+    
   },
 
   attack : function(){

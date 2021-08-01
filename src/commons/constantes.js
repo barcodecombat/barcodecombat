@@ -43,6 +43,10 @@ barcode.C = Object.freeze({
   DEFAULT_RANGE_ATTACK : 64,
   DEFAULT_HITPOINT : 100,
 
+  // CURSE & Blessing
+  CURSE_FROZEN : 1,
+
+
 //ANimation
   ANIMATION_SLASH_EPEE : 1,
   ANIMATION_BLOOD : 2,
