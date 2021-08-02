@@ -2,7 +2,6 @@
 var barcode = barcode || {};
 
 barcode.GameEngine = function (){
-  this.level = null;
   this.loaded = false;
   this.state = barcode.C.STATE_MENU_SHOWN;
   this.readcodebar = null;
@@ -156,6 +155,7 @@ barcode.GameEngine.prototype ={
   init : function(){
     barcode.Generator = new barcode.Generator();
     barcode.Generator.init();
+    barcode.generator2 = new barcode.Generator2();
     barcode.gameDonjon = new barcode.GameDonjon();
     barcode.RenderItem = new barcode.RenderItem();
     barcode.canvas = new barcode.Canvas();

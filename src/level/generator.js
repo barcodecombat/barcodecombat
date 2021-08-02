@@ -281,8 +281,3 @@ barcode.Generator.prototype = {
     this.setCanvasSize(window.innerWidth,window.innerHeight);
   }
 };
-
-/*barcode.Generator = new barcode.Generator();
-barcode.Generator.init();
-setInterval(barcode.Generator.gameLoop,1000/60)
-*/

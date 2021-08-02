@@ -85,7 +85,8 @@ barcode.Level.prototype = {
   },
 
   initFromGenerator : function(){
-    var lvlGenerated = barcode.Generator.generateLevel();
+    //var lvlGenerated = barcode.Generator.generateLevel();
+    var lvlGenerated = barcode.generator2.generateLevel();
     this.initFromJs(lvlGenerated);
   },
 
@@ -161,7 +162,6 @@ barcode.Level.prototype = {
         grid[elt.y][elt.x].status = "Obstacle";
       }
     });
-
     return grid;
   },
 
@@ -274,8 +274,5 @@ barcode.Level.prototype = {
     ctx = barcode.canvas.canvasCreature.getContext("2d");
     this.renderMob(ctx);
     this.renderCharacter(ctx);
-
   }
-
-
 }
