@@ -68,6 +68,16 @@ barcode.Room2.prototype = {
         return pos;
     },
 
+    addChest : function(){
+        var x = Math.floor(Math.random()*(this.sizeX-2) + 1);
+        var y = Math.floor(Math.random()*(this.sizeY-2) + 1);
+        var dec = new barcode.Decor();
+        dec.load(barcode.C.DECOR_CHEST);
+        dec.x = x + this.x;
+        dec.y = y + this.y;
+        this.decors.push(dec);
+      },
+
     addStartingPoint : function(){
         let x = Math.floor(Math.random()*(this.sizeX-2)+1 + this.x );
         let y = Math.floor(Math.random()*(this.sizeY-2)+1 + this.y );

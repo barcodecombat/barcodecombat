@@ -52,8 +52,12 @@ barcode.Generator2.prototype = {
       this.rooms[i].alignTiles();
       this.rooms[i].addDoor(previousDoorPos);
       // Ne pas ajouter une porte de sortie sur la dernière salle.
-      if (i != (this.rooms.length-1))
+      if (i != (this.rooms.length-1)){
         previousDoorPos= this.rooms[i].addRandomDoor(previousDoorPos);
+      }else{
+        // le coffre dans la dernière salle
+        this.rooms[i].addChest();
+      }
       // la première salle ne contient qu'une seule porte
       if (i==1){
         this.createCorridor2(this.rooms[i-1],this.rooms[i],this.rooms[i-1].doors[0],this.rooms[i].doors[0]);
