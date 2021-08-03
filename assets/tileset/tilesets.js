@@ -13,5 +13,17 @@ barcode.tilesets = [
   {
     "wall" : [8],
     "ground" : [7],
+  },
+  {
+    "wall" : [10],
+    "ground" : [9],
+  },
+  {
+    "wall" : [12],
+    "ground" : [11],
+  },
+  {
+    "wall" : [14],
+    "ground" : [13],
   }
 ];
