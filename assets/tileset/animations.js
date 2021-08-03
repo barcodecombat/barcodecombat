@@ -26,5 +26,13 @@ barcode.animations = {
       "y" : 3616,
       "name" : "ice",
       "tileset" : "assets/tileset/murmures.png",
+    },
+    "4":
+    {
+      "size":32,
+      "x" : 128,
+      "y" : 3648,
+      "name" : "poison",
+      "tileset" : "assets/tileset/murmures.png",
     }
 };

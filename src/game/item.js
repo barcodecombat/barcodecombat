@@ -108,6 +108,17 @@ barcode.Item.prototype = {
         if (! found){
           creature.attackEffects.push(tprop);
         }
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
+        let found = false;
+        for (let i = 0 ; i < creature.attackEffects.length ; i++){
+          if (creature.attackEffects[i].typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
+            creature.attackEffects[i].value += tprop.value;
+            found = true;
+          } 
+        }
+        if (! found){
+          creature.attackEffects.push(tprop);
+        }
       }
     })
   },
@@ -135,6 +146,18 @@ barcode.Item.prototype = {
         let indexProperty = -1 ;
         for (let i = 0 ; i < creature.attackEffects.length ; i++){
           if (creature.attackEffects[i].typepropery === barcode.C.PROPERTY_ITEM_FREEZE){
+            creature.attackEffects[i].value -= tprop.value;
+            if (creature.attackEffects[i].value <= 0){
+              indexProperty = i;
+            }
+          } 
+        }
+        if (indexProperty != -1)
+            creature.attackEffects.splice(indexProperty, 1);
+      }else if (tprop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
+        let indexProperty = -1 ;
+        for (let i = 0 ; i < creature.attackEffects.length ; i++){
+          if (creature.attackEffects[i].typepropery === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
             creature.attackEffects[i].value -= tprop.value;
             if (creature.attackEffects[i].value <= 0){
               indexProperty = i;

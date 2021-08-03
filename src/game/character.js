@@ -246,7 +246,6 @@ barcode.Character.prototype = {
   hitTargetHandleEffect : function(mob){
     for (let i=0; i < this.attackEffects.length;i++){
       if (this.attackEffects[i].typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
-        // TODO : Appliquer l'effet à la créature
         let touche = Math.floor(Math.random()*100);
         if (touche <= this.attackEffects[i].value){
           var animation = new barcode.Animation();
@@ -254,6 +253,16 @@ barcode.Character.prototype = {
           animation.setPosRandom(mob.x,mob.y);
           barcode.gameDonjon.animations.push(animation);
           mob.addCurse(barcode.C.CURSE_FROZEN);
+        }
+      }else if (this.attackEffects[i].typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
+        // TODO : Appliquer l'effet à la créature
+        let touche = Math.floor(Math.random()*100);
+        if (touche <= this.attackEffects[i].value){
+          var animation = new barcode.Animation();
+          animation.init(barcode.C.ANIMATION_SLASH_POISON, 500);
+          animation.setPosRandom(mob.x,mob.y);
+          barcode.gameDonjon.animations.push(animation);
+          mob.addCurse(barcode.C.CURSE_POISON);
         }
       }
     }

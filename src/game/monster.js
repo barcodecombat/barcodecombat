@@ -119,11 +119,19 @@ barcode.Monster.prototype = {
 
   },
 
+  handleCurse : function(curse){
+    if (curse.typeCurse === barcode.C.CURSE_POISON){
+      this.hp -= 10;
+    }
+  },
+
   manageCurses : function(){
     let indexCurseToRemove = -1;
     for (let i=0;i< this.curses.length;i++){
       if (!this.curses[i].isActive()){
         indexCurseToRemove = i;
+      }else{
+        this.handleCurse(this.curses[i]);
       }
     }
     if (indexCurseToRemove !== -1){

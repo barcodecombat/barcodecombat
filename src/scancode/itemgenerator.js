@@ -90,8 +90,9 @@ barcode.itemgenerator.prototype = {
   },
 
   generateProperty(){
-    var prop = Math.round(Math.random()*8);
+    var prop = Math.round(Math.random()*9);
     var value = 0;
+    prop=9;
     if (prop === barcode.C.PROPERTY_ITEM_LIGHT_RADIUS){
       value = Math.round(Math.random() * 10 * this.item.quality / 100 + 1);
     }else if (prop === barcode.C.PROPERTY_ITEM_LIFE_MODIFIER){
@@ -114,7 +115,9 @@ barcode.itemgenerator.prototype = {
       value = Math.floor(Math.random() * 10) +1;
     }else if (prop === barcode.C.PROPERTY_ITEM_ARMOR){
       value = Math.floor(Math.random() * 10) +1;
-    }
+    }else if (prop === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
+    value = Math.floor(Math.random() * 10) +1;
+  }
     var property = { 'typeproperty' : prop, 'value' : value};
     this.item.properties.push(property);
   },

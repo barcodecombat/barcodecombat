@@ -81,14 +81,17 @@ barcode.FichePerso.prototype = {
   drawAttackEffect : function(){
     for (let i = 0 ; i < barcode.gameEngine.character.attackEffects.length ; i++){
       let effect = barcode.gameEngine.character.attackEffects[i];
+      let text = "";
       if (effect.typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
-        let text = "Chance de glacer : " + effect.value + " %";
-        this.ctx.fillText(text ,
-            this.x, 
-            this.y + this.propertiesY);
-
-        this.propertiesY += this.stepY;
+        text = "Chance de glacer : " + effect.value + " %";
+      }else if (effect.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
+        text = "Chance de poison : " + effect.value + " %";
       }
+      this.ctx.fillText(text ,
+          this.x, 
+          this.y + this.propertiesY);
+
+      this.propertiesY += this.stepY;
     }
   },
 

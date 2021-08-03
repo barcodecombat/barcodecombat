@@ -167,6 +167,8 @@ barcode.ContextualItem.prototype ={
                 text = "Bonus d'armure : ";
             }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_FREEZE){
                 text = "Chance de glacer : ";
+            }else if (prop.typeproperty === barcode.C.PROPERTY_ITEM_ATTACK_ELEMENT_POISON){
+                text = "Chance de poison : ";
             }
 
             text += prop.value;
