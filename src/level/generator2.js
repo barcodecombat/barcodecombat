@@ -25,6 +25,7 @@ barcode.Generator2.prototype = {
     this.rooms[0].alignTiles();
     this.rooms[0].addStartingPoint();
     this.rooms[0].addMobs();
+    this.rooms[0].addDecor();
   },
 
   placeRooms : function(){
@@ -67,6 +68,7 @@ barcode.Generator2.prototype = {
       }
 
       this.rooms[i].addMobs();
+      this.rooms[i].addDecor();
     }
   },
 
