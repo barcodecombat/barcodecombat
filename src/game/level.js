@@ -85,8 +85,7 @@ barcode.Level.prototype = {
   },
 
   initFromGenerator : function(){
-    //var lvlGenerated = barcode.Generator.generateLevel();
-    var lvlGenerated = barcode.generator2.generateLevel();
+    var lvlGenerated = barcode.generator.generateLevel();
     this.initFromJs(lvlGenerated);
   },
 

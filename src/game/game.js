@@ -153,9 +153,7 @@ barcode.GameEngine.prototype ={
   },
 
   init : function(){
-    barcode.Generator = new barcode.Generator();
-    barcode.Generator.init();
-    barcode.generator2 = new barcode.Generator2();
+    barcode.generator = new barcode.Generator();
     barcode.gameDonjon = new barcode.GameDonjon();
     barcode.RenderItem = new barcode.RenderItem();
     barcode.canvas = new barcode.Canvas();
