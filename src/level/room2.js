@@ -63,9 +63,6 @@ barcode.Room2.prototype = {
     addRandomDoor : function(previous = -1){
         let pos = Math.floor(Math.random()*2) + 1;
         if (pos == barcode.C.DOOR_WEST) pos == barcode.C.DOOR_EAST;
-        console.log(pos);
-        /*if (previous === barcode.C.DOOR_NORTH && pos === barcode.C.DOOR_SOUTH){ pos = barcode.C.DOOR_EAST}
-        if (previous === barcode.C.DOOR_SOUTH && pos === barcode.C.DOOR_NORTH){ pos = barcode.C.DOOR_EAST}*/
         this.addDoor(pos);
         
         return pos;
