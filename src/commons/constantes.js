@@ -45,6 +45,7 @@ barcode.C = Object.freeze({
 
   // CURSE & Blessing
   CURSE_FROZEN : 1,
+  CURSE_POISON :2,
 
   //DOOR_PLACEMENT
   DOOR_NORTH :0,

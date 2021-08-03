@@ -70,8 +70,14 @@ barcode.Monster.prototype = {
         result = true;
       }
     }
-
     return result;
+  },
+
+  getCurse : function(){
+    if (this.curses.length > 0){
+      return (this.curses[0].typeCurse)
+    }
+    return -1;
   },
 
   addCurse : function(typeCurse){
@@ -86,8 +92,13 @@ barcode.Monster.prototype = {
     if ((tile.x + "/" + tile.y) in tilesArray){
       if (tilesArray[tile.x + "/" + tile.y].lightened){
         ctx.globalCompositeOperation = "source-over";
-        if (this.isFrozen()){
-          ctx.fillStyle = "#09f";
+        let curse = this.getCurse();
+        if (curse !== -1){
+          if (curse === barcode.C.CURSE_FROZEN){
+            ctx.fillStyle = "#09f";
+          }else if (curse === barcode.C.CURSE_POISON){
+            ctx.fillStyle = "#0ff08b";
+          }
           ctx.fillRect(this.x+barcode.gameEngine.centerX - barcode.gameEngine.character.x, 
             this.y+barcode.gameEngine.centerY - barcode.gameEngine.character.y, barcode.gameEngine.tileSize,
             barcode.gameEngine.tileSize);
