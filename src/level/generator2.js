@@ -33,8 +33,10 @@ barcode.Generator2.prototype = {
     let previousDoorPos = this.rooms[0].addRandomDoor();
 
     for (let i=1; i < this.rooms.length ; i++){
-      let XX = Math.floor(Math.random() * 5) + 1;
-      let YY = Math.floor(Math.random() * 5) + 1;
+      //let XX = Math.floor(Math.random() * 5) + 1;
+      //let YY = Math.floor(Math.random() * 5) + 1;
+      let XX = 5;
+      let YY = 5;
       if (previousDoorPos === barcode.C.DOOR_NORTH){
         this.rooms[i].x = this.rooms[i-1].x + XX;
         this.rooms[i].y = this.rooms[i-1].y - YY - this.rooms[i].sizeY;
@@ -50,7 +52,10 @@ barcode.Generator2.prototype = {
       }
       this.rooms[i].alignTiles();
       this.rooms[i].addDoor(previousDoorPos);
-      this.rooms[i].addRandomDoor(previousDoorPos);
+      // Ne pas ajouter une porte de sortie sur la dernière salle.
+      if (i != (this.rooms.length-1))
+        this.rooms[i].addRandomDoor(previousDoorPos);
+      // la première salle ne contient qu'une seule porte
       if (i==1){
         this.createCorridor2(this.rooms[i-1].doors[0],this.rooms[i].doors[0]);
       }else{
@@ -120,6 +125,7 @@ barcode.Generator2.prototype = {
     let tileSetIndex = Math.round(Math.random() * (barcode.tilesets.length-1));
     this.listOfTilesToUse = barcode.tilesets[tileSetIndex];
     let nbRooms = Math.floor(Math.random()*10) + 5;
+    console.log("nbRooms " + nbRooms);
     for (let i=0;i<nbRooms;i++){
       this.generateRoom();
     }
