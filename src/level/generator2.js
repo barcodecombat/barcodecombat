@@ -52,14 +52,15 @@ barcode.Generator2.prototype = {
       }
       this.rooms[i].alignTiles();
       this.rooms[i].addDoor(previousDoorPos);
+      console.log(this.rooms[i]);
       // Ne pas ajouter une porte de sortie sur la dernière salle.
       if (i != (this.rooms.length-1))
         this.rooms[i].addRandomDoor(previousDoorPos);
       // la première salle ne contient qu'une seule porte
       if (i==1){
-        this.createCorridor2(this.rooms[i-1].doors[0],this.rooms[i].doors[0]);
+        this.createCorridor2(this.rooms[i-1],this.rooms[i],this.rooms[i-1].doors[0],this.rooms[i].doors[0]);
       }else{
-        this.createCorridor2(this.rooms[i-1].doors[1],this.rooms[i].doors[0]);
+        this.createCorridor2(this.rooms[i-1],this.rooms[i],this.rooms[i-1].doors[1],this.rooms[i].doors[0]);
       }
     }
   },
@@ -73,10 +74,12 @@ barcode.Generator2.prototype = {
 
     for (let i=0;i<this.maxY;i++){
       for (let j=0;j<this.maxX;j++){
-        let brick = {'x' : j, 'y' : i, 'F' : -1, 'G' : -1, 'status' : 'Empty','cameFrom' : {}};
+        let brick = {'x' : j, 'y' : i, 'F' : -1, 'G' : -1, 'status' : 'Empty','cameFrom' : {} , 'tiletype' : 'Empty'};
         if (( j + "/" + i) in tiles){
            if(this.listOfTilesToUse.wall.indexOf(tiles[j + "/" + i].ttile) > -1 ){
              brick.status = 'Obstacle';
+          }else if (this.listOfTilesToUse.ground.indexOf(tiles[j + "/" + i].ttile) > -1 ){
+            brick.tiletype = 'Ground';
           }
         }
         grid[i][j] = brick;
@@ -85,7 +88,7 @@ barcode.Generator2.prototype = {
     return grid;
   },
 
-  createCorridor2 : function(door1,door2){
+  createCorridor2 : function(room1,room2,door1,door2){
     this.allTiles = this.createWholeMap();
     var pthFinding = new barcode.Apath();
     var result =  pthFinding.findShortestPath([door1.x,door1.y],
@@ -95,11 +98,15 @@ barcode.Generator2.prototype = {
     path.splice(-1,1);
     var _this = this;
     path.forEach(function(tilePath){
-      let tempTile = new barcode.Tile();
-      tempTile.x = tilePath.x;
-      tempTile.y = tilePath.y;
-      tempTile.ttile = 3;
-      _this.corridorTile.push(tempTile);
+      if (typeof _this.allTiles[tilePath.y][tilePath.x] !== 'undefined' && _this.allTiles[tilePath.y][tilePath.x].tiletype !== 'Ground'){
+        let tempTile = new barcode.Tile();
+        tempTile.x = tilePath.x;
+        tempTile.y = tilePath.y;
+        tempTile.ttile = 3;
+        _this.corridorTile.push(tempTile);
+      }else{
+        //console.log("no tile on " + tilePath.x + "/" + tilePath.y);
+      }
     })
   },
 
@@ -125,6 +132,7 @@ barcode.Generator2.prototype = {
     let tileSetIndex = Math.round(Math.random() * (barcode.tilesets.length-1));
     this.listOfTilesToUse = barcode.tilesets[tileSetIndex];
     let nbRooms = Math.floor(Math.random()*10) + 5;
+    nbRooms = 4;
     console.log("nbRooms " + nbRooms);
     for (let i=0;i<nbRooms;i++){
       this.generateRoom();
