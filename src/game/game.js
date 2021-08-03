@@ -89,7 +89,7 @@ barcode.GameEngine.prototype ={
     barcode.gameEngine.closeState();
     barcode.gameDonjon.init();
     barcode.gameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
-    barcode.gameEngine.character.resetHp();
+    barcode.gameEngine.character.reset();
   },
 
   initMenu : function(){

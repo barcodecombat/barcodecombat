@@ -182,6 +182,11 @@ barcode.Character.prototype = {
     this.hitpoint = this.maxHitPoint;
   },
 
+  reset : function(){
+    this.resetHp();
+    this.path = [];
+  },
+
   hit : function(hp){
     var ft = new barcode.FloatingText();
     if (! this.isHitBlocked()){
