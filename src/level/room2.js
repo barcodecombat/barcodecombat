@@ -68,6 +68,16 @@ barcode.Room2.prototype = {
         return pos;
     },
 
+    addMobs : function(){
+        let nbMobs = Math.floor(Math.random() * (Math.floor( Math.sqrt(this.sizeX * this.sizeY))))+2;
+    
+        for (let i = 0 ; i < nbMobs ; i++){
+          let x = this.x + Math.floor(Math.random()*(this.sizeX-2)+1);
+          let y = this.y + Math.floor(Math.random()*(this.sizeY-2)+1);
+          this.mobs.push({'x' : x, 'y' : y});
+        }
+      },
+
     addChest : function(){
         var x = Math.floor(Math.random()*(this.sizeX-2) + 1);
         var y = Math.floor(Math.random()*(this.sizeY-2) + 1);

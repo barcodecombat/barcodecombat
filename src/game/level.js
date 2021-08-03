@@ -184,6 +184,8 @@ barcode.Level.prototype = {
   renderMob : function(ctx){
     var _ctx = ctx;
     var monsterToRemove = [];
+    //console.log(this.monsters);
+    //console.log(barcode.gameEngine.character);
     this.monsters.forEach(function(elt){
 
       elt.doAction();

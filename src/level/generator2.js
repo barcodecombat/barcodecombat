@@ -24,6 +24,7 @@ barcode.Generator2.prototype = {
     this.rooms[0].y = 50;
     this.rooms[0].alignTiles();
     this.rooms[0].addStartingPoint();
+    this.rooms[0].addMobs();
   },
 
   placeRooms : function(){
@@ -64,6 +65,8 @@ barcode.Generator2.prototype = {
       }else{
         this.createCorridor2(this.rooms[i-1],this.rooms[i],this.rooms[i-1].doors[1],this.rooms[i].doors[0]);
       }
+
+      this.rooms[i].addMobs();
     }
   },
 
@@ -167,7 +170,6 @@ barcode.Generator2.prototype = {
     if (mobs.length > 0) result['mobs'] = mobs;
     result['tiles'] = tiles;
     result['decors'] = decors;
-
     return result;
   },
 };
