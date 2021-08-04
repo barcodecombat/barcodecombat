@@ -62,6 +62,8 @@ barcode.itemgenerator.prototype = {
   },
 
   generateCaractNecklace : function(){
+      var property = { 'typeproperty' : barcode.C.PROPERTY_ITEM_LIFE_REGENERATION, 'value' : 1};
+      this.item.properties.push(property);
   },
 
   generateCaractArmor : function(){
@@ -89,7 +91,6 @@ barcode.itemgenerator.prototype = {
       this.generateCaractNecklace();
     }else if(this.item.typeItem === barcode.C.TYPE_ITEM_POTION){
       this.generateCaractPotion();
-    //}else if(this.item.typeItem === barcode.C.TYPE_ITEM_ARMOR){
     }else if (armorList.indexOf(this.item.typeItem) >=0){ 
       this.generateCaractArmor();
     }
