@@ -38,6 +38,8 @@ barcode.GameEngine.prototype ={
       barcode.inventory.clickEvent(evt);
     }else if(barcode.gameEngine.state == barcode.C.STATE_MENU_SHOWN){
       barcode.mainMenu.clickEvent(evt);
+    }else if(barcode.gameEngine.state == barcode.C.STATE_SHOW_DONJONPATH){
+      barcode.donjonPath.clickEvent(evt);
     }
 
   },
@@ -115,6 +117,7 @@ barcode.GameEngine.prototype ={
   initDonjonPath : function(){
     barcode.gameEngine.closeState();
     barcode.gameEngine.state = barcode.C.STATE_SHOW_DONJONPATH;
+    barcode.donjonPath.init();
   },
 
 

@@ -7,11 +7,13 @@ barcode.DonjonPath = function(){
   this.y = 50;
   this.x = 80;
   this.stepY = 20;
+  this.donjon = null;
 };
 
 barcode.DonjonPath.prototype = {
   init : function(){
-
+    this.donjon = new barcode.Donjon();
+    this.donjon.init();
   },
 
   drawRect : function(){
@@ -25,14 +27,20 @@ barcode.DonjonPath.prototype = {
   },
 
   drawDonjon : function(){
-    let spriteset = barcode.tileset.get("assets/sprites/castle1.png");
     
     this.ctx.drawImage(
-        spriteset,
+        this.donjon.spriteset,
         100,
         50,
         barcode.gameEngine.tileSize *2 ,
         barcode.gameEngine.tileSize *2);
+  },
+
+  clickEvent : function(evt){
+    if (evt.pageX > 100 && evt.pageX < (100 + barcode.gameEngine.tileSize*2)
+        && evt.pageY > 50 && evt.pageY < (50 + barcode.gameEngine.tileSize*2)){
+            barcode.gameEngine.initDonjon();
+        }
   },
 
   render : function(){
