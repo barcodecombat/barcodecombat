@@ -28,6 +28,8 @@ barcode.GameEngine.prototype ={
       barcode.showItemGenerated.render();
     }else if(barcode.gameEngine.state == barcode.C.STATE_SHOW_PROPERTIES){
       barcode.fichePerso.render();
+    }else if(barcode.gameEngine.state == barcode.C.STATE_SHOW_DONJONPATH){
+      barcode.donjonPath.render();
     }
   },
 
@@ -110,6 +112,12 @@ barcode.GameEngine.prototype ={
     barcode.gameEngine.state = barcode.C.STATE_SHOW_PROPERTIES;
   },
 
+  initDonjonPath : function(){
+    barcode.gameEngine.closeState();
+    barcode.gameEngine.state = barcode.C.STATE_SHOW_DONJONPATH;
+  },
+
+
   initScan : function(){
     barcode.gameEngine.closeState();
     barcode.gameEngine.state = barcode.C.STATE_SCAN_INPROGRESS;
@@ -164,6 +172,7 @@ barcode.GameEngine.prototype ={
     barcode.fichePerso = new barcode.FichePerso();
     barcode.contextualItem = new barcode.ContextualItem();
     barcode.showItemGenerated = new barcode.ShowItemGenerated();
+    barcode.donjonPath = new barcode.DonjonPath();
     barcode.gameEngine.state = barcode.C.STATE_MENU_SHOWN;
     let btnMenu = document.getElementById("btnMenu");
     btnMenu.addEventListener("click",barcode.gameEngine.initMenu);

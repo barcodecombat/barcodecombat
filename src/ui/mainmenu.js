@@ -27,6 +27,12 @@ barcode.MainMenu = function(){
                     "height" : 50,
                     "state" : true,
                     "name" : "Scan"},
+                    { "x" : 150 ,
+                    "y" : 600 ,
+                    "width" : 230, 
+                    "height" : 50,
+                    "state" : true,
+                    "name" : "Chemin"},
                 ];
 };
 
@@ -48,6 +54,8 @@ barcode.MainMenu.prototype = {
                 barcode.gameEngine.initScan();
             }else if(this.buttonCoord[i].name === "Fiche"){
               barcode.gameEngine.initFiche();
+            }else if(this.buttonCoord[i].name === "Chemin"){
+              barcode.gameEngine.initDonjonPath();
             }
         }
     }
