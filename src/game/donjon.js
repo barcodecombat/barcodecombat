@@ -7,7 +7,8 @@ barcode.Donjon = function(){
 };
 
 barcode.Donjon.prototype = {
-  init : function(){
-    this.spriteset = barcode.tileset.get("assets/sprites/castle1.png");
+  init : function(templateId){
+    let src = barcode.donjons[templateId];
+    this.spriteset = barcode.tileset.get(src.sprite);
   },
 }

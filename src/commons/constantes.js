@@ -33,6 +33,10 @@ barcode.C = Object.freeze({
   MONSTER_BOLT_RED : 1,
   MONSTER_BOLT_PINK : 2,
 
+  //TILESET
+  TILESET_FIRE : 0,
+  TILESET_GRASS : 1,
+
   //POTIONS
   POTION_TYPE_HEAL : 1,
 
