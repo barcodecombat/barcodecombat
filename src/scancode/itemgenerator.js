@@ -65,6 +65,9 @@ barcode.itemgenerator.prototype = {
   },
 
   generateCaractArmor : function(){
+    let value = Math.floor(Math.random() * 10) +1;
+    var property = { 'typeproperty' : barcode.C.PROPERTY_ITEM_ARMOR, 'value' : value};
+    this.item.properties.push(property);
   },
 
   generateCaractPotion : function(){
@@ -76,6 +79,8 @@ barcode.itemgenerator.prototype = {
   generateCaract : function(){
     this.item.idimg = this.getImageForItem("" + this.item.typeItem + "-1-" + this.item.rarity);
     this.item.name = barcode.itemsimg[this.item.idimg].name;
+
+    let armorList = [barcode.C.TYPE_ITEM_HELMET, barcode.C.TYPE_ITEM_ARMOR,barcode.C.TYPE_ITEM_BOOT,barcode.C.TYPE_ITEM_GLOVE];
     if (this.item.typeItem === barcode.C.TYPE_ITEM_WEAPON ){
       this.generateCaractWeapon();
     }else if (this.item.typeItem === barcode.C.TYPE_ITEM_SHIELD ){
@@ -84,7 +89,8 @@ barcode.itemgenerator.prototype = {
       this.generateCaractNecklace();
     }else if(this.item.typeItem === barcode.C.TYPE_ITEM_POTION){
       this.generateCaractPotion();
-    }else if(this.item.typeItem === barcode.C.TYPE_ITEM_ARMOR){
+    //}else if(this.item.typeItem === barcode.C.TYPE_ITEM_ARMOR){
+    }else if (armorList.indexOf(this.item.typeItem) >=0){ 
       this.generateCaractArmor();
     }
   },
