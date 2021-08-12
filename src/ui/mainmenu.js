@@ -8,7 +8,7 @@ barcode.MainMenu = function(){
                     "width" : 230, 
                     "height" : 50,
                     "state" : true,
-                    "name" : "Donjon"},
+                    "name" : "Chemin"},
                     { "x" : 150 ,
                     "y" : 300 ,
                     "width" : 230, 
@@ -27,12 +27,6 @@ barcode.MainMenu = function(){
                     "height" : 50,
                     "state" : true,
                     "name" : "Scan"},
-                    { "x" : 150 ,
-                    "y" : 600 ,
-                    "width" : 230, 
-                    "height" : 50,
-                    "state" : true,
-                    "name" : "Chemin"},
                 ];
 };
 
@@ -48,8 +42,6 @@ barcode.MainMenu.prototype = {
                 && this.buttonCoord[i].state){
             if(this.buttonCoord[i].name === "Inventaire"){
                 barcode.gameEngine.initHero();
-            }else if(this.buttonCoord[i].name === "Donjon"){
-                barcode.gameEngine.initDonjon();
             }else if(this.buttonCoord[i].name === "Scan"){
                 barcode.gameEngine.initScan();
             }else if(this.buttonCoord[i].name === "Fiche"){

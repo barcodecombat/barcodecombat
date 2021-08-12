@@ -89,9 +89,9 @@ barcode.GameEngine.prototype ={
     barcode.gameEngine.saveGame();
   },
 
-  initDonjon : function(){
+  initDonjon : function(donjonId){
     barcode.gameEngine.closeState();
-    barcode.gameDonjon.init();
+    barcode.gameDonjon.init(donjonId);
     barcode.gameEngine.state = barcode.C.STATE_DONJON_INPROGRESS;
     barcode.gameEngine.character.reset();
   },

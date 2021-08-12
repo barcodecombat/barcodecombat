@@ -134,9 +134,8 @@ barcode.Generator.prototype = {
   generateLevel : function (){
     this.rooms = [];
     this.corridorTile = [];
-    let tileSetIndex = Math.round(Math.random() * (barcode.tilesets.length-1));
-    this.listOfTilesToUse = barcode.tilesets[tileSetIndex];
-    let nbRooms = Math.floor(Math.random()*10) + 5;
+    this.listOfTilesToUse = barcode.tilesets[barcode.gameDonjon.donjon.tileset];
+    let nbRooms = Math.floor(Math.random()*barcode.gameDonjon.donjon.nbRoom) + 3;
     console.log("nombre de pièces :" + nbRooms);
     for (let i=0;i<nbRooms;i++){
       this.generateRoom();

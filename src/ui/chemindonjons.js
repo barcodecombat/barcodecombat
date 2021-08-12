@@ -39,7 +39,8 @@ barcode.DonjonPath.prototype = {
   clickEvent : function(evt){
     if (evt.pageX > 100 && evt.pageX < (100 + barcode.gameEngine.tileSize*2)
         && evt.pageY > 50 && evt.pageY < (50 + barcode.gameEngine.tileSize*2)){
-            barcode.gameEngine.initDonjon();
+          //TODO CATCH THE REAL DONJON CLICKED ON
+            barcode.gameEngine.initDonjon(1);
         }
   },
 

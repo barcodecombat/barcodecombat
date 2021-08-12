@@ -6,14 +6,17 @@ barcode.GameDonjon = function (){
   this.animations = [];
   this.floatingText = [];
   this.tileSet = null;
+  this.donjon = null;
 };
 
 barcode.GameDonjon.prototype ={
-  init : function(){
+  init : function(donjonId){
     this.floatingText = [];
     this.animations = [];
     barcode.canvas.setCanvasSize(window.innerWidth,window.innerHeight);
     this.tileSet = barcode.tileset.get("assets/tileset/tileset1.png");
+    this.donjon = new barcode.Donjon();
+    this.donjon.init(donjonId);
     this.level = new barcode.Level();
     this.level.init();
 
