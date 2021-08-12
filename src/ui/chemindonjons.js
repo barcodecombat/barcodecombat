@@ -13,7 +13,7 @@ barcode.DonjonPath = function(){
 barcode.DonjonPath.prototype = {
   init : function(){
     this.donjon = new barcode.Donjon();
-    this.donjon.init();
+    this.donjon.init(1);
   },
 
   drawRect : function(){
